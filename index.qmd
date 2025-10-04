@@ -1,0 +1,5 @@
+---
+title: "Ethan's Section Material"
+---
+
+This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara.
