@@ -68,5 +68,68 @@
     "title": "Ethan’s Section Material",
     "section": "",
     "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, and a function h, we wish to identify the distribution of U := h(Y1, Y2, …, Yn).\n\n\n\n\nExamples:\n\nSample Mean:: \\(\\overline{Y}_n := n^{-1} \\sum_{i=1}^{n} Y_i\\)\nSample Variance:: \\(\\overline{Y}_n := (n-1)^{-1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2\\)\nOrder Statistics:: \\(Y_{(i)}\\) := ith smallest of the Y’s\n\nSample Minimum:: \\(Y_{(1)} := \\min\\{Y_1, \\cdots, Y_n\\}\\)\nSample Maximum:: \\(Y_{(n)} := \\max\\{Y_1, \\cdots, Y_n\\}\\)"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSpecial Cases\n\nIf:                          and                         , consider using the MGF Method.\n\nEven in this case, we need to be mindful of what we want at the end: if we only want the distribution, the MGF will be fine. But, if we want the density, we need some hope of being able to recognize the final MGF.\n\nGenerally, the CDF method will always work and give you a valid answer for the CDF and/or density.\n\nHowever, it is possible that the integrals involved are either intractable, or impossible to express in terms of elementary functions."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nUsing the CDF method, we need to express \\(\\{Y_{(n)} \\leq y\\}\\) in terms of the original Yi’s.\n\nIf the largest of a collection of numbers is less than or equal to some value y, then so too must all the numbers be less than or equal to y.\n\nAll values are less than or equal to the maximum (by definition)\nThe maximum is less than y (by assertion)\nTherefore all values are less than y (by logic)"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nNote: the converse is not true; that is, \\(\\{Y_{(n)} &gt; y\\}\\) does not imply that all the Y’s are greater than y.\n\nFor example: max{2, 4} is greater than 3, but it is not true that both 2 and 4 are greater than three\n\nThink About This: How can we translate \\(\\{Y_{(1)} \\leq y\\}\\) in terms of the original Y’s?\n\nThis is relevant for finding the density of the sample minimum."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?\n\nIt might seem strange to think of order statistics as random. I find an example might help.\nSuppose we let Yi denote the weight of a randomly-selected cat.\n\nSince the cat is randomly selected, Yi is random; different cats have different weights.\n\nLet (Y1, …, Yn) denote a sample of n independent cat weights.\n\nDifferent samples of cats lead to different recorded cat weights.\nThe minimum weight of each of these samples isn’t necessarily the same across samples - there is variability across samples!\nHence, the sample minimum is a random quantity."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
   }
 ]

@@ -1,0 +1,195 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 2 Discussion Section"
+footer: "PSTAT 120B - Fall 2025 with Dr. Uma Ravat; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: October 10, 2025
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa bezier-curve >}} Multivariate Transformations
+
+
+::: {.callout-tip}
+## **Goal**
+
+Given a collection of random variables _Y_~1~, _Y_~2~, ..., _Y_~_n_~, and a function _h_, we wish to identify the distribution of _U_ := _h_(_Y_~1~, _Y_~2~, ..., _Y_~_n_~).
+:::
+
+::: {.fragment}
+Examples:
+
+-   [**Sample Mean:**]{.alert}: $\overline{Y}_n := n^{-1} \sum_{i=1}^{n} Y_i$
+-   [**Sample Variance:**]{.alert}: $\overline{Y}_n := (n-1)^{-1} \sum_{i=1}^{n} (Y_i - \overline{Y}_n)^2$
+-   [**Order Statistics:**]{.alert}: $Y_{(i)}$ := _i_^th^ smallest of the _Y_'s
+    -   [**Sample Minimum:**]{.alert}: $Y_{(1)} := \min\{Y_1, \cdots, Y_n\}$
+    -   [**Sample Maximum:**]{.alert}: $Y_{(n)} := \max\{Y_1, \cdots, Y_n\}$
+
+:::
+
+
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Special Cases
+
+-   **If:** [\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]{.underline} and [\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]{.underline}, consider using the MGF Method.
+    -   Even in this case, we need to be mindful of what we want at the end: if we only want the _distribution_, the MGF will be fine. But, if we want the _density_, we need some hope of being able to recognize the final MGF.
+    
+    
+-   Generally, the CDF method will always work and give you a valid answer for the CDF and/or density.
+    -   However, it is possible that the integrals involved are either intractable, or impossible to express in terms of elementary functions.
+
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Sample Maximum
+
+::: {.callout-tip}
+## **Goal**
+
+Given a collection of random variables _Y_~1~, _Y_~2~, ..., _Y_~_n_~, we wish to identify the density of _Y_<sub>(_n_)</sub> := max\{Y~1~, ..., _Y_~_n_~ \}
+:::
+
+-   Using the CDF method, we need to express $\{Y_{(n)} \leq y\}$ in terms of the original _Y_~_i_~'s. 
+    -   If the largest of a collection of numbers is less than or equal to some value _y_, then so too must _all_ the numbers be less than or equal to _y_.
+        -   All values are less than or equal to the maximum (by definition)
+        -   The maximum is less than _y_ (by assertion)
+        -   Therefore all values are less than _y_ (by logic)
+        
+        
+
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Sample Maximum
+
+::: {.callout-tip}
+## **Goal**
+
+Given a collection of random variables _Y_~1~, _Y_~2~, ..., _Y_~_n_~, we wish to identify the density of _Y_<sub>(_n_)</sub> := max\{Y~1~, ..., _Y_~_n_~ \}
+:::
+
+-   **Note:** the converse is not true; that is, $\{Y_{(n)} > y\}$ does not imply that all the _Y_'s are greater than _y_.
+    -   For example: max{2, 4} is greater than 3, but it is _not_ true that both 2 and 4 are greater than three
+    
+-   **Think About This:** How can we translate $\{Y_{(1)} \leq y\}$ in terms of the original _Y_'s?
+    -   This is relevant for finding the density of the sample minimum. 
+    
+    
+
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Order Statistics: Why Are They Random?
+
+-   It might seem strange to think of order statistics as random. I find an example might help.
+
+-   Suppose we let _Y_~_i_~ denote the weight of a randomly-selected cat.
+    -   Since the cat is _randomly_ selected, _Y_~_i_~ is random; different cats have different weights.
+
+-   Let (_Y_~1~, ..., _Y_~_n_~) denote a sample of _n_ independent cat weights.
+    -   Different samples of cats lead to different recorded cat weights.
+    -   The _minimum_ weight of each of these samples isn't necessarily the same across samples - there is _variability_ across samples!
+    -   Hence, the sample minimum is a _random_ quantity.
+    
+    
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Order Statistics: Why Are They Random?
+
+![](Images/min0.svg)
+
+    
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Order Statistics: Why Are They Random?
+
+![](Images/min1.svg)
+
+    
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Order Statistics: Why Are They Random?
+
+![](Images/min2.svg)
+
+    
+## {{< fa bezier-curve >}} Multivariate Transformations
+### Order Statistics: Why Are They Random?
+
+![](Images/min3.svg)
