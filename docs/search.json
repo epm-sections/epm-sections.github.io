@@ -63,6 +63,48 @@
     "text": "CDF Method\n\nRecall the example from lecture: X ~ Unif[-1, 1] and Y = X2\n\nhttps://www.youtube.com/watch?v=HtzqjHfoRbw"
   },
   {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nOverview\n\nGiven a sample Y1, …, Yn, a statistic is a function h(Y1, …, Yn) of the sample.\n\nStatistics are random, and therefore have distributions; a statistics’ distribution is called its sampling distribution\n\nHow do we find sampling distributions?\n\nUsing our material from the Transformations chapter of this course!\nAfter all, statistics are just functions of random variables.\n\nWe start with the case of a normal population; i.e. that our sample is an i.i.d. sample drawn from a normal distribution."
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population\n\nSuppose \\(Y_1, \\cdots, Y_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\).\nWhat is the sampling distribution of the sample mean \\[ \\overline{Y}_n := \\frac{1}{n} \\sum_{i=1}^{n} Y_i \\]\nWhat do we know about the sampling distribution of the sample variance \\[ S_n^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2 \\]"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population: Sample Mean\n\n\nCode\nset.seed(120); means &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  means &lt;- c(means, mean(rnorm(n, 3, 1.2)))\n}"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population: Sample Variance\n\n\nCode\nset.seed(120); var_stat &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  var_stat &lt;- c(var_stat, ((n - 1) / (1.2^2)) * var(rnorm(n, 3, 1.2)))\n}"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
+    "href": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nQuick Review\n\n\n\n\\(Z \\sim \\mathcal{N}(0, 1)\\)\nPDF: \\(\\displaystyle \\phi(z) := \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} z^2}\\)\nCDF: \\(\\displaystyle \\Phi(z) := \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} x^2} \\ \\mathrm{d}x\\)"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#lookup-tables",
+    "href": "120B-F25/Wk03/wk3.html#lookup-tables",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Lookup Tables",
+    "text": "Lookup Tables\nNormal and Chi-Squared\n\n\\(\\Phi(z)\\) has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: \\(\\Phi(0)\\).)\n\nThis means we either have to use a computer, or a table\n\nOur table (for PSTAT 120B) gives right-tail areas, meaning it actually gives values of \\(1 - \\Phi(z)\\).\n\nThis is likely the opposite of the tables you saw in PSTAT 120A.\n\nExample: Evaluate \\(\\Phi(0.53)\\) using the table.\nExample: Evaluate \\(\\Phi^{-1}(0.9265)\\) using the table.\nExample: If \\(U \\sim \\chi^2_{8}\\), find \\(c\\) such that \\(\\Prob(U &gt; c) = 0.05\\)."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Ethan’s Section Material",

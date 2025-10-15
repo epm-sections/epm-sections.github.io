@@ -1,0 +1,262 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 3 Discussion Section"
+footer: "PSTAT 120B - Fall 2025 with Dr. Uma Ravat; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: October 17, 2025
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa chart-simple >}} Sampling Distributions
+### Overview
+
+-   Given a sample _Y_~1~, ..., _Y_~_n_~, a [**statistic**]{.alert} is a function _h_(_Y_~1~, ..., _Y_~_n_~) of the sample.
+    -   Statistics are random, and therefore have distributions; a statistics' distribution is called its [**sampling distribution**]{.alert}
+    
+-   How do we find sampling distributions?
+    -   Using our material from the Transformations chapter of this course!
+    -   After all, statistics are just functions of random variables.
+    
+-   We start with the case of a normal population; i.e. that our sample is an i.i.d. sample drawn from a normal distribution.
+    
+## {{< fa chart-simple >}} Sampling Distributions
+### Normal Population
+
+-   Suppose $Y_1, \cdots, Y_n \iid \mathcal{N}(\mu, \sigma^2)$.
+
+-   What is the sampling distribution of the sample mean
+$$ \overline{Y}_n := \frac{1}{n} \sum_{i=1}^{n} Y_i $$ 
+
+-   What do we know about the sampling distribution of the sample variance
+$$ S_n^2 := \frac{1}{n - 1} \sum_{i=1}^{n} (Y_i - \overline{Y}_n)^2 $$
+
+
+## {{< fa chart-simple >}} Sampling Distributions
+### Normal Population: Sample Mean
+
+```{r}
+#| echo: True
+#| code-fold: True
+set.seed(120); means <- c(); n <- 25
+for(k in 1:1000) {
+  means <- c(means, mean(rnorm(n, 3, 1.2)))
+}
+```
+
+```{r}
+means %>% data.frame() %>% 
+  ggplot(aes(x = `.`)) +
+  geom_histogram(aes(y = after_stat(density)),
+                 bins = 15, col = "white") +
+  theme_minimal(base_size = 24) + 
+  xlab("x") +
+  stat_function(fun = dnorm,
+                args = list(mean = 3,
+                            sd = sqrt(1.2 / n)),
+                col = "blue", linewidth = 1.5) +
+  ggtitle("Sample Mean", 
+          subtitle = "Empirical Sampling Distribution") +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+
+
+## {{< fa chart-simple >}} Sampling Distributions
+### Normal Population: Sample Variance
+
+```{r}
+#| echo: True
+#| code-fold: True
+set.seed(120); var_stat <- c(); n <- 25
+for(k in 1:1000) {
+  var_stat <- c(var_stat, ((n - 1) / (1.2^2)) * var(rnorm(n, 3, 1.2)))
+}
+```
+
+```{r}
+var_stat %>% data.frame() %>% 
+  ggplot(aes(x = `.`)) +
+  geom_histogram(aes(y = after_stat(density)),
+                 bins = 15, col = "white") +
+  theme_minimal(base_size = 24) + 
+  xlab("x") + 
+  stat_function(fun = dchisq,
+                args = list(df = n - 1),
+                col = "blue", linewidth = 1.5) +
+  ggtitle("Scaled Sample Variance", 
+          subtitle = "Empirical Sampling Distribution") +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+
+## {{< fa bell >}} Standard Normal Distribution
+### Quick Review
+
+:::: {.columns}
+
+::: {.column width="50%"}
+-   $Z \sim \mathcal{N}(0, 1)$
+
+-   **PDF:** $\displaystyle \phi(z) := \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} z^2}$
+
+-   **CDF:** $\displaystyle \Phi(z) := \int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} x^2} \ \mathrm{d}x$
+
+::: {.fragment}
+```{r}
+#| fig-height: 5
+
+data.frame(x = -3:3) %>% 
+  ggplot(aes(x = x)) +
+  stat_function(fun = dnorm, 
+                linewidth = 2,
+                col = "blue") +
+  theme_minimal(base_size = 28) +
+  ggtitle("PDF") +
+  xlab("z") + ylab(bquote(phi(z)))
+```
+:::
+
+
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+```{r}
+#| fig-height: 5
+
+data.frame(x = -3:3) %>% 
+  ggplot(aes(x = x)) +
+  stat_function(fun = dnorm, 
+                linewidth = 2,
+                col = "blue") + 
+  stat_function(geom = "area",
+                fun = dnorm, 
+                fill = "#E69F00",
+                alpha = 0.8,
+                xlim = c(-3, 1),
+                linewidth = 2,
+                col = "blue") +
+  theme_minimal(base_size = 28) +
+  ggtitle("CDF") +
+  xlab("x") + ylab(bquote(phi(x))) 
+```
+:::
+
+
+::: {.fragment}
+```{r}
+#| fig-height: 5
+
+data.frame(x = -3:3) %>% 
+  ggplot(aes(x = x)) +
+  stat_function(fun = pnorm, 
+                linewidth = 2,
+                col = "blue") +
+  theme_minimal(base_size = 28) +
+  ggtitle("CDF") +
+  xlab("z") + ylab(bquote(Phi(z))) 
+```
+:::
+:::
+
+::::
+
+## {{< fa tables >}} Lookup Tables
+### Normal and Chi-Squared
+
+-   $\Phi(z)$ has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: $\Phi(0)$.)
+    -   This means we either have to use a computer, or a **table**
+    
+-   Our table (for PSTAT 120B) gives **right-tail areas**, meaning it actually gives values of $1 - \Phi(z)$.
+    -   This is likely the opposite of the tables you saw in PSTAT 120A.
+    
+-   **Example:** Evaluate $\Phi(0.53)$ using the table.
+
+-   **Example:** Evaluate $\Phi^{-1}(0.9265)$ using the table.
+
+-   **Example:** If $U \sim \chi^2_{8}$, find $c$ such that $\Prob(U > c) = 0.05$.
