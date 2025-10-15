@@ -246,7 +246,7 @@ data.frame(x = -3:3) %>%
 
 ::::
 
-## {{< fa tables >}} Lookup Tables
+## {{< fa table >}} Lookup Tables
 ### Normal and Chi-Squared
 
 -   $\Phi(z)$ has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: $\Phi(0)$.)
