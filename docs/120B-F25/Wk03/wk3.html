@@ -264,6 +264,27 @@ MathJax = {
 </style>
 </div>
 </section>
+<section id="interlude-gamma-distribution" class="slide level2">
+<h2><i class="fa-solid fa-spell-check" aria-label="spell-check"></i> Interlude: Gamma Distribution</h2>
+<h3 id="related-to-homework-3">Related to Homework 3</h3>
+<ul>
+<li class="fragment"><p>Here is the convention we’re using for this class: if <span class="math inline">\(X \sim \mathrm{Gamma}(\alpha, \beta)\)</span> then <span class="math display">\[ f_X(x) = \frac{1}{\Gamma(\alpha) \beta^\alpha} x^{\alpha - 1} e^{-x / \beta} \cdot 1 \! \! 1_{\{x \geq 0\}} \]</span></p></li>
+<li class="fragment"><p><strong>Any other parametrization may not receive credit on quizzes/exams.</strong> For example, there is another way to write the Gamma density: <span class="math display">\[ f_X(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x} \cdot 1 \! \! 1_{\{x \geq 0\}} \]</span> with <span class="math inline">\(\E[X] = \alpha / \lambda\)</span> and <span class="math inline">\(\Var(X) = \alpha / \lambda^2\)</span>.</p></li>
+</ul>
+</section>
+<section id="interlude-gamma-distribution-1" class="slide level2">
+<h2><i class="fa-solid fa-spell-check" aria-label="spell-check"></i> Interlude: Gamma Distribution</h2>
+<h3 id="related-to-homework-3-1">Related to Homework 3</h3>
+<ul>
+<li class="fragment"><p>When it comes to expectations and variances, it doesn’t actually matter which parametrization you use. <strong>However,</strong> when you list the distribution’s <em>parameters</em>, it matters a lot.</p></li>
+<li class="fragment"><p>For example, say <span class="math inline">\(Y\)</span> is a random variable with density <span class="math inline">\(f(y) = 9y e^{-3y} \cdot 1 \! \! 1_{\{y \geq 0\}}\)</span>.</p>
+<ul>
+<li class="fragment">It is true that <span class="math inline">\(\E[Y] = 2/3\)</span> and <span class="math inline">\(\Var(Y) = 2/9\)</span>; no ambiguities there.</li>
+<li class="fragment">But, for this class, we would write <span class="math inline">\(Y \sim \mathrm{Gamma}(2, \ 1/3)\)</span> and <strong>NOT</strong> <span class="math inline">\(Y \sim \mathrm{Gamma}(2, 3)\)</span>.</li>
+</ul></li>
+<li class="fragment"><p>Please keep this mind for quizzes and exams!</p></li>
+</ul>
+</section>
 <section id="sampling-distributions" class="slide level2">
 <h2><i class="fa-solid fa-chart-simple" aria-label="chart-simple"></i> Sampling Distributions</h2>
 <h3 id="overview">Overview</h3>

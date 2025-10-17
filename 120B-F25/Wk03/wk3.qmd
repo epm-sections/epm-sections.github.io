@@ -92,6 +92,29 @@ library(plotly)
 library(tidymodels)
 ```
 
+
+## {{< fa spell-check >}} Interlude: Gamma Distribution
+### Related to Homework 3
+
+-   Here is the convention we're using for this class: if $X \sim \mathrm{Gamma}(\alpha, \beta)$ then
+$$ f_X(x) = \frac{1}{\Gamma(\alpha) \beta^\alpha} x^{\alpha - 1} e^{-x / \beta} \cdot 1 \! \! 1_{\{x \geq 0\}} $$
+
+-   **Any other parametrization may not receive credit on quizzes/exams.** For example, there is another way to write the Gamma density:
+$$ f_X(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x} \cdot 1 \! \! 1_{\{x \geq 0\}} $$
+with $\E[X] = \alpha / \lambda$ and $\Var(X) = \alpha / \lambda^2$. 
+
+## {{< fa spell-check >}} Interlude: Gamma Distribution
+### Related to Homework 3
+
+-   When it comes to expectations and variances, it doesn't actually matter which parametrization you use. **However,** when you list the distribution's _parameters_, it matters a lot.
+
+-   For example, say $Y$ is a random variable with density $f(y) = 9y e^{-3y} \cdot 1 \! \! 1_{\{y \geq 0\}}$. 
+    -   It is true that $\E[Y] = 2/3$ and $\Var(Y) = 2/9$; no ambiguities there.
+    -   But, for this class, we would write $Y \sim \mathrm{Gamma}(2, \ 1/3)$ and **NOT** $Y \sim \mathrm{Gamma}(2, 3)$.
+    
+-   Please keep this mind for quizzes and exams!
+
+
 ## {{< fa chart-simple >}} Sampling Distributions
 ### Overview
 
