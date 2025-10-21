@@ -125,11 +125,6 @@ Given a random variable _Y_ ~ _f_~_Y_~(_y_), we seek the distribution of _U_ := 
     -   Its MGF
     
 -   So, to identify the distribution of _U_, we can either find: its CDF ([**CDF Method**]{.alert}), PDF ([**Method of Transformations**]{.alert}), or MGF ([**MGF Method**]{.alert})
-  
-## {{< fa arrow-up-right-from-square >}} Univariate Transformations
-### Support
-
-![](Images/support.svg)
 
 ## {{< fa arrow-up-right-from-square >}} Univariate Transformations
 ### CDF Method
@@ -141,17 +136,13 @@ Given a random variable _Y_ ~ _f_~_Y_~(_y_), we seek the distribution of _U_ := 
     2)   Manipulate the event $\{g(Y) \leq u\}$ to be of the form $\{Y \in B_u\}$ for some set _B_~_u_~
     3)   Use the PDF of _Y_ (which is known!) to evaluate $\Prob(B_u)$, thereby finding an expression for the CDF _F_~_U_~(_u_) of _U_.
 
+-   Any assumptions? Downsides/potential issues?
+
 
 ## {{< fa arrow-up-right-from-square >}} Univariate Transformations
-### CDF Method
+### Transforming Intervals/Sets
 
-::: {.callout-tip}
-## **Example 1**
-
-Let _Y_ ~ Exp(β) for some β > 0, and define _U_ := _c_ _Y_ for some _c_ > 0. Use the CDF method to identify the distribution of _U_ **by name**, including any/all relevant parameter(s).
-:::
-
-
+![](Images/support2.svg)
 
 ## {{< fa arrow-up-right-from-square >}} Univariate Transformations
 ### Method of Transformations
@@ -171,19 +162,6 @@ This method can only be used if the following assumptions hold:
 :::
 :::
 
-
-## {{< fa arrow-up-right-from-square >}} Univariate Transformations
-### Method of Transformations
-
-::: {.callout-tip}
-## **Example 1 (revisited)**
-
-Let _X_ ~ Exp(β) for some β > 0, and define _Y_ := _c_ _X_ for some _c_ > 0. Use the Method of Transformations to identify the distribution of _Y_ **by name**, including any/all relevant parameter(s).
-:::
-
-
-
-
 ## {{< fa arrow-up-right-from-square >}} Univariate Transformations
 ### Method of MGFs
 
@@ -198,13 +176,18 @@ Let _X_ ~ Exp(β) for some β > 0, and define _Y_ := _c_ _X_ for some _c_ > 0. U
 -   In light of these, we see that the MGF method is particularly useful when our transformation involves a linear combination of independent random variables.
 
 ## {{< fa arrow-up-right-from-square >}} Univariate Transformations
-### Method of MGFs
+### Method of Transformations
 
 ::: {.callout-tip}
 ## **Example 1 (revisited)**
 
-Let _X_ ~ Exp(β) for some β > 0, and define _Y_ := _c_ _X_ for some _c_ > 0. Use the MGF Method to identify the distribution of _Y_ **by name**, including any/all relevant parameter(s).
+Let _X_ ~ Exp(β) for some β > 0, and define _Y_ := _c_ _X_ for some _c_ > 0. Find the density _f_~_Y_(_y_) of _Y_ three different ways:
+
+a)  Using the Method of Distribution Functions
+b)  Using the Method of Transformations
+c)  Using the Method of MGFs
 :::
+
 
 
 ## {{< fa arrow-up-right-from-square >}} Multivariate Transformations
@@ -335,8 +318,8 @@ viewof bet = Inputs.range(
 jstat = require("jstat")
 
 plt_pdf = Plot.plot({
-    width: 700,
-    height: 300,
+    width: 850,
+    height: 375,
     color: {
       legend: true
     },
@@ -378,8 +361,8 @@ viewof nu = Inputs.range(
 
 ```{ojs}
 plt_pdf2 = Plot.plot({
-    width: 700,
-    height: 300,
+    width: 850,
+    height: 375,
     color: {
       legend: true
     },
