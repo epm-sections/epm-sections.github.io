@@ -259,6 +259,76 @@
     "text": "Estimation\nMean Squared-Error (MSE)\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\n\n\n\n\n\nQuestion: should a “good” estimator have very high or very low MSE?"
   },
   {
+    "objectID": "120B-F25/Wk04/wk4.html#recap",
+    "href": "120B-F25/Wk04/wk4.html#recap",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Recap",
+    "text": "Recap\nFramework for Statistical Inference\n\n\n\n\n\nGoal: to make inferences about a population parameter.\nTo do so, we take random samples from the population.\nA statistic is a function of a random sample: \\(T := T(Y_1, \\cdots, Y_n)\\)\n\nStatistics, therefore, are random variables; their distributions are called sampling distributions"
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#recap-1",
+    "href": "120B-F25/Wk04/wk4.html#recap-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Recap",
+    "text": "Recap\nInference\n\nInference is, broadly speaking, divided into two subcategories: estimation and hypothesis testing\nWe’ll start by talking about estimation, and then later talk about hypothesis testing.\nIn estimation, we specifically seek to estimate the value of a population parameter\n\nE.g. the true average weight of all cats in the world\n\nIn fact, let’s continue with this “average cat weight” example."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation",
+    "href": "120B-F25/Wk04/wk4.html#estimation",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nGeneral Framework\n\n\n\n\n\n\nGoal\n\n\nTo estimate the true average weight of all cats in the world.\n\n\n\n\nLast week, we talked about taking samples of cats and recording their weights.\nIt seems natural that the average of our sampled cat weights should correspond, in some way, to the average of all cats in the world.\nThis is the basic idea behind estimation: we’ll use statistics (functions of our sample) to estimate the true value of a parameter.\n\nE.g. using the sample average cat weight to say something about the true population average cat weight."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-1",
+    "href": "120B-F25/Wk04/wk4.html#estimation-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nGeneral Framework\n\nThree key terms:\n\nEstimand: another word for the parameter we are trying to estimate.\nEstimator: a statistic being used to estimate the estimand.\n\nAnother way to think about this: a “rule” used to estimate the parameter.\n\nEstimate: a particular realization (i.e. observed instance) of an estimator."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-2",
+    "href": "120B-F25/Wk04/wk4.html#estimation-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nExample\n\n\n\n\n\n\nExample\n\n\nA vet wishes to estimate the true weight of all cats in the world. She takes a sample of 10 cats, and finds their average weight to be 9.12 lbs.\n\n\n\n\nThe estimand is the true average weight of all cats in the world (which we can call µ).\nThe estimator is the sample mean: we are using sample means to estimate µ.\nThe estimate in this scenario is 9.12 lbs, as this is a particular realization of our estimator."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-3",
+    "href": "120B-F25/Wk04/wk4.html#estimation-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nDesirable Properties of Estimators\n\nThere are potentially many estimators we can use to estimate a particular parameter.\nAs such, it is necessary to establish a notion of what makes a “good” estimator (or, equivalently, what makes one estimator “better” than another).\nOne notion is unbiasedness: an estimator \\(\\widehat{\\theta}_n\\) for \\(\\theta\\) is said to be unbiased if \\(\\E[\\widehat{\\theta}_n] = \\theta\\).\n\n“On average, the estimator gets it right.”\nMathematically: means the sampling distribution is centered at the right (true) value."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-4",
+    "href": "120B-F25/Wk04/wk4.html#estimation-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nAn Analogy\n\nUnbiasedness, however, is often not enough. To motivate why, let’s take a look at an analogy.\nAn analogy is often drawn between estimation and hitting a bullseye.\n\nThe bullseye is akin to our estimand, and estimates are represented by shots fired at the target.\nThe estimator is, therefore, akin to the marskperson.\n\nAn unbiased estimator is analogous to a marksperson for whom the average location of shots is the bullseye."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-5",
+    "href": "120B-F25/Wk04/wk4.html#estimation-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons are “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-6",
+    "href": "120B-F25/Wk04/wk4.html#estimation-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\mathrm{Bias}^2(\\widehat{\\theta}_n, \\theta) + \\Var(\\widehat{\\theta}_n) \\]\nwhere \\(\\mathrm{Bias}(\\widehat{\\theta}_n, \\theta) := \\E[\\widehat{\\theta}_n] - \\theta\\)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ethan’s Section Material",
+    "section": "",
+    "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
+  },
+  {
     "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
     "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
     "title": "PSTAT 120B: Mathematical Statistics",
@@ -313,13 +383,6 @@
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Lookup Tables",
     "text": "Lookup Tables\nNormal and Chi-Squared\n\n\\(\\Phi(z)\\) has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: \\(\\Phi(0)\\).)\n\nThis means we either have to use a computer, or a table\n\nOur table (for PSTAT 120B) gives right-tail areas, meaning it actually gives values of \\(1 - \\Phi(z)\\).\n\nThis is likely the opposite of the tables you saw in PSTAT 120A.\n\nExample: Evaluate \\(\\Phi(0.53)\\) using the table.\nExample: Evaluate \\(\\Phi^{-1}(0.9265)\\) using the table.\nExample: If \\(U \\sim \\chi^2_{8}\\), find \\(c\\) such that \\(\\Prob(U &gt; c) = 0.05\\)."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Ethan’s Section Material",
-    "section": "",
-    "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
   },
   {
     "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations",
