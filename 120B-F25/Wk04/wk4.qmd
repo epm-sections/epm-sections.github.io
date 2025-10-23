@@ -92,6 +92,16 @@ library(plotly)
 library(tidymodels)
 ```
 
+## {{< fa message >}} Announcements
+
+1) [**Midterm Review**]{.alert} (hosted by me): **Tuesday October 28, 2025** from **7:00 - 8:30 pm** in **BUCHN 1920**
+   -  The plan is to review some material and thenwork through some new practice problems together
+ 
+2) [**Midterm Advice**]{.alert}: write a note sheet (even though you don't technically get one on the exam)!
+   -  Studies show: the act of writing things down and synthesizing information is a _great_ way to commit things to long-term memory.
+   
+3) [**Homework 5**]{.alert}: remember that it is due **5pm** on Wednesday (instead of 11:59pm), and that **no late submissions will be accepted for ANY reasons**
+
 
 ## {{< fa backward-fast >}} Recap
 ### Framework for Statistical Inference
@@ -113,20 +123,6 @@ library(tidymodels)
 :::
 
 ::::
-
-
-
-## {{< fa backward-fast >}} Recap
-### Inference
-
--   Inference is, broadly speaking, divided into two subcategories: [**estimation**]{.alert} and [**hypothesis testing**]{.alert}
-
--   We'll start by talking about estimation, and then later talk about hypothesis testing.
-
--   In estimation, we specifically seek to _estimate_ the value of a population parameter
-    -   E.g. the true average weight of all cats in the world
-
--   In fact, let's continue with this "average cat weight" example.
 
 
 ## {{< fa sign-hanging >}} Estimation
@@ -195,7 +191,7 @@ A vet wishes to estimate the true weight of all cats in the world. She takes a s
 ## {{< fa sign-hanging >}} Estimation
 ### Two Markspersons
 
--   Which of the following markspersons are "better"? 
+-   Which of the following markspersons is "better"? 
 
 :::: {.columns}
 

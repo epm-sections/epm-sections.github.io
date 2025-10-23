@@ -259,18 +259,18 @@
     "text": "Estimation\nMean Squared-Error (MSE)\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\n\n\n\n\n\nQuestion: should a “good” estimator have very high or very low MSE?"
   },
   {
+    "objectID": "120B-F25/Wk04/wk4.html#announcements",
+    "href": "120B-F25/Wk04/wk4.html#announcements",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Announcements",
+    "text": "Announcements\n\nMidterm Review (hosted by me): Tuesday October 28, 2025 from 7:00 - 8:30 pm in BUCHN 1920\n\nThe plan is to review some material and thenwork through some new practice problems together\n\nMidterm Advice: write a note sheet (even though you don’t technically get one on the exam)!\n\nStudies show: the act of writing things down and synthesizing information is a great way to commit things to long-term memory.\n\nHomework 5: remember that it is due 5pm on Wednesday (instead of 11:59pm), and that no late submissions will be accepted for ANY reasons"
+  },
+  {
     "objectID": "120B-F25/Wk04/wk4.html#recap",
     "href": "120B-F25/Wk04/wk4.html#recap",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Recap",
     "text": "Recap\nFramework for Statistical Inference\n\n\n\n\n\nGoal: to make inferences about a population parameter.\nTo do so, we take random samples from the population.\nA statistic is a function of a random sample: \\(T := T(Y_1, \\cdots, Y_n)\\)\n\nStatistics, therefore, are random variables; their distributions are called sampling distributions"
-  },
-  {
-    "objectID": "120B-F25/Wk04/wk4.html#recap-1",
-    "href": "120B-F25/Wk04/wk4.html#recap-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Recap",
-    "text": "Recap\nInference\n\nInference is, broadly speaking, divided into two subcategories: estimation and hypothesis testing\nWe’ll start by talking about estimation, and then later talk about hypothesis testing.\nIn estimation, we specifically seek to estimate the value of a population parameter\n\nE.g. the true average weight of all cats in the world\n\nIn fact, let’s continue with this “average cat weight” example."
   },
   {
     "objectID": "120B-F25/Wk04/wk4.html#estimation",
@@ -312,7 +312,7 @@
     "href": "120B-F25/Wk04/wk4.html#estimation-5",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Estimation",
-    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons are “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
+    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons is “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
   },
   {
     "objectID": "120B-F25/Wk04/wk4.html#estimation-6",
