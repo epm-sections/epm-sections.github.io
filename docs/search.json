@@ -63,200 +63,130 @@
     "text": "CDF Method\n\nRecall the example from lecture: X ~ Unif[-1, 1] and Y = X2\n\nhttps://www.youtube.com/watch?v=HtzqjHfoRbw"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#roadmap-for-today",
-    "href": "120B-F25/MTRev/MTRev2.html#roadmap-for-today",
-    "title": "Midterm Review",
-    "section": " Roadmap for Today",
-    "text": "Roadmap for Today\n\nGo through some slides (including some interactive problems)\nWork through some problems together (on the worksheet; copies can be found at the front of the room)\n\n\n\n\n\n\n\n\nDisclaimer\n\n\nI have not seen the exam yet, so I do not know exactly what will or will not be on it. Just because something does or does not show up on these slides doesn’t mean it is guaranteed to show up / not show up on the exam.\n\n\n\n\n\n\n\n\n\n\n\nDisclaimer\n\n\nThis review is not intended to be comprehensive; I encourage you to consult the lecture notes, textbook, homework, and your own notes."
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#univariate-transformations",
-    "href": "120B-F25/MTRev/MTRev2.html#univariate-transformations",
-    "title": "Midterm Review",
-    "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nGeneral Framework\n\n\n\n\n\n\nGoal: Univariate Transformations\n\n\nGiven a random variable Y ~ fY(y), we seek the distribution of U := g(Y) for some real-valued function g.\n\n\n\n\nThree things uniquely characterize a distribution:\n\nIts CDF\nIts PDF\nIts MGF\n\nSo, to identify the distribution of U, we can either find: its CDF (CDF Method), PDF (Method of Transformations), or MGF (MGF Method)"
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#univariate-transformations-1",
-    "href": "120B-F25/MTRev/MTRev2.html#univariate-transformations-1",
-    "title": "Midterm Review",
-    "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nCDF Method\n\nFirst idea: find the CDF FU(u).\nOften a three-step procedure:\n\nWrite \\(F_U(u) := \\Prob(U \\leq u) = \\Prob(g(Y) \\leq u)\\)\nManipulate the event \\(\\{g(Y) \\leq u\\}\\) to be of the form \\(\\{Y \\in B_u\\}\\) for some set Bu\nUse the PDF of Y (which is known!) to evaluate \\(\\Prob(B_u)\\), thereby finding an expression for the CDF FU(u) of U.\n\nAny assumptions? Downsides/potential issues?"
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#univariate-transformations-2",
-    "href": "120B-F25/MTRev/MTRev2.html#univariate-transformations-2",
-    "title": "Midterm Review",
-    "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nTransforming Intervals/Sets"
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#univariate-transformations-3",
-    "href": "120B-F25/MTRev/MTRev2.html#univariate-transformations-3",
-    "title": "Midterm Review",
-    "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nMethod of Transformations\n\nIf g is strictly monotonic over the support of X, then \\[ f_U(u) = f_X[g^{-1}(u)] \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}u} g^{-1}(u) \\right| \\]\n\n\n\n\n\n\n\n\nCaution\n\n\nThis method can only be used if the following assumptions hold:\n\nThe underlying transformation is univariate (i.e. a function of only one random variable)\nThe underlying transforamtion is strictly monotonic (can anyone tell me why?)"
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#univariate-transformations-4",
-    "href": "120B-F25/MTRev/MTRev2.html#univariate-transformations-4",
-    "title": "Midterm Review",
-    "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nMethod of MGFs\n\nA useful fact is that MGFs uniquely determine distributions.\n\nFor example, if I tell you X has MGF \\(M_X(t) = e^{t^2}\\), then you can automatically conclude that \\(X \\sim \\mathcal{N}(0, 2)\\).\n\nTwo useful facts about MGFs:\n\n\\(M_{aX + b}(t) =\\)\nFor independent X and Y, \\(M_{X + Y}(t) =\\)\n\nIn light of these, we see that the MGF method is particularly useful when our transformation involves a linear combination of independent random variables."
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#univariate-transformations-5",
-    "href": "120B-F25/MTRev/MTRev2.html#univariate-transformations-5",
-    "title": "Midterm Review",
-    "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nMethod of Transformations\n\n\n\n\n\n\nExample 1 (revisited)\n\n\nLet X ~ Exp(β) for some β &gt; 0, and define Y := c X for some c &gt; 0. Find the density f~Y(y) of Y three different ways:\n\nUsing the Method of Distribution Functions\nUsing the Method of Transformations\nUsing the Method of MGFs"
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#multivariate-transformations",
-    "href": "120B-F25/MTRev/MTRev2.html#multivariate-transformations",
-    "title": "Midterm Review",
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations",
+    "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOutline\n\nWhen it comes to multivariate transformations (i.e. transformations of multiple random variables), there often is not a one-size-fits-all approach.\nA safe bet is usually the CDF method, though the corresponding integrals may be intractable.\nIf the transformation is a linear combination of independent random variables, then the MGF method might be a good bet.\nWe also saw some examples about minima and maxima; take a look through the lecture slides for those."
+    "text": "Multivariate Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, and a function h, we wish to identify the distribution of U := h(Y1, Y2, …, Yn).\n\n\n\n\nExamples:\n\nSample Mean:: \\(\\overline{Y}_n := n^{-1} \\sum_{i=1}^{n} Y_i\\)\nSample Variance:: \\(\\overline{Y}_n := (n-1)^{-1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2\\)\nOrder Statistics:: \\(Y_{(i)}\\) := ith smallest of the Y’s\n\nSample Minimum:: \\(Y_{(1)} := \\min\\{Y_1, \\cdots, Y_n\\}\\)\nSample Maximum:: \\(Y_{(n)} := \\max\\{Y_1, \\cdots, Y_n\\}\\)"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#multivariate-transformations-1",
-    "href": "120B-F25/MTRev/MTRev2.html#multivariate-transformations-1",
-    "title": "Midterm Review",
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nExample\n\n\n\n\n\n\nExample 2\n\n\nLet \\(X, Y \\iid \\mathrm{Exp}(\\beta)\\) for some \\(\\beta &gt; 0\\). Using whichever method you feel is most appropriate, identify the distribution of:\n\n\\(S := (X + Y)\\)\n\\(Z := \\min\\{X, Y\\}\\)"
+    "text": "Multivariate Transformations\nSpecial Cases\n\nIf:                          and                         , consider using the MGF Method.\n\nEven in this case, we need to be mindful of what we want at the end: if we only want the distribution, the MGF will be fine. But, if we want the density, we need some hope of being able to recognize the final MGF.\n\nGenerally, the CDF method will always work and give you a valid answer for the CDF and/or density.\n\nHowever, it is possible that the integrals involved are either intractable, or impossible to express in terms of elementary functions."
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nGeneral Framework\n\n\n\n\n\nGoal: to make inferences about a population parameter.\nTo do so, we take random samples from the population.\nA statistic is a function of a random sample: \\(T := T(Y_1, \\cdots, Y_n)\\)\n\nStatistics, therefore, are random variables; their distributions are called sampling distributions"
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nUsing the CDF method, we need to express \\(\\{Y_{(n)} \\leq y\\}\\) in terms of the original Yi’s.\n\nIf the largest of a collection of numbers is less than or equal to some value y, then so too must all the numbers be less than or equal to y.\n\nAll values are less than or equal to the maximum (by definition)\nThe maximum is less than y (by assertion)\nTherefore all values are less than y (by logic)"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-1",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-1",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nExample: Cats!"
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nNote: the converse is not true; that is, \\(\\{Y_{(n)} &gt; y\\}\\) does not imply that all the Y’s are greater than y.\n\nFor example: max{2, 4} is greater than 3, but it is not true that both 2 and 4 are greater than three\n\nThink About This: How can we translate \\(\\{Y_{(1)} \\leq y\\}\\) in terms of the original Y’s?\n\nThis is relevant for finding the density of the sample minimum."
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-2",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-2",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nExample: Cats!"
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?\n\nIt might seem strange to think of order statistics as random. I find an example might help.\nSuppose we let Yi denote the weight of a randomly-selected cat.\n\nSince the cat is randomly selected, Yi is random; different cats have different weights.\n\nLet (Y1, …, Yn) denote a sample of n independent cat weights.\n\nDifferent samples of cats lead to different recorded cat weights.\nThe minimum weight of each of these samples isn’t necessarily the same across samples - there is variability across samples!\nHence, the sample minimum is a random quantity."
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-3",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-3",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nExample: Cats!"
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-4",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-4",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nExample: Cats!"
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-5",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-5",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nNotation\n\nWith this example, we can highlight an important distinction.\nLet Yi denote the weight of a randomly-selected cat. Random or deterministic?\n\nRandom.\n\nLet yi denote the weight of a specific cat (e.g. Kitty). Random or deterministic?\n\nDeterministic.\n\nDenote \\(\\vect{Y} := \\{Y_i\\}_{i=1}^{n}\\) to be our random sample; let \\(\\vect{y} := \\{y_i\\}_{i=1}^{n}\\) be a realization (aka an observed instance) of our sample \\(\\vect{Y}\\)."
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-6",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-6",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nNormal Population\n\nTwo common statistics that arise frequently are the sample mean and sample variance, defined as \\[ \\overline{Y}_n := \\frac{1}{n} \\sum_{i=1}^{n} Y_i; \\qquad S_n^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2 \\]\n\n\n\n\n\n\n\n\nTheorem\n\n\nLet \\(Y_1, \\cdots, Y_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\). Then:\n\n\\(\\overline{Y}_n \\sim \\mathcal{N}\\left( \\mu, \\ \\frac{\\sigma^2}{n} \\right)\\)\n\\(\\left( \\frac{n - 1}{\\sigma^2} \\right) S_n^2 \\sim \\chi^2_{n - 1}\\)"
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#review-the-gamma-distribution",
-    "href": "120B-F25/MTRev/MTRev2.html#review-the-gamma-distribution",
-    "title": "Midterm Review",
-    "section": " Review: The Gamma Distribution",
-    "text": "Review: The Gamma Distribution\n\n\n\nviewof alph = Inputs.range(\n  [0.2, 10], \n  {value: 2, step: 0.1, label: \"α:\"}\n)\n\nviewof bet = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"β:\"}\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(0, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.gamma.pdf(x, alph, bet)}));\n  return pdf\n}"
+    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
+    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Interlude: Gamma Distribution",
+    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nHere is the convention we’re using for this class: if \\(X \\sim \\mathrm{Gamma}(\\alpha, \\beta)\\) then \\[ f_X(x) = \\frac{1}{\\Gamma(\\alpha) \\beta^\\alpha} x^{\\alpha - 1} e^{-x / \\beta} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\]\nAny other parametrization may not receive credit on quizzes/exams. For example, there is another way to write the Gamma density: \\[ f_X(x) = \\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)} x^{\\alpha - 1} e^{-\\lambda x} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\] with \\(\\E[X] = \\alpha / \\lambda\\) and \\(\\Var(X) = \\alpha / \\lambda^2\\)."
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#review-the-chi2_nu-distribution",
-    "href": "120B-F25/MTRev/MTRev2.html#review-the-chi2_nu-distribution",
-    "title": "Midterm Review",
-    "section": " Review: The \\(\\chi^2_{\\nu}\\) distribution",
-    "text": "Review: The \\(\\chi^2_{\\nu}\\) distribution\n\n\n\nviewof nu = Inputs.range(\n  [0.2, 10], \n  {value: 3, step: 0.1, label: \"ν:\"}\n)\n\n\n\n\n\n\n\nplt_pdf2 = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals2, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals2 = {\n  const x = d3.range(0, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.gamma.pdf(x, nu/2, 2)}));\n  return pdf\n}"
+    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
+    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Interlude: Gamma Distribution",
+    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nWhen it comes to expectations and variances, it doesn’t actually matter which parametrization you use. However, when you list the distribution’s parameters, it matters a lot.\nFor example, say \\(Y\\) is a random variable with density \\(f(y) = 9y e^{-3y} \\cdot 1 \\! \\! 1_{\\{y \\geq 0\\}}\\).\n\nIt is true that \\(\\E[Y] = 2/3\\) and \\(\\Var(Y) = 2/9\\); no ambiguities there.\nBut, for this class, we would write \\(Y \\sim \\mathrm{Gamma}(2, \\ 1/3)\\) and NOT \\(Y \\sim \\mathrm{Gamma}(2, 3)\\).\n\nPlease keep this mind for quizzes and exams!"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-7",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-7",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nt- and F-distributions\n\n\n\n\n\n\n\nDefinition: t-Distribution\n\n\nIf \\(Z \\sim \\mathcal{N}(0, 1)\\) and \\(U \\sim \\chi^2_{\\nu}\\) with \\(Z \\perp U\\), then \\[ T := \\frac{Z}{\\sqrt{U / \\nu}} \\sim t_{\\nu} \\]\n\n\n\n\n\n\n\n\n\n\n\nDefinition: F-Distribution\n\n\nIf \\(U_1 \\sim \\chi^2_{\\nu_1}\\) and \\(U_2 \\sim \\chi^2_{\\nu_2}\\) with \\(U_1 \\perp U_2\\), then \\[ F := \\frac{U_1 / \\nu_1}{U_2 / \\nu_2} \\sim F_{\\nu_1, \\nu_2} \\]"
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nOverview\n\nGiven a sample Y1, …, Yn, a statistic is a function h(Y1, …, Yn) of the sample.\n\nStatistics are random, and therefore have distributions; a statistics’ distribution is called its sampling distribution\n\nHow do we find sampling distributions?\n\nUsing our material from the Transformations chapter of this course!\nAfter all, statistics are just functions of random variables.\n\nWe start with the case of a normal population; i.e. that our sample is an i.i.d. sample drawn from a normal distribution."
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-8",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-8",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nConvergence in Distribution\n\n\n\n\n\n\nDefinition: Convergence in Distribution\n\n\nA sequence \\(\\{X_n\\}_{n \\geq 1}\\) of random variables is said to converge in distribution to another random variable \\(X\\) if, for every point \\(x\\) at which the CDF of \\(X\\) is continuous, \\[ \\lim_{n \\to \\infty} \\Prob(X_n \\leq x) = \\Prob(X \\leq x) \\] in which case we write \\[ X_n \\distto X \\]"
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population\n\nSuppose \\(Y_1, \\cdots, Y_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\).\nWhat is the sampling distribution of the sample mean \\[ \\overline{Y}_n := \\frac{1}{n} \\sum_{i=1}^{n} Y_i \\]\nWhat do we know about the sampling distribution of the sample variance \\[ S_n^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2 \\]"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-9",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-9",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nCentral Limit Theorem\n\n\n\n\n\n\nCentral Limit Theorem\n\n\nLet \\(Y_1, \\cdots, Y_n\\) denote an i.i.d. sample from a distribution with mean \\(\\mu\\) and finite variance \\(\\sigma^2 &lt; \\infty\\). Then \\[ \\frac{\\sqrt{n}(\\overline{Y}_n - \\mu)}{\\sigma} \\distto \\mathcal{N}(0, 1) \\] which we can sometimes write as, for sufficiently large n, \\[ \\overline{Y}_n \\stackrel{\\cdot}{\\sim} \\mathcal{N}\\left( \\mu , \\ \\frac{\\sigma^2}{n} \\right) \\sim \\mathcal{N}\\left( \\E[Y_i], \\ \\frac{\\Var(Y_i)}{n} \\right) \\]\n\n\n\n\nThe symbol \\(\\stackrel{\\cdot}{\\sim}\\) can be read as “approximately distributed as”"
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population: Sample Mean\n\n\nCode\nset.seed(120); means &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  means &lt;- c(means, mean(rnorm(n, 3, 1.2)))\n}"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#sampling-10",
-    "href": "120B-F25/MTRev/MTRev2.html#sampling-10",
-    "title": "Midterm Review",
-    "section": " Sampling",
-    "text": "Sampling\nDeMoivre-Laplace Theorem (Normal Approx. to Binomial)\n\n\n\n\n\n\nDeMoivre-Laplace Theorem\n\n\nLet \\(X_n \\sim \\mathrm{Bin}(n, p)\\). Then \\[ \\frac{X_n - np}{\\sqrt{np(1 - p)}} \\distto \\mathcal{N}\\left( 0, 1 \\right) \\] More specifically, provided that \\(n &gt; p \\cdot (\\max\\{p, 1 - p\\} / \\min\\{p, 1 - p\\})\\) then \\[ X_n \\stackrel{\\cdot}{\\sim} \\mathcal{N}\\left( np, \\ np(1 - p) \\right) \\]\n\n\n\n\nThis is what we called the “Normal Approximation to the Binomial Distribution” (in Topic 06).\n\nNotice that it is essentially just a special case of the CLT, since a Binomial distribution can be decomposed as a sum of i.i.d. Bernoulliis!"
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population: Sample Variance\n\n\nCode\nset.seed(120); var_stat &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  var_stat &lt;- c(var_stat, ((n - 1) / (1.2^2)) * var(rnorm(n, 3, 1.2)))\n}"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#estimation-1",
-    "href": "120B-F25/MTRev/MTRev2.html#estimation-1",
-    "title": "Midterm Review",
-    "section": " Estimation",
-    "text": "Estimation\nGeneral Framework\n\nThe goal of estimation is, as the name suggests, to use samples (specifically, sample statistics) to estimate the value of a population parameter.\nThree key terms:\n\nEstimand: another word for the parameter we are trying to estimate.\nEstimator: a statistic being used to estimate the estimand.\n\nAnother way to think about this: a “rule” used to estimate the parameter.\n\nEstimate: a particular realization (i.e. observed instance) of an estimator."
+    "objectID": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
+    "href": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nQuick Review\n\n\n\n\\(Z \\sim \\mathcal{N}(0, 1)\\)\nPDF: \\(\\displaystyle \\phi(z) := \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} z^2}\\)\nCDF: \\(\\displaystyle \\Phi(z) := \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} x^2} \\ \\mathrm{d}x\\)"
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#estimation-2",
-    "href": "120B-F25/MTRev/MTRev2.html#estimation-2",
-    "title": "Midterm Review",
-    "section": " Estimation",
-    "text": "Estimation\nExample\n\n\n\n\n\n\nExample\n\n\nA vet wishes to estimate the true weight of all cats in the world. She takes a sample of 10 cats, and finds their average weight to be 9.12 lbs.\n\n\n\n\nThe estimand is the true average weight of all cats in the world (which we can call µ).\nThe estimator is the sample mean: we are using sample means to estimate µ.\nThe estimate in this scenario is 9.12 lbs, as this is a particular realization of our estimator."
+    "objectID": "120B-F25/Wk03/wk3.html#lookup-tables",
+    "href": "120B-F25/Wk03/wk3.html#lookup-tables",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Lookup Tables",
+    "text": "Lookup Tables\nNormal and Chi-Squared\n\n\\(\\Phi(z)\\) has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: \\(\\Phi(0)\\).)\n\nThis means we either have to use a computer, or a table\n\nOur table (for PSTAT 120B) gives right-tail areas, meaning it actually gives values of \\(1 - \\Phi(z)\\).\n\nThis is likely the opposite of the tables you saw in PSTAT 120A.\n\nExample: Evaluate \\(\\Phi(0.53)\\) using the table.\nExample: Evaluate \\(\\Phi^{-1}(0.9265)\\) using the table.\nExample: If \\(U \\sim \\chi^2_{8}\\), find \\(c\\) such that \\(\\Prob(U &gt; c) = 0.05\\)."
   },
   {
-    "objectID": "120B-F25/MTRev/MTRev2.html#estimation-3",
-    "href": "120B-F25/MTRev/MTRev2.html#estimation-3",
-    "title": "Midterm Review",
-    "section": " Estimation",
-    "text": "Estimation\nGoodness-of-Fit\n\nGiven that there are potentially many estimators we could use to estimate a particular estimand, it’s useful to develop a metric of how well a particular estimator is performing (or, equivalently, on how to compare the performance of two estimators).\n\n\n\n\n\n\n\n\nDefinition: Bias\n\n\nThe bias of an estimator \\(\\widehat{\\theta}_n\\) being used to estimate a parameter \\(\\theta\\) is defined to be \\[ \\mathrm{Bias}(\\widehat{\\theta}_n) := \\E[\\widehat{\\theta}_n] - \\theta \\] The estimator is said to be unbiased if its bias is zero; i.e. if \\(\\E[\\widehat{\\theta}_n] = \\theta\\).\n\n\n\n\n\nAn unbiased estimator, “on average, gets it right”."
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#estimation-4",
-    "href": "120B-F25/MTRev/MTRev2.html#estimation-4",
-    "title": "Midterm Review",
-    "section": " Estimation",
-    "text": "Estimation\nAn Analogy\n\nUnbiasedness, however, is often not enough. To motivate why, let’s take a look at an analogy.\nAn analogy is often drawn between estimation and hitting a bullseye.\n\nThe bullseye is akin to our estimand, and estimates are represented by shots fired at the target.\nThe estimator is, therefore, akin to the marskperson.\n\nAn unbiased estimator is analogous to a marksperson for whom the average location of shots is the bullseye."
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#estimation-5",
-    "href": "120B-F25/MTRev/MTRev2.html#estimation-5",
-    "title": "Midterm Review",
-    "section": " Estimation",
-    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons are “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
-  },
-  {
-    "objectID": "120B-F25/MTRev/MTRev2.html#estimation-6",
-    "href": "120B-F25/MTRev/MTRev2.html#estimation-6",
-    "title": "Midterm Review",
-    "section": " Estimation",
-    "text": "Estimation\nMean Squared-Error (MSE)\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\n\n\n\n\n\nQuestion: should a “good” estimator have very high or very low MSE?"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ethan’s Section Material",
+    "section": "",
+    "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
   },
   {
     "objectID": "120B-F25/Wk04/wk4.html#announcements",
@@ -322,132 +252,6 @@
     "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\mathrm{Bias}^2(\\widehat{\\theta}_n, \\theta) + \\Var(\\widehat{\\theta}_n) \\]\nwhere \\(\\mathrm{Bias}(\\widehat{\\theta}_n, \\theta) := \\E[\\widehat{\\theta}_n] - \\theta\\)."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Ethan’s Section Material",
-    "section": "",
-    "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
-    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Interlude: Gamma Distribution",
-    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nHere is the convention we’re using for this class: if \\(X \\sim \\mathrm{Gamma}(\\alpha, \\beta)\\) then \\[ f_X(x) = \\frac{1}{\\Gamma(\\alpha) \\beta^\\alpha} x^{\\alpha - 1} e^{-x / \\beta} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\]\nAny other parametrization may not receive credit on quizzes/exams. For example, there is another way to write the Gamma density: \\[ f_X(x) = \\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)} x^{\\alpha - 1} e^{-\\lambda x} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\] with \\(\\E[X] = \\alpha / \\lambda\\) and \\(\\Var(X) = \\alpha / \\lambda^2\\)."
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
-    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Interlude: Gamma Distribution",
-    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nWhen it comes to expectations and variances, it doesn’t actually matter which parametrization you use. However, when you list the distribution’s parameters, it matters a lot.\nFor example, say \\(Y\\) is a random variable with density \\(f(y) = 9y e^{-3y} \\cdot 1 \\! \\! 1_{\\{y \\geq 0\\}}\\).\n\nIt is true that \\(\\E[Y] = 2/3\\) and \\(\\Var(Y) = 2/9\\); no ambiguities there.\nBut, for this class, we would write \\(Y \\sim \\mathrm{Gamma}(2, \\ 1/3)\\) and NOT \\(Y \\sim \\mathrm{Gamma}(2, 3)\\).\n\nPlease keep this mind for quizzes and exams!"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nOverview\n\nGiven a sample Y1, …, Yn, a statistic is a function h(Y1, …, Yn) of the sample.\n\nStatistics are random, and therefore have distributions; a statistics’ distribution is called its sampling distribution\n\nHow do we find sampling distributions?\n\nUsing our material from the Transformations chapter of this course!\nAfter all, statistics are just functions of random variables.\n\nWe start with the case of a normal population; i.e. that our sample is an i.i.d. sample drawn from a normal distribution."
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nNormal Population\n\nSuppose \\(Y_1, \\cdots, Y_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\).\nWhat is the sampling distribution of the sample mean \\[ \\overline{Y}_n := \\frac{1}{n} \\sum_{i=1}^{n} Y_i \\]\nWhat do we know about the sampling distribution of the sample variance \\[ S_n^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2 \\]"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nNormal Population: Sample Mean\n\n\nCode\nset.seed(120); means &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  means &lt;- c(means, mean(rnorm(n, 3, 1.2)))\n}"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nNormal Population: Sample Variance\n\n\nCode\nset.seed(120); var_stat &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  var_stat &lt;- c(var_stat, ((n - 1) / (1.2^2)) * var(rnorm(n, 3, 1.2)))\n}"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
-    "href": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Standard Normal Distribution",
-    "text": "Standard Normal Distribution\nQuick Review\n\n\n\n\\(Z \\sim \\mathcal{N}(0, 1)\\)\nPDF: \\(\\displaystyle \\phi(z) := \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} z^2}\\)\nCDF: \\(\\displaystyle \\Phi(z) := \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} x^2} \\ \\mathrm{d}x\\)"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#lookup-tables",
-    "href": "120B-F25/Wk03/wk3.html#lookup-tables",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Lookup Tables",
-    "text": "Lookup Tables\nNormal and Chi-Squared\n\n\\(\\Phi(z)\\) has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: \\(\\Phi(0)\\).)\n\nThis means we either have to use a computer, or a table\n\nOur table (for PSTAT 120B) gives right-tail areas, meaning it actually gives values of \\(1 - \\Phi(z)\\).\n\nThis is likely the opposite of the tables you saw in PSTAT 120A.\n\nExample: Evaluate \\(\\Phi(0.53)\\) using the table.\nExample: Evaluate \\(\\Phi^{-1}(0.9265)\\) using the table.\nExample: If \\(U \\sim \\chi^2_{8}\\), find \\(c\\) such that \\(\\Prob(U &gt; c) = 0.05\\)."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, and a function h, we wish to identify the distribution of U := h(Y1, Y2, …, Yn).\n\n\n\n\nExamples:\n\nSample Mean:: \\(\\overline{Y}_n := n^{-1} \\sum_{i=1}^{n} Y_i\\)\nSample Variance:: \\(\\overline{Y}_n := (n-1)^{-1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2\\)\nOrder Statistics:: \\(Y_{(i)}\\) := ith smallest of the Y’s\n\nSample Minimum:: \\(Y_{(1)} := \\min\\{Y_1, \\cdots, Y_n\\}\\)\nSample Maximum:: \\(Y_{(n)} := \\max\\{Y_1, \\cdots, Y_n\\}\\)"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nSpecial Cases\n\nIf:                          and                         , consider using the MGF Method.\n\nEven in this case, we need to be mindful of what we want at the end: if we only want the distribution, the MGF will be fine. But, if we want the density, we need some hope of being able to recognize the final MGF.\n\nGenerally, the CDF method will always work and give you a valid answer for the CDF and/or density.\n\nHowever, it is possible that the integrals involved are either intractable, or impossible to express in terms of elementary functions."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nUsing the CDF method, we need to express \\(\\{Y_{(n)} \\leq y\\}\\) in terms of the original Yi’s.\n\nIf the largest of a collection of numbers is less than or equal to some value y, then so too must all the numbers be less than or equal to y.\n\nAll values are less than or equal to the maximum (by definition)\nThe maximum is less than y (by assertion)\nTherefore all values are less than y (by logic)"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nNote: the converse is not true; that is, \\(\\{Y_{(n)} &gt; y\\}\\) does not imply that all the Y’s are greater than y.\n\nFor example: max{2, 4} is greater than 3, but it is not true that both 2 and 4 are greater than three\n\nThink About This: How can we translate \\(\\{Y_{(1)} \\leq y\\}\\) in terms of the original Y’s?\n\nThis is relevant for finding the density of the sample minimum."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?\n\nIt might seem strange to think of order statistics as random. I find an example might help.\nSuppose we let Yi denote the weight of a randomly-selected cat.\n\nSince the cat is randomly selected, Yi is random; different cats have different weights.\n\nLet (Y1, …, Yn) denote a sample of n independent cat weights.\n\nDifferent samples of cats lead to different recorded cat weights.\nThe minimum weight of each of these samples isn’t necessarily the same across samples - there is variability across samples!\nHence, the sample minimum is a random quantity."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
     "objectID": "120B-F25/MTRev/MTRev.html#roadmap-for-today",
     "href": "120B-F25/MTRev/MTRev.html#roadmap-for-today",
     "title": "Midterm Review",
@@ -459,28 +263,28 @@
     "href": "120B-F25/MTRev/MTRev.html#univariate-transformations",
     "title": "Midterm Review",
     "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nGeneral Framework\n\n\n\n\n\n\nGoal: Univariate Transformations\n\n\nGiven a random variable Y ~ fY(y), we seek the distribution of U := g(Y) for some real-valued function g.\n\n\n\n\nThree things uniquely characterize a distribution:\n\nIts CDF\nIts PDF\nIts MGF\n\nSo, to identify the distribution of U, we can either find: its CDF (CDF Method), PDF (Method of Transformations), or MGF (MGF Method)"
+    "text": "Univariate Transformations\nGeneral Framework\n\n\n\n\n\n\nGoal: Univariate Transformations\n\n\nGiven a random variable Y ~ fY(y), we seek the distribution of U := g(Y) for some real-valued function g.\n\n\n\n\nThree things uniquely characterize a distribution:\n\nIts CDF\nIts PDF\nIts MGF\n\nSo, to identify the distribution of U, we can either find: its CDF (CDF Method), PDF (Method of Transformations), or MGF (MGF Method)\n\n\n\n\n\n\n\n\nExample 1: Guiding Example\n\n\nLet Y ~ Exp(β) for some β &gt; 0, and define U := c Y for some c &gt; 0."
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#univariate-transformations-1",
     "href": "120B-F25/MTRev/MTRev.html#univariate-transformations-1",
     "title": "Midterm Review",
     "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nSupport"
+    "text": "Univariate Transformations\nCDF Method\n\nFirst idea: find the CDF FU(u).\nOften a three-step procedure:\n\nWrite \\(F_U(u) := \\Prob(U \\leq u) = \\Prob(g(Y) \\leq u)\\)\nManipulate the event \\(\\{g(Y) \\leq u\\}\\) to be of the form \\(\\{Y \\in B_u\\}\\) for some set Bu\nUse the PDF of Y (which is known!) to evaluate \\(\\Prob(B_u)\\), thereby finding an expression for the CDF FU(u) of U.\n\nAny assumptions? Downsides/potential issues?"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#univariate-transformations-2",
     "href": "120B-F25/MTRev/MTRev.html#univariate-transformations-2",
     "title": "Midterm Review",
     "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nCDF Method\n\nFirst idea: find the CDF FU(u).\nOften a three-step procedure:\n\nWrite \\(F_U(u) := \\Prob(U \\leq u) = \\Prob(g(Y) \\leq u)\\)\nManipulate the event \\(\\{g(Y) \\leq u\\}\\) to be of the form \\(\\{Y \\in B_u\\}\\) for some set Bu\nUse the PDF of Y (which is known!) to evaluate \\(\\Prob(B_u)\\), thereby finding an expression for the CDF FU(u) of U."
+    "text": "Univariate Transformations\nTransforming Intervals/Sets"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#univariate-transformations-3",
     "href": "120B-F25/MTRev/MTRev.html#univariate-transformations-3",
     "title": "Midterm Review",
     "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nCDF Method\n\n\n\n\n\n\nExample 1\n\n\nLet Y ~ Exp(β) for some β &gt; 0, and define U := c Y for some c &gt; 0. Use the CDF method to identify the distribution of U by name, including any/all relevant parameter(s)."
+    "text": "Univariate Transformations\nCDF Method: Guiding Example\n\n\n\n\n\n\nExample 1: Guiding Example\n\n\nLet Y ~ Exp(β) for some β &gt; 0, and define U := c Y for some c &gt; 0.\n\n\n\n\nStep 1: \\(F_U(u) := \\Prob(U \\leq u) = \\Prob( \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\leq u)\\) \nStep 2: \\(\\{ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\leq u \\} =\\) \nStep 3: \\(F_U(u) =\\)"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#univariate-transformations-4",
@@ -494,7 +298,7 @@
     "href": "120B-F25/MTRev/MTRev.html#univariate-transformations-5",
     "title": "Midterm Review",
     "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nMethod of Transformations\n\n\n\n\n\n\nExample 1 (revisited)\n\n\nLet X ~ Exp(β) for some β &gt; 0, and define Y := c X for some c &gt; 0. Use the Method of Transformations to identify the distribution of Y by name, including any/all relevant parameter(s)."
+    "text": "Univariate Transformations\nPDF Method: Guiding Example\n\n\n\n\n\n\nExample 1: Guiding Example\n\n\nLet Y ~ Exp(β) for some β &gt; 0, and define U := c Y for some c &gt; 0.\n\n\n\n\nTransformation: \\(g(y) =\\) \nInverse Transformation: \\(g^{-1}(u) =\\) \nDerivative of Inverse: \\(\\left| \\frac{\\mathrm{d}}{\\mathrm{d} u} g^{-1}(u) \\right| =\\) \nPlugging Into Formula:"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#univariate-transformations-6",
@@ -508,7 +312,7 @@
     "href": "120B-F25/MTRev/MTRev.html#univariate-transformations-7",
     "title": "Midterm Review",
     "section": " Univariate Transformations",
-    "text": "Univariate Transformations\nMethod of MGFs\n\n\n\n\n\n\nExample 1 (revisited)\n\n\nLet X ~ Exp(β) for some β &gt; 0, and define Y := c X for some c &gt; 0. Use the MGF Method to identify the distribution of Y by name, including any/all relevant parameter(s)."
+    "text": "Univariate Transformations\nMGF Method: Guiding Example\n\n\n\n\n\n\nExample 1: Guiding Example\n\n\nLet Y ~ Exp(β) for some β &gt; 0, and define U := c Y for some c &gt; 0.\n\n\n\n\nBy a previously-derived formula, \\(M_U(t) = M_Y(      )\\) \nThe MGF of Y, which we can find                                         , is given by  \nTherefore, the MGF of U is given by \nWe recognize the MGF of U as that of the                        distribution, allowing us to conclude that U ~"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#multivariate-transformations",
@@ -578,14 +382,14 @@
     "href": "120B-F25/MTRev/MTRev.html#review-the-gamma-distribution",
     "title": "Midterm Review",
     "section": " Review: The Gamma Distribution",
-    "text": "Review: The Gamma Distribution\n\n\n\nviewof alph = Inputs.range(\n  [0.2, 10], \n  {value: 2, step: 0.1, label: \"α:\"}\n)\n\nviewof bet = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"β:\"}\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 700,\n    height: 300,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(0, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.gamma.pdf(x, alph, bet)}));\n  return pdf\n}"
+    "text": "Review: The Gamma Distribution\n\n\n\nviewof alph = Inputs.range(\n  [0.2, 10], \n  {value: 2, step: 0.1, label: \"α:\"}\n)\n\nviewof bet = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"β:\"}\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(0, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.gamma.pdf(x, alph, bet)}));\n  return pdf\n}"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#review-the-chi2_nu-distribution",
     "href": "120B-F25/MTRev/MTRev.html#review-the-chi2_nu-distribution",
     "title": "Midterm Review",
     "section": " Review: The \\(\\chi^2_{\\nu}\\) distribution",
-    "text": "Review: The \\(\\chi^2_{\\nu}\\) distribution\n\n\n\nviewof nu = Inputs.range(\n  [0.2, 10], \n  {value: 3, step: 0.1, label: \"ν:\"}\n)\n\n\n\n\n\n\n\nplt_pdf2 = Plot.plot({\n    width: 700,\n    height: 300,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals2, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals2 = {\n  const x = d3.range(0, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.gamma.pdf(x, nu/2, 2)}));\n  return pdf\n}"
+    "text": "Review: The \\(\\chi^2_{\\nu}\\) distribution\n\n\n\nviewof nu = Inputs.range(\n  [0.2, 10], \n  {value: 3, step: 0.1, label: \"ν:\"}\n)\n\n\n\n\n\n\n\nplt_pdf2 = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals2, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals2 = {\n  const x = d3.range(0, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.gamma.pdf(x, nu/2, 2)}));\n  return pdf\n}"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#sampling-7",
@@ -606,14 +410,14 @@
     "href": "120B-F25/MTRev/MTRev.html#sampling-9",
     "title": "Midterm Review",
     "section": " Sampling",
-    "text": "Sampling\nCentral Limit Theorem\n\n\n\n\n\n\nCentral Limit Theorem\n\n\nLet \\(Y_1, \\cdots, Y_n\\) denote an i.i.d. sample from a distribution with mean \\(\\mu\\) and finite variance \\(\\sigma^2 &lt; \\infty\\). Then \\[ \\frac{\\sqrt{n}(\\overline{Y}_n - \\mu)}{\\sigma} \\distto \\mathcal{N}(0, 1) \\] which we can sometimes write as, for sufficiently large n, \\[ \\overline{Y}_n \\stackrel{\\cdot}{\\sim} \\mathcal{N}\\left( \\mu , \\ \\frac{\\sigma^2}{n} \\right) \\sim \\mathcal{N}\\left( \\E[Y_i], \\ \\frac{\\Var(Y_i)}{n} \\right) \\]\n\n\n\n\nThe symbol \\(\\stackrel{\\cdot}{\\sim}\\) can be read as “approximately distributed as”"
+    "text": "Sampling\nCentral Limit Theorem\n\n\n\n\n\n\nCentral Limit Theorem\n\n\nLet \\(Y_1, \\cdots, Y_n\\) denote an i.i.d. sample from a distribution with mean \\(\\mu\\) and finite variance \\(\\sigma^2 &lt; \\infty\\). Then \\[ \\frac{\\sqrt{n}(\\overline{Y}_n - \\mu)}{\\sigma} \\distto \\mathcal{N}(0, 1) \\] which we can sometimes write as, for sufficiently large n, \\[ \\overline{Y}_n \\stackrel{\\cdot}{\\sim} \\mathcal{N}\\left( \\mu , \\ \\frac{\\sigma^2}{n} \\right) \\sim \\mathcal{N}\\left( \\E[Y_i], \\ \\frac{\\Var(Y_i)}{n} \\right) \\]\n\n\n\n\nThe symbol \\(\\stackrel{\\cdot}{\\sim}\\) can be read as “approximately distributed as”\nhttps://epm027.shinyapps.io/CLT_Gamma/"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#sampling-10",
     "href": "120B-F25/MTRev/MTRev.html#sampling-10",
     "title": "Midterm Review",
     "section": " Sampling",
-    "text": "Sampling\nDeMoivre-Laplace Theorem (Normal Approx. to Binomial)\n\n\n\n\n\n\nDeMoivre-Laplace Theorem\n\n\nLet \\(X_n \\sim \\mathrm{Bin}(n, p)\\). Then \\[ \\frac{X_n - np}{\\sqrt{np(1 - p)}} \\distto \\mathcal{N}\\left( 0, 1 \\right) \\] More specifically, provided that \\(n &gt; p \\cdot (\\max\\{p, 1 - p\\} / \\min\\{p, 1 - p\\})\\) then \\[ X_n \\stackrel{\\cdot}{\\sim} \\mathcal{N}\\left( np, \\ np(1 - p) \\right) \\]\n\n\n\n\nThis is what we called the “Normal Approximation to the Binomial Distribution” (in Topic 06).\n\nNotice that it is essentially just a special case of the CLT, since a Binomial distribution can be decomposed as a sum of i.i.d. Bernoulliis!"
+    "text": "Sampling\nDeMoivre-Laplace Theorem (Normal Approx. to Binomial)\n\n\n\n\n\n\nDeMoivre-Laplace Theorem\n\n\nLet \\(X_n \\sim \\mathrm{Bin}(n, p)\\). Then \\[ \\frac{X_n - np}{\\sqrt{np(1 - p)}} \\distto \\mathcal{N}\\left( 0, 1 \\right) \\] More specifically, provided that \\(n &gt; p \\cdot (\\max\\{p, 1 - p\\} / \\min\\{p, 1 - p\\})\\) then \\[ X_n \\stackrel{\\cdot}{\\sim} \\mathcal{N}\\left( np, \\ np(1 - p) \\right) \\]\n\n\n\n\nThis is what we called the “Normal Approximation to the Binomial Distribution” (in Topic 06). Keep in mind the continuity correction.\n\nNotice that it is essentially just a special case of the CLT, since a Binomial distribution can be decomposed as a sum of i.i.d. Bernoulliis!"
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#estimation-1",
