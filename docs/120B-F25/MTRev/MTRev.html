@@ -278,22 +278,7 @@ Ethan P. Marzban
 <p><strong><strong>Disclaimer</strong></strong></p>
 </div>
 <div class="callout-content">
-<p>I have not seen the exam yet, so I do not know exactly what will or will not be on it. Just because something does or does not show up on these slides doesn’t mean it is guaranteed to show up / not show up on the exam.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong><strong>Disclaimer</strong></strong></p>
-</div>
-<div class="callout-content">
-<p>This review is not intended to be comprehensive; I encourage you to consult the lecture notes, textbook, homework, and your own notes.</p>
+<p>This review is not intended to be comprehensive; I encourage you to consult the lecture notes, textbook, homework, and your own notes. Just because something does or does not show up on these slides doesn’t mean it is guaranteed to show up / not show up on the exam.</p>
 </div>
 </div>
 </div>
@@ -594,15 +579,15 @@ Ethan P. Marzban
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="362" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 361;"><span id="cb1-362"><a></a>viewof alph <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb1-363"><a></a>  [<span class="fl">0.2</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> </span>
-<span id="cb1-364"><a></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"α:"</span>}</span>
-<span id="cb1-365"><a></a>)</span>
-<span id="cb1-366"><a></a></span>
-<span id="cb1-367"><a></a>viewof bet <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb1-368"><a></a>  [<span class="fl">0.2</span><span class="op">,</span> <span class="fl">3.1</span>]<span class="op">,</span> </span>
-<span id="cb1-369"><a></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"β:"</span>}</span>
-<span id="cb1-370"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="353" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 352;"><span id="cb1-353"><a></a>viewof alph <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-354"><a></a>  [<span class="fl">0.2</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> </span>
+<span id="cb1-355"><a></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"α:"</span>}</span>
+<span id="cb1-356"><a></a>)</span>
+<span id="cb1-357"><a></a></span>
+<span id="cb1-358"><a></a>viewof bet <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-359"><a></a>  [<span class="fl">0.2</span><span class="op">,</span> <span class="fl">3.1</span>]<span class="op">,</span> </span>
+<span id="cb1-360"><a></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"β:"</span>}</span>
+<span id="cb1-361"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -619,36 +604,36 @@ Ethan P. Marzban
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="374" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 373;"><span id="cb2-374"><a></a>jstat <span class="op">=</span> <span class="pp">require</span>(<span class="st">"jstat"</span>)</span>
-<span id="cb2-375"><a></a></span>
-<span id="cb2-376"><a></a>plt_pdf <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb2-377"><a></a>    <span class="dt">width</span><span class="op">:</span> <span class="dv">850</span><span class="op">,</span></span>
-<span id="cb2-378"><a></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">375</span><span class="op">,</span></span>
-<span id="cb2-379"><a></a>    <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb2-380"><a></a>      <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span></span>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="365" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 364;"><span id="cb2-365"><a></a>jstat <span class="op">=</span> <span class="pp">require</span>(<span class="st">"jstat"</span>)</span>
+<span id="cb2-366"><a></a></span>
+<span id="cb2-367"><a></a>plt_pdf <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb2-368"><a></a>    <span class="dt">width</span><span class="op">:</span> <span class="dv">850</span><span class="op">,</span></span>
+<span id="cb2-369"><a></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">375</span><span class="op">,</span></span>
+<span id="cb2-370"><a></a>    <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb2-371"><a></a>      <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb2-372"><a></a>    }<span class="op">,</span></span>
+<span id="cb2-373"><a></a>    <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb2-374"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
+<span id="cb2-375"><a></a>      <span class="dt">axis</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb2-376"><a></a>    }<span class="op">,</span></span>
+<span id="cb2-377"><a></a>    <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb2-378"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"f(x)"</span><span class="op">,</span></span>
+<span id="cb2-379"><a></a>      <span class="co">//axis: false,</span></span>
+<span id="cb2-380"><a></a>      <span class="co">//domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  </span></span>
 <span id="cb2-381"><a></a>    }<span class="op">,</span></span>
-<span id="cb2-382"><a></a>    <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb2-383"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
-<span id="cb2-384"><a></a>      <span class="dt">axis</span><span class="op">:</span> <span class="kw">true</span></span>
-<span id="cb2-385"><a></a>    }<span class="op">,</span></span>
-<span id="cb2-386"><a></a>    <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb2-387"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"f(x)"</span><span class="op">,</span></span>
-<span id="cb2-388"><a></a>      <span class="co">//axis: false,</span></span>
-<span id="cb2-389"><a></a>      <span class="co">//domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  </span></span>
-<span id="cb2-390"><a></a>    }<span class="op">,</span></span>
-<span id="cb2-391"><a></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb2-392"><a></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])<span class="op">,</span></span>
-<span id="cb2-393"><a></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])<span class="op">,</span></span>
-<span id="cb2-394"><a></a>      Plot<span class="op">.</span><span class="fu">line</span>(pdfvals<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"pdf"</span><span class="op">,</span> <span class="dt">stroke</span> <span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">4</span>})</span>
-<span id="cb2-395"><a></a>    ]</span>
-<span id="cb2-396"><a></a>  })</span>
-<span id="cb2-397"><a></a>  </span>
-<span id="cb2-398"><a></a>pdfvals <span class="op">=</span> {</span>
-<span id="cb2-399"><a></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="fl">0.01</span>)<span class="op">;</span></span>
-<span id="cb2-400"><a></a>  <span class="kw">var</span> pdf<span class="op">;</span></span>
-<span id="cb2-401"><a></a>  pdf <span class="op">=</span> x<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({<span class="dt">x</span><span class="op">:</span> x<span class="op">,</span> <span class="dt">pdf</span><span class="op">:</span> jstat<span class="op">.</span><span class="at">gamma</span><span class="op">.</span><span class="fu">pdf</span>(x<span class="op">,</span> alph<span class="op">,</span> bet)}))<span class="op">;</span></span>
-<span id="cb2-402"><a></a>  <span class="cf">return</span> pdf</span>
-<span id="cb2-403"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-382"><a></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb2-383"><a></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])<span class="op">,</span></span>
+<span id="cb2-384"><a></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])<span class="op">,</span></span>
+<span id="cb2-385"><a></a>      Plot<span class="op">.</span><span class="fu">line</span>(pdfvals<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"pdf"</span><span class="op">,</span> <span class="dt">stroke</span> <span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">4</span>})</span>
+<span id="cb2-386"><a></a>    ]</span>
+<span id="cb2-387"><a></a>  })</span>
+<span id="cb2-388"><a></a>  </span>
+<span id="cb2-389"><a></a>pdfvals <span class="op">=</span> {</span>
+<span id="cb2-390"><a></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="fl">0.01</span>)<span class="op">;</span></span>
+<span id="cb2-391"><a></a>  <span class="kw">var</span> pdf<span class="op">;</span></span>
+<span id="cb2-392"><a></a>  pdf <span class="op">=</span> x<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({<span class="dt">x</span><span class="op">:</span> x<span class="op">,</span> <span class="dt">pdf</span><span class="op">:</span> jstat<span class="op">.</span><span class="at">gamma</span><span class="op">.</span><span class="fu">pdf</span>(x<span class="op">,</span> alph<span class="op">,</span> bet)}))<span class="op">;</span></span>
+<span id="cb2-393"><a></a>  <span class="cf">return</span> pdf</span>
+<span id="cb2-394"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -677,10 +662,10 @@ Ethan P. Marzban
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="410" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 409;"><span id="cb3-410"><a></a>viewof nu <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb3-411"><a></a>  [<span class="fl">0.2</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> </span>
-<span id="cb3-412"><a></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ν:"</span>}</span>
-<span id="cb3-413"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="401" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 400;"><span id="cb3-401"><a></a>viewof nu <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb3-402"><a></a>  [<span class="fl">0.2</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> </span>
+<span id="cb3-403"><a></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ν:"</span>}</span>
+<span id="cb3-404"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="declaration">
 
@@ -688,34 +673,34 @@ Ethan P. Marzban
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="419" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 418;"><span id="cb4-419"><a></a>plt_pdf2 <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb4-420"><a></a>    <span class="dt">width</span><span class="op">:</span> <span class="dv">850</span><span class="op">,</span></span>
-<span id="cb4-421"><a></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">375</span><span class="op">,</span></span>
-<span id="cb4-422"><a></a>    <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb4-423"><a></a>      <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span></span>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="410" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 409;"><span id="cb4-410"><a></a>plt_pdf2 <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-411"><a></a>    <span class="dt">width</span><span class="op">:</span> <span class="dv">850</span><span class="op">,</span></span>
+<span id="cb4-412"><a></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">375</span><span class="op">,</span></span>
+<span id="cb4-413"><a></a>    <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb4-414"><a></a>      <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb4-415"><a></a>    }<span class="op">,</span></span>
+<span id="cb4-416"><a></a>    <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb4-417"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
+<span id="cb4-418"><a></a>      <span class="dt">axis</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb4-419"><a></a>    }<span class="op">,</span></span>
+<span id="cb4-420"><a></a>    <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb4-421"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"f(x)"</span><span class="op">,</span></span>
+<span id="cb4-422"><a></a>      <span class="co">//axis: false,</span></span>
+<span id="cb4-423"><a></a>      <span class="co">//domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  </span></span>
 <span id="cb4-424"><a></a>    }<span class="op">,</span></span>
-<span id="cb4-425"><a></a>    <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb4-426"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span></span>
-<span id="cb4-427"><a></a>      <span class="dt">axis</span><span class="op">:</span> <span class="kw">true</span></span>
-<span id="cb4-428"><a></a>    }<span class="op">,</span></span>
-<span id="cb4-429"><a></a>    <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb4-430"><a></a>      <span class="dt">label</span><span class="op">:</span> <span class="st">"f(x)"</span><span class="op">,</span></span>
-<span id="cb4-431"><a></a>      <span class="co">//axis: false,</span></span>
-<span id="cb4-432"><a></a>      <span class="co">//domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  </span></span>
-<span id="cb4-433"><a></a>    }<span class="op">,</span></span>
-<span id="cb4-434"><a></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb4-435"><a></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])<span class="op">,</span></span>
-<span id="cb4-436"><a></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])<span class="op">,</span></span>
-<span id="cb4-437"><a></a>      Plot<span class="op">.</span><span class="fu">line</span>(pdfvals2<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"pdf"</span><span class="op">,</span> <span class="dt">stroke</span> <span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">4</span>})</span>
-<span id="cb4-438"><a></a>    ]</span>
-<span id="cb4-439"><a></a>  })</span>
-<span id="cb4-440"><a></a>  </span>
-<span id="cb4-441"><a></a>pdfvals2 <span class="op">=</span> {</span>
-<span id="cb4-442"><a></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="fl">0.01</span>)<span class="op">;</span></span>
-<span id="cb4-443"><a></a>  <span class="kw">var</span> pdf<span class="op">;</span></span>
-<span id="cb4-444"><a></a>  pdf <span class="op">=</span> x<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({<span class="dt">x</span><span class="op">:</span> x<span class="op">,</span> <span class="dt">pdf</span><span class="op">:</span> jstat<span class="op">.</span><span class="at">gamma</span><span class="op">.</span><span class="fu">pdf</span>(x<span class="op">,</span> nu<span class="op">/</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>)}))<span class="op">;</span></span>
-<span id="cb4-445"><a></a>  <span class="cf">return</span> pdf</span>
-<span id="cb4-446"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-425"><a></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-426"><a></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])<span class="op">,</span></span>
+<span id="cb4-427"><a></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])<span class="op">,</span></span>
+<span id="cb4-428"><a></a>      Plot<span class="op">.</span><span class="fu">line</span>(pdfvals2<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"pdf"</span><span class="op">,</span> <span class="dt">stroke</span> <span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">4</span>})</span>
+<span id="cb4-429"><a></a>    ]</span>
+<span id="cb4-430"><a></a>  })</span>
+<span id="cb4-431"><a></a>  </span>
+<span id="cb4-432"><a></a>pdfvals2 <span class="op">=</span> {</span>
+<span id="cb4-433"><a></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="fl">0.01</span>)<span class="op">;</span></span>
+<span id="cb4-434"><a></a>  <span class="kw">var</span> pdf<span class="op">;</span></span>
+<span id="cb4-435"><a></a>  pdf <span class="op">=</span> x<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> ({<span class="dt">x</span><span class="op">:</span> x<span class="op">,</span> <span class="dt">pdf</span><span class="op">:</span> jstat<span class="op">.</span><span class="at">gamma</span><span class="op">.</span><span class="fu">pdf</span>(x<span class="op">,</span> nu<span class="op">/</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>)}))<span class="op">;</span></span>
+<span id="cb4-436"><a></a>  <span class="cf">return</span> pdf</span>
+<span id="cb4-437"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-4-1" data-nodetype="declaration">

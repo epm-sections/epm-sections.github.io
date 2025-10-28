@@ -95,16 +95,7 @@ library(plotly)
 ::: {.callout-important}
 ## **Disclaimer**
 
-I have not seen the exam yet, so I do not know exactly what will or will not be on it. Just because something does or does not show up on these slides doesn't mean it is guaranteed to show up / not show up on the exam.
-:::
-:::
-
-
-::: {.fragment}
-::: {.callout-important}
-## **Disclaimer**
-
-This review is not intended to be comprehensive; I encourage you to consult the lecture notes, textbook, homework, and your own notes.
+This review is not intended to be comprehensive; I encourage you to consult the lecture notes, textbook, homework, and your own notes. Just because something does or does not show up on these slides doesn't mean it is guaranteed to show up / not show up on the exam.
 :::
 :::
 
