@@ -1,0 +1,339 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 6 Discussion Section"
+footer: "PSTAT 120B - Fall 2025 with Dr. Uma Ravat; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: November 7, 2025
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\probto}{\stackrel{\mathrm{p}}{\longrightarrow}}
+\newcommand{\distto}{\stackrel{\mathrm{d}}{\longrightarrow}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa message >}} Announcements
+
+1) _Information about regrades_
+   -  Additional Text
+
+
+## {{< fa backward-fast >}} Recap
+### Framework for Estimation
+
+-   **Goal:** estimate a particular population parameter.
+-   Three key terms:
+    -   [**Estimand:**]{.alert} another word for the parameter we are trying to estimate.
+    -   [**Estimator:**]{.alert} a statistic being used to estimate the estimand.
+        -   Another way to think about this: a "rule" used to estimate the parameter.
+    -   [**Estimate:**]{.alert} a particular _realization_ (i.e. _observed instance_) of an estimator.
+
+## {{< fa sign-hanging >}} Estimation
+### An Analogy
+
+-   Here's an analogy from _OpenIntro_ Statistics (a very good introductory statistics textbook!)
+
+-   Suppose we want to catch a fish in a murky lake, using a spear.
+    -   The location of the fish is akin to the _estimand_, and our spear throwing abilities are akin our _estimator_.
+    
+-   One strategy would be to throw the spear exactly where we last saw the fish.
+    -   This is like constructing an _estimate_ from a realized dataset.
+
+-   But, perhaps a _better_ strategy is to throw a _net_ in the vicinity of where we last saw the fish.
+    -   So, what's the statistical analog of a net?
+    
+    
+## {{< fa sign-hanging >}} Interval Estimation
+### General Setup
+
+-   Instead of reporting a _single_ value as our estimate, we report an _interval_ as our estimate.
+
+::: {.fragment}
+::: {.callout-note}
+## **Definition**
+
+An [**interval estimator**]{.alert} (aka [**confidence interval**]{.alert}) is an interval 
+$$ \left[ \widehat{\theta}_{L} \ , \ \widehat{\theta}_{U} \right] $$
+with _random_ endpoints (i.e. point estimators) $\widehat{\theta}_{L}$ and $\widehat{\theta}_{U}$.
+:::
+:::
+
+-   We set up our intervals to have specified [**coverage probability**]{.alert}: $$\Prob( \widehat{\theta}_{L} \leq \theta \leq \widehat{\theta}_U) = 1 - \alpha $$
+
+
+## {{< fa sign-hanging >}} Interval Estimation
+### Two Results
+
+-   [**Normal CI**]{.alert}: $\overline{Y}_n \pm \Phi^{-1}\left(1 - \frac{\alpha}{2} \right) \cdot \frac{\sigma}{\sqrt{n}}$
+    -   Use if the population is either normally distributed, or the sample size is large enough for the CLT to kick in
+    -   Use if the population standard deviation $\sigma$ is known.
+    
+-   [**_t_ CI**]{.alert}: $\overline{Y}_n \pm F_{t_{n - 1}}^{-1} \left(1 - \frac{\alpha}{2} \right) \cdot \frac{s}{\sqrt{n}}$
+    -   Use if the population is either normally distributed, or the sample size is large enough for the CLT to kick in
+    -   Use if the population standard deviation $\sigma$ is unknown.
+
+
+## {{< fa sign-hanging >}} Interval Estimation
+### Interpretation of Results
+
+-   Say $[a, b]$ is a numerical 95\% confidence interval for $\theta$.
+
+-   The interpretation of this interval is: we are 95\% confident that the interval $[a, b]$ covers the true value of $\theta$.
+    -   It is **INCORRECT** to say that "there is a 95\% probability that $\theta$ is in the interval $[a, b]$," because none of these quantities ($a$, $b$, $\theta$) are random!
+    
+-   An equivalent interpretation: the true value of $\theta$ is estimated to be between $a$ and $b$ for 95\% of all intervals constructed from all possible samples.
+
+
+## {{< fa sign-hanging >}} Interval Estimation
+### Interpretation of Results
+
+```{r}
+set.seed(120)
+lowers <- c()
+uppers <- c()
+centers <- c()
+for(b in 1:100){
+  temp_samp <- rnorm(25, 2, 1.5)
+  centers <- c(centers, mean(temp_samp))
+  lowers <- c(lowers, mean(temp_samp) - 1.96 * (1.5 / 5))
+  uppers <- c(uppers, mean(temp_samp) + 1.96 * (1.5 / 5))
+}
+
+df <- data.frame(
+  lowers,
+  centers,
+  uppers,
+  x = 1:length(centers)
+) %>%
+  mutate(covind = ifelse((lowers >= 2) | (uppers <= 2), "no", "yes"))
+
+
+df %>%
+  ggplot(aes(x = x)) +
+  geom_segment(aes(x = x, xend = x, y = lowers, yend = uppers,
+                   col = covind),
+               linewidth = 0.75) +
+  theme_minimal(base_size = 18) +
+  scale_color_manual(values = c("red", "blue")) + 
+  ggtitle("100 CIs for a Mean",
+          subtitle = "Normal(25, 2.25) Population; n = 25") +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold",
+                             size = 24))  +
+  xlab("") + ylab("")
+```
+
+
+
+## {{< fa sign-hanging >}} Interval Estimation
+### Interpretation of Results
+
+```{r}
+set.seed(130)
+lowers <- c()
+uppers <- c()
+centers <- c()
+for(b in 1:100){
+  temp_samp <- rnorm(25, 2, 1.5)
+  centers <- c(centers, mean(temp_samp))
+  lowers <- c(lowers, mean(temp_samp) - 1.96 * (1.5 / 5))
+  uppers <- c(uppers, mean(temp_samp) + 1.96 * (1.5 / 5))
+}
+
+df <- data.frame(
+  lowers,
+  centers,
+  uppers,
+  x = 1:length(centers)
+) %>%
+  mutate(covind = ifelse((lowers >= 2) | (uppers <= 2), "no", "yes"))
+
+
+df %>%
+  ggplot(aes(x = x)) +
+  geom_segment(aes(x = x, xend = x, y = lowers, yend = uppers,
+                   col = covind),
+               linewidth = 0.75) +
+  theme_minimal(base_size = 18) +
+  scale_color_manual(values = c("red", "blue")) + 
+  ggtitle("100 CIs for a Mean",
+          subtitle = "Normal(25, 2.25) Population; n = 25") +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold",
+                             size = 24))  +
+  xlab("") + ylab("")
+```
+
+
+## {{< fa sign-hanging >}} Interval Estimation
+### Interpretation of Results
+
+```{r}
+set.seed(100)
+lowers <- c()
+uppers <- c()
+centers <- c()
+for(b in 1:100){
+  temp_samp <- rnorm(25, 2, 1.5)
+  centers <- c(centers, mean(temp_samp))
+  lowers <- c(lowers, mean(temp_samp) - 1.96 * (1.5 / 5))
+  uppers <- c(uppers, mean(temp_samp) + 1.96 * (1.5 / 5))
+}
+
+df <- data.frame(
+  lowers,
+  centers,
+  uppers,
+  x = 1:length(centers)
+) %>%
+  mutate(covind = ifelse((lowers >= 2) | (uppers <= 2), "no", "yes"))
+
+
+df %>%
+  ggplot(aes(x = x)) +
+  geom_segment(aes(x = x, xend = x, y = lowers, yend = uppers,
+                   col = covind),
+               linewidth = 0.75) +
+  theme_minimal(base_size = 18) +
+  scale_color_manual(values = c("red", "blue")) + 
+  ggtitle("100 CIs for a Mean",
+          subtitle = "Normal(25, 2.25) Population; n = 25") +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold",
+                             size = 24))  +
+  xlab("") + ylab("")
+```
+
+
+
+
+## {{< fa arrow-right >}} Consistency
+### Definition
+
+::: {.callout-important}
+## **Definition:** Consistency
+
+An estimator $\widehat{\theta}_n$ is said to be a [**consistent**]{.alert} estimator for $\theta$, denoted
+$$ \widehat{\theta}_n \probto \theta $$
+if, for any $\varepsilon > 0$, either of the following equivalent statements hold:
+\begin{align*}
+  \lim_{n \to \infty} \Prob\left( |\widehat{\theta}_n - \theta| \leq \varepsilon \right)  & = 1 \\
+  \lim_{n \to \infty} \Prob\left( |\widehat{\theta}_n - \theta| >  \varepsilon \right)  & = 0
+\end{align*}
+:::
+
+-   Let's break this down.
+
+
+## {{< fa arrow-right >}} Consistency
+### Interpretation
+
+-   $|\widehat{\theta}_n - \theta|$ is essentially the _distance_ between $\widehat{\theta}_n$ and $\theta$.
+
+-   Saying that $|\widehat{\theta}_n - \theta| \leq \varepsilon$ for any $\varepsilon > 0$ is saying that "the distance between $\widehat{\theta}_n$ and $\theta$ is very small."
+    -   Equivalently: "$\widehat{\theta}_n$ is very close to $\theta$."
+    
+-   The definition of consistency asserts that this probability goes to zero as the sample size increases.
+    -   That is: "as our sample size becomes larger, we become more certain that $\widehat{\theta}_n$ is very close to $\theta$."
+    
+-   Seems like a pretty nice property for an estimator to have, doesn't it?
+    
+    
+## {{< fa arrow-right >}} Consistency
+### Consistency and Unbiasedness
+
+-   **Question:** are all consistent estimators unbiased?
+    -   **Answer:** _no_! For example, $S_n^2 := \frac{1}{n} \sum_{i=1}^{n} (Y_i - \overline{Y}_n)^2$ is a biased estimator for $\sigma^2$, but it turns out it is a consistent estimator for $\sigma^2$.
+    
+-   **Question:** are all unbiased estimators consistent?
+    -   **Answer:** you tell me...
+    
+    
+::: {.fragment}
+::: {.callout-important}
+## **Theorem 9.1**
+An unbiased estimator $\widehat{\theta}_n$ for $\theta$ is consistent if $\lim\limits_{n \to \infty} \Var(\widehat{\theta}_n) = 0$.
+:::
+:::

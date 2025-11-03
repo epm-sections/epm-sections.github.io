@@ -1,255 +1,87 @@
 [
   {
-    "objectID": "120B-F25/Wk01/wk1.html#hello",
-    "href": "120B-F25/Wk01/wk1.html#hello",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Hello!",
-    "text": "Hello!\nA Quick Introduction\n\nHello! My name is Ethan (he/him), and I will be taking over from Sirui.\n\nI am a sixth year PhD; this is my fourth time with this course (including having been the Instructor once :) )\n\nMy Office Hours: Wednesdays, 11:30 am - 12:30 pm in South Hall 5607F (Inside the PSTAT Main Office, on the Fifth Floor of South Hall)\n\nThese have been posted to Canvas as well.\n\nMy Email: epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#distributions",
-    "href": "120B-F25/Wk01/wk1.html#distributions",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Distributions",
-    "text": "Distributions\nWhat Makes Them Unique?\n\n\n\n\n\n\nQuestion\n\n\nWhat uniquely determines a distribution?\n\n\n\n\nOne of three things:\n\n\nAn MGF (Moment-Generating Function)\nA CDF/CMF (Cumulative Distribution/Mass Function)\nA PDF/PMF (Probability Density/Mass Function)"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#distributions-1",
-    "href": "120B-F25/Wk01/wk1.html#distributions-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Distributions",
-    "text": "Distributions\nWhat Makes Them Unique?\nFor Example:\n\nIf I tell you X is a random variable with MGF MX(t) = et2, you can immediately tell me that X follows a Normal Distribution with mean 0 and variance 2.\nIf I tell you Y is a random variable with density given by fY(y) = 2e-2y for y &gt; 0 and 0 otherwise, you can immediately tell me that Y follows an Exponential Distribution with scale parameter 1/2.\n\n\nNot all distributions have names, but they can still be uniquely defined; e.g. a random variable Z with density fZ(z) = π cos(π z) for 0 ≤ z ≤ 1 and 0 otherwise"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#transformations",
-    "href": "120B-F25/Wk01/wk1.html#transformations",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Transformations",
-    "text": "Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable Y and a function h, we wish to identify the distribution of U := h(Y).\n\n\n\n\nCan be accomplished by finding:\n\nThe MGF of U (MGF Method)\nThe CDF/CMF of U (CDF Method)\nThe PDF/PMF of U (Inverse Transformation Method, or Change of Variable)\n\n\n\nThis is essentially the roadmap for the next few lectures/weeks in this course!"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#transformations-1",
-    "href": "120B-F25/Wk01/wk1.html#transformations-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Transformations",
-    "text": "Transformations\nMight seem abstract… but quite applicable!\n\nUnit Conversion: the temperature C in Centigrade at a randomly-selected location in a city follows some distribution; what is the distribution of temperatures F as measured in Fahrenheit?\n\nExample of a univariate transformation; i.e. a transformation of only one random variable\n\nData Summary: given an i.i.d. collection of random variables, what is the distribution of the sample mean? Or, the sample variance? Or, the sample maximum?\n\nExamples of multivariate transformations; i.e. transformations involving multiple random variables"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#moment-generating-functions",
-    "href": "120B-F25/Wk01/wk1.html#moment-generating-functions",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Moment Generating Functions",
-    "text": "Moment Generating Functions\n\n\n\n\n\n\nDefinition\n\n\nThe Moment Generating Function (MGF) for a random variable Y is defined as \\[ M_Y(t) := \\mathbb{E}[e^{tY}] \\]\n\n\n\n\nQuestion for you: When do we compute an MGF as a sum, and when do we compute it as an integral?\n\n\n\n\n\n\n\n\nProperties of MGFs\n\n\n\n\\(M_{aY + b}(t) = e^{bt} M_Y(at)\\)\nFor independent \\(X\\) and \\(Y\\), \\(M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)\\)\nMoment-Generating Property: \\(M_Y^{(n)}(0) = \\E[Y^n]\\)"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#moment-generating-functions-1",
-    "href": "120B-F25/Wk01/wk1.html#moment-generating-functions-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Moment Generating Functions",
-    "text": "Moment Generating Functions\nExample\n\nPartially Worked-Out Example: Y ~ Exp(β) (note the parametrization being used in 120B is different from that in 120A!)\n\n\n\\[ M_Y(t) = \\int_{0}^{\\infty} e^{ty} \\cdot \\frac{1}{\\beta} e^{-y/\\beta} \\ \\mathrm{d}y = \\frac{1}{\\beta} \\int_{0}^{\\infty} e^{-\\left(\\frac{1}{\\beta} - t \\right)y}  \\ \\mathrm{d}y \\]\n\n\nThis integral is finite only when \\((\\frac{1}{\\beta} - t) &gt; 0\\); i.e. when \\(t &lt; 1/\\beta\\). When it is finite: \\[\\begin{align}\n  \\class{fragment}{{} M_Y(t)}\n&\\class{fragment}{{} = \\frac{1}{\\beta} \\cdot {\\color{blue} \\frac{1}{\\left( \\frac{1}{\\beta} - t \\right)} } \\cdot  \\int_{0}^{\\infty} {\\color{blue} \\left( \\frac{1}{\\beta} - t \\right) }  e^{-\\left(\\frac{1}{\\beta} - t \\right)y}  \\ \\mathrm{d}y}  \\\\[1mm]\n&\\class{fragment}{{} = \\frac{1}{\\beta} \\cdot  \\frac{1}{\\left( \\frac{1}{\\beta} - t \\right)} = \\frac{1}{1 - \\beta t}}   \\\\[3mm]\n\\end{align}\\]"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#cdf-method",
-    "href": "120B-F25/Wk01/wk1.html#cdf-method",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " CDF Method",
-    "text": "CDF Method\n\nGeneral Idea: Write \\(F_U(u) := \\mathbb{P}(U \\leq u)\\)\n\nMain task is to write the event \\(\\{U \\leq u\\}\\) in terms of Y, since everything about Y is known.\nMy advice: a picture is worth a thousand words!"
-  },
-  {
-    "objectID": "120B-F25/Wk01/wk1.html#cdf-method-1",
-    "href": "120B-F25/Wk01/wk1.html#cdf-method-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " CDF Method",
-    "text": "CDF Method\n\nRecall the example from lecture: X ~ Unif[-1, 1] and Y = X2\n\nhttps://www.youtube.com/watch?v=HtzqjHfoRbw"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, and a function h, we wish to identify the distribution of U := h(Y1, Y2, …, Yn).\n\n\n\n\nExamples:\n\nSample Mean:: \\(\\overline{Y}_n := n^{-1} \\sum_{i=1}^{n} Y_i\\)\nSample Variance:: \\(\\overline{Y}_n := (n-1)^{-1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2\\)\nOrder Statistics:: \\(Y_{(i)}\\) := ith smallest of the Y’s\n\nSample Minimum:: \\(Y_{(1)} := \\min\\{Y_1, \\cdots, Y_n\\}\\)\nSample Maximum:: \\(Y_{(n)} := \\max\\{Y_1, \\cdots, Y_n\\}\\)"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nSpecial Cases\n\nIf:                          and                         , consider using the MGF Method.\n\nEven in this case, we need to be mindful of what we want at the end: if we only want the distribution, the MGF will be fine. But, if we want the density, we need some hope of being able to recognize the final MGF.\n\nGenerally, the CDF method will always work and give you a valid answer for the CDF and/or density.\n\nHowever, it is possible that the integrals involved are either intractable, or impossible to express in terms of elementary functions."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nUsing the CDF method, we need to express \\(\\{Y_{(n)} \\leq y\\}\\) in terms of the original Yi’s.\n\nIf the largest of a collection of numbers is less than or equal to some value y, then so too must all the numbers be less than or equal to y.\n\nAll values are less than or equal to the maximum (by definition)\nThe maximum is less than y (by assertion)\nTherefore all values are less than y (by logic)"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nNote: the converse is not true; that is, \\(\\{Y_{(n)} &gt; y\\}\\) does not imply that all the Y’s are greater than y.\n\nFor example: max{2, 4} is greater than 3, but it is not true that both 2 and 4 are greater than three\n\nThink About This: How can we translate \\(\\{Y_{(1)} \\leq y\\}\\) in terms of the original Y’s?\n\nThis is relevant for finding the density of the sample minimum."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?\n\nIt might seem strange to think of order statistics as random. I find an example might help.\nSuppose we let Yi denote the weight of a randomly-selected cat.\n\nSince the cat is randomly selected, Yi is random; different cats have different weights.\n\nLet (Y1, …, Yn) denote a sample of n independent cat weights.\n\nDifferent samples of cats lead to different recorded cat weights.\nThe minimum weight of each of these samples isn’t necessarily the same across samples - there is variability across samples!\nHence, the sample minimum is a random quantity."
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
-    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Multivariate Transformations",
-    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
-    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Interlude: Gamma Distribution",
-    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nHere is the convention we’re using for this class: if \\(X \\sim \\mathrm{Gamma}(\\alpha, \\beta)\\) then \\[ f_X(x) = \\frac{1}{\\Gamma(\\alpha) \\beta^\\alpha} x^{\\alpha - 1} e^{-x / \\beta} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\]\nAny other parametrization may not receive credit on quizzes/exams. For example, there is another way to write the Gamma density: \\[ f_X(x) = \\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)} x^{\\alpha - 1} e^{-\\lambda x} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\] with \\(\\E[X] = \\alpha / \\lambda\\) and \\(\\Var(X) = \\alpha / \\lambda^2\\)."
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
-    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Interlude: Gamma Distribution",
-    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nWhen it comes to expectations and variances, it doesn’t actually matter which parametrization you use. However, when you list the distribution’s parameters, it matters a lot.\nFor example, say \\(Y\\) is a random variable with density \\(f(y) = 9y e^{-3y} \\cdot 1 \\! \\! 1_{\\{y \\geq 0\\}}\\).\n\nIt is true that \\(\\E[Y] = 2/3\\) and \\(\\Var(Y) = 2/9\\); no ambiguities there.\nBut, for this class, we would write \\(Y \\sim \\mathrm{Gamma}(2, \\ 1/3)\\) and NOT \\(Y \\sim \\mathrm{Gamma}(2, 3)\\).\n\nPlease keep this mind for quizzes and exams!"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nOverview\n\nGiven a sample Y1, …, Yn, a statistic is a function h(Y1, …, Yn) of the sample.\n\nStatistics are random, and therefore have distributions; a statistics’ distribution is called its sampling distribution\n\nHow do we find sampling distributions?\n\nUsing our material from the Transformations chapter of this course!\nAfter all, statistics are just functions of random variables.\n\nWe start with the case of a normal population; i.e. that our sample is an i.i.d. sample drawn from a normal distribution."
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nNormal Population\n\nSuppose \\(Y_1, \\cdots, Y_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\).\nWhat is the sampling distribution of the sample mean \\[ \\overline{Y}_n := \\frac{1}{n} \\sum_{i=1}^{n} Y_i \\]\nWhat do we know about the sampling distribution of the sample variance \\[ S_n^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2 \\]"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nNormal Population: Sample Mean\n\n\nCode\nset.seed(120); means &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  means &lt;- c(means, mean(rnorm(n, 3, 1.2)))\n}"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
-    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Sampling Distributions",
-    "text": "Sampling Distributions\nNormal Population: Sample Variance\n\n\nCode\nset.seed(120); var_stat &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  var_stat &lt;- c(var_stat, ((n - 1) / (1.2^2)) * var(rnorm(n, 3, 1.2)))\n}"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
-    "href": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Standard Normal Distribution",
-    "text": "Standard Normal Distribution\nQuick Review\n\n\n\n\\(Z \\sim \\mathcal{N}(0, 1)\\)\nPDF: \\(\\displaystyle \\phi(z) := \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} z^2}\\)\nCDF: \\(\\displaystyle \\Phi(z) := \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} x^2} \\ \\mathrm{d}x\\)"
-  },
-  {
-    "objectID": "120B-F25/Wk03/wk3.html#lookup-tables",
-    "href": "120B-F25/Wk03/wk3.html#lookup-tables",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Lookup Tables",
-    "text": "Lookup Tables\nNormal and Chi-Squared\n\n\\(\\Phi(z)\\) has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: \\(\\Phi(0)\\).)\n\nThis means we either have to use a computer, or a table\n\nOur table (for PSTAT 120B) gives right-tail areas, meaning it actually gives values of \\(1 - \\Phi(z)\\).\n\nThis is likely the opposite of the tables you saw in PSTAT 120A.\n\nExample: Evaluate \\(\\Phi(0.53)\\) using the table.\nExample: Evaluate \\(\\Phi^{-1}(0.9265)\\) using the table.\nExample: If \\(U \\sim \\chi^2_{8}\\), find \\(c\\) such that \\(\\Prob(U &gt; c) = 0.05\\)."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Ethan’s Section Material",
-    "section": "",
-    "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
-  },
-  {
-    "objectID": "120B-F25/Wk04/wk4.html#announcements",
-    "href": "120B-F25/Wk04/wk4.html#announcements",
+    "objectID": "120B-F25/Wk06/wk6.html#announcements",
+    "href": "120B-F25/Wk06/wk6.html#announcements",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Announcements",
-    "text": "Announcements\n\nMidterm Review (hosted by me): Tuesday October 28, 2025 from 7:00 - 8:30 pm in BUCHN 1920\n\nThe plan is to review some material and thenwork through some new practice problems together\n\nMidterm Advice: write a note sheet (even though you don’t technically get one on the exam)!\n\nStudies show: the act of writing things down and synthesizing information is a great way to commit things to long-term memory.\n\nHomework 5: remember that it is due 5pm on Wednesday (instead of 11:59pm), and that no late submissions will be accepted for ANY reasons"
+    "text": "Announcements\n\nInformation about regrades\n\nAdditional Text"
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#recap",
-    "href": "120B-F25/Wk04/wk4.html#recap",
+    "objectID": "120B-F25/Wk06/wk6.html#recap",
+    "href": "120B-F25/Wk06/wk6.html#recap",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Recap",
-    "text": "Recap\nFramework for Statistical Inference\n\n\n\n\n\nGoal: to make inferences about a population parameter.\nTo do so, we take random samples from the population.\nA statistic is a function of a random sample: \\(T := T(Y_1, \\cdots, Y_n)\\)\n\nStatistics, therefore, are random variables; their distributions are called sampling distributions"
+    "text": "Recap\nFramework for Estimation\n\nGoal: estimate a particular population parameter.\nThree key terms:\n\nEstimand: another word for the parameter we are trying to estimate.\nEstimator: a statistic being used to estimate the estimand.\n\nAnother way to think about this: a “rule” used to estimate the parameter.\n\nEstimate: a particular realization (i.e. observed instance) of an estimator."
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation",
-    "href": "120B-F25/Wk04/wk4.html#estimation",
+    "objectID": "120B-F25/Wk06/wk6.html#estimation",
+    "href": "120B-F25/Wk06/wk6.html#estimation",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Estimation",
-    "text": "Estimation\nGeneral Framework\n\n\n\n\n\n\nGoal\n\n\nTo estimate the true average weight of all cats in the world.\n\n\n\n\nLast week, we talked about taking samples of cats and recording their weights.\nIt seems natural that the average of our sampled cat weights should correspond, in some way, to the average of all cats in the world.\nThis is the basic idea behind estimation: we’ll use statistics (functions of our sample) to estimate the true value of a parameter.\n\nE.g. using the sample average cat weight to say something about the true population average cat weight."
+    "text": "Estimation\nAn Analogy\n\nHere’s an analogy from OpenIntro Statistics (a very good introductory statistics textbook!)\nSuppose we want to catch a fish in a murky lake, using a spear.\n\nThe location of the fish is akin to the estimand, and our spear throwing abilities are akin our estimator.\n\nOne strategy would be to throw the spear exactly where we last saw the fish.\n\nThis is like constructing an estimate from a realized dataset.\n\nBut, perhaps a better strategy is to throw a net in the vicinity of where we last saw the fish.\n\nSo, what’s the statistical analog of a net?"
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation-1",
-    "href": "120B-F25/Wk04/wk4.html#estimation-1",
+    "objectID": "120B-F25/Wk06/wk6.html#interval-estimation",
+    "href": "120B-F25/Wk06/wk6.html#interval-estimation",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Estimation",
-    "text": "Estimation\nGeneral Framework\n\nThree key terms:\n\nEstimand: another word for the parameter we are trying to estimate.\nEstimator: a statistic being used to estimate the estimand.\n\nAnother way to think about this: a “rule” used to estimate the parameter.\n\nEstimate: a particular realization (i.e. observed instance) of an estimator."
+    "section": " Interval Estimation",
+    "text": "Interval Estimation\nGeneral Setup\n\nInstead of reporting a single value as our estimate, we report an interval as our estimate.\n\n\n\n\n\n\n\n\nDefinition\n\n\nAn interval estimator (aka confidence interval) is an interval \\[ \\left[ \\widehat{\\theta}_{L} \\ , \\ \\widehat{\\theta}_{U} \\right] \\] with random endpoints (i.e. point estimators) \\(\\widehat{\\theta}_{L}\\) and \\(\\widehat{\\theta}_{U}\\).\n\n\n\n\n\nWe set up our intervals to have specified coverage probability: \\[\\Prob( \\widehat{\\theta}_{L} \\leq \\theta \\leq \\widehat{\\theta}_U) = 1 - \\alpha \\]"
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation-2",
-    "href": "120B-F25/Wk04/wk4.html#estimation-2",
+    "objectID": "120B-F25/Wk06/wk6.html#interval-estimation-1",
+    "href": "120B-F25/Wk06/wk6.html#interval-estimation-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Estimation",
-    "text": "Estimation\nExample\n\n\n\n\n\n\nExample\n\n\nA vet wishes to estimate the true weight of all cats in the world. She takes a sample of 10 cats, and finds their average weight to be 9.12 lbs.\n\n\n\n\nThe estimand is the true average weight of all cats in the world (which we can call µ).\nThe estimator is the sample mean: we are using sample means to estimate µ.\nThe estimate in this scenario is 9.12 lbs, as this is a particular realization of our estimator."
+    "section": " Interval Estimation",
+    "text": "Interval Estimation\nTwo Results\n\nNormal CI: \\(\\overline{Y}_n \\pm \\Phi^{-1}\\left(1 - \\frac{\\alpha}{2} \\right) \\cdot \\frac{\\sigma}{\\sqrt{n}}\\)\n\nUse if the population is either normally distributed, or the sample size is large enough for the CLT to kick in\nUse if the population standard deviation \\(\\sigma\\) is known.\n\nt CI: \\(\\overline{Y}_n \\pm F_{t_{n - 1}}^{-1} \\left(1 - \\frac{\\alpha}{2} \\right) \\cdot \\frac{s}{\\sqrt{n}}\\)\n\nUse if the population is either normally distributed, or the sample size is large enough for the CLT to kick in\nUse if the population standard deviation \\(\\sigma\\) is unknown."
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation-3",
-    "href": "120B-F25/Wk04/wk4.html#estimation-3",
+    "objectID": "120B-F25/Wk06/wk6.html#interval-estimation-2",
+    "href": "120B-F25/Wk06/wk6.html#interval-estimation-2",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Estimation",
-    "text": "Estimation\nDesirable Properties of Estimators\n\nThere are potentially many estimators we can use to estimate a particular parameter.\nAs such, it is necessary to establish a notion of what makes a “good” estimator (or, equivalently, what makes one estimator “better” than another).\nOne notion is unbiasedness: an estimator \\(\\widehat{\\theta}_n\\) for \\(\\theta\\) is said to be unbiased if \\(\\E[\\widehat{\\theta}_n] = \\theta\\).\n\n“On average, the estimator gets it right.”\nMathematically: means the sampling distribution is centered at the right (true) value."
+    "section": " Interval Estimation",
+    "text": "Interval Estimation\nInterpretation of Results\n\nSay \\([a, b]\\) is a numerical 95% confidence interval for \\(\\theta\\).\nThe interpretation of this interval is: we are 95% confident that the interval \\([a, b]\\) covers the true value of \\(\\theta\\).\n\nIt is INCORRECT to say that “there is a 95% probability that \\(\\theta\\) is in the interval \\([a, b]\\),” because none of these quantities (\\(a\\), \\(b\\), \\(\\theta\\)) are random!\n\nAn equivalent interpretation: the true value of \\(\\theta\\) is estimated to be between \\(a\\) and \\(b\\) for 95% of all intervals constructed from all possible samples."
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation-4",
-    "href": "120B-F25/Wk04/wk4.html#estimation-4",
+    "objectID": "120B-F25/Wk06/wk6.html#interval-estimation-3",
+    "href": "120B-F25/Wk06/wk6.html#interval-estimation-3",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Estimation",
-    "text": "Estimation\nAn Analogy\n\nUnbiasedness, however, is often not enough. To motivate why, let’s take a look at an analogy.\nAn analogy is often drawn between estimation and hitting a bullseye.\n\nThe bullseye is akin to our estimand, and estimates are represented by shots fired at the target.\nThe estimator is, therefore, akin to the marskperson.\n\nAn unbiased estimator is analogous to a marksperson for whom the average location of shots is the bullseye."
+    "section": " Interval Estimation",
+    "text": "Interval Estimation\nInterpretation of Results"
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation-5",
-    "href": "120B-F25/Wk04/wk4.html#estimation-5",
+    "objectID": "120B-F25/Wk06/wk6.html#interval-estimation-4",
+    "href": "120B-F25/Wk06/wk6.html#interval-estimation-4",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Estimation",
-    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons is “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
+    "section": " Interval Estimation",
+    "text": "Interval Estimation\nInterpretation of Results"
   },
   {
-    "objectID": "120B-F25/Wk04/wk4.html#estimation-6",
-    "href": "120B-F25/Wk04/wk4.html#estimation-6",
+    "objectID": "120B-F25/Wk06/wk6.html#interval-estimation-5",
+    "href": "120B-F25/Wk06/wk6.html#interval-estimation-5",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Estimation",
-    "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\mathrm{Bias}^2(\\widehat{\\theta}_n, \\theta) + \\Var(\\widehat{\\theta}_n) \\]\nwhere \\(\\mathrm{Bias}(\\widehat{\\theta}_n, \\theta) := \\E[\\widehat{\\theta}_n] - \\theta\\)."
+    "section": " Interval Estimation",
+    "text": "Interval Estimation\nInterpretation of Results"
+  },
+  {
+    "objectID": "120B-F25/Wk06/wk6.html#consistency",
+    "href": "120B-F25/Wk06/wk6.html#consistency",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Consistency",
+    "text": "Consistency\nDefinition\n\n\n\n\n\n\nDefinition: Consistency\n\n\nAn estimator \\(\\widehat{\\theta}_n\\) is said to be a consistent estimator for \\(\\theta\\), denoted \\[ \\widehat{\\theta}_n \\probto \\theta \\] if, for any \\(\\varepsilon &gt; 0\\), either of the following equivalent statements hold: \\[\\begin{align*}\n  \\lim_{n \\to \\infty} \\Prob\\left( |\\widehat{\\theta}_n - \\theta| \\leq \\varepsilon \\right)  & = 1 \\\\\n  \\lim_{n \\to \\infty} \\Prob\\left( |\\widehat{\\theta}_n - \\theta| &gt;  \\varepsilon \\right)  & = 0\n\\end{align*}\\]\n\n\n\n\nLet’s break this down."
+  },
+  {
+    "objectID": "120B-F25/Wk06/wk6.html#consistency-1",
+    "href": "120B-F25/Wk06/wk6.html#consistency-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Consistency",
+    "text": "Consistency\nInterpretation\n\n\\(|\\widehat{\\theta}_n - \\theta|\\) is essentially the distance between \\(\\widehat{\\theta}_n\\) and \\(\\theta\\).\nSaying that \\(|\\widehat{\\theta}_n - \\theta| \\leq \\varepsilon\\) for any \\(\\varepsilon &gt; 0\\) is saying that “the distance between \\(\\widehat{\\theta}_n\\) and \\(\\theta\\) is very small.”\n\nEquivalently: “\\(\\widehat{\\theta}_n\\) is very close to \\(\\theta\\).”\n\nThe definition of consistency asserts that this probability goes to zero as the sample size increases.\n\nThat is: “as our sample size becomes larger, we become more certain that \\(\\widehat{\\theta}_n\\) is very close to \\(\\theta\\).”\n\nSeems like a pretty nice property for an estimator to have, doesn’t it?"
+  },
+  {
+    "objectID": "120B-F25/Wk06/wk6.html#consistency-2",
+    "href": "120B-F25/Wk06/wk6.html#consistency-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Consistency",
+    "text": "Consistency\nConsistency and Unbiasedness\n\nQuestion: are all consistent estimators unbiased?\n\nAnswer: no! For example, \\(S_n^2 := \\frac{1}{n} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2\\) is a biased estimator for \\(\\sigma^2\\), but it turns out it is a consistent estimator for \\(\\sigma^2\\).\n\nQuestion: are all unbiased estimators consistent?\n\nAnswer: you tell me…\n\n\n\n\n\n\n\n\n\nTheorem 9.1\n\n\nAn unbiased estimator \\(\\widehat{\\theta}_n\\) for \\(\\theta\\) is consistent if \\(\\lim\\limits_{n \\to \\infty} \\Var(\\widehat{\\theta}_n) = 0\\)."
   },
   {
     "objectID": "120B-F25/MTRev/MTRev.html#roadmap-for-today",
@@ -460,5 +292,257 @@
     "title": "Midterm Review",
     "section": " Estimation",
     "text": "Estimation\nMean Squared-Error (MSE)\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\n\n\n\n\n\nQuestion: should a “good” estimator have very high or very low MSE?"
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#announcements",
+    "href": "120B-F25/Wk04/wk4.html#announcements",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Announcements",
+    "text": "Announcements\n\nMidterm Review (hosted by me): Tuesday October 28, 2025 from 7:00 - 8:30 pm in BUCHN 1920\n\nThe plan is to review some material and thenwork through some new practice problems together\n\nMidterm Advice: write a note sheet (even though you don’t technically get one on the exam)!\n\nStudies show: the act of writing things down and synthesizing information is a great way to commit things to long-term memory.\n\nHomework 5: remember that it is due 5pm on Wednesday (instead of 11:59pm), and that no late submissions will be accepted for ANY reasons"
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#recap",
+    "href": "120B-F25/Wk04/wk4.html#recap",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Recap",
+    "text": "Recap\nFramework for Statistical Inference\n\n\n\n\n\nGoal: to make inferences about a population parameter.\nTo do so, we take random samples from the population.\nA statistic is a function of a random sample: \\(T := T(Y_1, \\cdots, Y_n)\\)\n\nStatistics, therefore, are random variables; their distributions are called sampling distributions"
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation",
+    "href": "120B-F25/Wk04/wk4.html#estimation",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nGeneral Framework\n\n\n\n\n\n\nGoal\n\n\nTo estimate the true average weight of all cats in the world.\n\n\n\n\nLast week, we talked about taking samples of cats and recording their weights.\nIt seems natural that the average of our sampled cat weights should correspond, in some way, to the average of all cats in the world.\nThis is the basic idea behind estimation: we’ll use statistics (functions of our sample) to estimate the true value of a parameter.\n\nE.g. using the sample average cat weight to say something about the true population average cat weight."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-1",
+    "href": "120B-F25/Wk04/wk4.html#estimation-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nGeneral Framework\n\nThree key terms:\n\nEstimand: another word for the parameter we are trying to estimate.\nEstimator: a statistic being used to estimate the estimand.\n\nAnother way to think about this: a “rule” used to estimate the parameter.\n\nEstimate: a particular realization (i.e. observed instance) of an estimator."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-2",
+    "href": "120B-F25/Wk04/wk4.html#estimation-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nExample\n\n\n\n\n\n\nExample\n\n\nA vet wishes to estimate the true weight of all cats in the world. She takes a sample of 10 cats, and finds their average weight to be 9.12 lbs.\n\n\n\n\nThe estimand is the true average weight of all cats in the world (which we can call µ).\nThe estimator is the sample mean: we are using sample means to estimate µ.\nThe estimate in this scenario is 9.12 lbs, as this is a particular realization of our estimator."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-3",
+    "href": "120B-F25/Wk04/wk4.html#estimation-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nDesirable Properties of Estimators\n\nThere are potentially many estimators we can use to estimate a particular parameter.\nAs such, it is necessary to establish a notion of what makes a “good” estimator (or, equivalently, what makes one estimator “better” than another).\nOne notion is unbiasedness: an estimator \\(\\widehat{\\theta}_n\\) for \\(\\theta\\) is said to be unbiased if \\(\\E[\\widehat{\\theta}_n] = \\theta\\).\n\n“On average, the estimator gets it right.”\nMathematically: means the sampling distribution is centered at the right (true) value."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-4",
+    "href": "120B-F25/Wk04/wk4.html#estimation-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nAn Analogy\n\nUnbiasedness, however, is often not enough. To motivate why, let’s take a look at an analogy.\nAn analogy is often drawn between estimation and hitting a bullseye.\n\nThe bullseye is akin to our estimand, and estimates are represented by shots fired at the target.\nThe estimator is, therefore, akin to the marskperson.\n\nAn unbiased estimator is analogous to a marksperson for whom the average location of shots is the bullseye."
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-5",
+    "href": "120B-F25/Wk04/wk4.html#estimation-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons is “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
+  },
+  {
+    "objectID": "120B-F25/Wk04/wk4.html#estimation-6",
+    "href": "120B-F25/Wk04/wk4.html#estimation-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n, \\theta) := \\mathrm{Bias}^2(\\widehat{\\theta}_n, \\theta) + \\Var(\\widehat{\\theta}_n) \\]\nwhere \\(\\mathrm{Bias}(\\widehat{\\theta}_n, \\theta) := \\E[\\widehat{\\theta}_n] - \\theta\\)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ethan’s Section Material",
+    "section": "",
+    "text": "This is a GitHub site, designed to host material created by Ethan Marzban for his teaching duties at the University of California, Santa Barbara."
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
+    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Interlude: Gamma Distribution",
+    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nHere is the convention we’re using for this class: if \\(X \\sim \\mathrm{Gamma}(\\alpha, \\beta)\\) then \\[ f_X(x) = \\frac{1}{\\Gamma(\\alpha) \\beta^\\alpha} x^{\\alpha - 1} e^{-x / \\beta} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\]\nAny other parametrization may not receive credit on quizzes/exams. For example, there is another way to write the Gamma density: \\[ f_X(x) = \\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)} x^{\\alpha - 1} e^{-\\lambda x} \\cdot 1 \\! \\! 1_{\\{x \\geq 0\\}} \\] with \\(\\E[X] = \\alpha / \\lambda\\) and \\(\\Var(X) = \\alpha / \\lambda^2\\)."
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
+    "href": "120B-F25/Wk03/wk3.html#interlude-gamma-distribution-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Interlude: Gamma Distribution",
+    "text": "Interlude: Gamma Distribution\nRelated to Homework 3\n\nWhen it comes to expectations and variances, it doesn’t actually matter which parametrization you use. However, when you list the distribution’s parameters, it matters a lot.\nFor example, say \\(Y\\) is a random variable with density \\(f(y) = 9y e^{-3y} \\cdot 1 \\! \\! 1_{\\{y \\geq 0\\}}\\).\n\nIt is true that \\(\\E[Y] = 2/3\\) and \\(\\Var(Y) = 2/9\\); no ambiguities there.\nBut, for this class, we would write \\(Y \\sim \\mathrm{Gamma}(2, \\ 1/3)\\) and NOT \\(Y \\sim \\mathrm{Gamma}(2, 3)\\).\n\nPlease keep this mind for quizzes and exams!"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nOverview\n\nGiven a sample Y1, …, Yn, a statistic is a function h(Y1, …, Yn) of the sample.\n\nStatistics are random, and therefore have distributions; a statistics’ distribution is called its sampling distribution\n\nHow do we find sampling distributions?\n\nUsing our material from the Transformations chapter of this course!\nAfter all, statistics are just functions of random variables.\n\nWe start with the case of a normal population; i.e. that our sample is an i.i.d. sample drawn from a normal distribution."
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population\n\nSuppose \\(Y_1, \\cdots, Y_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\).\nWhat is the sampling distribution of the sample mean \\[ \\overline{Y}_n := \\frac{1}{n} \\sum_{i=1}^{n} Y_i \\]\nWhat do we know about the sampling distribution of the sample variance \\[ S_n^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2 \\]"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population: Sample Mean\n\n\nCode\nset.seed(120); means &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  means &lt;- c(means, mean(rnorm(n, 3, 1.2)))\n}"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
+    "href": "120B-F25/Wk03/wk3.html#sampling-distributions-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Sampling Distributions",
+    "text": "Sampling Distributions\nNormal Population: Sample Variance\n\n\nCode\nset.seed(120); var_stat &lt;- c(); n &lt;- 25\nfor(k in 1:1000) {\n  var_stat &lt;- c(var_stat, ((n - 1) / (1.2^2)) * var(rnorm(n, 3, 1.2)))\n}"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
+    "href": "120B-F25/Wk03/wk3.html#standard-normal-distribution",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nQuick Review\n\n\n\n\\(Z \\sim \\mathcal{N}(0, 1)\\)\nPDF: \\(\\displaystyle \\phi(z) := \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} z^2}\\)\nCDF: \\(\\displaystyle \\Phi(z) := \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{1}{2} x^2} \\ \\mathrm{d}x\\)"
+  },
+  {
+    "objectID": "120B-F25/Wk03/wk3.html#lookup-tables",
+    "href": "120B-F25/Wk03/wk3.html#lookup-tables",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Lookup Tables",
+    "text": "Lookup Tables\nNormal and Chi-Squared\n\n\\(\\Phi(z)\\) has no closed-form expression; as such, it must be (in general) evaluated numerically. (One exception: \\(\\Phi(0)\\).)\n\nThis means we either have to use a computer, or a table\n\nOur table (for PSTAT 120B) gives right-tail areas, meaning it actually gives values of \\(1 - \\Phi(z)\\).\n\nThis is likely the opposite of the tables you saw in PSTAT 120A.\n\nExample: Evaluate \\(\\Phi(0.53)\\) using the table.\nExample: Evaluate \\(\\Phi^{-1}(0.9265)\\) using the table.\nExample: If \\(U \\sim \\chi^2_{8}\\), find \\(c\\) such that \\(\\Prob(U &gt; c) = 0.05\\)."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, and a function h, we wish to identify the distribution of U := h(Y1, Y2, …, Yn).\n\n\n\n\nExamples:\n\nSample Mean:: \\(\\overline{Y}_n := n^{-1} \\sum_{i=1}^{n} Y_i\\)\nSample Variance:: \\(\\overline{Y}_n := (n-1)^{-1} \\sum_{i=1}^{n} (Y_i - \\overline{Y}_n)^2\\)\nOrder Statistics:: \\(Y_{(i)}\\) := ith smallest of the Y’s\n\nSample Minimum:: \\(Y_{(1)} := \\min\\{Y_1, \\cdots, Y_n\\}\\)\nSample Maximum:: \\(Y_{(n)} := \\max\\{Y_1, \\cdots, Y_n\\}\\)"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSpecial Cases\n\nIf:                          and                         , consider using the MGF Method.\n\nEven in this case, we need to be mindful of what we want at the end: if we only want the distribution, the MGF will be fine. But, if we want the density, we need some hope of being able to recognize the final MGF.\n\nGenerally, the CDF method will always work and give you a valid answer for the CDF and/or density.\n\nHowever, it is possible that the integrals involved are either intractable, or impossible to express in terms of elementary functions."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nUsing the CDF method, we need to express \\(\\{Y_{(n)} \\leq y\\}\\) in terms of the original Yi’s.\n\nIf the largest of a collection of numbers is less than or equal to some value y, then so too must all the numbers be less than or equal to y.\n\nAll values are less than or equal to the maximum (by definition)\nThe maximum is less than y (by assertion)\nTherefore all values are less than y (by logic)"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nSample Maximum\n\n\n\n\n\n\nGoal\n\n\nGiven a collection of random variables Y1, Y2, …, Yn, we wish to identify the density of Y(n) := max{Y1, …, Yn }\n\n\n\n\nNote: the converse is not true; that is, \\(\\{Y_{(n)} &gt; y\\}\\) does not imply that all the Y’s are greater than y.\n\nFor example: max{2, 4} is greater than 3, but it is not true that both 2 and 4 are greater than three\n\nThink About This: How can we translate \\(\\{Y_{(1)} \\leq y\\}\\) in terms of the original Y’s?\n\nThis is relevant for finding the density of the sample minimum."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?\n\nIt might seem strange to think of order statistics as random. I find an example might help.\nSuppose we let Yi denote the weight of a randomly-selected cat.\n\nSince the cat is randomly selected, Yi is random; different cats have different weights.\n\nLet (Y1, …, Yn) denote a sample of n independent cat weights.\n\nDifferent samples of cats lead to different recorded cat weights.\nThe minimum weight of each of these samples isn’t necessarily the same across samples - there is variability across samples!\nHence, the sample minimum is a random quantity."
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
+    "href": "120B-F25/Wk02/wk2.html#multivariate-transformations-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Multivariate Transformations",
+    "text": "Multivariate Transformations\nOrder Statistics: Why Are They Random?"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#hello",
+    "href": "120B-F25/Wk01/wk1.html#hello",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hello!",
+    "text": "Hello!\nA Quick Introduction\n\nHello! My name is Ethan (he/him), and I will be taking over from Sirui.\n\nI am a sixth year PhD; this is my fourth time with this course (including having been the Instructor once :) )\n\nMy Office Hours: Wednesdays, 11:30 am - 12:30 pm in South Hall 5607F (Inside the PSTAT Main Office, on the Fifth Floor of South Hall)\n\nThese have been posted to Canvas as well.\n\nMy Email: epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#distributions",
+    "href": "120B-F25/Wk01/wk1.html#distributions",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Distributions",
+    "text": "Distributions\nWhat Makes Them Unique?\n\n\n\n\n\n\nQuestion\n\n\nWhat uniquely determines a distribution?\n\n\n\n\nOne of three things:\n\n\nAn MGF (Moment-Generating Function)\nA CDF/CMF (Cumulative Distribution/Mass Function)\nA PDF/PMF (Probability Density/Mass Function)"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#distributions-1",
+    "href": "120B-F25/Wk01/wk1.html#distributions-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Distributions",
+    "text": "Distributions\nWhat Makes Them Unique?\nFor Example:\n\nIf I tell you X is a random variable with MGF MX(t) = et2, you can immediately tell me that X follows a Normal Distribution with mean 0 and variance 2.\nIf I tell you Y is a random variable with density given by fY(y) = 2e-2y for y &gt; 0 and 0 otherwise, you can immediately tell me that Y follows an Exponential Distribution with scale parameter 1/2.\n\n\nNot all distributions have names, but they can still be uniquely defined; e.g. a random variable Z with density fZ(z) = π cos(π z) for 0 ≤ z ≤ 1 and 0 otherwise"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#transformations",
+    "href": "120B-F25/Wk01/wk1.html#transformations",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable Y and a function h, we wish to identify the distribution of U := h(Y).\n\n\n\n\nCan be accomplished by finding:\n\nThe MGF of U (MGF Method)\nThe CDF/CMF of U (CDF Method)\nThe PDF/PMF of U (Inverse Transformation Method, or Change of Variable)\n\n\n\nThis is essentially the roadmap for the next few lectures/weeks in this course!"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#transformations-1",
+    "href": "120B-F25/Wk01/wk1.html#transformations-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\nMight seem abstract… but quite applicable!\n\nUnit Conversion: the temperature C in Centigrade at a randomly-selected location in a city follows some distribution; what is the distribution of temperatures F as measured in Fahrenheit?\n\nExample of a univariate transformation; i.e. a transformation of only one random variable\n\nData Summary: given an i.i.d. collection of random variables, what is the distribution of the sample mean? Or, the sample variance? Or, the sample maximum?\n\nExamples of multivariate transformations; i.e. transformations involving multiple random variables"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#moment-generating-functions",
+    "href": "120B-F25/Wk01/wk1.html#moment-generating-functions",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Moment Generating Functions",
+    "text": "Moment Generating Functions\n\n\n\n\n\n\nDefinition\n\n\nThe Moment Generating Function (MGF) for a random variable Y is defined as \\[ M_Y(t) := \\mathbb{E}[e^{tY}] \\]\n\n\n\n\nQuestion for you: When do we compute an MGF as a sum, and when do we compute it as an integral?\n\n\n\n\n\n\n\n\nProperties of MGFs\n\n\n\n\\(M_{aY + b}(t) = e^{bt} M_Y(at)\\)\nFor independent \\(X\\) and \\(Y\\), \\(M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)\\)\nMoment-Generating Property: \\(M_Y^{(n)}(0) = \\E[Y^n]\\)"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#moment-generating-functions-1",
+    "href": "120B-F25/Wk01/wk1.html#moment-generating-functions-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Moment Generating Functions",
+    "text": "Moment Generating Functions\nExample\n\nPartially Worked-Out Example: Y ~ Exp(β) (note the parametrization being used in 120B is different from that in 120A!)\n\n\n\\[ M_Y(t) = \\int_{0}^{\\infty} e^{ty} \\cdot \\frac{1}{\\beta} e^{-y/\\beta} \\ \\mathrm{d}y = \\frac{1}{\\beta} \\int_{0}^{\\infty} e^{-\\left(\\frac{1}{\\beta} - t \\right)y}  \\ \\mathrm{d}y \\]\n\n\nThis integral is finite only when \\((\\frac{1}{\\beta} - t) &gt; 0\\); i.e. when \\(t &lt; 1/\\beta\\). When it is finite: \\[\\begin{align}\n  \\class{fragment}{{} M_Y(t)}\n&\\class{fragment}{{} = \\frac{1}{\\beta} \\cdot {\\color{blue} \\frac{1}{\\left( \\frac{1}{\\beta} - t \\right)} } \\cdot  \\int_{0}^{\\infty} {\\color{blue} \\left( \\frac{1}{\\beta} - t \\right) }  e^{-\\left(\\frac{1}{\\beta} - t \\right)y}  \\ \\mathrm{d}y}  \\\\[1mm]\n&\\class{fragment}{{} = \\frac{1}{\\beta} \\cdot  \\frac{1}{\\left( \\frac{1}{\\beta} - t \\right)} = \\frac{1}{1 - \\beta t}}   \\\\[3mm]\n\\end{align}\\]"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#cdf-method",
+    "href": "120B-F25/Wk01/wk1.html#cdf-method",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " CDF Method",
+    "text": "CDF Method\n\nGeneral Idea: Write \\(F_U(u) := \\mathbb{P}(U \\leq u)\\)\n\nMain task is to write the event \\(\\{U \\leq u\\}\\) in terms of Y, since everything about Y is known.\nMy advice: a picture is worth a thousand words!"
+  },
+  {
+    "objectID": "120B-F25/Wk01/wk1.html#cdf-method-1",
+    "href": "120B-F25/Wk01/wk1.html#cdf-method-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " CDF Method",
+    "text": "CDF Method\n\nRecall the example from lecture: X ~ Unif[-1, 1] and Y = X2\n\nhttps://www.youtube.com/watch?v=HtzqjHfoRbw"
   }
 ]
