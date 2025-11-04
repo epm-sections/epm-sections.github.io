@@ -1,0 +1,858 @@
+---
+title: "Data Visualization"
+subtitle: "Data Science Collaborative"
+footer: "DS Collab, Fall 2025 -- material © Ethan P. Marzban"
+logo: "Images/main_logo.png"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: November 5, 2025
+title-slide-attributes:
+    data-background-image: "Images/main_logo.png"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa question >}} Some Questions
+### Leadup
+
+:::: {.columns}
+
+::: {.column width="50%"}
+-   How do the GDPs of countries vary as a function of average life expectancy at birth?
+
+-   Does the nature of this relationship change across continents?
+
+-   Can you _justify_ your answers?
+    -   What sort of **data** could be used to answer these questions _and_ provide appropriate justification?
+:::
+
+::: {.column width="50%"}
+::: {.fragment style="text-align:center"}
+![](Images/dsl_simple.svg){width="70%"}
+:::
+:::
+
+::::
+
+
+
+## {{< fa globe >}} World Bank Dataset
+
+-   The _World Bank_ is a collection of organization aiming to study the effects of poverty worldwide.
+    -   You can read more about them at their [website](https://www.worldbank.org/ext/en/who-we-are).
+    
+-   Some variables with corresponding data:
+
+::: {.fragment style="font-size:24px"}
+::: {.nonincremental}
+:::: {.columns}
+::: {.column width="33.3333%"}
+  -   Country Name
+  -   Country Code (abbreviation)
+  -   Continent
+  -   Year of observation
+  -   GDP (Gross Domestic Product)
+:::
+
+::: {.column width="33.3333%"}
+  -   Female Life Expectancy at Birth 
+  -   Male Life Expectancy at Birth
+  -   Total Life Expectancy at Birth
+  -   Female Adult Literacy Rate
+  -   Male Adult Literacy Rate
+  -   Total Adult Literacy Rate
+:::
+
+::: {.column width="33.3333%"}
+  -   Female Youth Literacy Rate
+  -   Male Youth Literacy Rate
+  -   Total Youth Literacy Rate
+  -   Population             
+:::
+:::
+:::
+:::
+
+
+
+## {{< fa globe >}} World Bank Dataset
+
+::: {.nonincremental}
+-   How do the GDPs of countries vary as a function of average life expectancy at birth?
+
+-   Does the nature of this relationship change across continents?
+:::
+
+```{r}
+#| echo: True
+#| class-output: hscroll1
+wb <- read.csv("data/wb_cont.csv", check.names = FALSE)
+wb %>% head(100)
+```
+
+
+```{css echo = F}
+.hscroll1 {
+  height: 100%;
+  max-height: 350px !important;
+  overflow: scroll;
+}
+```
+
+
+
+
+## {{< fa globe >}} World Bank Dataset
+
+::: {.nonincremental}
+-   How do the GDPs of countries vary as a function of average life expectancy at birth?
+
+-   Does the nature of this relationship change across continents?
+:::
+
+```{r}
+#| echo: False
+
+wb_tidy <- wb %>% melt(
+  id.vars = c("Country Name", "Country Code", "Continent", "Series Name"),
+  variable.name = "Year"
+) %>%
+  pivot_wider(
+    names_from = `Series Name`
+  )
+
+wb_tidy %>% 
+  filter(
+    Year == "2014"
+  ) %>%
+  ggplot(aes(x = `Life expectancy at birth, total (years)`,
+             y = `GDP (current US$)`)) +
+  geom_point(aes(colour = Continent,
+                 shape = Continent), size = 3) +
+  theme_minimal(base_size = 18) +
+  theme(plot.title = element_text(face = "bold")) +
+  ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") +
+  scale_y_log10() + ylab("log(GDP), in log(USD)") +
+  labs(colour = "Continent")
+```
+
+
+
+
+## {{< fa globe >}} World Bank Dataset
+
+::: {.nonincremental}
+-   How do the GDPs of countries vary as a function of average life expectancy at birth?
+
+-   Does the nature of this relationship change across continents?
+:::
+
+```{r}
+#| echo: False
+
+wb_tidy <- wb %>% melt(
+  id.vars = c("Country Name", "Country Code", "Continent", "Series Name"),
+  variable.name = "Year"
+) %>%
+  pivot_wider(
+    names_from = `Series Name`
+  )
+
+wb_tidy %>% 
+  filter(
+    Year == "2014"
+  ) %>%
+  ggplot(aes(x = `Life expectancy at birth, total (years)`,
+             y = `GDP (current US$)`)) +
+  geom_point(size = 3) +
+  facet_wrap(~Continent) +
+  theme_bw(base_size = 18) +
+  theme(plot.title = element_text(face = "bold")) +
+  ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") +
+  scale_y_log10() + ylab("log(GDP), in log(USD)") +
+  labs(colour = "Continent")
+```
+
+## {{< fa compass-drafting >}} Data Visualizations
+### Overview
+
+-   Notice how, with just a single well-crafted visualization, we were able to answer our initial questions with ease!
+
+-   This illustrates one of the major reasons why visualizations are so important: they can succinctly summarize data, and highlight important patterns that would be otherwise very difficult (or impossible) to see.
+
+-   My goal in this workshop is to help you craft [**presentation-quality**]{.alert} graphics, which are highly curated for maximal impact.
+    -   Contrast these with [**exploratory**]{.alert} visualizations, which are more "quantity over quality".
+
+## {{< fa compass-drafting >}} Data Visualizations
+### Basic Building Blocks
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Univariate Categorical Data**:
+
+-   [**Bargraphs**]{.alert} (aka [**barplots**]{.alert})
+
+**Univariate Numerical Data**:
+
+-   [**Histograms**]{.alert}
+-   [**Boxplots**]{.alert}
+
+**Bivariate Numerical Data**:
+
+-   [**Scatterplot**]{.alert}
+
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+```{r}
+#| fig-height: 3.5
+set.seed(100)
+x <- sample(c("red", "green", "blue", "orange"), size = 100, replace = T,
+            prob = c(0.7, 0.2, 0.05, 0.05))
+
+x %>% data.frame() %>% ggplot(aes(x = .)) +
+  geom_bar(fill = "#56B4E9") + xlab("color") + ggtitle("Example Barplot") +
+  theme_minimal(base_size = 24)
+```
+:::
+
+::: {.fragment}
+```{r}
+#| fig-height: 3.5
+set.seed(100)
+y <- rchisq(100, df = 4)
+
+y %>% data.frame() %>% ggplot(aes(x = .)) +
+  geom_histogram(bins = 13, col = "white", fill = "#56B4E9") + 
+  xlab("color") + ggtitle("Example Histogram") +
+  theme_minimal(base_size = 24)
+```
+:::
+
+
+::: {.fragment}
+```{r}
+#| fig-height: 3.5
+y %>% data.frame() %>% ggplot(aes(x = .)) +
+  geom_boxplot(staplewidth = 0.25, fill = "#56B4E9") + 
+  xlab("color") + ggtitle("Example Boxplot") +
+  theme_minimal(base_size = 24)
+```
+:::
+
+:::
+
+::::
+
+
+## {{< fa compass-drafting >}} Data Visualizations
+### Scatterplots
+
+
+:::{.fragment style="text-align:center"}
+![](Images/scatter1.svg){width=80%}
+:::
+
+
+## {{< fa dice-two >}} Scatterplot
+### Trends
+
+-   When considering scatterplots, certain patterns may become apparent.
+    -   For example, notice that, on average, as commute distance increases, so does commute time.
+    
+-   Such patterns are called [**trends**]{.alert}.
+
+-   Most trends can be classified along two axes: positive/negative, and linear/nonlinear.
+
+-   A [**positive**]{.alert} trend is observed when as `x` increases so does `y`; a [**negative**]{.alert} trend is observed when as `x` increases `y` decreases.
+    
+-   A trend whose rate of change is constant is said to be [**linear**]{.alert}; a trend whose rate of change is nonconstant is said to be [**nonlinear**]{.alert}
+
+## {{< fa dice-two >}} Scatterplot
+### Trends
+
+![](Images/trends1.svg)
+
+
+## {{< fa dice-two >}} Scatterplot
+### Trends
+
+![](Images/no_trend.svg)
+
+-   Another way to describe the findings of a scatterplot is in terms of the [**association**]{.alert} between the variables being compared.
+    -   For instance, if the scatterplot of `y` vs. `x` displays a positive linear trend, we would say that `x` and `y` have a positive linear association, or that `x` and `y` are positively linearly associated.
+
+
+
+## {{< fa kiwi-bird >}} Penguins {style="font-size:30px"}
+### An Example
+
+:::: {.columns}
+::: {.column width="40%"}
+::: {.fragment}
+![Artwork by @allison_horst](Images/lter_penguins-1.png)
+:::
+:::
+
+::: {.column width="60%"}
+-   The `penguins` dataset, from the `palmerpenguins` package, contains information on 344 penguins, collected by Dr. Kristen Gorman, at the Palmer Research Station in Antarctica.
+
+-   Three species of penguins were observed: Adélie, Chinstrap, and Gentoo
+:::
+::::
+
+:::: {.columns}
+::: {.column width="60%"}
+-   Various characteristics of each penguin were also observed, including: flipper length, bill length, bill depth, sex, and island.
+
+-   It seems plausible that a penguin's bill length should be related to its body mass.
+:::
+
+::: {.column width="40%"}
+::: {.fragment}
+![Artwork by @allison_horst](Images/culmen_depth.png){width="80%"}
+:::
+:::
+
+::::
+
+
+
+## {{< fa kiwi-bird >}} Penguins
+### An Example
+
+:::: {.columns}
+
+::: {.column width="60%"}
+```{r}
+#| echo: False
+
+penguins %>% ggplot(aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(size = 3) + 
+  theme_minimal(base_size = 24) + 
+  xlab("Body Mass (g)") + ylab("Bill Length (mm)") +
+  ggtitle("Bill Length vs. Body Mass")
+```
+:::
+
+::: {.column width="40%"}
+-   Is there a trend?
+    -   Increasing or decreasing?
+    -   Linear or nonlinear?
+    
+-   Do heavier penguins tend to have longer bills?
+:::
+
+::::
+
+
+::: {.fragment}
+::: {.callout-tip}
+## **Question**
+
+Does our answer change depending on the penguins' species?
+:::
+:::
+
+-   That is, do different species exhibit different relationships between body mass and bill length?
+
+
+## {{< fa kiwi-bird >}} Penguins
+### Two Ideas:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: {.fragment}
+**First Idea:** Color each point according to the associated species:
+:::
+
+::: {.fragment}
+```{r}
+penguins %>% ggplot(aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(size = 3, aes(colour = species)) + 
+  theme_minimal(base_size = 24) + 
+  xlab("Body Mass (g)") + ylab("Bill Length (mm)") +
+  ggtitle("Bill Length vs. Body Mass") +
+  scale_color_okabe_ito()
+```
+:::
+:::
+
+
+
+::: {.column width="50%"}
+::: {.fragment}
+**Second Idea:** Use different shapes for different species:
+:::
+
+::: {.fragment}
+```{r}
+penguins %>% ggplot(aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(size = 3, aes(shape = species)) + 
+  theme_minimal(base_size = 24) + 
+  xlab("Body Mass (g)") + ylab("Bill Length (mm)") +
+  ggtitle("Bill Length vs. Body Mass") +
+  scale_color_okabe_ito()
+```
+:::
+:::
+
+::::
+
+-   Key takeaway: we can encode information from additional variables by modifying certain attributes about the objects on our plots.
+
+
+
+## {{< fa kiwi-bird >}} Penguins
+### Example
+
+
+```{r}
+penguins %>% ggplot(aes(y = body_mass_g)) +
+  geom_boxplot(aes(x = species, fill = sex),
+               staplewidth = 0.25) +
+  theme_minimal(base_size = 18) +
+  scale_fill_okabe_ito() +
+  ylab("body mass (g)") +
+  ggtitle("Distributions of Body Mass",
+          subtitle = "Within Species and Sexes")
+```
+
+
+
+## {{< fa book >}} The Grammar of Graphics
+### Introduction
+
+-   Though we can make graphs "by hand" (with pen and paper), how can we tell a _computer_ to make a graph?
+    -   To answer this question, we need to establish a framework with which we can decompose a plot into its constituent parts.
+    
+-   Several such frameworks exist; one of the most popular is the [**Grammar of Graphics**]{.alert}
+    -   First proposed by Leland Wilkinson in 1999, and then modified by Hadley Wickham in the 2000s
+
+-   We start with [**data**]{.alert} (often in [**tidy**]{.alert} format).
+
+
+## {{< fa book >}} The Grammar of Graphics
+### Introduction
+
+-   Then, we need to specify [**axes**]{.alert} / a [**coordinate system**]{.alert}
+    -   What variable goes on the _x_-axis? What about the _y_-axis? Should we include a radial axis? Should we make a map?
+    
+-   Finally, we need [**geometric objects**]{.alert} (shortened to [**geoms**]{.alert})
+    -   Do we need bars or points? Lines or sectors? Etc.
+    
+-   [**Aesthetics**]{.alert} are additional attributes of the geoms, to which variables can be mapped (e.g. coordinates of points, heights of bars, etc.)
+    -   Be careful to distinguish the aesthetics from the aesthetic _mappings_ - the latter is what maps the data to the former.
+
+
+
+## {{< fa book >}} The Grammar of Graphics
+### Some Common Aesthetics
+
+![](Images/aesthetics.svg){width="60%"}
+
+
+## {{< fa book >}} The Grammar of Graphics
+### Example
+
+![](Images/barplot_ggplot.svg)
+
+-   Note that (at least for this workshop), we are treating _x_- and _y_-coordinates as aesthetics.
+
+
+    
+## {{< fa car-side >}} `mtcars`
+### Check Your Understanding
+
+:::: {.columns}
+::: {.column width="60%}
+```{r}
+#| echo: False
+#| fig-height: 10
+
+mtcars %>% ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(size = cyl,
+                 col = hp)) +
+  ggtitle("Another Scatterplot") +
+  theme_minimal(base_size = 24) +
+  scale_size(range = c(3, 15)) +
+  guides(
+    col = guide_colourbar(theme = theme(
+      legend.key.width = unit(1.25, "lines"),
+      legend.key.height = unit(15, "lines")
+    ))
+  ) +
+  xlab("weight") + ylab("miles per gallon")
+```
+:::
+
+::: {.column width="40%"}
+-   How many variables are being compared?
+-   What aesthetic is each mapped to?
+-   What conclusions can we draw from the plot?
+:::
+::::
+
+
+
+# Theory of Visualization {background-color="black" background-image="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGsxOWltdm93a2Voc3RoenA1Z3JycTh5N3c5OWg2ODF0OWJ5ZDg1cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vcB9QRaLUHYw8/giphy.gif" background-size="100rem"}
+
+
+## {{< fa lightbulb >}} Principles of Good Visualization
+### Setting Goals
+
+-   When setting out to make a plot, it's important to be intentional about our goals.
+
+-   There are two main types of plots: exploratory, and presentation-quality.
+
+::: {.fragment}
+::: {.panel-tabset}
+
+## Exploratory
+
+:::{.nonincremental}
+-   Summarize trends/patterns before performing more sophisticated statistical analyses
+-   Details not too important; quantity over quality
+:::
+
+## Presentation-Quality
+
+::: {.nonincremental}
+-   Highly curated for maximal impact and understandability
+-   Curate for communication; quality over quantity
+:::
+
+:::
+:::
+
+
+## {{< fa lightbulb >}} Principles of Good Visualizations
+### Tips and Tricks
+
+Here are some tips I've found useful when crafting visualizations
+
+<ol>
+
+::: {.fragment}
+<li>**Keep things simple.** You can (and in many cases should) try to communicate as much information as is effective. But, don’t take it to an extreme.</li>
+:::
+
+::: {.fragment}
+<ul>
+<li>**3D-Styling is almost NEVER effective**. As neat and "cool" as 3D barplots might be, the 3D-styling elements often obfuscate the plot's true meaning</li>
+</ul>
+:::
+
+:::{.fragment}
+<li>**Beware of Scales and Areas**. We;ll talk about this one more in a bit - spoiler alert, pie charts are a notoriously bad graphic!</li>
+:::
+</ol>
+
+
+## {{< fa lightbulb >}} Principles of Good Visualizations
+### Tips and Tricks
+
+
+<ol start="3">
+
+::: {.fragment}
+<li>**Label Axes, and Title your Plots.** This one should (hopefully) be self-explanatory, but make sure you are using descriptive (but not overly complex) labels for your axes, and make sure your plots are titled.</li>
+:::
+
+::: {.fragment}
+<li>**Interpret your plots.** All too often I see "floating" plots - that is, figures that appear mysteriously and suddenly with no explanation whatsoever.  No matter how self-explanatory you think your plot is, make sure you actively describe it and its conclusions somewhere in your report. </li>
+:::
+
+</ol>
+
+\
+
+-   There's a bit more I'd like to say on the use of **color** as well.
+
+
+
+## {{< fa eye >}} CVD and Accessibility {style="font-size:28px"}
+
+-   Especially when it comes to presentation-oriented graphics, accessibility is key.
+
+-   One thing to keep in mind that many readers may suffer from Color-Vision Deficiency (CVD; aka colorblindness), and may not be able to easily perceive differences in colors. 
+    -   [**Deuteranomaly**]{.alert}: difficulty perceiving green
+    -   [**Protanomaly**]{.alert}: difficulty perceiving red
+    -   [**Tritanomaly**]{.alert}: difficulty perceiving blue
+    
+:::: {.columns}
+::: {.column width="40%"}
+::: {.fragment}
+![](Images/Photoreceptors.webp){width="75%"}
+:::
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+Trichromatic persons (i.e. people with no colorblindness) possess all three retinal cone cell types (and have cone cell types that function "as expected", and are therefore able to process and perceive red, green, and blue light
+
+::: {style = "font-size:21px"}
+_Image Source:_  https://www.aao.org/eye-health/anatomy/cones
+:::
+
+:::
+:::
+
+::::
+
+
+## {{< fa paint-roller >}} CVD and Accessibility
+
+![](Images/cvd1.svg)
+
+
+## {{< fa paint-roller >}} CVD and Accessibility
+
+![](Images/cvd2.svg)
+
+## {{< fa paint-roller >}} CVD and Accessibility
+### The Okabe-Ito Palette
+
+![](Images/okabe_ito.svg)
+
+::: {.fragment}
+```{r}
+#| echo: True
+
+palette.colors(palette = "Okabe-Ito")
+```
+:::
+
+-   Another resource: [https://www.color-blindness.com/coblis-color-blindness-simulator/](https://www.color-blindness.com/coblis-color-blindness-simulator/) 
+
+
+## {{< fa paint-roller >}} Color Scales
+### Three Main Types
+
+-   It is also important to make sure you are using a [**color scale**]{.alert} that is appropriate for your visualization
+    -   Loosely speaking, you can think of a "color scale" as a palette of colors that will appear on your plot.
+    
+-   There are three main types of color scales:
+    -   [**Qualitative**]{.alert}: colors are distinct, with no natural order. Good for use with categorical variables.
+    -   [**Sequential**]{.alert}: colors range from light to dark, and are used to convey a _direction_. Similar to what we colloquially call "gradients"
+    -   [**Diverging:**]{.alert}: two sequential scales stitched together at a neutral midpoint.
+    
+## {{< fa paint-roller >}} Color Scales
+### Three Main Types
+
+::: {.panel-tabset}
+
+## Qualitative
+
+![Source: _Fundamentals of Data Visualization, by Claus Wilke_](Images/scale_qual.png)
+
+## Sequential
+
+![Source: _Fundamentals of Data Visualization, by Claus Wilke_](Images/scale_seq.png)
+
+## Diverging
+
+![Source: _Fundamentals of Data Visualization, by Claus Wilke_](Images/scale_div.png)
+
+:::
+
+    
+## {{< fa paint-roller >}} Color Scales
+### Example
+
+::: {.panel-tabset}
+
+## Misuse
+
+![Source: _Fundamentals of Data Visualization, by Claus Wilke_](Images/texas_rainbow.png){width="50%"}
+
+## Improvement
+
+![Source: _Fundamentals of Data Visualization, by Claus Wilke_](Images/texas_better.png){width="50%"}
+
+:::
+
+## {{< fa arrows-split-up-and-left >}} Facetting
+
+-   Color may not always be the most effective way to convey information.
+
+::: {.fragment}
+```{r}
+wb <- read.csv("data/wb_cont.csv", check.names = FALSE)
+
+wb_tidy <- wb %>% melt(
+  id.vars = c("Country Name", "Country Code", "Continent", "Series Name"),
+  variable.name = "Year"
+) %>%
+  pivot_wider(
+    names_from = `Series Name`
+  )
+
+wb_tidy %>% 
+  filter(
+    Year == "2014"
+  ) %>%
+  ggplot(aes(x = `Life expectancy at birth, total (years)`,
+             y = `GDP (current US$)`)) +
+  geom_point(aes(colour = Continent), size = 3) +
+  theme_minimal(base_size = 18) +
+  ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") +
+  scale_y_log10() + ylab("log(GDP), in log(USD)") +
+  labs(colour = "Continent")
+```
+:::
+
+## {{< fa arrows-split-up-and-left >}} Facetting
+
+-   One potential alternative is [**facetting**]{.alert}
+
+::: {.fragment}
+```{r}
+wb <- read.csv("data/wb_cont.csv", check.names = FALSE)
+
+wb_tidy <- wb %>% melt(
+  id.vars = c("Country Name", "Country Code", "Continent", "Series Name"),
+  variable.name = "Year"
+) %>%
+  pivot_wider(
+    names_from = `Series Name`
+  )
+
+wb_tidy %>% 
+  filter(
+    Year == "2014"
+  ) %>%
+  ggplot(aes(x = `Life expectancy at birth, total (years)`,
+             y = `GDP (current US$)`)) +
+  geom_point(size = 3) +
+  facet_wrap(~Continent) + 
+  theme_bw(base_size = 18) +
+  ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") +
+  scale_y_log10() + ylab("log(GDP), in log(USD)") +
+  labs(colour = "Continent")
+```
+:::
+
+## {{< fa bezier-curve >}} Transformations
+
+-   Also note how [**transformations**]{.alert} may be useful, especially when one or more of your variables has comparatively high spread.
+
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.fragment}
+**Raw:**
+```{r}
+#| fig-height: 7
+
+wb_tidy %>% 
+  filter(
+    Year == "2014"
+  ) %>%
+  ggplot(aes(x = `Life expectancy at birth, total (years)`,
+             y = `GDP (current US$)`)) +
+  geom_point(size = 3) +
+  theme_bw(base_size = 32) +
+  ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") + 
+  ylab("GDP, in USD") +
+  labs(colour = "Continent")
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+**Log-Transformed:**
+```{r}
+#| fig-height: 7
+
+wb_tidy %>% 
+  filter(
+    Year == "2014"
+  ) %>%
+  ggplot(aes(x = `Life expectancy at birth, total (years)`,
+             y = `GDP (current US$)`)) +
+  geom_point(size = 3) +
+  theme_bw(base_size = 32) +
+  ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") + 
+  ylab("log(GDP), in log(USD)") +
+  scale_y_log10() +
+  labs(colour = "Continent")
+```
+:::
+:::
+::::
