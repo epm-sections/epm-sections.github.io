@@ -504,6 +504,13 @@
     "text": "mtcars\nCheck Your Understanding\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow many variables are being compared?\nWhat aesthetic is each mapped to?\nWhat conclusions can we draw from the plot?"
   },
   {
+    "objectID": "DSCol-F25/DataVis/DataVis.html#extensions",
+    "href": "DSCol-F25/DataVis/DataVis.html#extensions",
+    "title": "Data Visualization",
+    "section": " Extensions",
+    "text": "Extensions\nLots of Other Types of Plots Too!"
+  },
+  {
     "objectID": "DSCol-F25/DataVis/DataVis.html#cvd-and-accessibility",
     "href": "DSCol-F25/DataVis/DataVis.html#cvd-and-accessibility",
     "title": "Data Visualization",
@@ -530,13 +537,6 @@
     "title": "Data Visualization",
     "section": " CVD and Accessibility",
     "text": "CVD and Accessibility\nThe Okabe-Ito Palette\n\n\n\npalette.colors(palette = \"Okabe-Ito\")\n\n[1] \"#000000\" \"#E69F00\" \"#56B4E9\" \"#009E73\" \"#F0E442\" \"#0072B2\" \"#D55E00\"\n[8] \"#CC79A7\" \"#999999\"\n\n\n\n\nAnother resource: https://www.color-blindness.com/coblis-color-blindness-simulator/"
-  },
-  {
-    "objectID": "DSCol-F25/DataVis/DataVis.html#extensions",
-    "href": "DSCol-F25/DataVis/DataVis.html#extensions",
-    "title": "Data Visualization",
-    "section": " Extensions",
-    "text": "Extensions\nLots of Other Types of Plots Too!"
   },
   {
     "objectID": "DSCol-F25/DataVis/DataVis.html#plotting-in-python-1",

@@ -573,6 +573,12 @@ mtcars %>% ggplot(aes(x = wt, y = mpg)) +
 ::::
 
 
+## {{< fa expand >}} Extensions
+### Lots of Other Types of Plots Too!
+
+![](Images/other_plots.svg)
+
+
 ## {{< fa eye >}} CVD and Accessibility {style="font-size:28px"}
 
 -   Especially when it comes to presentation-oriented graphics, accessibility is key.
@@ -626,13 +632,6 @@ palette.colors(palette = "Okabe-Ito")
 :::
 
 -   Another resource: [https://www.color-blindness.com/coblis-color-blindness-simulator/](https://www.color-blindness.com/coblis-color-blindness-simulator/) 
-
-
-## {{< fa expand >}} Extensions
-### Lots of Other Types of Plots Too!
-
-![](Images/other_plots.svg)
-
 
 
 # Plotting in Python {background-color="black" background-image="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnA1ZHVwZTM4NzNlajFoMm9wZXh1Z2w3MmlyZTlkcm1yazIycDd4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A06UFEx8jxEwU/giphy.gif" background-size="80rem"}
