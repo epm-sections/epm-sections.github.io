@@ -83,6 +83,8 @@ library(plotly)
 library(tidymodels)
 ```
 
+
+
 ## {{< fa question >}} Some Questions
 ### Leadup
 
@@ -284,7 +286,7 @@ x <- sample(c("red", "green", "blue", "orange"), size = 100, replace = T,
             prob = c(0.7, 0.2, 0.05, 0.05))
 
 x %>% data.frame() %>% ggplot(aes(x = .)) +
-  geom_bar(fill = "#56B4E9") + xlab("color") + ggtitle("Example Barplot") +
+  geom_bar(fill = "#0072B2") + xlab("color") + ggtitle("Example Barplot") +
   theme_minimal(base_size = 24)
 ```
 :::
@@ -296,7 +298,7 @@ set.seed(100)
 y <- rchisq(100, df = 4)
 
 y %>% data.frame() %>% ggplot(aes(x = .)) +
-  geom_histogram(bins = 13, col = "white", fill = "#56B4E9") + 
+  geom_histogram(bins = 13, col = "white", fill = "#0072B2") + 
   xlab("color") + ggtitle("Example Histogram") +
   theme_minimal(base_size = 24)
 ```
@@ -307,7 +309,7 @@ y %>% data.frame() %>% ggplot(aes(x = .)) +
 ```{r}
 #| fig-height: 3.5
 y %>% data.frame() %>% ggplot(aes(x = .)) +
-  geom_boxplot(staplewidth = 0.25, fill = "#56B4E9") + 
+  geom_boxplot(staplewidth = 0.25, fill = "#0072B2") + 
   xlab("color") + ggtitle("Example Boxplot") +
   theme_minimal(base_size = 24)
 ```
@@ -527,13 +529,16 @@ penguins %>% ggplot(aes(y = body_mass_g)) +
 
 
 ## {{< fa book >}} The Grammar of Graphics
-### Example
-
-![](Images/barplot_ggplot.svg)
-
--   Note that (at least for this workshop), we are treating _x_- and _y_-coordinates as aesthetics.
+### Example: Basic Scatterplot
 
 
+::: {.r-stack}
+![](Images/ggplot_01.svg){width="950"}
+
+![](Images/ggplot_02.svg){.fragment width="950"}
+
+![](Images/ggplot_03.svg){.fragment width="950"}
+:::
     
 ## {{< fa car-side >}} `mtcars`
 ### Check Your Understanding
@@ -566,6 +571,265 @@ mtcars %>% ggplot(aes(x = wt, y = mpg)) +
 -   What conclusions can we draw from the plot?
 :::
 ::::
+
+
+## {{< fa eye >}} CVD and Accessibility {style="font-size:28px"}
+
+-   Especially when it comes to presentation-oriented graphics, accessibility is key.
+
+-   One thing to keep in mind that many readers may suffer from Color-Vision Deficiency (CVD; aka colorblindness), and may not be able to easily perceive differences in colors. 
+    -   [**Deuteranomaly**]{.alert}: difficulty perceiving green
+    -   [**Protanomaly**]{.alert}: difficulty perceiving red
+    -   [**Tritanomaly**]{.alert}: difficulty perceiving blue
+    
+:::: {.columns}
+::: {.column width="40%"}
+::: {.fragment}
+![](Images/Photoreceptors.webp){width="75%"}
+:::
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+Trichromatic persons (i.e. people with no colorblindness) possess all three retinal cone cell types (and have cone cell types that function "as expected", and are therefore able to process and perceive red, green, and blue light
+
+::: {style = "font-size:21px"}
+_Image Source:_  https://www.aao.org/eye-health/anatomy/cones
+:::
+
+:::
+:::
+
+::::
+
+
+## {{< fa paint-roller >}} CVD and Accessibility
+
+![](Images/cvd1.svg)
+
+
+## {{< fa paint-roller >}} CVD and Accessibility
+
+![](Images/cvd2.svg)
+
+## {{< fa paint-roller >}} CVD and Accessibility
+### The Okabe-Ito Palette
+
+![](Images/okabe_ito.svg)
+
+::: {.fragment}
+```{r}
+#| echo: True
+
+palette.colors(palette = "Okabe-Ito")
+```
+:::
+
+-   Another resource: [https://www.color-blindness.com/coblis-color-blindness-simulator/](https://www.color-blindness.com/coblis-color-blindness-simulator/) 
+
+
+## {{< fa expand >}} Extensions
+### Lots of Other Types of Plots Too!
+
+![](Images/other_plots.svg)
+
+
+
+# Plotting in Python {background-color="black" background-image="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnA1ZHVwZTM4NzNlajFoMm9wZXh1Z2w3MmlyZTlkcm1yazIycDd4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A06UFEx8jxEwU/giphy.gif" background-size="80rem"}
+
+## {{< fa code >}} Plotting in `Python`
+### An Overview
+
+-   There are many modules available in `Python` to generate plots.
+    -   Some popular ones include: **`matplotlib`** and **`seaborn`**.
+    -   Both are pretty good... but I prefer a different one!
+    
+-   For this workshop, we'll be using [**`Altair`**](https://altair-viz.github.io/){target="_blank"}.
+    -   I particularly like Altair because it is _built_ upon the grammar of graphics, making it (in my opinion) fairly intuitive to use.
+    
+-   Sidebar: most data scientists agree that `R` (specifically, a library called `ggplot2`) is the best for creating graphics/visualizations.
+    -   But, Altair is a pretty good dupe for `ggplot2`! 
+
+
+## {{< fa code >}} Plotting in `Altair`
+### Example: Basic Scatterplot
+
+::: {.r-stack}
+![](Images/ggplot3_01.svg){width="1000"}
+
+![](Images/ggplot3_02.svg){.fragment width="1000"}
+
+![](Images/ggplot3_03.svg){.fragment width="1000"}
+:::
+
+## {{< fa code >}} Plotting in `Altair`
+### Example: Simple Dataset
+
+```{r}
+#| echo: False
+#| message: False
+
+library(reticulate)
+py_require("pandas")
+py_require("altair")
+py_require("scipy")
+```
+
+```{python}
+#| echo: False
+## DO NOT EDIT
+import pandas as pd
+import numpy as np
+import altair as alt
+import scipy.stats as sps
+
+alt.renderers.enable('html');
+```
+
+```{python}
+#| echo: True
+#| code-fold: True
+df = pd.DataFrame({
+    'col1': [1, 2, 3, 4],
+    'col2': [2, 3, 1, 1]
+})
+
+alt.Chart(
+    df,
+    title = "My First Scatterplot"
+).mark_point().encode(
+    x = 'col1',
+    y = 'col2'
+)
+```
+
+
+## {{< fa code >}} Plotting in `Altair`
+### Example: Simple Dataset, with Formatting
+
+```{python}
+#| echo: True
+#| code-fold: True
+alt.Chart(
+    df,
+    title = "My Second Scatterplot"
+).mark_point(
+    filled = True,
+    size = 200,
+    color='blue'
+).encode(
+    x = alt.X('col1', axis=alt.Axis(tickCount=6)),
+    y = alt.Y('col2', axis=alt.Axis(tickCount=6))
+).properties(
+    width = 600,
+    height = 400
+).configure_title(
+    fontSize = 24
+).configure_axis(
+    labelFontSize = 14,
+    titleFontSize = 16
+)
+```
+
+
+
+## {{< fa code >}} Plotting in `Altair`
+### Example: Static Function
+
+```{python}
+#| echo: True
+#| code-fold: True
+
+def f(x):
+  """a trigonometric function"""
+  return np.cos(x) * np.sin(2*x) + 0.3 * x
+
+x = np.linspace(-2, 3, 200)
+df2 = pd.DataFrame({
+  'x': x,
+  'f(x)': f(x)
+})
+
+alt.Chart(
+    df2,
+    title = "Graph of f(x) = cos(x)*sin(2x) + 0.3x"
+).mark_line(strokeWidth = 4.5).encode(
+    x = alt.X('x', axis=alt.Axis(tickCount=6)),
+    y = alt.Y('f(x)', axis=alt.Axis(tickCount=6))
+).properties(
+    width = 600,
+    height = 400
+).configure_title(
+    fontSize = 24
+).configure_axis(
+    labelFontSize = 14,
+    titleFontSize = 16
+)
+```
+    
+    
+
+
+## {{< fa code >}} Plotting in `Altair`
+### Example: Multiple Encodings
+
+```{python}
+#| echo: True
+#| code-fold: True
+
+np.random.seed(100)
+num1 = sps.norm.rvs(loc = 0, size = 300)
+cat1 = np.random.choice(['A', 'B'], size = 300, p = [0.5, 0.5])
+num2 = []
+for k in np.arange(300):
+  num2.append(sps.norm.rvs(loc = 0.5*num1[k] if cat1[k] == 'A' else 1.5*num1[k], scale = 0.5, size = 1)[0])
+
+num3 = []
+for k in np.arange(300):
+  if num1[k] <= -2:
+    num3.append(np.random.choice([1, 2, 3, 4, 5], size = 1, p = [0.6, 0.1, 0.1, 0.1, 0.1])[0])
+  elif -2 < num1[k] <= -1:
+    num3.append(np.random.choice([1, 2, 3, 4, 5], size = 1, p = [0.1, 0.6, 0.1, 0.1, 0.1])[0])
+  elif -1 < num1[k] <= 0:
+    num3.append(np.random.choice([1, 2, 3, 4, 5], size = 1, p = [0.1, 0.1, 0.6, 0.1, 0.1])[0])
+  elif 0 < num1[k] <= 1:
+    num3.append(np.random.choice([1, 2, 3, 4, 5], size = 1, p = [0.1, 0.1, 0.1, 0.6, 0.1])[0])
+  else:
+    num3.append(np.random.choice([1, 2, 3, 4, 5], size = 1, p = [0.1, 0.1, 0.1, 0.1, 0.6])[0])
+
+df3 = pd.DataFrame({
+  'num1': num1,
+  'num2': num2,
+  'num3': num3,
+  'cat1': cat1
+})
+
+alt.Chart(
+    df3,
+    title = "Scatterplot with Multiple Encodings"
+).mark_point(
+    filled = True
+).encode(
+    x = alt.X('num1', axis=alt.Axis(tickCount=6)),
+    y = alt.Y('num2', axis=alt.Axis(tickCount=6)),
+    color = 'cat1',
+    size = 'num3'
+).properties(
+    width = 600,
+    height = 400
+).configure_title(
+    fontSize = 24
+).configure_axis(
+    labelFontSize = 14,
+    titleFontSize = 16
+).configure_legend(
+    labelFontSize = 14,
+    titleFontSize = 16,
+    padding = 20,
+)
+```
+
+
 
 
 
@@ -642,63 +906,6 @@ Here are some tips I've found useful when crafting visualizations
 \
 
 -   There's a bit more I'd like to say on the use of **color** as well.
-
-
-
-## {{< fa eye >}} CVD and Accessibility {style="font-size:28px"}
-
--   Especially when it comes to presentation-oriented graphics, accessibility is key.
-
--   One thing to keep in mind that many readers may suffer from Color-Vision Deficiency (CVD; aka colorblindness), and may not be able to easily perceive differences in colors. 
-    -   [**Deuteranomaly**]{.alert}: difficulty perceiving green
-    -   [**Protanomaly**]{.alert}: difficulty perceiving red
-    -   [**Tritanomaly**]{.alert}: difficulty perceiving blue
-    
-:::: {.columns}
-::: {.column width="40%"}
-::: {.fragment}
-![](Images/Photoreceptors.webp){width="75%"}
-:::
-:::
-
-::: {.column width="60%"}
-::: {.fragment}
-Trichromatic persons (i.e. people with no colorblindness) possess all three retinal cone cell types (and have cone cell types that function "as expected", and are therefore able to process and perceive red, green, and blue light
-
-::: {style = "font-size:21px"}
-_Image Source:_  https://www.aao.org/eye-health/anatomy/cones
-:::
-
-:::
-:::
-
-::::
-
-
-## {{< fa paint-roller >}} CVD and Accessibility
-
-![](Images/cvd1.svg)
-
-
-## {{< fa paint-roller >}} CVD and Accessibility
-
-![](Images/cvd2.svg)
-
-## {{< fa paint-roller >}} CVD and Accessibility
-### The Okabe-Ito Palette
-
-![](Images/okabe_ito.svg)
-
-::: {.fragment}
-```{r}
-#| echo: True
-
-palette.colors(palette = "Okabe-Ito")
-```
-:::
-
--   Another resource: [https://www.color-blindness.com/coblis-color-blindness-simulator/](https://www.color-blindness.com/coblis-color-blindness-simulator/) 
-
 
 ## {{< fa paint-roller >}} Color Scales
 ### Three Main Types
@@ -825,7 +1032,7 @@ wb_tidy %>%
   ) %>%
   ggplot(aes(x = `Life expectancy at birth, total (years)`,
              y = `GDP (current US$)`)) +
-  geom_point(size = 3) +
+  geom_point(size = 4) +
   theme_bw(base_size = 32) +
   ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") + 
   ylab("GDP, in USD") +
@@ -846,7 +1053,7 @@ wb_tidy %>%
   ) %>%
   ggplot(aes(x = `Life expectancy at birth, total (years)`,
              y = `GDP (current US$)`)) +
-  geom_point(size = 3) +
+  geom_point(size = 4) +
   theme_bw(base_size = 32) +
   ggtitle("GDP vs. Life Expectancy", subtitle = "In 2014") + 
   ylab("log(GDP), in log(USD)") +
@@ -856,3 +1063,6 @@ wb_tidy %>%
 :::
 :::
 ::::
+
+
+    
