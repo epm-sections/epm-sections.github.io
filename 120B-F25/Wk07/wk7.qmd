@@ -1,0 +1,381 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 7 Discussion Section"
+footer: "PSTAT 120B - Fall 2025 with Dr. Uma Ravat; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: November 14, 2025
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\probto}{\stackrel{\mathrm{p}}{\longrightarrow}}
+\newcommand{\distto}{\stackrel{\mathrm{d}}{\longrightarrow}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+
+## {{< fa arrow-right >}} Consistency
+### Definition
+
+::: {.callout-note}
+## **Definition:** Consistency
+
+An estimator $\widehat{\theta}_n$ for $\theta$ is said to be a [**consistent estimator**]{.alert} for $\theta$ if either of the following equivalent conditions hold: for any $\varepsilon > 0$,
+\begin{align*}
+  \lim_{n \to \infty} \Prob(|\widehat{\theta}_n - \theta| \leq \varepsilon)  & = 1 \\
+  \lim_{n \to \infty} \Prob(|\widehat{\theta}_n - \theta| > \varepsilon)  & = 0
+\end{align*}
+:::
+
+-   This definition can seem scary at first; let's break it down.
+
+## {{< fa arrow-right >}} Consistency
+### Definition: Interpretation
+
+-   $|\widehat{\theta}_n - \theta|$ is essentially the distance between our estimator and estimand.
+
+-   The event $\{|\widehat{\theta}_n - \theta| < \varepsilon\}$ is then: "the distance between our estimator and estimand is small."
+    -   In other words: "our estimator is very close to our estimand."
+    
+-   Saying that $\Prob(|\widehat{\theta}_n - \theta| < \varepsilon) \to 1$ as $n \to \infty$ means that, as our sample size gets large, we are more and more certain that our estimator is very close to our estimand.
+
+-   That's all consistency is saying!
+    -   I find this breakdown useful when trying to remember the definition of consistency.
+
+## {{< fa arrow-right >}} Consistency
+### Main Theorem
+
+-   We don't always need to use the definition of consistency:
+
+::: {.fragment}
+::: {.callout-important}
+## **Theorem**
+
+If $\widehat{\theta}_n$ is an unbiased estimator for $\theta$, then it is also a consistent estimator for $\theta$ if and only if $\Var(\widehat{\theta}_n) \to 0$ as $n \to \infty$.
+:::
+:::
+
+-   **Caution:** If you want to use this theorem, you MUST first check that your estimator is unbiased! (Otherwise, we can't appeal to this theorem.)
+
+-   **Question:** are all unbiased estimators consistent?
+
+-   **Question:** are all consistent estimators unbiased?
+
+
+## {{< fa arrow-right >}} Consistency
+### Biased but Consistent
+
+**Example:** $\widehat{\sigma^2}_n := \frac{1}{n} \sum_{i=1}^{n} (Y_i - \bar{Y}_n)^2$
+```{r}
+exact_dist <- \(x, n, sig2){
+  dgamma(x, shape = (n - 1)/2, scale = 2*sig2/n)
+}
+
+data.frame(x = 0:6) %>% ggplot(aes(x = x)) +
+  stat_function(fun = exact_dist,
+                args = list(n = 5,
+                            sig2 = 1.5),
+                aes(colour = "05"),
+                linewidth = 1.5
+  ) + stat_function(fun = exact_dist,
+                args = list(n = 10,
+                            sig2 = 1.5),
+                aes(colour = "10"),
+                linewidth = 1.5
+  ) + stat_function(fun = exact_dist,
+                args = list(n = 15,
+                            sig2 = 1.5),
+                aes(colour = "15"),
+                linewidth = 1.5
+  ) + stat_function(fun = exact_dist,
+                args = list(n = 20,
+                            sig2 = 1.5),
+                aes(colour = "20"),
+                n = 200,
+                linewidth = 1.5
+  ) + stat_function(fun = exact_dist,
+                args = list(n = 25,
+                            sig2 = 1.5),
+                aes(colour = "25"),
+                n = 200,
+                linewidth = 1.5
+  )  +
+  geom_vline(xintercept = 1.5, linetype = "dashed") +
+  theme_minimal(base_size = 18) +
+  ggtitle("Modified Sample Variance") +
+  labs(colour = "n") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  scale_color_okabe_ito()
+```
+
+## {{< fa dice >}} Likelihoods
+
+-   A coin lands "heads" with probability $\theta \in (0, 1)$. 
+
+-   Suppose we toss the coin five times, and observe (`H`, `T`, `H`, `H`, `T`).
+    -   Letting _X_ denote the number of heads in 5 tosses, _X_ ~ Bin(5, $\theta$)
+
+-   If $\theta = 0.3$, how likely were we to have observed what we saw?
+    -   If $\theta = 0.3$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.3)^3(0.7)^2 \approx 0.1323$
+    
+-   If $\theta = 0.4$, how likely were we to have observed what we saw?
+    -   If $\theta = 0.3$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.4)^3(0.6)^2 \approx 0.2304$
+    
+-   Given that we observed (`H`, `T`, `H`, `H`, `T`), which was more likely: that $\theta = 0.3$ or that $\theta = 0.4$?
+
+## {{< fa dice >}} Likelihoods
+### Maximization
+
+::: {.callout-tip}
+## **Idea:** 
+
+To estimate a parameter $\theta$ given data $Y_1, Y_2, \cdots, Y_n$, find the value of $\theta$ that was _most likely_ to have given rise to the data we observed.
+:::
+
+-   This procedure is called [**maximum likelihood estimation**]{.alert} and the resulting estimator is called the [**maximum likelihood estimator**]{.alert}
+
+-   The [**likelihood**]{.alert} gives a way of answering the question: "given data $Y_1, Y_2, \cdots, Y_n$, how likely was it that the true value of the parameter were $\theta$, for an arbitrary $\theta$?"
+
+-   For example, back to our coin-tossing example:
+
+
+## {{< fa dice >}} Likelihoods
+### Example
+
+```{r}
+#| echo: False
+#| code-fold: True
+
+lik_theta <- Vectorize(function(theta){
+  dbinom(3, 5, theta)
+})
+
+data.frame(x = 0:1) %>% ggplot(aes(x = x)) +
+  stat_function(fun = lik_theta, linewidth = 1) +
+  theme_minimal(base_size = 18) +
+  xlab(bquote(theta)) +
+  ylab(paste("likelihood that true prob. is", bquote(theta))) +
+  ggtitle("Example Likelihood",
+          subtitle = "Data = (H, T, H, H, T)") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  annotate(
+    "point",
+    x = 0.3, y = lik_theta(0.3),
+    size = 4
+  ) + annotate(
+    "point",
+    x = 0.4, y = lik_theta(0.4),
+    size = 4
+  ) +
+  geom_segment(
+    aes(x = 0.3, xend = 0.3,
+        y = 0, yend = lik_theta(0.3)),
+    linetype = "dotted"
+  ) + geom_segment(
+    aes(x = 0, xend = 0.3,
+        y = lik_theta(0.3), yend = lik_theta(0.3)),
+    linetype = "dotted"
+  ) +
+  geom_segment(
+    aes(x = 0.4, xend = 0.4,
+        y = 0, yend = lik_theta(0.4)),
+    linetype = "dotted"
+  ) + geom_segment(
+    aes(x = 0, xend = 0.4,
+        y = lik_theta(0.4), yend = lik_theta(0.4)),
+    linetype = "dotted"
+  )
+```
+
+
+## {{< fa dice >}} Likelihoods
+### Example: Different Datasets
+
+```{r}
+#| echo: False
+#| code-fold: True
+
+lik_theta <- function(theta, x){
+  dbinom(sum(x == "H"), length(x), theta)
+}
+
+data.frame(x = 0:1) %>% ggplot(aes(x = x)) +
+  stat_function(fun = lik_theta, linewidth = 1.5,
+                args = list(x = c("H", "T", "H", "H", "T")),
+                aes(colour = "c(H, T, H, H, T)")
+  ) + stat_function(fun = lik_theta, linewidth = 1.5,
+                args = list(x = c("T", "T", "T", "T", "H")),
+                aes(colour = "c(T, T, T, T, H)")
+  ) + stat_function(fun = lik_theta, linewidth = 1.5,
+                args = list(x = c("H", "H", "H", "H", "T")),
+                aes(colour = "c(H, H, H, H, T)")
+  ) +
+  theme_minimal(base_size = 18) +
+  labs(colour = "Data") +
+  ggtitle("Example Likelihood",
+          subtitle = "Different Datasets") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  xlab(bquote(theta)) +
+  ylab(paste("likelihood that true prob. is", bquote(theta))) +
+  scale_color_okabe_ito()
+```
+
+
+## {{< fa dice >}} Likelihoods
+### Definition
+
+-   The likelihood given a sample is just the marginal mass/density function.
+
+-   Indeed, the reason we call this a "likelihood" function instead of a "probability" function is because, in the continuous case, the likelihood at a given point doesn't really represent a true _probability_ (but, it is giving the same _sort_ of information as a probability).
+
+::: {.fragment}
+$$ \mathcal{L}(\theta; Y_1, Y_2, \cdots, Y_n) := f_{Y_1, Y_2, \cdots, Y_n}(Y_1, Y_2, \cdots, Y_n; \theta) $$
+:::
+
+-   If the sample is i.i.d.: $\displaystyle \mathcal{L}(\theta; Y_1, Y_2, \cdots, Y_n) = \prod_{i=1}^{n} f(Y_i; \theta)$
+
+## {{< fa dice >}} Likelihoods
+### Continuous Example: Exponential
+
+-   **Example Scenario:** The wait time at _The Arbor_ of a randomly-selected customer follows an Exponential distribution with unknown mean $\theta$. 
+
+-   Likelihood (assuming i.i.d.):
+\begin{align*}
+  \class{fragment}{{} \mathcal{L}(\theta; Y_1, Y_2, \cdots, Y_n)}
+    &\class{fragment}{{} = \prod_{i=1}^{n} f(Y_i; \theta)}            \\[3px]
+    &\class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{1}{\theta} e^{-Y_i/\theta} \cdot 1 \! \! 1_{\{Y_i \geq 0\}} \right] }    \\[3px]
+    &\class{fragment}{{} = \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} Y_i} \cdot 1 \! \! 1_{\{Y_{(1)} \geq 0\}}} 
+\end{align*}
+
+## {{< fa dice >}} Likelihoods
+### Continuous Example: Exponential
+
+$$ \mathcal{L}(\theta; Y_1, Y_2, \cdots, Y_n) = \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} Y_i} \cdot 1 \! \! 1_{\{Y_{(1)} \geq 0\}} $$
+
+-   Note that we are viewing this as a function of $\theta$! 
+    -   The idea is: we assume that we already have our data $(Y_1, Y_2, \cdots, Y_n)$; what we're trying to do is figure out the _most plausible_ $\theta$ value given the data we've observed.
+    
+-   Further note that this means likelihoods aren't necessarily true density functions in $\theta$.
+
+## {{< fa dice >}} Likelihoods
+### Continuous Example: Exponential
+
+```{r}
+#| echo: True
+#| code-fold: True
+exp_lik <- function(theta, y) {
+  (1 / theta)^(length(y)) * exp(-(1 / theta) * sum(y))
+}
+```
+
+```{r}
+data.frame(x = 0:6) %>% ggplot(aes(x = x)) +
+  stat_function(fun = exp_lik,
+                args = list(y = c(1, 2, 3, 1, 2)),
+                aes(colour = "c(1, 2, 3, 1, 2)"),
+                linewidth = 1.5
+  ) + stat_function(fun = exp_lik,
+                args = list(y = c(2, 2, 2, 2, 2)),
+                aes(colour = "c(2, 2, 2, 2, 2)"),
+                linewidth = 1.5
+  ) + stat_function(fun = exp_lik,
+                args = list(y = c(1, 2, 3, 2, 2)),
+                aes(colour = "c(1, 2, 3, 2, 2)"),
+                linewidth = 1.5,
+                linetype = "dashed"
+  ) +
+  theme_minimal(base_size = 18) +
+  labs(colour = "Data") +
+  ggtitle("Exponential Likelihood",
+          subtitle = "Different Datasets") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  xlab(bquote(theta)) +
+  ylab(paste("likelihood that true avg. is", bquote(theta))) +
+  scale_color_manual(values = c("#009E73","#0072B2","#E69F00")) 
+```
+
