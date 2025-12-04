@@ -28,7 +28,6 @@ title-slide-attributes:
 code-annotations: hover
 ---
 
-
 <style>
 mjx-math {
   font-size: 80% !important;
@@ -998,4 +997,4 @@ grid.arrange(p1, p2, p3, ncol = 1)
 
 -   Also, even though material from Topic 15 will not feature heavily on the exam (if at all - again, I haven't seen the exam yet!) I [**HIGHLY**]{.alert} recommend you take a look at it before moving on to your future statistics courses.
     -   Pretty much every course will at least in part make reference to that material, even if behind the scenes.
-        -   Any time you perform a hypothesis test (e.g. in: Machine Learning, Time Series, etc.), you're often concerned with finding a test with _optimal power_. The Neyman-Pearson Lemma and Likelihood Ratio Tests gives you such a test in many cases!
+        -   Any time you perform a hypothesis test (e.g. in: Machine Learning, Time Series, etc.), you're often concerned with finding a test with _optimal power_. The Neyman-Pearson Lemma and Likelihood Ratio Tests gives you such a test in many cases.
