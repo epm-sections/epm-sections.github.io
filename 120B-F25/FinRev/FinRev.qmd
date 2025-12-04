@@ -325,26 +325,15 @@ $$ \overline{Y}_n = \frac{1}{\widehat{p}_{\mathrm{MoM}}} $$
 ## {{< fa vial >}} Sampling
 ### Example: Cats!
 
-![](Images/Sampling0.svg)
+::: {.r-stack}
+![](Images/Sampling0.svg){.fragment width="950"}
 
+![](Images/Sampling1.svg){.fragment width="950"}
 
-## {{< fa vial >}} Sampling
-### Example: Cats!
+![](Images/Sampling2.svg){.fragment width="950"}
 
-![](Images/Sampling1.svg)
-
-
-## {{< fa vial >}} Sampling
-### Example: Cats!
-
-![](Images/Sampling2.svg)
-
-
-## {{< fa vial >}} Sampling
-### Example: Cats!
-
-![](Images/Sampling3.svg)
-
+![](Images/Sampling3.svg){.fragment width="950"}
+:::
 
 ## {{< fa stairs >}} Leadup
 
