@@ -1,0 +1,244 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 1 Discussion Section"
+footer: "PSTAT 120B - Winter 2026 with Dr. Annie Qu; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: January 7, 2026
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\S}{\mathbb{S}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa circle-info >}} Hello!
+### A Quick Introduction
+
+
+-   Hello! My name is Ethan (he/him), and I am very much looking forward to being your TA!
+    -   I am a sixth year PhD; this is my fifth time with this course (including having been the Instructor once :) )
+    
+-   **My Office Hours:** TBD
+
+-   **My Email:** epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)
+
+::: {.fragment}
+::: {.callout-note}
+## **Goal for Today**
+
+Briefly review PSTAT 120A and Calculus material.
+:::
+:::
+
+## {{< fa rocket >}} Probability Spaces; Random Variables
+### High-Level Overview
+
+-   [**Probability Space**]{.alert}: $(\Omega, \F, \Prob)$ where:
+    -   $\Omega$ denotes the [**outcome space**]{.alert}
+    -   $\F$ denotes the [**event space**]{.alert}
+    -   $\Prob: \F \to \R$ denotes the [**probability measure**]{.alert}
+
+-   A [**random variable**]{.alert} $X$ is a mapping $X : \Omega \to \R$
+    -   [**Support**]{.alert}: $X(\Omega)$ (set of values over which the random variable is defined)
+        -   Finite or countable support $\implies$ $X$ is [**discrete**]{.alert}
+        -   Uncountable support $\implies$ $X$ is [**continuous**]{.alert}
+        
+        
+## {{< fa rocket >}} Probability Spaces; Random Variables
+### Example
+
+::: {.callout-tip}
+## **Example 1**
+
+A fair coin is tossed twice, and the outcomes are recorded; let _X_ denote the number of heads.
+:::
+
+-   **Outcome Space:** $\Omega =$ \{`H`, `T`\}^2^ = \{(`H`, `H`), (`H`, `T`), (`T`, `H`), (`T`, `T`) \}
+
+-   _X_ should map each element in $\Omega$ to a real number, by counting the number of heads in the outcome.
+    -   _X_((`H`, `H`)) = [2]{.fragment}; \ \ \ \ \ \ _X_((`H`, `T`)) = [1]{.fragment}; \ \ \ \ \ \ _X_((`H`, `T`)) = [1]{.fragment}; \ \ \ \ \ \ _X_((`T`, `T`)) = [0]{.fragment}
+    
+-   The support of _X_ is [**\{0, 1, 2\}**]{.fragment}, which is [**finite**]{.fragment}, meaning _X_ is a [**discrete**]{.fragment} random variable
+
+-   **Fair Coin** implies we should use the [**equally-likely probability measure**]{.alert}; $\Prob(E) = |E| / |\Omega|$ for every event _E_.
+    -   Allows us to construct the [**probability mass function**]{.alert} (PMF) of _X_.
+
+
+## {{< fa dice >}} Random Variables
+### Relevant Quantities
+
+:::: {.columns}
+::: {.column width="50%"}
+**Discrete:**
+
+-   [**PMF**]{.alert}: $f(x) := \Prob(X = x)$
+-   [**Probabilities:**]{.alert} $\Prob(X \in B) = \sum_{x \in B} f(x)$
+-   [**CMF:**]{.alert} $F(x) := \Prob(X \leq x) = \sum_{t \leq x} f(x)$
+-   [**LOTUS:**]{.alert} $\E[g(X)] = \sum_{x} g(x) f(x)$
+-   [**Variance:**]{.alert} $\Var(X) := \E\left\{(X - \E[X])^2\right\}$
+:::
+
+::: {.column width="50%"}
+**Continuous:**
+
+-   [**PDF**]{.alert}: $f(x) \geq 0$ and $\int_{\R} f(x) = 1$
+-   [**Probabilities:**]{.alert} $\Prob(X \in B) = \int_{B} f(x) \ \mathrm{d}x$
+-   [**CDF:**]{.alert} $F(x) := \Prob(X \leq x) = \int_{-\infty}^{x} f(t) \ \mathrm{d}t$
+-   [**LOTUS:**]{.alert} $\E[g(X)] = \int_{\R} g(x) f(x) \ \mathrm{d}x$
+-   [**Variance:**]{.alert} $\Var(X) := \E\left\{(X - \E[X])^2\right\}$
+:::
+::::
+
+
+## {{< fa battery-full >}} Moment Generating Functions
+### Overview
+
+::: {.callout-important}
+## **Definition:** MGF
+
+The [**moment generating function**]{.alert} (MGF) of a random variable _X_ is defined as
+$$ M_X(t) := \E[e^{tX}] $$
+:::
+
+[**Properties:**]{.fragment}
+
+-   If it is continuous in a neighborhood of zero, then it uniquely determines a distribution.
+-   $M_X^{(n)}(0) = \E[X^n]$ for any $n \in \N$ (**Homework Hint:** What is $M_X(0)$?)
+-   $M_{X + Y}(t) = M_X(t) \cdot M_Y(t)$ provided that $X \perp Y$
+-   $M_{aX + b}(t) = e^{tb} \cdot M_X(at)$ for constants $a, b$
+
+
+## {{< fa square-root-variable >}} Parameters
+### Example: Normal Distribution
+
+Think of [**parameters**]{.alert} as dials that control the shape of a distribution.
+
+```{ojs}
+viewof µ = Inputs.range(
+  [-3, 3], 
+  {value: 0, step: 0.1, label: "µ:"}
+)
+
+viewof σ = Inputs.range(
+  [0.2, 3.1], 
+  {value: 1, step: 0.01, label: "σ:"}
+)
+
+sigsquared = σ**2
+```
+
+```{ojs}
+jstat = require("jstat")
+
+plt_pdf = Plot.plot({
+    width: 850,
+    height: 375,
+    color: {
+      legend: true
+    },
+    x: {
+      label: "x",
+      axis: true
+    },
+    y: {
+      label: "f(x)",
+      //axis: false,
+      //domain: [0, d3.max(pdfvals.map(d => d.pdf))]  
+    },
+    marks: [
+      Plot.ruleY([0]),
+      Plot.ruleX([0]),
+      Plot.line(pdfvals, {x: "x", y: "pdf", stroke : "blue", strokeWidth: 4})
+    ]
+  })
+  
+pdfvals = {
+  const x = d3.range(-12, 12, 0.01);
+  var pdf;
+  pdf = x.map(x => ({x: x, pdf: jstat.normal.pdf(x, µ, σ)}));
+  return pdf
+}
+```
+

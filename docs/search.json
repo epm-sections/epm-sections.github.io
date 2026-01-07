@@ -588,6 +588,48 @@
     "text": "Hypothesis Testing\nPSTAT 120B\n\nTake a look through 10.7 of the textbook, titled “Some Comments on the Theory of Hypothesis Testing.” The authors provide some (in my opinion) very useful and practical comments on hypothesis testing.\nAlso, even though material from Topic 15 will not feature heavily on the exam (if at all - again, I haven’t seen the exam yet!) I HIGHLY recommend you take a look at it before moving on to your future statistics courses.\n\nPretty much every course will at least in part make reference to that material, even if behind the scenes.\n\nAny time you perform a hypothesis test (e.g. in: Machine Learning, Time Series, etc.), you’re often concerned with finding a test with optimal power. The Neyman-Pearson Lemma and Likelihood Ratio Tests gives you such a test in many cases!"
   },
   {
+    "objectID": "120B-W26/Wk01/wk1.html#hello",
+    "href": "120B-W26/Wk01/wk1.html#hello",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hello!",
+    "text": "Hello!\nA Quick Introduction\n\nHello! My name is Ethan (he/him), and I am very much looking forward to being your TA!\n\nI am a sixth year PhD; this is my fifth time with this course (including having been the Instructor once :) )\n\nMy Office Hours: TBD\nMy Email: epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)\n\n\n\n\n\n\n\n\nGoal for Today\n\n\nBriefly review PSTAT 120A and Calculus material."
+  },
+  {
+    "objectID": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables",
+    "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Probability Spaces; Random Variables",
+    "text": "Probability Spaces; Random Variables\nHigh-Level Overview\n\nProbability Space: \\((\\Omega, \\F, \\Prob)\\) where:\n\n\\(\\Omega\\) denotes the outcome space\n\\(\\F\\) denotes the event space\n\\(\\Prob: \\F \\to \\R\\) denotes the probability measure\n\nA random variable \\(X\\) is a mapping \\(X : \\Omega \\to \\R\\)\n\nSupport: \\(X(\\Omega)\\) (set of values over which the random variable is defined)\n\nFinite or countable support \\(\\implies\\) \\(X\\) is discrete\nUncountable support \\(\\implies\\) \\(X\\) is continuous"
+  },
+  {
+    "objectID": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
+    "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Probability Spaces; Random Variables",
+    "text": "Probability Spaces; Random Variables\nExample\n\n\n\n\n\n\nExample 1\n\n\nA fair coin is tossed twice, and the outcomes are recorded; let X denote the number of heads.\n\n\n\n\nOutcome Space: \\(\\Omega =\\) {H, T}2 = {(H, H), (H, T), (T, H), (T, T) }\nX should map each element in \\(\\Omega\\) to a real number, by counting the number of heads in the outcome.\n\nX((H, H)) = 2;       X((H, T)) = 1;       X((H, T)) = 1;       X((T, T)) = 0\n\nThe support of X is {0, 1, 2}, which is finite, meaning X is a discrete random variable\nFair Coin implies we should use the equally-likely probability measure; \\(\\Prob(E) = |E| / |\\Omega|\\) for every event E.\n\nAllows us to construct the probability mass function (PMF) of X."
+  },
+  {
+    "objectID": "120B-W26/Wk01/wk1.html#random-variables",
+    "href": "120B-W26/Wk01/wk1.html#random-variables",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Random Variables",
+    "text": "Random Variables\nRelevant Quantities\n\n\nDiscrete:\n\nPMF: \\(f(x) := \\Prob(X = x)\\)\nProbabilities: \\(\\Prob(X \\in B) = \\sum_{x \\in B} f(x)\\)\nCMF: \\(F(x) := \\Prob(X \\leq x) = \\sum_{t \\leq x} f(x)\\)\nLOTUS: \\(\\E[g(X)] = \\sum_{x} g(x) f(x)\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)\n\n\nContinuous:\n\nPDF: \\(f(x) \\geq 0\\) and \\(\\int_{\\R} f(x) = 1\\)\nProbabilities: \\(\\Prob(X \\in B) = \\int_{B} f(x) \\ \\mathrm{d}x\\)\nCDF: \\(F(x) := \\Prob(X \\leq x) = \\int_{-\\infty}^{x} f(t) \\ \\mathrm{d}t\\)\nLOTUS: \\(\\E[g(X)] = \\int_{\\R} g(x) f(x) \\ \\mathrm{d}x\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk01/wk1.html#moment-generating-functions",
+    "href": "120B-W26/Wk01/wk1.html#moment-generating-functions",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Moment Generating Functions",
+    "text": "Moment Generating Functions\nOverview\n\n\n\n\n\n\nDefinition: MGF\n\n\nThe moment generating function (MGF) of a random variable X is defined as \\[ M_X(t) := \\E[e^{tX}] \\]\n\n\n\nProperties:\n\nIf it is continuous in a neighborhood of zero, then it uniquely determines a distribution.\n\\(M_X^{(n)}(0) = \\E[X^n]\\) for any \\(n \\in \\N\\) (Homework Hint: What is \\(M_X(0)\\)?)\n\\(M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)\\) provided that \\(X \\perp Y\\)\n\\(M_{aX + b}(t) = e^{tb} \\cdot M_X(at)\\) for constants \\(a, b\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk01/wk1.html#parameters",
+    "href": "120B-W26/Wk01/wk1.html#parameters",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Parameters",
+    "text": "Parameters\nExample: Normal Distribution\nThink of parameters as dials that control the shape of a distribution.\n\nviewof µ = Inputs.range(\n  [-3, 3], \n  {value: 0, step: 0.1, label: \"µ:\"}\n)\n\nviewof σ = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"σ:\"}\n)\n\nsigsquared = σ**2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(-12, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.normal.pdf(x, µ, σ)}));\n  return pdf\n}"
+  },
+  {
     "objectID": "DSCol-F25/DataVis/DataVis.html#some-questions",
     "href": "DSCol-F25/DataVis/DataVis.html#some-questions",
     "title": "Data Visualization",
