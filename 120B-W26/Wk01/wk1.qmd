@@ -100,7 +100,7 @@ library(tidymodels)
 -   Hello! My name is Ethan (he/him), and I am very much looking forward to being your TA!
     -   I am a sixth year PhD; this is my fifth time with this course (including having been the Instructor once :) )
     
--   **My Office Hours:** TBD
+-   **My Office Hours:** Tuesdays, 1:30 - 2:30 pm in SH 5607 F <br /> Thursdays, 10:30 - 11:30 am in SH 5607 F
 
 -   **My Email:** epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)
 
