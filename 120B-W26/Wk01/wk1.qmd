@@ -138,7 +138,7 @@ A fair coin is tossed twice, and the outcomes are recorded; let _X_ denote the n
 -   **Outcome Space:** $\Omega =$ \{`H`, `T`\}^2^ = \{(`H`, `H`), (`H`, `T`), (`T`, `H`), (`T`, `T`) \}
 
 -   _X_ should map each element in $\Omega$ to a real number, by counting the number of heads in the outcome.
-    -   _X_((`H`, `H`)) = [2]{.fragment}; \ \ \ \ \ \ _X_((`H`, `T`)) = [1]{.fragment}; \ \ \ \ \ \ _X_((`H`, `T`)) = [1]{.fragment}; \ \ \ \ \ \ _X_((`T`, `T`)) = [0]{.fragment}
+    -   _X_((`H`, `H`)) = [2]{.fragment}; \ \ \ \ \ \ _X_((`H`, `T`)) = [1]{.fragment}; \ \ \ \ \ \ _X_((`T`, `H`)) = [1]{.fragment}; \ \ \ \ \ \ _X_((`T`, `T`)) = [0]{.fragment}
     
 -   The support of _X_ is [**\{0, 1, 2\}**]{.fragment}, which is [**finite**]{.fragment}, meaning _X_ is a [**discrete**]{.fragment} random variable
 
@@ -155,7 +155,7 @@ A fair coin is tossed twice, and the outcomes are recorded; let _X_ denote the n
 
 -   [**PMF**]{.alert}: $f(x) := \Prob(X = x)$
 -   [**Probabilities:**]{.alert} $\Prob(X \in B) = \sum_{x \in B} f(x)$
--   [**CMF:**]{.alert} $F(x) := \Prob(X \leq x) = \sum_{t \leq x} f(x)$
+-   [**CMF:**]{.alert} $F(x) := \Prob(X \leq x) = \sum_{t \leq x} f(t)$
 -   [**LOTUS:**]{.alert} $\E[g(X)] = \sum_{x} g(x) f(x)$
 -   [**Variance:**]{.alert} $\Var(X) := \E\left\{(X - \E[X])^2\right\}$
 :::

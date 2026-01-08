@@ -606,14 +606,14 @@
     "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Probability Spaces; Random Variables",
-    "text": "Probability Spaces; Random Variables\nExample\n\n\n\n\n\n\nExample 1\n\n\nA fair coin is tossed twice, and the outcomes are recorded; let X denote the number of heads.\n\n\n\n\nOutcome Space: \\(\\Omega =\\) {H, T}2 = {(H, H), (H, T), (T, H), (T, T) }\nX should map each element in \\(\\Omega\\) to a real number, by counting the number of heads in the outcome.\n\nX((H, H)) = 2;       X((H, T)) = 1;       X((H, T)) = 1;       X((T, T)) = 0\n\nThe support of X is {0, 1, 2}, which is finite, meaning X is a discrete random variable\nFair Coin implies we should use the equally-likely probability measure; \\(\\Prob(E) = |E| / |\\Omega|\\) for every event E.\n\nAllows us to construct the probability mass function (PMF) of X."
+    "text": "Probability Spaces; Random Variables\nExample\n\n\n\n\n\n\nExample 1\n\n\nA fair coin is tossed twice, and the outcomes are recorded; let X denote the number of heads.\n\n\n\n\nOutcome Space: \\(\\Omega =\\) {H, T}2 = {(H, H), (H, T), (T, H), (T, T) }\nX should map each element in \\(\\Omega\\) to a real number, by counting the number of heads in the outcome.\n\nX((H, H)) = 2;       X((H, T)) = 1;       X((T, H)) = 1;       X((T, T)) = 0\n\nThe support of X is {0, 1, 2}, which is finite, meaning X is a discrete random variable\nFair Coin implies we should use the equally-likely probability measure; \\(\\Prob(E) = |E| / |\\Omega|\\) for every event E.\n\nAllows us to construct the probability mass function (PMF) of X."
   },
   {
     "objectID": "120B-W26/Wk01/wk1.html#random-variables",
     "href": "120B-W26/Wk01/wk1.html#random-variables",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Random Variables",
-    "text": "Random Variables\nRelevant Quantities\n\n\nDiscrete:\n\nPMF: \\(f(x) := \\Prob(X = x)\\)\nProbabilities: \\(\\Prob(X \\in B) = \\sum_{x \\in B} f(x)\\)\nCMF: \\(F(x) := \\Prob(X \\leq x) = \\sum_{t \\leq x} f(x)\\)\nLOTUS: \\(\\E[g(X)] = \\sum_{x} g(x) f(x)\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)\n\n\nContinuous:\n\nPDF: \\(f(x) \\geq 0\\) and \\(\\int_{\\R} f(x) = 1\\)\nProbabilities: \\(\\Prob(X \\in B) = \\int_{B} f(x) \\ \\mathrm{d}x\\)\nCDF: \\(F(x) := \\Prob(X \\leq x) = \\int_{-\\infty}^{x} f(t) \\ \\mathrm{d}t\\)\nLOTUS: \\(\\E[g(X)] = \\int_{\\R} g(x) f(x) \\ \\mathrm{d}x\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)"
+    "text": "Random Variables\nRelevant Quantities\n\n\nDiscrete:\n\nPMF: \\(f(x) := \\Prob(X = x)\\)\nProbabilities: \\(\\Prob(X \\in B) = \\sum_{x \\in B} f(x)\\)\nCMF: \\(F(x) := \\Prob(X \\leq x) = \\sum_{t \\leq x} f(t)\\)\nLOTUS: \\(\\E[g(X)] = \\sum_{x} g(x) f(x)\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)\n\n\nContinuous:\n\nPDF: \\(f(x) \\geq 0\\) and \\(\\int_{\\R} f(x) = 1\\)\nProbabilities: \\(\\Prob(X \\in B) = \\int_{B} f(x) \\ \\mathrm{d}x\\)\nCDF: \\(F(x) := \\Prob(X \\leq x) = \\int_{-\\infty}^{x} f(t) \\ \\mathrm{d}t\\)\nLOTUS: \\(\\E[g(X)] = \\int_{\\R} g(x) f(x) \\ \\mathrm{d}x\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)"
   },
   {
     "objectID": "120B-W26/Wk01/wk1.html#moment-generating-functions",

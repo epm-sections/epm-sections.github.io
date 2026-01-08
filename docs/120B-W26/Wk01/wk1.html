@@ -334,7 +334,7 @@ MathJax = {
 <li class="fragment"><p><strong>Outcome Space:</strong> <span class="math inline">\(\Omega =\)</span> {<code>H</code>, <code>T</code>}<sup>2</sup> = {(<code>H</code>, <code>H</code>), (<code>H</code>, <code>T</code>), (<code>T</code>, <code>H</code>), (<code>T</code>, <code>T</code>) }</p></li>
 <li class="fragment"><p><em>X</em> should map each element in <span class="math inline">\(\Omega\)</span> to a real number, by counting the number of heads in the outcome.</p>
 <ul>
-<li class="fragment"><em>X</em>((<code>H</code>, <code>H</code>)) = <span class="fragment">2</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>X</em>((<code>H</code>, <code>T</code>)) = <span class="fragment">1</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>X</em>((<code>H</code>, <code>T</code>)) = <span class="fragment">1</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>X</em>((<code>T</code>, <code>T</code>)) = <span class="fragment">0</span></li>
+<li class="fragment"><em>X</em>((<code>H</code>, <code>H</code>)) = <span class="fragment">2</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>X</em>((<code>H</code>, <code>T</code>)) = <span class="fragment">1</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>X</em>((<code>T</code>, <code>H</code>)) = <span class="fragment">1</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>X</em>((<code>T</code>, <code>T</code>)) = <span class="fragment">0</span></li>
 </ul></li>
 <li class="fragment"><p>The support of <em>X</em> is <span class="fragment"><strong>{0, 1, 2}</strong></span>, which is <span class="fragment"><strong>finite</strong></span>, meaning <em>X</em> is a <span class="fragment"><strong>discrete</strong></span> random variable</p></li>
 <li class="fragment"><p><strong>Fair Coin</strong> implies we should use the <span class="alert"><strong>equally-likely probability measure</strong></span>; <span class="math inline">\(\Prob(E) = |E| / |\Omega|\)</span> for every event <em>E</em>.</p>
@@ -352,7 +352,7 @@ MathJax = {
 <ul>
 <li class="fragment"><span class="alert"><strong>PMF</strong></span>: <span class="math inline">\(f(x) := \Prob(X = x)\)</span></li>
 <li class="fragment"><span class="alert"><strong>Probabilities:</strong></span> <span class="math inline">\(\Prob(X \in B) = \sum_{x \in B} f(x)\)</span></li>
-<li class="fragment"><span class="alert"><strong>CMF:</strong></span> <span class="math inline">\(F(x) := \Prob(X \leq x) = \sum_{t \leq x} f(x)\)</span></li>
+<li class="fragment"><span class="alert"><strong>CMF:</strong></span> <span class="math inline">\(F(x) := \Prob(X \leq x) = \sum_{t \leq x} f(t)\)</span></li>
 <li class="fragment"><span class="alert"><strong>LOTUS:</strong></span> <span class="math inline">\(\E[g(X)] = \sum_{x} g(x) f(x)\)</span></li>
 <li class="fragment"><span class="alert"><strong>Variance:</strong></span> <span class="math inline">\(\Var(X) := \E\left\{(X - \E[X])^2\right\}\)</span></li>
 </ul>
