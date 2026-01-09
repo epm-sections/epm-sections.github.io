@@ -910,6 +910,41 @@
     "text": "Transformations\n\nAlso note how transformations may be useful, especially when one or more of your variables has comparatively high spread.\n\n\n\n\nRaw:\n\n\n\n\n\n\n\n\n\n\n\n\nLog-Transformed:"
   },
   {
+    "objectID": "120B-W26/Wk02/wk02.html#transformations",
+    "href": "120B-W26/Wk02/wk02.html#transformations",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\nUnivariate Case\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g(•)?\n\n\n\n\nReal-World Example: Unit conversion\n\nLet X denote temperature measurements of some apparatus in Centigrade\nLet Y denote the temperature measurements in Fahrenheit\nY = (9/5)X + 32\n\nExpectation (sidebar: how can we compute \\(\\E[Y]\\)?) is not enough\n\nE.g. just because, say, \\(\\E[Y] = 2\\) doesn’t mean we know what distribution Y follows"
+  },
+  {
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-1",
+    "href": "120B-W26/Wk02/wk02.html#transformations-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g(•)?\n\n\n\n\nFirst Approach: Leverage the fact that MGF’s uniquely determine distributions\n\nThat is, if we can find the MGF MY(t) of Y, then we will (hopefully!) know its distribution!\n\nRecall two useful properties of MGFs from last week’s Section:\n\nIf X and Y are independent, MX + Y(t) = MX(t) * MY(t)\nMaX + b(t) = ebt * MX(at)"
+  },
+  {
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-2",
+    "href": "120B-W26/Wk02/wk02.html#transformations-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\nMGF Method: Example (On the Board)\n\n\n\n\n\n\nExample 1\n\n\nIf X ~ Exp(λ) and Y = cX for some c &gt; 0, what is the distribution of Y?"
+  },
+  {
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-3",
+    "href": "120B-W26/Wk02/wk02.html#transformations-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf Y = g(X) for some monotonic and differentiable g(•), then \\(f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right|\\)\n\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nIf X ~ Exp(λ) and Y = cX for some c &gt; 0, what is the distribution of Y?"
+  },
+  {
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-4",
+    "href": "120B-W26/Wk02/wk02.html#transformations-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Transformations",
+    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf Y = g(X) for some monotonic and differentiable g(•), then \\(f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right|\\)\n\n\n\n\nIf g(•) is not monotonic, then split up the support of X into regions over which g(•) is monotonic.\n\n\n\n\n\n\n\n\nExample 2\n\n\nIf X ~ Unif[-1, 1] and Y := X2, find fY(y), the density of Y.\n\n\n\n\n\nTry this on your own! The final answer is \\(f_Y(y) = \\begin{cases} \\frac{1}{2 \\sqrt{y}} & \\text{if } 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\)"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Ethan’s Section Material",
