@@ -1,0 +1,180 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 3 Discussion Section"
+footer: "PSTAT 120B - Winter 2026 with Dr. Annie Qu; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: January 21, 2026
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\S}{\mathbb{S}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa dice >}} An Example
+
+-   Suppose I roll a fair six-sided die, and record the face that is showing.
+
+-   Then, I toss as many fair coins as there are spots on the face showing.
+
+-   Let _X_ denote the number of heads I observe.
+
+-   **Question:** Is _X_ Binomially distributed?
+    -   **No**, because we do not have a fixed number of trials- the number of coins I toss is itself random!
+    
+-   Let _N_ denote the result of the die roll. What distribution does _N_ follow?
+    -   _N_ ~ DiscUnif\{1, 2, ..., 6\}
+    -   $\Prob(N = n) = 1/6$, for any $n \in \{1, \cdots, 6\}$
+
+-   What is $\Prob(X = 5 \mid N = 3)$?
+    -   Zero; it is impossible to toss 3 coins and observe 5 heads.
+    
+
+## {{< fa dice >}} An Example
+
+-   What is $\Prob(X = 3 \mid N = 5)$?
+    -   $\binom{5}{3}(1/2)^5$, using the formula for the Binomial PMF
+    
+-   Indeed, _after conditioning on the number of coins tossed_, _X_ becomes Binomially distributed: $$ (X \mid N = n) \sim \mathrm{Bin}(n, 1/2) $$
+
+-   The [**conditional PMF**]{.alert} $p_{X \mid N}(x \mid n)$ of $(X \mid N)$ is then given by
+$$ p_{X \mid N}(x \mid n) := \Prob(X = x \mid N = n) = \binom{n}{x} \left( \frac{1}{2} \right)^n $$
+    -   Note that, for a fixed _n_ $\in$ \{1, 2, ..., 6\}, _p_~_X_|_N_~(_x_ | _n_) is a valid PMF in _x_.
+    
+    
+## {{< fa timeline >}} Conditional Expectation
+
+-   For discrete random variables _X_ and _Y_, we have a sort of "Conditional LOTUS":
+$$ \E[g(Y) \mid X = x] = \sum_{y} g(y) p_{Y \mid x}(y \mid x) $$
+    -   For example, in our coin-tossing example from before,
+    $$ \E[X \mid N = n] = \sum_{x = 0}^{n} x \cdot \binom{n}{x} \left( \frac{1}{2} \right)^n = \frac{n}{2} $$
+    
+-   In general, $h(x) := \E[Y \mid X = x]$ will be a function of _x_. We define the [**conditional expectation of _Y_ given _X_**]{.alert} to be
+$$ \E[Y \mid X] := h(X) $$
+
+
+## {{< fa bezier-curve >}} Continuous Realm
+
+::: {.callout-note}
+## **Definition:** Conditional Density
+Given continuous random variables $X$ and $Y$ with joint density $f_{X, Y}(x, y)$, we define the [**conditional PDF**]{.alert} of _Y_ given _Y_ to be 
+$$ f_{Y \mid X}(y \mid x) := \frac{f_{X, Y}(x, y)}{f_X(x)} $$
+**only if** _x_ is such that $f_{X}(x) \neq 0$. If _x_ is such that $f_X(x) = 0$, then $f_{Y \mid X}(y \mid x)$ is **undefined.**
+:::
+
+
+
+::: {.fragment}
+::: {.callout-important}
+## **Conditional Expectation**
+\begin{align*}
+  h(x)  := \E[Y \mid X = x] & := \int_{\R} y f_{Y \mid X}(y \mid x) \ \mathrm{d}y \\
+            \E[Y \mid X]    & := h(X) \\
+        \E[g(Y) \mid X = x] & := \int_{\R} g(y) f_{Y \mid X}(y \mid x) \ \mathrm{d}y
+\end{align*}
+:::
+:::
+
+
+## {{< fa box >}} Conditional Expectations
+
+-   In general, $\E[Y \mid X = x]$ will be a function of _x_, but will be deterministic (i.e. nonrandom).
+
+-   By contrast, $\E[Y \mid X]$ will be a random variable.
+    -   To calculate $\E[Y \mid X]$, we first calculate $h(x) := \E[Y \mid X = x]$ and then replace all instances of _x_ with _X_.
+    
+::: {.fragment}
+::: {.callout-important}
+## Law of Total Expectation
+$$ \E[Y] = \E[\E[Y \mid X]] $$
+:::
+:::
+
+::: {.fragment}
+::: {.callout-important}
+## Law of Total Variance
+$$ \Var(Y) = \Var(\E[Y \mid X]) + \E[\Var(Y \mid X)] $$
+:::
+:::
