@@ -630,39 +630,46 @@
     "text": "Parameters\nExample: Normal Distribution\nThink of parameters as dials that control the shape of a distribution.\n\nviewof µ = Inputs.range(\n  [-3, 3], \n  {value: 0, step: 0.1, label: \"µ:\"}\n)\n\nviewof σ = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"σ:\"}\n)\n\nsigsquared = σ**2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(-12, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.normal.pdf(x, µ, σ)}));\n  return pdf\n}"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#an-example",
-    "href": "120B-W26/Wk03/wk03.html#an-example",
+    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
+    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " An Example",
-    "text": "An Example\n\nSuppose I roll a fair six-sided die, and record the face that is showing.\nThen, I toss as many fair coins as there are spots on the face showing.\nLet X denote the number of heads I observe.\nQuestion: Is X Binomially distributed?\n\nNo, because we do not have a fixed number of trials- the number of coins I toss is itself random!\n\nLet N denote the result of the die roll. What distribution does N follow?\n\nN ~ DiscUnif{1, 2, …, 6}\n\\(\\Prob(N = n) = 1/6\\), for any \\(n \\in \\{1, \\cdots, 6\\}\\)\n\nWhat is \\(\\Prob(X = 5 \\mid N = 3)\\)?\n\nZero; it is impossible to toss 3 coins and observe 5 heads."
+    "section": " Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\n\nGiven a collection of random variables X1, X2, …, Xn, we define a linear combination of these random variables to be \\[ U := \\sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \\cdots + a_n X_n \\]\nCrucially, U will be a random variable!\n\nE.g. Let X1 := revenue on a randomly-selected Monday; X2 := revenue on a randomly-selected Tuesday; X1 + X2 (total revenue) will be random!\n\nTwo questions:\n\nWhat are \\(\\E[U]\\) and \\(\\Var(U)\\)?\nWhat is the distribution of \\(U\\)?"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#an-example-1",
-    "href": "120B-W26/Wk03/wk03.html#an-example-1",
+    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-1",
+    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " An Example",
-    "text": "An Example\n\nWhat is \\(\\Prob(X = 3 \\mid N = 5)\\)?\n\n\\(\\binom{5}{3}(1/2)^5\\), using the formula for the Binomial PMF\n\nIndeed, after conditioning on the number of coins tossed, X becomes Binomially distributed: \\[ (X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2) \\]\nThe conditional PMF \\(p_{X \\mid N}(x \\mid n)\\) of \\((X \\mid N)\\) is then given by \\[ p_{X \\mid N}(x \\mid n) := \\Prob(X = x \\mid N = n) = \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n \\]\n\nNote that, for a fixed n \\(\\in\\) {1, 2, …, 6}, pX|N(x | n) is a valid PMF in x."
+    "section": " Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nExpectation and Variance\n\n\\(\\displaystyle \\E\\left[ \\sum_{i=1}^{n} a_i X_i \\right] =\\)\n\nAny assumptions?\n\n\n\n\n\n\\(\\displaystyle \\Var\\left( \\sum_{i=1}^{n} a_i X_i \\right) =\\)\n\nAny assumptions?"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectation",
-    "href": "120B-W26/Wk03/wk03.html#conditional-expectation",
+    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-2",
+    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-2",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Expectation",
-    "text": "Conditional Expectation\n\nFor discrete random variables X and Y, we have a sort of “Conditional LOTUS”: \\[ \\E[g(Y) \\mid X = x] = \\sum_{y} g(y) p_{Y \\mid x}(y \\mid x) \\]\n\nFor example, in our coin-tossing example from before, \\[ \\E[X \\mid N = n] = \\sum_{x = 0}^{n} x \\cdot \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n = \\frac{n}{2} \\]\n\nIn general, \\(h(x) := \\E[Y \\mid X = x]\\) will be a function of x. We define the conditional expectation of Y given X to be \\[ \\E[Y \\mid X] := h(X) \\]"
+    "section": " Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nMGF\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\nProof: \\[\\begin{align*}\n  \\class{fragment}{{} M_{\\sum_{i=1}^{n} a_i X_i}(t)}\n    & \\class{fragment}{{} : = \\E\\left[ e^{t\\sum_{i=1}^{n} a_i X_i} \\right] } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} \\E[e^{(a_i t) X_i}]} & \\class{fragment}{{}\\color{blue}[\\mathrm{Independence}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} M_{X_i}(a_i t)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n\\end{align*}\\]"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#continuous-realm",
-    "href": "120B-W26/Wk03/wk03.html#continuous-realm",
+    "objectID": "120B-W26/Wk04/wk04.html#statistics",
+    "href": "120B-W26/Wk04/wk04.html#statistics",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Continuous Realm",
-    "text": "Continuous Realm\n\n\n\n\n\n\nDefinition: Conditional Density\n\n\nGiven continuous random variables \\(X\\) and \\(Y\\) with joint density \\(f_{X, Y}(x, y)\\), we define the conditional PDF of Y given Y to be \\[ f_{Y \\mid X}(y \\mid x) := \\frac{f_{X, Y}(x, y)}{f_X(x)} \\] only if x is such that \\(f_{X}(x) \\neq 0\\). If x is such that \\(f_X(x) = 0\\), then \\(f_{Y \\mid X}(y \\mid x)\\) is undefined.\n\n\n\n\n\n\n\n\n\n\nConditional Expectation\n\n\n\\[\\begin{align*}\n  h(x)  := \\E[Y \\mid X = x] & := \\int_{\\R} y f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y \\\\\n            \\E[Y \\mid X]    & := h(X) \\\\\n        \\E[g(Y) \\mid X = x] & := \\int_{\\R} g(y) f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y\n\\end{align*}\\]"
+    "section": " Statistics",
+    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectations",
-    "href": "120B-W26/Wk03/wk03.html#conditional-expectations",
+    "objectID": "120B-W26/Wk04/wk04.html#statistics-1",
+    "href": "120B-W26/Wk04/wk04.html#statistics-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Expectations",
-    "text": "Conditional Expectations\n\nIn general, \\(\\E[Y \\mid X = x]\\) will be a function of x, but will be deterministic (i.e. nonrandom).\nBy contrast, \\(\\E[Y \\mid X]\\) will be a random variable.\n\nTo calculate \\(\\E[Y \\mid X]\\), we first calculate \\(h(x) := \\E[Y \\mid X = x]\\) and then replace all instances of x with X.\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[Y] = \\E[\\E[Y \\mid X]] \\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Total Variance\n\n\n\\[ \\Var(Y) = \\Var(\\E[Y \\mid X]) + \\E[\\Var(Y \\mid X)] \\]"
+    "section": " Statistics",
+    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#statistics-2",
+    "href": "120B-W26/Wk04/wk04.html#statistics-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
   },
   {
     "objectID": "DSCol-F25/DataVis/DataVis.html#some-questions",
@@ -943,6 +950,41 @@
     "title": "Data Visualization",
     "section": " Transformations",
     "text": "Transformations\n\nAlso note how transformations may be useful, especially when one or more of your variables has comparatively high spread.\n\n\n\n\nRaw:\n\n\n\n\n\n\n\n\n\n\n\n\nLog-Transformed:"
+  },
+  {
+    "objectID": "120B-W26/Wk03/wk03.html#an-example",
+    "href": "120B-W26/Wk03/wk03.html#an-example",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " An Example",
+    "text": "An Example\n\nSuppose I roll a fair six-sided die, and record the face that is showing.\nThen, I toss as many fair coins as there are spots on the face showing.\nLet X denote the number of heads I observe.\nQuestion: Is X Binomially distributed?\n\nNo, because we do not have a fixed number of trials- the number of coins I toss is itself random!\n\nLet N denote the result of the die roll. What distribution does N follow?\n\nN ~ DiscUnif{1, 2, …, 6}\n\\(\\Prob(N = n) = 1/6\\), for any \\(n \\in \\{1, \\cdots, 6\\}\\)\n\nWhat is \\(\\Prob(X = 5 \\mid N = 3)\\)?\n\nZero; it is impossible to toss 3 coins and observe 5 heads."
+  },
+  {
+    "objectID": "120B-W26/Wk03/wk03.html#an-example-1",
+    "href": "120B-W26/Wk03/wk03.html#an-example-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " An Example",
+    "text": "An Example\n\nWhat is \\(\\Prob(X = 3 \\mid N = 5)\\)?\n\n\\(\\binom{5}{3}(1/2)^5\\), using the formula for the Binomial PMF\n\nIndeed, after conditioning on the number of coins tossed, X becomes Binomially distributed: \\[ (X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2) \\]\nThe conditional PMF \\(p_{X \\mid N}(x \\mid n)\\) of \\((X \\mid N)\\) is then given by \\[ p_{X \\mid N}(x \\mid n) := \\Prob(X = x \\mid N = n) = \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n \\]\n\nNote that, for a fixed n \\(\\in\\) {1, 2, …, 6}, pX|N(x | n) is a valid PMF in x."
+  },
+  {
+    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectation",
+    "href": "120B-W26/Wk03/wk03.html#conditional-expectation",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Expectation",
+    "text": "Conditional Expectation\n\nFor discrete random variables X and Y, we have a sort of “Conditional LOTUS”: \\[ \\E[g(Y) \\mid X = x] = \\sum_{y} g(y) p_{Y \\mid x}(y \\mid x) \\]\n\nFor example, in our coin-tossing example from before, \\[ \\E[X \\mid N = n] = \\sum_{x = 0}^{n} x \\cdot \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n = \\frac{n}{2} \\]\n\nIn general, \\(h(x) := \\E[Y \\mid X = x]\\) will be a function of x. We define the conditional expectation of Y given X to be \\[ \\E[Y \\mid X] := h(X) \\]"
+  },
+  {
+    "objectID": "120B-W26/Wk03/wk03.html#continuous-realm",
+    "href": "120B-W26/Wk03/wk03.html#continuous-realm",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Continuous Realm",
+    "text": "Continuous Realm\n\n\n\n\n\n\nDefinition: Conditional Density\n\n\nGiven continuous random variables \\(X\\) and \\(Y\\) with joint density \\(f_{X, Y}(x, y)\\), we define the conditional PDF of Y given Y to be \\[ f_{Y \\mid X}(y \\mid x) := \\frac{f_{X, Y}(x, y)}{f_X(x)} \\] only if x is such that \\(f_{X}(x) \\neq 0\\). If x is such that \\(f_X(x) = 0\\), then \\(f_{Y \\mid X}(y \\mid x)\\) is undefined.\n\n\n\n\n\n\n\n\n\n\nConditional Expectation\n\n\n\\[\\begin{align*}\n  h(x)  := \\E[Y \\mid X = x] & := \\int_{\\R} y f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y \\\\\n            \\E[Y \\mid X]    & := h(X) \\\\\n        \\E[g(Y) \\mid X = x] & := \\int_{\\R} g(y) f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectations",
+    "href": "120B-W26/Wk03/wk03.html#conditional-expectations",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Expectations",
+    "text": "Conditional Expectations\n\nIn general, \\(\\E[Y \\mid X = x]\\) will be a function of x, but will be deterministic (i.e. nonrandom).\nBy contrast, \\(\\E[Y \\mid X]\\) will be a random variable.\n\nTo calculate \\(\\E[Y \\mid X]\\), we first calculate \\(h(x) := \\E[Y \\mid X = x]\\) and then replace all instances of x with X.\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[Y] = \\E[\\E[Y \\mid X]] \\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Total Variance\n\n\n\\[ \\Var(Y) = \\Var(\\E[Y \\mid X]) + \\E[\\Var(Y \\mid X)] \\]"
   },
   {
     "objectID": "120B-W26/Wk02/wk02.html#transformations",
