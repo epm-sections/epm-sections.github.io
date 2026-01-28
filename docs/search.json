@@ -630,6 +630,13 @@
     "text": "Parameters\nExample: Normal Distribution\nThink of parameters as dials that control the shape of a distribution.\n\nviewof µ = Inputs.range(\n  [-3, 3], \n  {value: 0, step: 0.1, label: \"µ:\"}\n)\n\nviewof σ = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"σ:\"}\n)\n\nsigsquared = σ**2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(-12, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.normal.pdf(x, µ, σ)}));\n  return pdf\n}"
   },
   {
+    "objectID": "120B-W26/Wk04/wk04.html#announcements",
+    "href": "120B-W26/Wk04/wk04.html#announcements",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Announcements",
+    "text": "Announcements\n\nMidterm Exam is taking place on Monday February 9, 2026 at 11am (Usual Lecture Time) in ILP 1302 (Usual Lecture Classroom)\nYou are allowed to use a calculator, and two sheets of notes\n\nNo worked-out examples; only theorems, definitions, etc.\nYou will be asked to turn in your note sheet at the end of the exam, so you should make a copy beforehand if you are planning on reusing your sheet in the future\n\nI will be holding a Review Session from 5 - 6:30pm on Thursday February 5, 2026 in Broida 1610 (Canvas Announcement coming soon)\n\nThis will be comprised of some slides (material review) and some additional practice problems."
+  },
+  {
     "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
     "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
     "title": "PSTAT 120B: Mathematical Statistics",

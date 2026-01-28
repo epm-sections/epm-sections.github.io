@@ -93,6 +93,19 @@ library(plotly)
 library(tidymodels)
 ```
 
+## {{< fa info >}} Announcements
+
+::: {.nonincremental}
+-   Midterm Exam is taking place on **Monday February 9, 2026** at **11am** (Usual Lecture Time) in **ILP 1302** (Usual Lecture Classroom)
+
+-   You are allowed to use a calculator, and two sheets of notes
+    -   No worked-out examples; only theorems, definitions, etc.
+    -   You will be asked to turn in your note sheet at the end of the exam, so you should **make a copy beforehand** if you are planning on reusing your sheet in the future
+    
+-   I will be holding a Review Session from **5 - 6:30pm** on **Thursday February 5, 2026** in **Broida 1610** (Canvas Announcement coming soon)
+    -   This will be comprised of some slides (material review) and some additional practice problems.
+:::
+
 ## {{< fa calculator >}} Linear Combinations of Random Variables
 
 -   Given a collection of random variables _X_~1~, _X_~2~, ..., _X_~_n_~, we define a [**linear combination**]{.alert} of these random variables to be
