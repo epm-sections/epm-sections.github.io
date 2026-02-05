@@ -1,0 +1,631 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Midterm Review Session"
+footer: "PSTAT 120B - Winter 2026 with Dr. Annie Qu; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: February 5, 2026
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\S}{\mathbb{S}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa info >}} Welcome!
+### And A Disclaimer
+
+-   Hello! I'm Ethan (he/him), and I'm one of the TAs this quarter (I host the Wednesday 1pm and Wednesday 2pm Sections).
+
+::: {.fragment}
+::: {.callout-important}
+## **Disclaimer**
+
+I have not yet seen the exam! What I cover here today is not meant to be an indication of exactly what will be covered on the exam.
+:::
+:::
+
+-   Just because I cover something today doesn't mean it will show up on the exam; similarly, just because I _don't_ cover something today doesn't mean it _won't_ show up on the exam.
+
+-   With that said, I have some prior experience with this class, so am basing my review on material I think could _plausibly_ appear on the exam
+
+
+
+## {{< fa map >}} Roadmap for Today
+
+1) **Review some Material**
+   -   Transformations
+   -   Conditional distributions and expectations
+   -   Linear Combinations and Statistics
+    
+2) **Work through some problems**
+   -   I'll pass out a worksheet later with some problems for groupwork (that we'll later solve together)
+    
+-   I will upload most (but not all!) material from today to a Google Drive folder; I'll send a Canvas announcement with more information.
+
+# Transformations {background-color="black" background-image="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGI2ajVrb2RhY2Vyamh3a2l5Nmkwd3N3YTVwdXBla2RodTR6NzU1bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CWx3Qijmkf4746TtGu/giphy.gif" background-size="100rem"}
+
+## {{< fa bezier-curve >}} Transformations
+### Overview
+
+::: {.callout-tip}
+## **Goal**
+
+Given a random variable _X_ whose distribution is known, what is the distribution of _Y_ := _g_(_X_) for some function _g_?
+:::
+
+-   Concrete example: unit conversion
+    -   Say _X_ denotes random temperature measurements in Centigrade
+    -   Let _Y_ denote the temperature measurements in _Fahrenheit_
+    -   Then _Y_ = (9/5) _X_ + 32 
+
+-   So, transformation can actually be very applicable!
+
+## {{< fa bezier-curve >}} Transformations
+### Overview
+
+::: {.callout-tip}
+## **Goal**
+
+Given a random variable _X_ whose distribution is known, what is the distribution of _Y_ := _g_(_X_) for some function _g_?
+:::
+
+-   **Question 1:** Can we calculate $\E[Y]$ without knowing its density?
+    -   Yes, using the [**LOTUS**]{.alert}: $\E[Y] = \E[g(X)] = \int_{-\infty}^{\infty} g(x) f_X(x) \ \mathrm{d}x$
+    
+-   **Question 2:** Does $\E[Y]$ tell us what _distribution_ _Y_ follows?
+    -   No; e.g. say $\E[Y] = 2$; do we have $Y \sim \mathrm{Exp}(1/2)$? or $Y \sim \mathcal{N}(2, 1)$?
+    
+-   **Question 3:** What are some things that uniquely determine a distribution?
+    -   [**MGF**]{.alert} (moment generating function) and/or [**PDF/CDF**]{.alert} (probability density function/cumulative distribution function)
+    
+    
+## {{< fa bezier-curve >}} Transformations
+### MGF Method
+
+::: {.callout-note}
+## **Fact 1**
+
+MGFs uniquely determine distributions, provided they are continuous in a small neighborhood of the origin.
+:::
+
+-   In other words: every distribution has a unique MGF, and every MGF corresponds to a unique distribution.
+    -   E.g. say I tell you the random variable _Y_ has MGF given by _M_~_Y_~(_t_) = _e_<sup>_t_^2^ / 2</sub>. 
+    -   There is only _one_ distribution that has this MGF (can anyone tell me which one?)
+    
+-   So, going back to our transformation problem, if we can find an expression for the MGF of _Y_, we will know its distribution.
+
+## {{< fa bezier-curve >}} Transformations
+### MGF Method
+
+::: {.nonincremental}
+**Useful Properties of MGFs**:
+
+-   _M_<sub>_a_*X* + _b_</sub>(_t_) = 
+    -   **Proof:**
+    
+\
+
+-   If _X_ and _Y_ are independent, _M_<sub>_X_ + _Y_</sub>(_t_) = 
+    -   **Proof:**
+:::  
+
+    
+## {{< fa bezier-curve >}} Transformations
+### Transformation Theorem
+
+-   PDFs also uniquely determine distributions.
+    -   So, if we can find the PDF of _Y_ := _g_(_X_), then we will know its distribution.
+    
+::: {.fragment}
+::: {.callout-important}
+## **Transformation Theorem**
+
+If _X_ is a random variable with PDF _f_~_X_~(_x_) and _Y_ := _g_(_X_) where _g_ is **strictly monotonic** and **differentiable** over the support of _X_, then the PDF of _Y_ is given by
+$$ f_Y(y) = f_X(g^{-1}(y)) \cdot \left| \frac{\mathrm{d}}{\mathrm{d}y} g^{-1}(y) \right| $$
+:::
+:::
+
+::: {.fragment}
+::: {.callout-caution}
+## **Caution**
+
+When using the Transformation Theorem, make sure to check that the transformation is strictly monotonic and differentiable!  
+:::
+:::
+
+
+## {{< fa bezier-curve >}} Transformations
+### MGF Method
+
+::: {.callout-tip}
+## **Example 1**
+
+Let _X_ ~ Exp($\lambda$), and define _Y_ := _c_*X* for some positive constant _c_ > 0. What distribution does _Y_ follow?
+:::
+
+    
+## {{< fa bezier-curve >}} Transformations
+### Transformation Theorem
+
+::: {.callout-important}
+## **Transformation Theorem**
+
+If _X_ is a random variable with PDF _f_~_X_~(_x_) and _Y_ := _g_(_X_) where _g_ is **strictly monotonic** and **differentiable** over the support of _X_, then the PDF of _Y_ is given by
+$$ f_Y(y) = f_X(g^{-1}(y)) \cdot \left| \frac{\mathrm{d}}{\mathrm{d}y} g^{-1}(y) \right| $$
+:::
+
+::: {.callout-tip}
+## **Example 1 (Revisited)**
+
+Let _X_ ~ Exp($\lambda$), and define _Y_ := _c_*X* for some positive constant _c_ > 0. What distribution does _Y_ follow?
+:::
+
+
+# Joint Distributions {background-color="white" background-image="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXhxOW9yNDJqc3YyZTM0YWJodzJrZDg0dmk5emtoaXpwNTg2cXZyNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4FGI6GrskoEpkwU0/giphy.gif" background-size="50rem"}
+
+
+## {{< fa handshake >}} Joint Distributions
+### Overview
+
+-   Recall that a single continuous random variable _X_ is described by its PDF _f_~_X_~(_x_).
+
+-   A pair of continuous random variables (_X_, _Y_) is described by a [**joint PDF**]{.alert} _f_<sub>_X_,_Y_</sub>(_x_, _y_) that satisfies:
+    1)    [**Nonnegativity:**]{.alert} $f_{X, Y}(x, y) \geq 0$ for all $(x, y) \in \R^2$
+    2)    [**Double-Integrates to Unity:**]{.alert} $\iint_{\R^2} f_{X, Y}(x, y) \ \mathrm{d}A = 1$
+    
+-   Given a valid joint density _f_<sub>_X_,_Y_</sub>(_x_, _y_), we have:
+    -   $\Prob((X, Y) \in \mathcal{R}) = \iint_{\mathcal{R}} f_{X, Y}(x, y) \ \mathrm{d}A$ (probabilities are found by double-integrating the joint density)
+    -   $\E[g(X, Y)] = \iint_{\R^2} g(x, y) f_{X, Y}(x, y) \ \mathrm{d}A$ (multivariate [**LOTUS**]{.alert})
+
+
+
+## {{< fa handshake >}} Joint Distributions
+### Example
+
+$f_{X, Y}(x, y) = \begin{cases} \frac{6}{5} (x + y^2) & \text{if } 0 \leq x \leq 1, \ 0 \leq y \leq 1 \\ 0 & \text{otherwise} \\ \end{cases}$
+```{r}
+#| echo: False
+n <- 100
+f <- Vectorize(function(x, y){
+  if(any(x < 0) | any(y < 0) | any(x > 1) | any(y > 1)) {return(0)}
+  else { return((6/5) * (x + y^2)) }
+})
+
+x <- seq(-0.5, 1.5, length = n)
+y <- seq(-0.5, 1.5, length = n)
+
+z <- matrix(rep(NA, n^2), nrow = n)
+for(i in 1:n){
+  for(j in 1:n){
+    z[i, j] <- f(x[i], y[j])
+  }
+}
+
+plot_ly(
+  x = ~x,
+  y = ~y,
+  z = ~z
+) %>%
+add_surface(
+  colorscale = list(c(0, 1), c("skyblue", "darkblue"))
+)
+```
+
+## {{< fa handshake >}} Joint Distributions
+### Marginal Densities
+
+-   Given a valid joint density function $f_{X, Y}(x, y)$, we can extract the [**marginal densities**]{.alert} of _X_ and _Y_ by "integrating out the other variable:"
+\begin{align*}
+  f_X(x)  & = \int_{\R} f_{X, Y}(x, y) \ \mathrm{d}y  \\
+  f_Y(y)  & = \int_{\R} f_{X, Y}(x, y) \ \mathrm{d}x
+\end{align*}
+
+-   Oftentimes the bounds are the trickiest part; my advice is to always sketch a picture!
+    -   Keep in mind that the bounds may change depending on the variable in question; we'll talk about this more when we get to today's worksheet.
+    
+    
+## {{< fa handshake >}} Joint Distributions
+### Covariance
+
+-   The [**covariance**]{.alert} between two random variables _X_ and _Y_ is given by
+\begin{align*}
+  \Cov(X, Y)  & := \E\left\{ \left( X - \E[X] \right) \left( Y - \E[Y] \right)  \right\}  \\
+    & = \E[XY] - \E[X] \cdot \E[Y]
+\end{align*}
+
+::: {.fragment}
+**Questions:**
+:::
+
+-   What is another name for $\Cov(X, X)$?
+-   Are covariances bounded or unbounded?
+-   What is the covariance between two independent random variables? Does zero covariance imply independence?
+
+
+## {{< fa handshake >}} Joint Distributions
+### Properties of Covariance
+
+::: {.callout-important}
+## **Bilinearity Property**
+$$ \Cov\left( \sum_{i=1}^{n} a_i X_i \ , \ \sum_{j=1}^{n} b_j Y_j \right) = \sum_{i=1}^{n} \sum_{j=1}^{n} a_i b_j \Cov(X_i, X_j)$$
+:::
+
+::: {.fragment}
+::: {.callout-important}
+## **Variance of a Sum**
+$$ \Var\left( \sum_{i=1}^{n} a_i X_i \right) = \sum_{i=1}^{n} a_i^2 \Var(X_i) + 2 \sum_{i \neq j} a_i a_j \Cov(X_i, X_j) $$
+:::
+:::
+
+
+
+# [**Conditional Distributions**]{.alert} {background-color="black" background-image="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXJ1YjRueTJkZXNvc2ppeWYzdGh3Z24zbnlzNm92N2hkajJhd2I5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41YoV54ZT606BGO4/giphy.gif" background-size="50rem"}
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Conditional PMF
+
+-   Recall: given events _E_ and _F_ such that $\Prob(F) \neq 0$, we define
+$$ \Prob(E \mid F) = \frac{\Prob(E \cap F)}{\Prob(F)} $$
+    
+-   Given **discrete** random variables _X_ and _Y_ with joint PMF _p_<sub>_X_,_Y_</sub>(_x_,_y_), we have, provided _p_<sub>_Y_</sub>(_y_) ≠ 0,
+$$ \Prob(X = x \mid Y = y) := \frac{\Prob(X = x, \ Y = y)}{\Prob(Y = y)} = \frac{p_{X, Y}(x, y)}{p_Y(y)} $$
+    -   For any fixed _y_, this will be a valid PMF in _x_ which is why we notate this quantity _p_<sub>_X_|_Y_</sub>(_x_|_y_) and call it the [**conditional PMF**]{.alert} of _X_ given _Y_ = _y_.
+    
+## {{< fa layer-group >}} Conditional Distributions
+### Example
+
+-   Roll a fair six-sided die, and record the face showing
+    -   Then toss as many fair coins as there are spots on the face showing
+    -   Let _X_ denote the number of heads
+    
+-   **Question:** Does _X_ follow a Binomial distribution?
+    -   **No,** as the number of trials is _not fixed_!
+    
+-   Let _N_ denote the result of the die roll
+    -   Then _N_ ~ DiscUnif\{1, ..., 6\}
+
+   
+-   What is _p_<sub>_X_|_N_</sub>(5|7)?
+    -   **Undefined**; it is not possible to roll a 7 on a six-sided die
+    
+## {{< fa layer-group >}} Conditional Distributions
+### Example
+    
+
+-   What is _p_<sub>_X_|_N_</sub>(5|3)?
+    -   Zero; it is impossible to toss three coins and observe 5 heads
+    
+-   What is _p_<sub>_X_|_N_</sub>(3|5)?
+    -   $p_{X \mid N}(3 \mid 5) = \Prob(X = 3 \mid N = 5) = \binom{5}{3} (1/2)^5$, using the Binomial PMF
+
+-   So, provided that _n_ $\in$ \{1, ..., 6\}, we have 
+$$ p_{X \mid N}(x \mid n) = \begin{cases}
+  \binom{n}{x} \left( \frac{1}{2} \right)^n  & \text{if } x \in \{0, 1, \cdots, n\}  \\
+  0     & \text{otherwise} 
+\end{cases} $$
+and for any _n_ $\notin$ \{1, ..., 6\} we have that _p_<sub>_X_|_N_</sub>(_x_|_n_) is undefined.
+    -   We can succinctly write this as $(X \mid N = n) \sim \mathrm{Bin}(n, 1/2)$.
+
+## {{< fa layer-group >}} Conditional Distributions
+### Conditional Distributions: Discrete Case
+
+-   Given **discrete** random variables _X_ and _Y_ with joint PMF _p_<sub>_X_,_Y_</sub>(_x_, _y_):
+    -   $\Prob(X \in A \mid Y = y) = \sum\limits_{x \in A} p_{X \mid Y}(x \mid y)$
+    -   $\E[g(X) \mid Y = y] := \sum\limits_{x} x p_{X \mid Y}(x \mid y)$
+    
+-   Note that $h(y) := \E[X \mid Y = y]$ will be a function of _y_.
+    -   We define $\E[X \mid Y]$, the [**conditional expectation**]{.alert} of _X_ given _Y_, to be $h(Y)$. That is, we first compute $h(y) := \E[X \mid Y = y]$ and then replace all instances of _y_ with _Y_.
+    -   This means that $\E[X \mid Y]$ will be a **random variable**
+    
+-   **Example:** in our coin tossing example, $\E[X \mid N = n] = n/2$ meaning $\E[X \mid N] = N/2$.
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Conditional Distributions: Continuous Case
+
+::: {.callout-note}
+## **Definition:** Conditional Density
+Given continuous random variables $X$ and $Y$ with joint density $f_{X, Y}(x, y)$, we define the [**conditional PDF**]{.alert} of _X_ given _Y_ to be 
+$$ f_{X \mid Y}(x \mid y) := \frac{f_{X, Y}(x, y)}{f_Y(y)} $$
+**only if** _y_ is such that $f_{Y}(y) \neq 0$. If _y_ is such that $f_Y(y) = 0$, then $f_{X \mid Y}(x \mid y)$ is **undefined.**
+:::
+
+-   $\Prob(X \in A \mid Y = y) = \int_{A} f_{X \mid Y}(x \mid y) \ \mathrm{d}x$
+-   $\E[g(Y) \mid X = x] := \int_{\R} g(y) f_{Y \mid X}(y \mid x) \ \mathrm{d}y$
+-   $\E[X \mid Y] := h(Y)$ where $h(y) := \E[X \mid Y = y]$
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Example and Distinction
+
+::: {.callout-tip}
+## **Example 2**
+Let _X_ and _Y_ be continuous random variables with joint density given by 
+$$f_{X, Y}(x, y) = \begin{cases} \frac{6}{5} (x + y^2) & \text{if } 0 \leq x \leq 1, \ 0 \leq y \leq 1 \\ 0 & \text{otherwise} \\ \end{cases}$$
+
+::: {.nonincremental}
+a)    Calculate $\Prob(Y < 0.5 \mid X > 0.5)$
+b)    Calculate $\Prob(Y < 0.5 \mid X = 0.5)$
+:::
+:::
+
+-   Notice how similar these questions appear
+    -   They require us to proceed in _very_ different directions.
+-   Recall: $\Prob(E \mid F) := \Prob(E \cap F) / \Prob(F)$, [provided that $\Prob(F) \neq 0$.]{.fragment}
+    -   Does $\Prob(X > 0.5) = 0$? [Does $\Prob(X = 0.5) = 0$?]{.fragment}
+
+
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Example and Distinction
+
+::: {.callout-tip}
+## **Example 2**
+Let _X_ and _Y_ be continuous random variables with joint density given by 
+$$f_{X, Y}(x, y) = \begin{cases} \frac{6}{5} (x + y^2) & \text{if } 0 \leq x \leq 1, \ 0 \leq y \leq 1 \\ 0 & \text{otherwise} \\ \end{cases}$$
+
+::: {.nonincremental}
+a)    Calculate $\Prob(Y < 0.5 \mid X > 0.5)$
+b)    Calculate $\Prob(Y < 0.5 \mid X = 0.5)$
+:::
+:::
+
+-   Part (a): conditioning on an event with **nonzero probability**; can use the **definition of conditional probability**
+$$ \Prob(Y < 0.5 \mid X > 0.5) = \frac{\Prob(X > 0.5, \ Y < 0.5)}{\Prob(X > 0.5)} $$
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Example and Distinction
+
+::: {.callout-tip}
+## **Example 2**
+Let _X_ and _Y_ be continuous random variables with joint density given by 
+$$f_{X, Y}(x, y) = \begin{cases} \frac{6}{5} (x + y^2) & \text{if } 0 \leq x \leq 1, \ 0 \leq y \leq 1 \\ 0 & \text{otherwise} \\ \end{cases}$$
+
+::: {.nonincremental}
+a)    Calculate $\Prob(Y < 0.5 \mid X > 0.5)$
+b)    Calculate $\Prob(Y < 0.5 \mid X = 0.5)$
+:::
+:::
+
+::: {.nonincremental}
+-   Part (b): conditioning on an event with **zero probability**; **cannot** use the definition of conditional probability, must instead **integrate the conditional density**
+$$ \Prob(Y < 0.5 \mid X = 0.5) = \int_{-\infty}^{0.5} f_{Y \mid X}(y \mid 0.5) \ \mathrm{d}y  $$
+:::
+
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Example and Distinction: Takeaway
+
+-   So, here's the key takeaway: always check whether the event we're conditioning on has zero or nonzero probability.
+    -   If the event has nonzero probability, use the "120A definition" of conditional probability (and double-integrate the joint density to find the numerator and denominator)
+    -   If instead the event has _zero_ probability, integrate the conditional density.
+    
+    
+## {{< fa layer-group >}} Conditional Distributions
+### Conditional Expectations, Revisited
+
+-   Recall that $\E[X \mid Y]$ will be a random variable.
+    -   A natural question is: what is its expectation?
+    
+::: {.fragment}
+::: {.callout-important}
+## **Law of Total Expectation**
+
+$$ \E[ \E[X \mid Y]] = \E[X]$$
+:::
+:::
+
+  
+::: {.fragment}
+::: {.callout-important}
+## **Law of Variance**
+
+$$ \Var(X) = \Var(\E[X \mid Y]) + \E[\Var(X \mid Y)] $$
+:::
+:::
+
+
+## {{< fa layer-group >}} Conditional Distributions
+### Conditional Expectations, Example
+
+::: {.callout-tip}
+## **Example 3**
+Let $(X \mid N = n) \sim \mathrm{Bin}(n, 1/2)$ and $N \sim \mathrm{DiscUnif}\{1, \cdots, 6\}$. Find $\E[X]$ and $\Var(X)$. **Some Facts:** $\E[N] = (7/2)$ and $\Var(N) = 35/12$.
+:::
+
+-   $\E[X \mid N] = N/2 \implies \E[X] = \E[\E[X \mid N]] = \E[N / 2] = (7/2)(1/2) = \boxed{7/4}$
+
+-   $\Var(X \mid N) = N(1/2)(1/2) = (N / 4)$
+
+\begin{align*}
+  \class{fragment}{{} \Var(X)}
+    & \class{fragment}{{} = \Var(\E[X \mid N]) + \E[\Var(X \mid N)]}         \\[3px]
+    & \class{fragment}{{} = \Var(N/2) + \E[(N / 4)]}         \\[3px]
+    & \class{fragment}{{} = (1/4) \Var(N) + (1/4) \E[N]}         \\[3px]
+    & \class{fragment}{{} = (1/4) \Var(N) + (1/4) \E[N] = \frac{1}{4} \cdot \frac{35}{12} + \frac{1}{4} \cdot \frac{7}{2} = \boxed{ \frac{77}{48} }}         \\[3px]
+\end{align*}
+
+
+# Statistics and Linear Combinations {background-color="black" background-image="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWI0aDh4c3IxODBkaHpxam0xemlkZXdveGNyOHVva3Q5NjB1MWM5ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9ADoZQgs0tyww/giphy.gif" background-size="60rem"}
+
+## {{< fa chart-area >}} Statistics
+### General Concepts
+
+:::{.callout-note}
+## **Definition:** Statistic
+
+A [**statistic**]{.alert} is any quantity calculated from the sample data.
+:::
+
+**Some Examples:**
+
+-   [**Sample Mean:**]{.alert} $\bar{X} := \frac{1}{n} \sum_{i=1}^{n} X_i$
+-   [**Sample Variance:**]{.alert} $S_X^2 := \frac{1}{n - 1} \sum_{i=1}^{n} (X_i - \bar{X})^2$
+-   [**Sample Maximum:**]{.alert} $X_{(n)} := \max\{X_1, \cdots, X_n\}$
+-   [**Sample Minimum:**]{.alert} $X_{(1)} := \min\{X_1, \cdots, X_n\}$
+
+::: {.fragment}
+::: {.callout-important}
+## **Key Takeaway**
+
+Crucially, statistics are _random_
+:::
+:::
+
+## {{< fa chart-area >}} Statistics
+### Example: Cat Weights
+
+::: {.r-stack}
+![](Images/min0.svg){.fragment width="1200"}
+
+![](Images/min1.svg){.fragment width="1200"}
+
+![](Images/min2.svg){.fragment width="1200"}
+
+![](Images/min3.svg){.fragment width="1200"}
+:::
+
+-   Different samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc.
+
+
+## {{< fa chart-area >}} Statistics
+### Sampling Distributions
+
+-   The distribution of a statistic $T(X_1, \cdots, X_n)$ is called its [**sampling distribution**]{.alert}
+    -   For example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)
+    
+-   In general, deriving sampling distributions can be involved. Two useful tools are:
+    -   MGFs (assuming a linear combination of independent random variables)
+    -   CDFs (may lead to difficult integrals, but will get you to the answer eventually!)
+
+
+## {{< fa chart-area >}} Statistics
+### Linear Combinations
+
+-   A [**linear combination**]{.alert} of an i.i.d. random sample $X_1, X_2, \cdots, X_n$ is defined to be
+$$ U := \sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \cdots + a_n X_n $$
+for constants $a_1, a_2, \cdots, a_n$.
+    -   Note that a linear combination is also a statistic!
+    -   In particular, taking $a_1 = a_2 = \cdots = a_n := 1/n$ gives rise to the sample mean.
+    
+-   The expected value and variance of a linear combination follow trivially from PSTAT 120A principles.
+
+
+## {{< fa chart-area >}} Statistics
+### Linear Combinations: an MGF Property
+
+
+::: {.callout-important}
+## **Theorem**
+If $X_1, X_2, \cdots, X_n$ are independent random variables, $\displaystyle M_{\sum_{i=1}^{n} a_i X_i}(t) = \prod_{i=1}^{n} M_{X_i}(a_i t)$
+:::
+
+\begin{align*}
+  \class{fragment}{{} M_{\sum_{i=1}^{n} a_i X_i}(t)}
+    & \class{fragment}{{} : = \E\left[ e^{t\sum_{i=1}^{n} a_i X_i} \right] } & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
+    & \class{fragment}{{} : = \E\left[ \prod_{i=1}^{n} e^{(a_i t) X_i} \right]}  & \class{fragment}{{}\color{blue}[\mathrm{Algebra/Arithmetic}]}         \\[3px]
+    & \class{fragment}{{} : = \prod_{i=1}^{n} \E[e^{(a_i t) X_i}]} & \class{fragment}{{}\color{blue}[\mathrm{Independence}]}         \\[3px]
+    & \class{fragment}{{} : = \prod_{i=1}^{n} M_{X_i}(a_i t)} & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
+\end{align*}
+
+
+## {{< fa chart-area >}} Statistics
+### Linear Combinations: an Example
+
+
+::: {.callout-important}
+## **Theorem**
+If $X_1, X_2, \cdots, X_n$ are independent random variables, $\displaystyle M_{\sum_{i=1}^{n} a_i X_i}(t) = \prod_{i=1}^{n} M_{X_i}(a_i t)$
+:::
+
+::: {.callout-tip}
+## **Example 4**
+If $X_1, X_2, \cdots, X_n$ is an i.i.d. sample, what is the MGF of $\bar{X}_n := (X_1 + X_2 + \cdots + X_n) / n$, in terms of the MGF $M_{X_i}(t)$ of $X_i$?
+:::
+
