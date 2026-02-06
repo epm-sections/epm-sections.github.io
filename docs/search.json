@@ -1054,7 +1054,7 @@
     "href": "120B-W26/MTRev/MTRev.html#transformations-2",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nOverview\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g?\n\n\n\n\nQuestion 1: Can we calculate \\(\\E[Y]\\) without knowing its density?\n\nYes, using the LOTUS: \\(\\E[Y] = \\E[g(X)] = \\int_{-\\infty}^{\\infty} g(x) f_X(x) \\ \\mathrm{d}x\\)\n\nQuestion 2: Does \\(\\E[Y]\\) tell us what distribution Y follows?\n\nNo; e.g. say \\(\\E[Y] = 2\\); do we have \\(Y \\sim \\mathrm{Exp}(1/2)\\)? or \\(Y \\sim \\mathcal{N}(2, 1)\\)?\n\nQuestion 3: What are some things that uniquely determine a distribution?\n\nMGF (moment generating function) and/or PDF/CDF (probability density function/cumulative distribution function)"
+    "text": "Transformations\nOverview\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g?\n\n\n\n\nQuestion 1: Can we calculate \\(\\E[Y]\\) without knowing its density?\n\nYes, using the LOTUS: \\(\\E[Y] = \\E[g(X)] = \\int_{-\\infty}^{\\infty} g(x) f_X(x) \\ \\mathrm{d}x\\)\n\nQuestion 2: Does \\(\\E[Y]\\) tell us what distribution Y follows?\n\nNo; e.g. if \\(\\E[Y] = 2\\); do we have \\(Y \\sim \\mathrm{Exp}(1/2)\\)? or \\(Y \\sim \\mathcal{N}(2, 1)\\)? Etc.\n\nQuestion 3: What are some things that uniquely determine a distribution?\n\nMGF (moment generating function) and/or PDF/CDF (probability density function/cumulative distribution function)"
   },
   {
     "objectID": "120B-W26/MTRev/MTRev.html#transformations-3",
@@ -1075,21 +1075,21 @@
     "href": "120B-W26/MTRev/MTRev.html#transformations-5",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nTransformation Theorem\n\nPDFs also uniquely determine distributions.\n\nSo, if we can find the PDF of Y := g(X), then we will know its distribution.\n\n\n\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\n\n\nCaution\n\n\nWhen using the Transformation Theorem, make sure to check that the transformation is strictly monotonic and differentiable!"
+    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nExample 1\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
   },
   {
     "objectID": "120B-W26/MTRev/MTRev.html#transformations-6",
     "href": "120B-W26/MTRev/MTRev.html#transformations-6",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nExample 1\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
+    "text": "Transformations\nTransformation Theorem\n\nPDFs also uniquely determine distributions.\n\nSo, if we can find the PDF of Y := g(X), then we will know its distribution.\n\n\n\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\n\n\nCaution\n\n\nWhen using the Transformation Theorem, make sure to check that the transformation is strictly monotonic and differentiable!"
   },
   {
     "objectID": "120B-W26/MTRev/MTRev.html#transformations-7",
     "href": "120B-W26/MTRev/MTRev.html#transformations-7",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
+    "text": "Transformations\nTransformation Theorem: Example\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
   },
   {
     "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-1",
@@ -1244,6 +1244,20 @@
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Statistics",
     "text": "Statistics\nLinear Combinations: an Example\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\n\n\n\n\n\n\nExample 4\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) is an i.i.d. sample, what is the MGF of \\(\\bar{X}_n := (X_1 + X_2 + \\cdots + X_n) / n\\), in terms of the MGF \\(M_{X_i}(t)\\) of \\(X_i\\)?"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-6",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nDiscrete Statistics\n\nFor our so-called discrete statistics (aka order statistics), our general approach is to find the CDF, and then differentiate.\nFor example: if \\(X_{(n)} := \\max\\{X_1, X_2, \\cdots, X_n\\}\\) for an i.i.d. sample \\(X_1, X_2, \\cdots, X_n\\), then\n\n\\[\\begin{align*}\n  \\class{fragment}{{} F_{X_{(n)}}(x)}\n    & \\class{fragment}{{} : = \\Prob(X_{(n)} \\leq x) } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ CDF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\Prob(\\max\\{X_1, X_2, \\cdots, X_n\\} \\leq x)}  & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition}]}         \\\\[3px]\n    & \\class{fragment}{{} = \\Prob(X_1 \\leq x, \\ X_2 \\leq x, \\ \\cdots \\ X_n \\leq x)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Logic}]}         \\\\[3px]\n    & \\class{fragment}{{} = \\prod_{i=1}^{n} \\Prob(X_i \\leq x)} \\class{fragment}{{}  = [\\Prob(X_i \\leq x)]^n} & \\class{fragment}{{}\\color{blue}[\\mathrm{I.I.D.}]}         \\\\[3px]\n    & \\class{fragment}{{} = [F_{X_i}(x)]^n} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\  CDF}]}         \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-7",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nDiscrete Statistics\n\nFor our so-called discrete statistics (aka order statistics), our general approach is to find the CDF, and then differentiate.\nFor example: if \\(X_{(n)} := \\max\\{X_1, X_2, \\cdots, X_n\\}\\) for an i.i.d. sample \\(X_1, X_2, \\cdots, X_n\\), then\n\n\\[\\begin{align*}\n  {{} F_{X_{(n)}}(x)}\n    & {{} =  [F_{X_i}(x)]^n} \\\\[3px]\n  \\class{fragment}{{} \\implies f_{X_{(n)}}(x)} & \\class{fragment}{{} = \\frac{\\mathrm{d}}{\\mathrm{d}x} f_{X_{(n)}}(x) } \\class{fragment}{{} = \\frac{\\mathrm{d}}{\\mathrm{d}x} [F_{X_i}(x)]^n } \\class{fragment}{{} = n [F_{X_i}(x)]^{n - 1} \\cdot f_{X_i}(x) }\n\\end{align*}\\]"
   },
   {
     "objectID": "index.html",

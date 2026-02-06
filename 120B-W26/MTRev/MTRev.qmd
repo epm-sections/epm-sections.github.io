@@ -155,7 +155,7 @@ Given a random variable _X_ whose distribution is known, what is the distributio
     -   Yes, using the [**LOTUS**]{.alert}: $\E[Y] = \E[g(X)] = \int_{-\infty}^{\infty} g(x) f_X(x) \ \mathrm{d}x$
     
 -   **Question 2:** Does $\E[Y]$ tell us what _distribution_ _Y_ follows?
-    -   No; e.g. say $\E[Y] = 2$; do we have $Y \sim \mathrm{Exp}(1/2)$? or $Y \sim \mathcal{N}(2, 1)$?
+    -   No; e.g. if $\E[Y] = 2$; do we have $Y \sim \mathrm{Exp}(1/2)$? or $Y \sim \mathcal{N}(2, 1)$? Etc.
     
 -   **Question 3:** What are some things that uniquely determine a distribution?
     -   [**MGF**]{.alert} (moment generating function) and/or [**PDF/CDF**]{.alert} (probability density function/cumulative distribution function)
@@ -191,6 +191,17 @@ MGFs uniquely determine distributions, provided they are continuous in a small n
     -   **Proof:**
 :::  
 
+
+
+## {{< fa bezier-curve >}} Transformations
+### MGF Method
+
+::: {.callout-tip}
+## **Example 1**
+
+Let _X_ ~ Exp($\lambda$), and define _Y_ := _c_*X* for some positive constant _c_ > 0. What distribution does _Y_ follow?
+:::
+
     
 ## {{< fa bezier-curve >}} Transformations
 ### Transformation Theorem
@@ -214,20 +225,9 @@ $$ f_Y(y) = f_X(g^{-1}(y)) \cdot \left| \frac{\mathrm{d}}{\mathrm{d}y} g^{-1}(y)
 When using the Transformation Theorem, make sure to check that the transformation is strictly monotonic and differentiable!  
 :::
 :::
-
-
-## {{< fa bezier-curve >}} Transformations
-### MGF Method
-
-::: {.callout-tip}
-## **Example 1**
-
-Let _X_ ~ Exp($\lambda$), and define _Y_ := _c_*X* for some positive constant _c_ > 0. What distribution does _Y_ follow?
-:::
-
     
 ## {{< fa bezier-curve >}} Transformations
-### Transformation Theorem
+### Transformation Theorem: Example
 
 ::: {.callout-important}
 ## **Transformation Theorem**
@@ -628,4 +628,40 @@ If $X_1, X_2, \cdots, X_n$ are independent random variables, $\displaystyle M_{\
 ## **Example 4**
 If $X_1, X_2, \cdots, X_n$ is an i.i.d. sample, what is the MGF of $\bar{X}_n := (X_1 + X_2 + \cdots + X_n) / n$, in terms of the MGF $M_{X_i}(t)$ of $X_i$?
 :::
+
+
+
+## {{< fa chart-area >}} Statistics
+### Discrete Statistics
+
+-   For our so-called [**discrete statistics**]{.alert} (aka [**order statistics**]{.alert}), our general approach is to find the CDF, and then differentiate.
+
+-   For example: if $X_{(n)} := \max\{X_1, X_2, \cdots, X_n\}$ for an i.i.d. sample $X_1, X_2, \cdots, X_n$, then
+
+\begin{align*}
+  \class{fragment}{{} F_{X_{(n)}}(x)}
+    & \class{fragment}{{} : = \Prob(X_{(n)} \leq x) } & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ CDF}]}         \\[3px]
+    & \class{fragment}{{} : = \Prob(\max\{X_1, X_2, \cdots, X_n\} \leq x)}  & \class{fragment}{{}\color{blue}[\mathrm{Definition}]}         \\[3px]
+    & \class{fragment}{{} = \Prob(X_1 \leq x, \ X_2 \leq x, \ \cdots \ X_n \leq x)} & \class{fragment}{{}\color{blue}[\mathrm{Logic}]}         \\[3px]
+    & \class{fragment}{{} = \prod_{i=1}^{n} \Prob(X_i \leq x)} \class{fragment}{{}  = [\Prob(X_i \leq x)]^n} & \class{fragment}{{}\color{blue}[\mathrm{I.I.D.}]}         \\[3px]
+    & \class{fragment}{{} = [F_{X_i}(x)]^n} & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \  CDF}]}         \\[3px]
+\end{align*}
+
+
+
+
+## {{< fa chart-area >}} Statistics
+### Discrete Statistics
+
+::: {.nonincremental}
+-   For our so-called [**discrete statistics**]{.alert} (aka [**order statistics**]{.alert}), our general approach is to find the CDF, and then differentiate.
+
+-   For example: if $X_{(n)} := \max\{X_1, X_2, \cdots, X_n\}$ for an i.i.d. sample $X_1, X_2, \cdots, X_n$, then
+:::
+
+\begin{align*}
+  {{} F_{X_{(n)}}(x)}
+    & {{} =  [F_{X_i}(x)]^n} \\[3px]
+  \class{fragment}{{} \implies f_{X_{(n)}}(x)} & \class{fragment}{{} = \frac{\mathrm{d}}{\mathrm{d}x} f_{X_{(n)}}(x) } \class{fragment}{{} = \frac{\mathrm{d}}{\mathrm{d}x} [F_{X_i}(x)]^n } \class{fragment}{{} = n [F_{X_i}(x)]^{n - 1} \cdot f_{X_i}(x) }
+\end{align*}
 
