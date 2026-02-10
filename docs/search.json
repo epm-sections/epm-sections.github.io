@@ -588,116 +588,382 @@
     "text": "Hypothesis Testing\nPSTAT 120B\n\nTake a look through 10.7 of the textbook, titled “Some Comments on the Theory of Hypothesis Testing.” The authors provide some (in my opinion) very useful and practical comments on hypothesis testing.\nAlso, even though material from Topic 15 will not feature heavily on the exam (if at all - again, I haven’t seen the exam yet!) I HIGHLY recommend you take a look at it before moving on to your future statistics courses.\n\nPretty much every course will at least in part make reference to that material, even if behind the scenes.\n\nAny time you perform a hypothesis test (e.g. in: Machine Learning, Time Series, etc.), you’re often concerned with finding a test with optimal power. The Neyman-Pearson Lemma and Likelihood Ratio Tests gives you such a test in many cases!"
   },
   {
-    "objectID": "120B-W26/Wk01/wk1.html#hello",
-    "href": "120B-W26/Wk01/wk1.html#hello",
+    "objectID": "120B-W26/Wk06/wk06.html#convergence",
+    "href": "120B-W26/Wk06/wk06.html#convergence",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Hello!",
-    "text": "Hello!\nA Quick Introduction\n\nHello! My name is Ethan (he/him), and I am very much looking forward to being your TA!\n\nI am a sixth year PhD; this is my fifth time with this course (including having been the Instructor once :) )\n\nMy Office Hours: Tuesdays, 1:30 - 2:30 pm in SH 5607 F  Thursdays, 10:30 - 11:30 am in SH 5607 F\nMy Email: epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)\n\n\n\n\n\n\n\n\nGoal for Today\n\n\nBriefly review PSTAT 120A and Calculus material."
+    "section": " Convergence",
+    "text": "Convergence\nGeneral Overview\n\nMuch like how certain sequences of numbers converge in various ways, so too do certain sequences of random variables.\nThe three types of convergence we discussed in this class are:\n\nConvergence in Probability [P]\nConvergence in Distribution [D]\nConvergence in Mean Square [MS]\n\n[MS] implies [P], but not necessarily vice-versa\n[P] implies [D], but not necessarily vice-versa\n\nQuestion: Does [MS] imply [D]?"
   },
   {
-    "objectID": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables",
-    "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables",
+    "objectID": "120B-W26/Wk06/wk06.html#convergence-1",
+    "href": "120B-W26/Wk06/wk06.html#convergence-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Probability Spaces; Random Variables",
-    "text": "Probability Spaces; Random Variables\nHigh-Level Overview\n\nProbability Space: \\((\\Omega, \\F, \\Prob)\\) where:\n\n\\(\\Omega\\) denotes the outcome space\n\\(\\F\\) denotes the event space\n\\(\\Prob: \\F \\to \\R\\) denotes the probability measure\n\nA random variable \\(X\\) is a mapping \\(X : \\Omega \\to \\R\\)\n\nSupport: \\(X(\\Omega)\\) (set of values over which the random variable is defined)\n\nFinite or countable support \\(\\implies\\) \\(X\\) is discrete\nUncountable support \\(\\implies\\) \\(X\\) is continuous"
+    "section": " Convergence",
+    "text": "Convergence\nConvergence in Probability\n\n\n\n\n\n\nDefinition: Convergence in Probability\n\n\nWe say that a sequence of random variables \\(\\{X_n\\}\\) converges in probability to a constant \\(x\\) if, for any \\(\\varepsilon &gt; 0\\), \\[ \\lim_{n \\to \\infty} \\Prob(|X_n - x| &gt; \\varepsilon) = 0\\] We use the notation \\(X_n \\probto x\\) to denote convergence in probability.\n\n\n\n\n\\(|X_n - x|\\) is essentially the “distance” between \\(X_n\\) and \\(x\\).\n\nTherefore, the event \\(\\{|X_n - x| &gt; \\varepsilon\\}\\) is essentially “\\(X_n\\) is very far from \\(x\\)”\nConvergence in probability asserts that the probability of this event goes to zero as \\(n\\) gets large; i.e. “we become more more and more certain that \\(X_n\\) is very close to \\(x\\)”"
   },
   {
-    "objectID": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
-    "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
+    "objectID": "120B-W26/Wk06/wk06.html#convergence-2",
+    "href": "120B-W26/Wk06/wk06.html#convergence-2",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Probability Spaces; Random Variables",
-    "text": "Probability Spaces; Random Variables\nExample\n\n\n\n\n\n\nExample 1\n\n\nA fair coin is tossed twice, and the outcomes are recorded; let X denote the number of heads.\n\n\n\n\nOutcome Space: \\(\\Omega =\\) {H, T}2 = {(H, H), (H, T), (T, H), (T, T) }\nX should map each element in \\(\\Omega\\) to a real number, by counting the number of heads in the outcome.\n\nX((H, H)) = 2;       X((H, T)) = 1;       X((T, H)) = 1;       X((T, T)) = 0\n\nThe support of X is {0, 1, 2}, which is finite, meaning X is a discrete random variable\nFair Coin implies we should use the equally-likely probability measure; \\(\\Prob(E) = |E| / |\\Omega|\\) for every event E.\n\nAllows us to construct the probability mass function (PMF) of X."
+    "section": " Convergence",
+    "text": "Convergence\nConvergence in Probability: Example\n\n\nCode\nset.seed(100)\nX &lt;- sample(c(\"H\", \"T\"), size = 1000, replace = T, prob = c(0.25, 0.75))\nrel.freq &lt;- cumsum(ifelse(X == \"H\", 1, 0)[1:1000])/(1:1000)"
   },
   {
-    "objectID": "120B-W26/Wk01/wk1.html#random-variables",
-    "href": "120B-W26/Wk01/wk1.html#random-variables",
+    "objectID": "120B-W26/Wk06/wk06.html#law-of-large-numbers",
+    "href": "120B-W26/Wk06/wk06.html#law-of-large-numbers",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Random Variables",
-    "text": "Random Variables\nRelevant Quantities\n\n\nDiscrete:\n\nPMF: \\(f(x) := \\Prob(X = x)\\)\nProbabilities: \\(\\Prob(X \\in B) = \\sum_{x \\in B} f(x)\\)\nCMF: \\(F(x) := \\Prob(X \\leq x) = \\sum_{t \\leq x} f(t)\\)\nLOTUS: \\(\\E[g(X)] = \\sum_{x} g(x) f(x)\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)\n\n\nContinuous:\n\nPDF: \\(f(x) \\geq 0\\) and \\(\\int_{\\R} f(x) = 1\\)\nProbabilities: \\(\\Prob(X \\in B) = \\int_{B} f(x) \\ \\mathrm{d}x\\)\nCDF: \\(F(x) := \\Prob(X \\leq x) = \\int_{-\\infty}^{x} f(t) \\ \\mathrm{d}t\\)\nLOTUS: \\(\\E[g(X)] = \\int_{\\R} g(x) f(x) \\ \\mathrm{d}x\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)"
+    "section": " Law of Large Numbers",
+    "text": "Law of Large Numbers\nTwo Versions\n\n\n\n\n\n\nLaw of Large Numbers (Version 2)\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) denotes an i.i.d. sample from a distribution with finite mean \\(\\E[X_i]\\) and finite variance \\(\\Var(X_i)\\), then \\[ \\bar{X}_n \\probto \\E[X_i] \\]\n\n\n\n\n\n\n\n\n\n\nLaw of Large Numbers (Version 1)\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) denotes an i.i.d. sample from a distribution with finite mean \\(\\E[X_i]\\) and finite variance \\(\\Var(X_i)\\), then \\[ \\bar{X}_n \\mseto \\E[X_i] \\]\n\n\n\n\n\n\\[ f_X(x) = \\frac{1}{\\pi(1 + x^2)} \\]"
   },
   {
-    "objectID": "120B-W26/Wk01/wk1.html#moment-generating-functions",
-    "href": "120B-W26/Wk01/wk1.html#moment-generating-functions",
+    "objectID": "120B-W26/Wk06/wk06.html#law-of-large-numbers-1",
+    "href": "120B-W26/Wk06/wk06.html#law-of-large-numbers-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Moment Generating Functions",
-    "text": "Moment Generating Functions\nOverview\n\n\n\n\n\n\nDefinition: MGF\n\n\nThe moment generating function (MGF) of a random variable X is defined as \\[ M_X(t) := \\E[e^{tX}] \\]\n\n\n\nProperties:\n\nIf it is continuous in a neighborhood of zero, then it uniquely determines a distribution.\n\\(M_X^{(n)}(0) = \\E[X^n]\\) for any \\(n \\in \\N\\) (Homework Hint: What is \\(M_X(0)\\)?)\n\\(M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)\\) provided that \\(X \\perp Y\\)\n\\(M_{aX + b}(t) = e^{tb} \\cdot M_X(at)\\) for constants \\(a, b\\)"
+    "section": " Law of Large Numbers",
+    "text": "Law of Large Numbers\nInfinite Mean and Variance Example\n\n\nCode\nset.seed(100)\nX &lt;- rcauchy(1000)\nrel.freq &lt;- cumsum(X)/(1:1000)"
   },
   {
-    "objectID": "120B-W26/Wk01/wk1.html#parameters",
-    "href": "120B-W26/Wk01/wk1.html#parameters",
+    "objectID": "120B-W26/Wk06/wk06.html#probability-vs.-statistics",
+    "href": "120B-W26/Wk06/wk06.html#probability-vs.-statistics",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Parameters",
-    "text": "Parameters\nExample: Normal Distribution\nThink of parameters as dials that control the shape of a distribution.\n\nviewof µ = Inputs.range(\n  [-3, 3], \n  {value: 0, step: 0.1, label: \"µ:\"}\n)\n\nviewof σ = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"σ:\"}\n)\n\nsigsquared = σ**2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(-12, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.normal.pdf(x, µ, σ)}));\n  return pdf\n}"
+    "section": " Probability vs. Statistics",
+    "text": "Probability vs. Statistics\nAn Illustration\n\nConsider a bucket comprised of blue and gold marbles, and suppose we know how many blue and gold marbles there are.\n\nFrom this bucket, we take a sample of marbles.\n\n\n\n\n\n\n\n\n\nWe then use our information of the configuration of marbles in the bucket to inform us about what’s in our hand.\n\nE.g. what’s the expected number of gold marbles in our hand?\nE.g. what’s the probability that we have more than 3 blue marbles in our hand?"
   },
   {
-    "objectID": "120B-W26/Wk02/wk02.html#transformations",
-    "href": "120B-W26/Wk02/wk02.html#transformations",
+    "objectID": "120B-W26/Wk06/wk06.html#probability-vs.-statistics-1",
+    "href": "120B-W26/Wk06/wk06.html#probability-vs.-statistics-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Probability vs. Statistics",
+    "text": "Probability vs. Statistics\nAn Illustration\n\nConsider now the opposite scenario: we do not know anything about the configuration of marbles in the bucket. All we have is a sample of, say, 11 blue and 6 gold marbles drawn from this bucket.\n\n\n\n\n\n\n\n\nWe then use our information on the configuration of marbles in our hand to inform us about what’s in the bucket.\n\nE.g. what’s the expected number of gold marbles in the bucket?\nE.g. what’s the probability that there are more than 3 blue marbles in the bucket?"
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#statistical-inference",
+    "href": "120B-W26/Wk06/wk06.html#statistical-inference",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistical Inference",
+    "text": "Statistical Inference\nGeneral Framework\n\nNow, instead of marbles in a bucket, imagine units in our sampled population.\n\n\n\n\nWe have a population, governed by a set of population parameters that are unobserved (but that we’d like to make claims about).\nTo make claims about the population parameters, we take a sample.\nWe then use our sample to make inferences (i.e. claims) about the population parameters."
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#estimation",
+    "href": "120B-W26/Wk06/wk06.html#estimation",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nGeneral Framework\n\nThree key terms:\n\nEstimand: another word for the parameter we are trying to estimate. (Not in lecture slides!)\nEstimator: a statistic being used to estimate the estimand.\n\nAnother way to think about this: a “rule” used to estimate the parameter.\n\nEstimate: a particular realization (i.e. observed instance) of an estimator."
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#estimation-1",
+    "href": "120B-W26/Wk06/wk06.html#estimation-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nExample\n\n\n\n\n\n\nExample\n\n\nA vet wishes to estimate the true weight of all cats in the world. She takes a sample of 10 cats, and finds their average weight to be 9.12 lbs.\n\n\n\n\nThe estimand is the true average weight of all cats in the world (which we can call µ).\nThe estimator is the sample mean: we are using sample means to estimate µ.\nThe estimate in this scenario is 9.12 lbs, as this is a particular realization of our estimator."
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#estimation-2",
+    "href": "120B-W26/Wk06/wk06.html#estimation-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nDesirable Properties of Estimators\n\nThere are potentially many estimators we can use to estimate a particular parameter.\nAs such, it is necessary to establish a notion of what makes a “good” estimator (or, equivalently, what makes one estimator “better” than another).\nOne notion is unbiasedness: an estimator \\(\\widehat{\\theta}_n\\) for \\(\\theta\\) is said to be unbiased if \\(\\E[\\widehat{\\theta}_n] = \\theta\\).\n\n“On average, the estimator gets it right.”\nMathematically: means the sampling distribution is centered at the right (true) value."
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#estimation-3",
+    "href": "120B-W26/Wk06/wk06.html#estimation-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nAn Analogy\n\nUnbiasedness, however, is often not enough. To motivate why, let’s take a look at an analogy.\nAn analogy is often drawn between estimation and hitting a bullseye.\n\nThe bullseye is akin to our estimand, and estimates are represented by shots fired at the target.\nThe estimator is, therefore, akin to the marskperson.\n\nAn unbiased estimator is analogous to a marksperson for whom the average location of shots is the bullseye."
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#estimation-4",
+    "href": "120B-W26/Wk06/wk06.html#estimation-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons is “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
+  },
+  {
+    "objectID": "120B-W26/Wk06/wk06.html#estimation-5",
+    "href": "120B-W26/Wk06/wk06.html#estimation-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\nwhere \\(\\mathrm{Bias}(\\widehat{\\theta}_n) := \\E[\\widehat{\\theta}_n] - \\theta\\)."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#welcome",
+    "href": "120B-W26/MTRev/MTRev.html#welcome",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Welcome!",
+    "text": "Welcome!\nAnd A Disclaimer\n\nHello! I’m Ethan (he/him), and I’m one of the TAs this quarter (I host the Wednesday 1pm and Wednesday 2pm Sections).\n\n\n\n\n\n\n\n\nDisclaimer\n\n\nI have not yet seen the exam! What I cover here today is not meant to be an indication of exactly what will be covered on the exam.\n\n\n\n\n\nJust because I cover something today doesn’t mean it will show up on the exam; similarly, just because I don’t cover something today doesn’t mean it won’t show up on the exam.\nWith that said, I have some prior experience with this class, so am basing my review on material I think could plausibly appear on the exam"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#roadmap-for-today",
+    "href": "120B-W26/MTRev/MTRev.html#roadmap-for-today",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Roadmap for Today",
+    "text": "Roadmap for Today\n\nReview some Material\n\nTransformations\nConditional distributions and expectations\nLinear Combinations and Statistics\n\nWork through some problems\n\nI’ll pass out a worksheet later with some problems for groupwork (that we’ll later solve together)\n\n\n\nI will upload most (but not all!) material from today to a Google Drive folder; I’ll send a Canvas announcement with more information."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-1",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nUnivariate Case\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g(•)?\n\n\n\n\nReal-World Example: Unit conversion\n\nLet X denote temperature measurements of some apparatus in Centigrade\nLet Y denote the temperature measurements in Fahrenheit\nY = (9/5)X + 32\n\nExpectation (sidebar: how can we compute \\(\\E[Y]\\)?) is not enough\n\nE.g. just because, say, \\(\\E[Y] = 2\\) doesn’t mean we know what distribution Y follows"
+    "text": "Transformations\nOverview\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g?\n\n\n\n\nConcrete example: unit conversion\n\nSay X denotes random temperature measurements in Centigrade\nLet Y denote the temperature measurements in Fahrenheit\nThen Y = (9/5) X + 32\n\nSo, transformation can actually be very applicable!"
   },
   {
-    "objectID": "120B-W26/Wk02/wk02.html#transformations-1",
-    "href": "120B-W26/Wk02/wk02.html#transformations-1",
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-2",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-2",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g(•)?\n\n\n\n\nFirst Approach: Leverage the fact that MGF’s uniquely determine distributions\n\nThat is, if we can find the MGF MY(t) of Y, then we will (hopefully!) know its distribution!\n\nRecall two useful properties of MGFs from last week’s Section:\n\nIf X and Y are independent, MX + Y(t) = MX(t) * MY(t)\nMaX + b(t) = ebt * MX(at)"
+    "text": "Transformations\nOverview\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g?\n\n\n\n\nQuestion 1: Can we calculate \\(\\E[Y]\\) without knowing its density?\n\nYes, using the LOTUS: \\(\\E[Y] = \\E[g(X)] = \\int_{-\\infty}^{\\infty} g(x) f_X(x) \\ \\mathrm{d}x\\)\n\nQuestion 2: Does \\(\\E[Y]\\) tell us what distribution Y follows?\n\nNo; e.g. if \\(\\E[Y] = 2\\); do we have \\(Y \\sim \\mathrm{Exp}(1/2)\\)? or \\(Y \\sim \\mathcal{N}(2, 1)\\)? Etc.\n\nQuestion 3: What are some things that uniquely determine a distribution?\n\nMGF (moment generating function) and/or PDF/CDF (probability density function/cumulative distribution function)"
   },
   {
-    "objectID": "120B-W26/Wk02/wk02.html#transformations-2",
-    "href": "120B-W26/Wk02/wk02.html#transformations-2",
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-3",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-3",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nMGF Method: Example (On the Board)\n\n\n\n\n\n\nExample 1\n\n\nIf X ~ Exp(λ) and Y = cX for some c &gt; 0, what is the distribution of Y?"
+    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nFact 1\n\n\nMGFs uniquely determine distributions, provided they are continuous in a small neighborhood of the origin.\n\n\n\n\nIn other words: every distribution has a unique MGF, and every MGF corresponds to a unique distribution.\n\nE.g. say I tell you the random variable Y has MGF given by MY(t) = et2 / 2.\nThere is only one distribution that has this MGF (can anyone tell me which one?)\n\nSo, going back to our transformation problem, if we can find an expression for the MGF of Y, we will know its distribution."
   },
   {
-    "objectID": "120B-W26/Wk02/wk02.html#transformations-3",
-    "href": "120B-W26/Wk02/wk02.html#transformations-3",
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-4",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-4",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf Y = g(X) for some monotonic and differentiable g(•), then \\(f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right|\\)\n\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nIf X ~ Exp(λ) and Y = cX for some c &gt; 0, what is the distribution of Y?"
+    "text": "Transformations\nMGF Method\nUseful Properties of MGFs:\n\nMaX + b(t) =\n\nProof:\n\n\n\n\n\nIf X and Y are independent, MX + Y(t) =\n\nProof:"
   },
   {
-    "objectID": "120B-W26/Wk02/wk02.html#transformations-4",
-    "href": "120B-W26/Wk02/wk02.html#transformations-4",
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-5",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-5",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf Y = g(X) for some monotonic and differentiable g(•), then \\(f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right|\\)\n\n\n\n\nIf g(•) is not monotonic, then split up the support of X into regions over which g(•) is monotonic.\n\n\n\n\n\n\n\n\nExample 2\n\n\nIf X ~ Unif[-1, 1] and Y := X2, find fY(y), the density of Y.\n\n\n\n\n\nTry this on your own! The final answer is \\(f_Y(y) = \\begin{cases} \\frac{1}{2 \\sqrt{y}} & \\text{if } 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\)"
+    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nExample 1\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#an-example",
-    "href": "120B-W26/Wk03/wk03.html#an-example",
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-6",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-6",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " An Example",
-    "text": "An Example\n\nSuppose I roll a fair six-sided die, and record the face that is showing.\nThen, I toss as many fair coins as there are spots on the face showing.\nLet X denote the number of heads I observe.\nQuestion: Is X Binomially distributed?\n\nNo, because we do not have a fixed number of trials- the number of coins I toss is itself random!\n\nLet N denote the result of the die roll. What distribution does N follow?\n\nN ~ DiscUnif{1, 2, …, 6}\n\\(\\Prob(N = n) = 1/6\\), for any \\(n \\in \\{1, \\cdots, 6\\}\\)\n\nWhat is \\(\\Prob(X = 5 \\mid N = 3)\\)?\n\nZero; it is impossible to toss 3 coins and observe 5 heads."
+    "section": " Transformations",
+    "text": "Transformations\nTransformation Theorem\n\nPDFs also uniquely determine distributions.\n\nSo, if we can find the PDF of Y := g(X), then we will know its distribution.\n\n\n\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\n\n\nCaution\n\n\nWhen using the Transformation Theorem, make sure to check that the transformation is strictly monotonic and differentiable!"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#an-example-1",
-    "href": "120B-W26/Wk03/wk03.html#an-example-1",
+    "objectID": "120B-W26/MTRev/MTRev.html#transformations-7",
+    "href": "120B-W26/MTRev/MTRev.html#transformations-7",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " An Example",
-    "text": "An Example\n\nWhat is \\(\\Prob(X = 3 \\mid N = 5)\\)?\n\n\\(\\binom{5}{3}(1/2)^5\\), using the formula for the Binomial PMF\n\nIndeed, after conditioning on the number of coins tossed, X becomes Binomially distributed: \\[ (X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2) \\]\nThe conditional PMF \\(p_{X \\mid N}(x \\mid n)\\) of \\((X \\mid N)\\) is then given by \\[ p_{X \\mid N}(x \\mid n) := \\Prob(X = x \\mid N = n) = \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n \\]\n\nNote that, for a fixed n \\(\\in\\) {1, 2, …, 6}, pX|N(x | n) is a valid PMF in x."
+    "section": " Transformations",
+    "text": "Transformations\nTransformation Theorem: Example\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectation",
-    "href": "120B-W26/Wk03/wk03.html#conditional-expectation",
+    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-1",
+    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Expectation",
-    "text": "Conditional Expectation\n\nFor discrete random variables X and Y, we have a sort of “Conditional LOTUS”: \\[ \\E[g(Y) \\mid X = x] = \\sum_{y} g(y) p_{Y \\mid x}(y \\mid x) \\]\n\nFor example, in our coin-tossing example from before, \\[ \\E[X \\mid N = n] = \\sum_{x = 0}^{n} x \\cdot \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n = \\frac{n}{2} \\]\n\nIn general, \\(h(x) := \\E[Y \\mid X = x]\\) will be a function of x. We define the conditional expectation of Y given X to be \\[ \\E[Y \\mid X] := h(X) \\]"
+    "section": " Joint Distributions",
+    "text": "Joint Distributions\nOverview\n\nRecall that a single continuous random variable X is described by its PDF fX(x).\nA pair of continuous random variables (X, Y) is described by a joint PDF fX,Y(x, y) that satisfies:\n\nNonnegativity: \\(f_{X, Y}(x, y) \\geq 0\\) for all \\((x, y) \\in \\R^2\\)\nDouble-Integrates to Unity: \\(\\iint_{\\R^2} f_{X, Y}(x, y) \\ \\mathrm{d}A = 1\\)\n\nGiven a valid joint density fX,Y(x, y), we have:\n\n\\(\\Prob((X, Y) \\in \\mathcal{R}) = \\iint_{\\mathcal{R}} f_{X, Y}(x, y) \\ \\mathrm{d}A\\) (probabilities are found by double-integrating the joint density)\n\\(\\E[g(X, Y)] = \\iint_{\\R^2} g(x, y) f_{X, Y}(x, y) \\ \\mathrm{d}A\\) (multivariate LOTUS)"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#continuous-realm",
-    "href": "120B-W26/Wk03/wk03.html#continuous-realm",
+    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-2",
+    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-2",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Continuous Realm",
-    "text": "Continuous Realm\n\n\n\n\n\n\nDefinition: Conditional Density\n\n\nGiven continuous random variables \\(X\\) and \\(Y\\) with joint density \\(f_{X, Y}(x, y)\\), we define the conditional PDF of Y given Y to be \\[ f_{Y \\mid X}(y \\mid x) := \\frac{f_{X, Y}(x, y)}{f_X(x)} \\] only if x is such that \\(f_{X}(x) \\neq 0\\). If x is such that \\(f_X(x) = 0\\), then \\(f_{Y \\mid X}(y \\mid x)\\) is undefined.\n\n\n\n\n\n\n\n\n\n\nConditional Expectation\n\n\n\\[\\begin{align*}\n  h(x)  := \\E[Y \\mid X = x] & := \\int_{\\R} y f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y \\\\\n            \\E[Y \\mid X]    & := h(X) \\\\\n        \\E[g(Y) \\mid X = x] & := \\int_{\\R} g(y) f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y\n\\end{align*}\\]"
+    "section": " Joint Distributions",
+    "text": "Joint Distributions\nExample\n\\(f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\)"
   },
   {
-    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectations",
-    "href": "120B-W26/Wk03/wk03.html#conditional-expectations",
+    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-3",
+    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-3",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Expectations",
-    "text": "Conditional Expectations\n\nIn general, \\(\\E[Y \\mid X = x]\\) will be a function of x, but will be deterministic (i.e. nonrandom).\nBy contrast, \\(\\E[Y \\mid X]\\) will be a random variable.\n\nTo calculate \\(\\E[Y \\mid X]\\), we first calculate \\(h(x) := \\E[Y \\mid X = x]\\) and then replace all instances of x with X.\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[Y] = \\E[\\E[Y \\mid X]] \\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Total Variance\n\n\n\\[ \\Var(Y) = \\Var(\\E[Y \\mid X]) + \\E[\\Var(Y \\mid X)] \\]"
+    "section": " Joint Distributions",
+    "text": "Joint Distributions\nMarginal Densities\n\nGiven a valid joint density function \\(f_{X, Y}(x, y)\\), we can extract the marginal densities of X and Y by “integrating out the other variable:” \\[\\begin{align*}\n  f_X(x)  & = \\int_{\\R} f_{X, Y}(x, y) \\ \\mathrm{d}y  \\\\\n  f_Y(y)  & = \\int_{\\R} f_{X, Y}(x, y) \\ \\mathrm{d}x\n\\end{align*}\\]\nOftentimes the bounds are the trickiest part; my advice is to always sketch a picture!\n\nKeep in mind that the bounds may change depending on the variable in question; we’ll talk about this more when we get to today’s worksheet."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-4",
+    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Joint Distributions",
+    "text": "Joint Distributions\nCovariance\n\nThe covariance between two random variables X and Y is given by \\[\\begin{align*}\n  \\Cov(X, Y)  & := \\E\\left\\{ \\left( X - \\E[X] \\right) \\left( Y - \\E[Y] \\right)  \\right\\}  \\\\\n& = \\E[XY] - \\E[X] \\cdot \\E[Y]\n\\end{align*}\\]\n\n\nQuestions:\n\n\nWhat is another name for \\(\\Cov(X, X)\\)?\nAre covariances bounded or unbounded?\nWhat is the covariance between two independent random variables? Does zero covariance imply independence?"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-5",
+    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Joint Distributions",
+    "text": "Joint Distributions\nProperties of Covariance\n\n\n\n\n\n\nBilinearity Property\n\n\n\\[ \\Cov\\left( \\sum_{i=1}^{n} a_i X_i \\ , \\ \\sum_{j=1}^{n} b_j Y_j \\right) = \\sum_{i=1}^{n} \\sum_{j=1}^{n} a_i b_j \\Cov(X_i, X_j)\\]\n\n\n\n\n\n\n\n\n\n\nVariance of a Sum\n\n\n\\[ \\Var\\left( \\sum_{i=1}^{n} a_i X_i \\right) = \\sum_{i=1}^{n} a_i^2 \\Var(X_i) + 2 \\sum_{i \\neq j} a_i a_j \\Cov(X_i, X_j) \\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-1",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nConditional PMF\n\nRecall: given events E and F such that \\(\\Prob(F) \\neq 0\\), we define \\[ \\Prob(E \\mid F) = \\frac{\\Prob(E \\cap F)}{\\Prob(F)} \\]\nGiven discrete random variables X and Y with joint PMF pX,Y(x,y), we have, provided pY(y) ≠ 0, \\[ \\Prob(X = x \\mid Y = y) := \\frac{\\Prob(X = x, \\ Y = y)}{\\Prob(Y = y)} = \\frac{p_{X, Y}(x, y)}{p_Y(y)} \\]\n\nFor any fixed y, this will be a valid PMF in x which is why we notate this quantity pX|Y(x|y) and call it the conditional PMF of X given Y = y."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-2",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nExample\n\nRoll a fair six-sided die, and record the face showing\n\nThen toss as many fair coins as there are spots on the face showing\nLet X denote the number of heads\n\nQuestion: Does X follow a Binomial distribution?\n\nNo, as the number of trials is not fixed!\n\nLet N denote the result of the die roll\n\nThen N ~ DiscUnif{1, …, 6}\n\nWhat is pX|N(5|7)?\n\nUndefined; it is not possible to roll a 7 on a six-sided die"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-3",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nExample\n\nWhat is pX|N(5|3)?\n\nZero; it is impossible to toss three coins and observe 5 heads\n\nWhat is pX|N(3|5)?\n\n\\(p_{X \\mid N}(3 \\mid 5) = \\Prob(X = 3 \\mid N = 5) = \\binom{5}{3} (1/2)^5\\), using the Binomial PMF\n\nSo, provided that n \\(\\in\\) {1, …, 6}, we have \\[ p_{X \\mid N}(x \\mid n) = \\begin{cases}\n  \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n  & \\text{if } x \\in \\{0, 1, \\cdots, n\\}  \\\\\n  0     & \\text{otherwise}\n\\end{cases} \\] and for any n \\(\\notin\\) {1, …, 6} we have that pX|N(x|n) is undefined.\n\nWe can succinctly write this as \\((X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2)\\)."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-4",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nConditional Distributions: Discrete Case\n\nGiven discrete random variables X and Y with joint PMF pX,Y(x, y):\n\n\\(\\Prob(X \\in A \\mid Y = y) = \\sum\\limits_{x \\in A} p_{X \\mid Y}(x \\mid y)\\)\n\\(\\E[g(X) \\mid Y = y] := \\sum\\limits_{x} x p_{X \\mid Y}(x \\mid y)\\)\n\nNote that \\(h(y) := \\E[X \\mid Y = y]\\) will be a function of y.\n\nWe define \\(\\E[X \\mid Y]\\), the conditional expectation of X given Y, to be \\(h(Y)\\). That is, we first compute \\(h(y) := \\E[X \\mid Y = y]\\) and then replace all instances of y with Y.\nThis means that \\(\\E[X \\mid Y]\\) will be a random variable\n\nExample: in our coin tossing example, \\(\\E[X \\mid N = n] = n/2\\) meaning \\(\\E[X \\mid N] = N/2\\)."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-5",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nConditional Distributions: Continuous Case\n\n\n\n\n\n\nDefinition: Conditional Density\n\n\nGiven continuous random variables \\(X\\) and \\(Y\\) with joint density \\(f_{X, Y}(x, y)\\), we define the conditional PDF of X given Y to be \\[ f_{X \\mid Y}(x \\mid y) := \\frac{f_{X, Y}(x, y)}{f_Y(y)} \\] only if y is such that \\(f_{Y}(y) \\neq 0\\). If y is such that \\(f_Y(y) = 0\\), then \\(f_{X \\mid Y}(x \\mid y)\\) is undefined.\n\n\n\n\n\\(\\Prob(X \\in A \\mid Y = y) = \\int_{A} f_{X \\mid Y}(x \\mid y) \\ \\mathrm{d}x\\)\n\\(\\E[g(Y) \\mid X = x] := \\int_{\\R} g(y) f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y\\)\n\\(\\E[X \\mid Y] := h(Y)\\) where \\(h(y) := \\E[X \\mid Y = y]\\)"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-6",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nExample and Distinction\n\n\n\n\n\n\nExample 2\n\n\nLet X and Y be continuous random variables with joint density given by \\[f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\]\n\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X &gt; 0.5)\\)\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X = 0.5)\\)\n\n\n\n\n\nNotice how similar these questions appear\n\nThey require us to proceed in very different directions.\n\nRecall: \\(\\Prob(E \\mid F) := \\Prob(E \\cap F) / \\Prob(F)\\), provided that \\(\\Prob(F) \\neq 0\\).\n\nDoes \\(\\Prob(X &gt; 0.5) = 0\\)? Does \\(\\Prob(X = 0.5) = 0\\)?"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-7",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nExample and Distinction\n\n\n\n\n\n\nExample 2\n\n\nLet X and Y be continuous random variables with joint density given by \\[f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\]\n\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X &gt; 0.5)\\)\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X = 0.5)\\)\n\n\n\n\n\nPart (a): conditioning on an event with nonzero probability; can use the definition of conditional probability \\[ \\Prob(Y &lt; 0.5 \\mid X &gt; 0.5) = \\frac{\\Prob(X &gt; 0.5, \\ Y &lt; 0.5)}{\\Prob(X &gt; 0.5)} \\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-8",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nExample and Distinction\n\n\n\n\n\n\nExample 2\n\n\nLet X and Y be continuous random variables with joint density given by \\[f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\]\n\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X &gt; 0.5)\\)\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X = 0.5)\\)\n\n\n\n\n\nPart (b): conditioning on an event with zero probability; cannot use the definition of conditional probability, must instead integrate the conditional density \\[ \\Prob(Y &lt; 0.5 \\mid X = 0.5) = \\int_{-\\infty}^{0.5} f_{Y \\mid X}(y \\mid 0.5) \\ \\mathrm{d}y  \\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-9",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-9",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nExample and Distinction: Takeaway\n\nSo, here’s the key takeaway: always check whether the event we’re conditioning on has zero or nonzero probability.\n\nIf the event has nonzero probability, use the “120A definition” of conditional probability (and double-integrate the joint density to find the numerator and denominator)\nIf instead the event has zero probability, integrate the conditional density."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-10",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-10",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nConditional Expectations, Revisited\n\nRecall that \\(\\E[X \\mid Y]\\) will be a random variable.\n\nA natural question is: what is its expectation?\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[ \\E[X \\mid Y]] = \\E[X]\\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Variance\n\n\n\\[ \\Var(X) = \\Var(\\E[X \\mid Y]) + \\E[\\Var(X \\mid Y)] \\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-11",
+    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-11",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Conditional Distributions",
+    "text": "Conditional Distributions\nConditional Expectations, Example\n\n\n\n\n\n\nExample 3\n\n\nLet \\((X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2)\\) and \\(N \\sim \\mathrm{DiscUnif}\\{1, \\cdots, 6\\}\\). Find \\(\\E[X]\\) and \\(\\Var(X)\\). Some Facts: \\(\\E[N] = (7/2)\\) and \\(\\Var(N) = 35/12\\).\n\n\n\n\n\\(\\E[X \\mid N] = N/2 \\implies \\E[X] = \\E[\\E[X \\mid N]] = \\E[N / 2] = (7/2)(1/2) = \\boxed{7/4}\\)\n\\(\\Var(X \\mid N) = N(1/2)(1/2) = (N / 4)\\)\n\n\\[\\begin{align*}\n  \\class{fragment}{{} \\Var(X)}\n    & \\class{fragment}{{} = \\Var(\\E[X \\mid N]) + \\E[\\Var(X \\mid N)]}         \\\\[3px]\n    & \\class{fragment}{{} = \\Var(N/2) + \\E[(N / 4)]}         \\\\[3px]\n    & \\class{fragment}{{} = (1/4) \\Var(N) + (1/4) \\E[N]}         \\\\[3px]\n    & \\class{fragment}{{} = (1/4) \\Var(N) + (1/4) \\E[N] = \\frac{1}{4} \\cdot \\frac{35}{12} + \\frac{1}{4} \\cdot \\frac{7}{2} = \\boxed{ \\frac{77}{48} }}         \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics",
+    "href": "120B-W26/MTRev/MTRev.html#statistics",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-1",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-2",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-3",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nLinear Combinations\n\nA linear combination of an i.i.d. random sample \\(X_1, X_2, \\cdots, X_n\\) is defined to be \\[ U := \\sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \\cdots + a_n X_n \\] for constants \\(a_1, a_2, \\cdots, a_n\\).\n\nNote that a linear combination is also a statistic!\nIn particular, taking \\(a_1 = a_2 = \\cdots = a_n := 1/n\\) gives rise to the sample mean.\n\nThe expected value and variance of a linear combination follow trivially from PSTAT 120A principles."
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-4",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nLinear Combinations: an MGF Property\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\n\\[\\begin{align*}\n  \\class{fragment}{{} M_{\\sum_{i=1}^{n} a_i X_i}(t)}\n    & \\class{fragment}{{} : = \\E\\left[ e^{t\\sum_{i=1}^{n} a_i X_i} \\right] } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\E\\left[ \\prod_{i=1}^{n} e^{(a_i t) X_i} \\right]}  & \\class{fragment}{{}\\color{blue}[\\mathrm{Algebra/Arithmetic}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} \\E[e^{(a_i t) X_i}]} & \\class{fragment}{{}\\color{blue}[\\mathrm{Independence}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} M_{X_i}(a_i t)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-5",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nLinear Combinations: an Example\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\n\n\n\n\n\n\nExample 4\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) is an i.i.d. sample, what is the MGF of \\(\\bar{X}_n := (X_1 + X_2 + \\cdots + X_n) / n\\), in terms of the MGF \\(M_{X_i}(t)\\) of \\(X_i\\)?"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-6",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nDiscrete Statistics\n\nFor our so-called discrete statistics (aka order statistics), our general approach is to find the CDF, and then differentiate.\nFor example: if \\(X_{(n)} := \\max\\{X_1, X_2, \\cdots, X_n\\}\\) for an i.i.d. sample \\(X_1, X_2, \\cdots, X_n\\), then\n\n\\[\\begin{align*}\n  \\class{fragment}{{} F_{X_{(n)}}(x)}\n    & \\class{fragment}{{} : = \\Prob(X_{(n)} \\leq x) } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ CDF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\Prob(\\max\\{X_1, X_2, \\cdots, X_n\\} \\leq x)}  & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition}]}         \\\\[3px]\n    & \\class{fragment}{{} = \\Prob(X_1 \\leq x, \\ X_2 \\leq x, \\ \\cdots \\ X_n \\leq x)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Logic}]}         \\\\[3px]\n    & \\class{fragment}{{} = \\prod_{i=1}^{n} \\Prob(X_i \\leq x)} \\class{fragment}{{}  = [\\Prob(X_i \\leq x)]^n} & \\class{fragment}{{}\\color{blue}[\\mathrm{I.I.D.}]}         \\\\[3px]\n    & \\class{fragment}{{} = [F_{X_i}(x)]^n} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\  CDF}]}         \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/MTRev/MTRev.html#statistics-7",
+    "href": "120B-W26/MTRev/MTRev.html#statistics-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nDiscrete Statistics\n\nFor our so-called discrete statistics (aka order statistics), our general approach is to find the CDF, and then differentiate.\nFor example: if \\(X_{(n)} := \\max\\{X_1, X_2, \\cdots, X_n\\}\\) for an i.i.d. sample \\(X_1, X_2, \\cdots, X_n\\), then\n\n\\[\\begin{align*}\n  {{} F_{X_{(n)}}(x)}\n    & {{} =  [F_{X_i}(x)]^n} \\\\[3px]\n  \\class{fragment}{{} \\implies f_{X_{(n)}}(x)} & \\class{fragment}{{} = \\frac{\\mathrm{d}}{\\mathrm{d}x} f_{X_{(n)}}(x) } \\class{fragment}{{} = \\frac{\\mathrm{d}}{\\mathrm{d}x} [F_{X_i}(x)]^n } \\class{fragment}{{} = n [F_{X_i}(x)]^{n - 1} \\cdot f_{X_i}(x) }\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#announcements",
+    "href": "120B-W26/Wk04/wk04.html#announcements",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Announcements",
+    "text": "Announcements\n\nMidterm Exam is taking place on Monday February 9, 2026 at 11am (Usual Lecture Time) in ILP 1302 (Usual Lecture Classroom)\nYou are allowed to use a calculator, and two sheets of notes\n\nNo worked-out examples; only theorems, definitions, etc.\nYou will be asked to turn in your note sheet at the end of the exam, so you should make a copy beforehand if you are planning on reusing your sheet in the future\n\nI will be holding a Review Session from 5 - 6:30pm on Thursday February 5, 2026 in Broida 1610 (Canvas Announcement coming soon)\n\nThis will be comprised of some slides (material review) and some additional practice problems."
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
+    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\n\nGiven a collection of random variables X1, X2, …, Xn, we define a linear combination of these random variables to be \\[ U := \\sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \\cdots + a_n X_n \\]\nCrucially, U will be a random variable!\n\nE.g. Let X1 := revenue on a randomly-selected Monday; X2 := revenue on a randomly-selected Tuesday; X1 + X2 (total revenue) will be random!\n\nTwo questions:\n\nWhat are \\(\\E[U]\\) and \\(\\Var(U)\\)?\nWhat is the distribution of \\(U\\)?"
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-1",
+    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nExpectation and Variance\n\n\\(\\displaystyle \\E\\left[ \\sum_{i=1}^{n} a_i X_i \\right] =\\)\n\nAny assumptions?\n\n\n\n\n\n\\(\\displaystyle \\Var\\left( \\sum_{i=1}^{n} a_i X_i \\right) =\\)\n\nAny assumptions?"
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-2",
+    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nMGF\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\nProof: \\[\\begin{align*}\n  \\class{fragment}{{} M_{\\sum_{i=1}^{n} a_i X_i}(t)}\n    & \\class{fragment}{{} : = \\E\\left[ e^{t\\sum_{i=1}^{n} a_i X_i} \\right] } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} \\E[e^{(a_i t) X_i}]} & \\class{fragment}{{}\\color{blue}[\\mathrm{Independence}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} M_{X_i}(a_i t)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#statistics",
+    "href": "120B-W26/Wk04/wk04.html#statistics",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#statistics-1",
+    "href": "120B-W26/Wk04/wk04.html#statistics-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
+  },
+  {
+    "objectID": "120B-W26/Wk04/wk04.html#statistics-2",
+    "href": "120B-W26/Wk04/wk04.html#statistics-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
   },
   {
     "objectID": "DSCol-F25/DataVis/DataVis.html#some-questions",
@@ -980,284 +1246,116 @@
     "text": "Transformations\n\nAlso note how transformations may be useful, especially when one or more of your variables has comparatively high spread.\n\n\n\n\nRaw:\n\n\n\n\n\n\n\n\n\n\n\n\nLog-Transformed:"
   },
   {
-    "objectID": "120B-W26/Wk04/wk04.html#announcements",
-    "href": "120B-W26/Wk04/wk04.html#announcements",
+    "objectID": "120B-W26/Wk03/wk03.html#an-example",
+    "href": "120B-W26/Wk03/wk03.html#an-example",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Announcements",
-    "text": "Announcements\n\nMidterm Exam is taking place on Monday February 9, 2026 at 11am (Usual Lecture Time) in ILP 1302 (Usual Lecture Classroom)\nYou are allowed to use a calculator, and two sheets of notes\n\nNo worked-out examples; only theorems, definitions, etc.\nYou will be asked to turn in your note sheet at the end of the exam, so you should make a copy beforehand if you are planning on reusing your sheet in the future\n\nI will be holding a Review Session from 5 - 6:30pm on Thursday February 5, 2026 in Broida 1610 (Canvas Announcement coming soon)\n\nThis will be comprised of some slides (material review) and some additional practice problems."
+    "section": " An Example",
+    "text": "An Example\n\nSuppose I roll a fair six-sided die, and record the face that is showing.\nThen, I toss as many fair coins as there are spots on the face showing.\nLet X denote the number of heads I observe.\nQuestion: Is X Binomially distributed?\n\nNo, because we do not have a fixed number of trials- the number of coins I toss is itself random!\n\nLet N denote the result of the die roll. What distribution does N follow?\n\nN ~ DiscUnif{1, 2, …, 6}\n\\(\\Prob(N = n) = 1/6\\), for any \\(n \\in \\{1, \\cdots, 6\\}\\)\n\nWhat is \\(\\Prob(X = 5 \\mid N = 3)\\)?\n\nZero; it is impossible to toss 3 coins and observe 5 heads."
   },
   {
-    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
-    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables",
+    "objectID": "120B-W26/Wk03/wk03.html#an-example-1",
+    "href": "120B-W26/Wk03/wk03.html#an-example-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Linear Combinations of Random Variables",
-    "text": "Linear Combinations of Random Variables\n\nGiven a collection of random variables X1, X2, …, Xn, we define a linear combination of these random variables to be \\[ U := \\sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \\cdots + a_n X_n \\]\nCrucially, U will be a random variable!\n\nE.g. Let X1 := revenue on a randomly-selected Monday; X2 := revenue on a randomly-selected Tuesday; X1 + X2 (total revenue) will be random!\n\nTwo questions:\n\nWhat are \\(\\E[U]\\) and \\(\\Var(U)\\)?\nWhat is the distribution of \\(U\\)?"
+    "section": " An Example",
+    "text": "An Example\n\nWhat is \\(\\Prob(X = 3 \\mid N = 5)\\)?\n\n\\(\\binom{5}{3}(1/2)^5\\), using the formula for the Binomial PMF\n\nIndeed, after conditioning on the number of coins tossed, X becomes Binomially distributed: \\[ (X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2) \\]\nThe conditional PMF \\(p_{X \\mid N}(x \\mid n)\\) of \\((X \\mid N)\\) is then given by \\[ p_{X \\mid N}(x \\mid n) := \\Prob(X = x \\mid N = n) = \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n \\]\n\nNote that, for a fixed n \\(\\in\\) {1, 2, …, 6}, pX|N(x | n) is a valid PMF in x."
   },
   {
-    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-1",
-    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-1",
+    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectation",
+    "href": "120B-W26/Wk03/wk03.html#conditional-expectation",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Linear Combinations of Random Variables",
-    "text": "Linear Combinations of Random Variables\nExpectation and Variance\n\n\\(\\displaystyle \\E\\left[ \\sum_{i=1}^{n} a_i X_i \\right] =\\)\n\nAny assumptions?\n\n\n\n\n\n\\(\\displaystyle \\Var\\left( \\sum_{i=1}^{n} a_i X_i \\right) =\\)\n\nAny assumptions?"
+    "section": " Conditional Expectation",
+    "text": "Conditional Expectation\n\nFor discrete random variables X and Y, we have a sort of “Conditional LOTUS”: \\[ \\E[g(Y) \\mid X = x] = \\sum_{y} g(y) p_{Y \\mid x}(y \\mid x) \\]\n\nFor example, in our coin-tossing example from before, \\[ \\E[X \\mid N = n] = \\sum_{x = 0}^{n} x \\cdot \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n = \\frac{n}{2} \\]\n\nIn general, \\(h(x) := \\E[Y \\mid X = x]\\) will be a function of x. We define the conditional expectation of Y given X to be \\[ \\E[Y \\mid X] := h(X) \\]"
   },
   {
-    "objectID": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-2",
-    "href": "120B-W26/Wk04/wk04.html#linear-combinations-of-random-variables-2",
+    "objectID": "120B-W26/Wk03/wk03.html#continuous-realm",
+    "href": "120B-W26/Wk03/wk03.html#continuous-realm",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Linear Combinations of Random Variables",
-    "text": "Linear Combinations of Random Variables\nMGF\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\nProof: \\[\\begin{align*}\n  \\class{fragment}{{} M_{\\sum_{i=1}^{n} a_i X_i}(t)}\n    & \\class{fragment}{{} : = \\E\\left[ e^{t\\sum_{i=1}^{n} a_i X_i} \\right] } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} \\E[e^{(a_i t) X_i}]} & \\class{fragment}{{}\\color{blue}[\\mathrm{Independence}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} M_{X_i}(a_i t)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n\\end{align*}\\]"
+    "section": " Continuous Realm",
+    "text": "Continuous Realm\n\n\n\n\n\n\nDefinition: Conditional Density\n\n\nGiven continuous random variables \\(X\\) and \\(Y\\) with joint density \\(f_{X, Y}(x, y)\\), we define the conditional PDF of Y given Y to be \\[ f_{Y \\mid X}(y \\mid x) := \\frac{f_{X, Y}(x, y)}{f_X(x)} \\] only if x is such that \\(f_{X}(x) \\neq 0\\). If x is such that \\(f_X(x) = 0\\), then \\(f_{Y \\mid X}(y \\mid x)\\) is undefined.\n\n\n\n\n\n\n\n\n\n\nConditional Expectation\n\n\n\\[\\begin{align*}\n  h(x)  := \\E[Y \\mid X = x] & := \\int_{\\R} y f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y \\\\\n            \\E[Y \\mid X]    & := h(X) \\\\\n        \\E[g(Y) \\mid X = x] & := \\int_{\\R} g(y) f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y\n\\end{align*}\\]"
   },
   {
-    "objectID": "120B-W26/Wk04/wk04.html#statistics",
-    "href": "120B-W26/Wk04/wk04.html#statistics",
+    "objectID": "120B-W26/Wk03/wk03.html#conditional-expectations",
+    "href": "120B-W26/Wk03/wk03.html#conditional-expectations",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
+    "section": " Conditional Expectations",
+    "text": "Conditional Expectations\n\nIn general, \\(\\E[Y \\mid X = x]\\) will be a function of x, but will be deterministic (i.e. nonrandom).\nBy contrast, \\(\\E[Y \\mid X]\\) will be a random variable.\n\nTo calculate \\(\\E[Y \\mid X]\\), we first calculate \\(h(x) := \\E[Y \\mid X = x]\\) and then replace all instances of x with X.\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[Y] = \\E[\\E[Y \\mid X]] \\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Total Variance\n\n\n\\[ \\Var(Y) = \\Var(\\E[Y \\mid X]) + \\E[\\Var(Y \\mid X)] \\]"
   },
   {
-    "objectID": "120B-W26/Wk04/wk04.html#statistics-1",
-    "href": "120B-W26/Wk04/wk04.html#statistics-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
-  },
-  {
-    "objectID": "120B-W26/Wk04/wk04.html#statistics-2",
-    "href": "120B-W26/Wk04/wk04.html#statistics-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#welcome",
-    "href": "120B-W26/MTRev/MTRev.html#welcome",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Welcome!",
-    "text": "Welcome!\nAnd A Disclaimer\n\nHello! I’m Ethan (he/him), and I’m one of the TAs this quarter (I host the Wednesday 1pm and Wednesday 2pm Sections).\n\n\n\n\n\n\n\n\nDisclaimer\n\n\nI have not yet seen the exam! What I cover here today is not meant to be an indication of exactly what will be covered on the exam.\n\n\n\n\n\nJust because I cover something today doesn’t mean it will show up on the exam; similarly, just because I don’t cover something today doesn’t mean it won’t show up on the exam.\nWith that said, I have some prior experience with this class, so am basing my review on material I think could plausibly appear on the exam"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#roadmap-for-today",
-    "href": "120B-W26/MTRev/MTRev.html#roadmap-for-today",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Roadmap for Today",
-    "text": "Roadmap for Today\n\nReview some Material\n\nTransformations\nConditional distributions and expectations\nLinear Combinations and Statistics\n\nWork through some problems\n\nI’ll pass out a worksheet later with some problems for groupwork (that we’ll later solve together)\n\n\n\nI will upload most (but not all!) material from today to a Google Drive folder; I’ll send a Canvas announcement with more information."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-1",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-1",
+    "objectID": "120B-W26/Wk02/wk02.html#transformations",
+    "href": "120B-W26/Wk02/wk02.html#transformations",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nOverview\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g?\n\n\n\n\nConcrete example: unit conversion\n\nSay X denotes random temperature measurements in Centigrade\nLet Y denote the temperature measurements in Fahrenheit\nThen Y = (9/5) X + 32\n\nSo, transformation can actually be very applicable!"
+    "text": "Transformations\nUnivariate Case\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g(•)?\n\n\n\n\nReal-World Example: Unit conversion\n\nLet X denote temperature measurements of some apparatus in Centigrade\nLet Y denote the temperature measurements in Fahrenheit\nY = (9/5)X + 32\n\nExpectation (sidebar: how can we compute \\(\\E[Y]\\)?) is not enough\n\nE.g. just because, say, \\(\\E[Y] = 2\\) doesn’t mean we know what distribution Y follows"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-2",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-2",
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-1",
+    "href": "120B-W26/Wk02/wk02.html#transformations-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nOverview\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g?\n\n\n\n\nQuestion 1: Can we calculate \\(\\E[Y]\\) without knowing its density?\n\nYes, using the LOTUS: \\(\\E[Y] = \\E[g(X)] = \\int_{-\\infty}^{\\infty} g(x) f_X(x) \\ \\mathrm{d}x\\)\n\nQuestion 2: Does \\(\\E[Y]\\) tell us what distribution Y follows?\n\nNo; e.g. if \\(\\E[Y] = 2\\); do we have \\(Y \\sim \\mathrm{Exp}(1/2)\\)? or \\(Y \\sim \\mathcal{N}(2, 1)\\)? Etc.\n\nQuestion 3: What are some things that uniquely determine a distribution?\n\nMGF (moment generating function) and/or PDF/CDF (probability density function/cumulative distribution function)"
+    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nGoal\n\n\nGiven a random variable X whose distribution is known, what is the distribution of Y := g(X) for some function g(•)?\n\n\n\n\nFirst Approach: Leverage the fact that MGF’s uniquely determine distributions\n\nThat is, if we can find the MGF MY(t) of Y, then we will (hopefully!) know its distribution!\n\nRecall two useful properties of MGFs from last week’s Section:\n\nIf X and Y are independent, MX + Y(t) = MX(t) * MY(t)\nMaX + b(t) = ebt * MX(at)"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-3",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-3",
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-2",
+    "href": "120B-W26/Wk02/wk02.html#transformations-2",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nFact 1\n\n\nMGFs uniquely determine distributions, provided they are continuous in a small neighborhood of the origin.\n\n\n\n\nIn other words: every distribution has a unique MGF, and every MGF corresponds to a unique distribution.\n\nE.g. say I tell you the random variable Y has MGF given by MY(t) = et2 / 2.\nThere is only one distribution that has this MGF (can anyone tell me which one?)\n\nSo, going back to our transformation problem, if we can find an expression for the MGF of Y, we will know its distribution."
+    "text": "Transformations\nMGF Method: Example (On the Board)\n\n\n\n\n\n\nExample 1\n\n\nIf X ~ Exp(λ) and Y = cX for some c &gt; 0, what is the distribution of Y?"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-4",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-4",
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-3",
+    "href": "120B-W26/Wk02/wk02.html#transformations-3",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nMGF Method\nUseful Properties of MGFs:\n\nMaX + b(t) =\n\nProof:\n\n\n\n\n\nIf X and Y are independent, MX + Y(t) =\n\nProof:"
+    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf Y = g(X) for some monotonic and differentiable g(•), then \\(f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right|\\)\n\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nIf X ~ Exp(λ) and Y = cX for some c &gt; 0, what is the distribution of Y?"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-5",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-5",
+    "objectID": "120B-W26/Wk02/wk02.html#transformations-4",
+    "href": "120B-W26/Wk02/wk02.html#transformations-4",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Transformations",
-    "text": "Transformations\nMGF Method\n\n\n\n\n\n\nExample 1\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
+    "text": "Transformations\nTransformation Theorem\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf Y = g(X) for some monotonic and differentiable g(•), then \\(f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right|\\)\n\n\n\n\nIf g(•) is not monotonic, then split up the support of X into regions over which g(•) is monotonic.\n\n\n\n\n\n\n\n\nExample 2\n\n\nIf X ~ Unif[-1, 1] and Y := X2, find fY(y), the density of Y.\n\n\n\n\n\nTry this on your own! The final answer is \\(f_Y(y) = \\begin{cases} \\frac{1}{2 \\sqrt{y}} & \\text{if } 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\)"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-6",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-6",
+    "objectID": "120B-W26/Wk01/wk1.html#hello",
+    "href": "120B-W26/Wk01/wk1.html#hello",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Transformations",
-    "text": "Transformations\nTransformation Theorem\n\nPDFs also uniquely determine distributions.\n\nSo, if we can find the PDF of Y := g(X), then we will know its distribution.\n\n\n\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\n\n\nCaution\n\n\nWhen using the Transformation Theorem, make sure to check that the transformation is strictly monotonic and differentiable!"
+    "section": " Hello!",
+    "text": "Hello!\nA Quick Introduction\n\nHello! My name is Ethan (he/him), and I am very much looking forward to being your TA!\n\nI am a sixth year PhD; this is my fifth time with this course (including having been the Instructor once :) )\n\nMy Office Hours: Tuesdays, 1:30 - 2:30 pm in SH 5607 F  Thursdays, 10:30 - 11:30 am in SH 5607 F\nMy Email: epmarzban@pstat.ucsb.edu (please allow a 24 business hour response time)\n\n\n\n\n\n\n\n\nGoal for Today\n\n\nBriefly review PSTAT 120A and Calculus material."
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#transformations-7",
-    "href": "120B-W26/MTRev/MTRev.html#transformations-7",
+    "objectID": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables",
+    "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Transformations",
-    "text": "Transformations\nTransformation Theorem: Example\n\n\n\n\n\n\nTransformation Theorem\n\n\nIf X is a random variable with PDF fX(x) and Y := g(X) where g is strictly monotonic and differentiable over the support of X, then the PDF of Y is given by \\[ f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left| \\frac{\\mathrm{d}}{\\mathrm{d}y} g^{-1}(y) \\right| \\]\n\n\n\n\n\n\n\n\n\nExample 1 (Revisited)\n\n\nLet X ~ Exp(\\(\\lambda\\)), and define Y := cX for some positive constant c &gt; 0. What distribution does Y follow?"
+    "section": " Probability Spaces; Random Variables",
+    "text": "Probability Spaces; Random Variables\nHigh-Level Overview\n\nProbability Space: \\((\\Omega, \\F, \\Prob)\\) where:\n\n\\(\\Omega\\) denotes the outcome space\n\\(\\F\\) denotes the event space\n\\(\\Prob: \\F \\to \\R\\) denotes the probability measure\n\nA random variable \\(X\\) is a mapping \\(X : \\Omega \\to \\R\\)\n\nSupport: \\(X(\\Omega)\\) (set of values over which the random variable is defined)\n\nFinite or countable support \\(\\implies\\) \\(X\\) is discrete\nUncountable support \\(\\implies\\) \\(X\\) is continuous"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-1",
-    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-1",
+    "objectID": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
+    "href": "120B-W26/Wk01/wk1.html#probability-spaces-random-variables-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Joint Distributions",
-    "text": "Joint Distributions\nOverview\n\nRecall that a single continuous random variable X is described by its PDF fX(x).\nA pair of continuous random variables (X, Y) is described by a joint PDF fX,Y(x, y) that satisfies:\n\nNonnegativity: \\(f_{X, Y}(x, y) \\geq 0\\) for all \\((x, y) \\in \\R^2\\)\nDouble-Integrates to Unity: \\(\\iint_{\\R^2} f_{X, Y}(x, y) \\ \\mathrm{d}A = 1\\)\n\nGiven a valid joint density fX,Y(x, y), we have:\n\n\\(\\Prob((X, Y) \\in \\mathcal{R}) = \\iint_{\\mathcal{R}} f_{X, Y}(x, y) \\ \\mathrm{d}A\\) (probabilities are found by double-integrating the joint density)\n\\(\\E[g(X, Y)] = \\iint_{\\R^2} g(x, y) f_{X, Y}(x, y) \\ \\mathrm{d}A\\) (multivariate LOTUS)"
+    "section": " Probability Spaces; Random Variables",
+    "text": "Probability Spaces; Random Variables\nExample\n\n\n\n\n\n\nExample 1\n\n\nA fair coin is tossed twice, and the outcomes are recorded; let X denote the number of heads.\n\n\n\n\nOutcome Space: \\(\\Omega =\\) {H, T}2 = {(H, H), (H, T), (T, H), (T, T) }\nX should map each element in \\(\\Omega\\) to a real number, by counting the number of heads in the outcome.\n\nX((H, H)) = 2;       X((H, T)) = 1;       X((T, H)) = 1;       X((T, T)) = 0\n\nThe support of X is {0, 1, 2}, which is finite, meaning X is a discrete random variable\nFair Coin implies we should use the equally-likely probability measure; \\(\\Prob(E) = |E| / |\\Omega|\\) for every event E.\n\nAllows us to construct the probability mass function (PMF) of X."
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-2",
-    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-2",
+    "objectID": "120B-W26/Wk01/wk1.html#random-variables",
+    "href": "120B-W26/Wk01/wk1.html#random-variables",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Joint Distributions",
-    "text": "Joint Distributions\nExample\n\\(f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\)"
+    "section": " Random Variables",
+    "text": "Random Variables\nRelevant Quantities\n\n\nDiscrete:\n\nPMF: \\(f(x) := \\Prob(X = x)\\)\nProbabilities: \\(\\Prob(X \\in B) = \\sum_{x \\in B} f(x)\\)\nCMF: \\(F(x) := \\Prob(X \\leq x) = \\sum_{t \\leq x} f(t)\\)\nLOTUS: \\(\\E[g(X)] = \\sum_{x} g(x) f(x)\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)\n\n\nContinuous:\n\nPDF: \\(f(x) \\geq 0\\) and \\(\\int_{\\R} f(x) = 1\\)\nProbabilities: \\(\\Prob(X \\in B) = \\int_{B} f(x) \\ \\mathrm{d}x\\)\nCDF: \\(F(x) := \\Prob(X \\leq x) = \\int_{-\\infty}^{x} f(t) \\ \\mathrm{d}t\\)\nLOTUS: \\(\\E[g(X)] = \\int_{\\R} g(x) f(x) \\ \\mathrm{d}x\\)\nVariance: \\(\\Var(X) := \\E\\left\\{(X - \\E[X])^2\\right\\}\\)"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-3",
-    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-3",
+    "objectID": "120B-W26/Wk01/wk1.html#moment-generating-functions",
+    "href": "120B-W26/Wk01/wk1.html#moment-generating-functions",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Joint Distributions",
-    "text": "Joint Distributions\nMarginal Densities\n\nGiven a valid joint density function \\(f_{X, Y}(x, y)\\), we can extract the marginal densities of X and Y by “integrating out the other variable:” \\[\\begin{align*}\n  f_X(x)  & = \\int_{\\R} f_{X, Y}(x, y) \\ \\mathrm{d}y  \\\\\n  f_Y(y)  & = \\int_{\\R} f_{X, Y}(x, y) \\ \\mathrm{d}x\n\\end{align*}\\]\nOftentimes the bounds are the trickiest part; my advice is to always sketch a picture!\n\nKeep in mind that the bounds may change depending on the variable in question; we’ll talk about this more when we get to today’s worksheet."
+    "section": " Moment Generating Functions",
+    "text": "Moment Generating Functions\nOverview\n\n\n\n\n\n\nDefinition: MGF\n\n\nThe moment generating function (MGF) of a random variable X is defined as \\[ M_X(t) := \\E[e^{tX}] \\]\n\n\n\nProperties:\n\nIf it is continuous in a neighborhood of zero, then it uniquely determines a distribution.\n\\(M_X^{(n)}(0) = \\E[X^n]\\) for any \\(n \\in \\N\\) (Homework Hint: What is \\(M_X(0)\\)?)\n\\(M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)\\) provided that \\(X \\perp Y\\)\n\\(M_{aX + b}(t) = e^{tb} \\cdot M_X(at)\\) for constants \\(a, b\\)"
   },
   {
-    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-4",
-    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-4",
+    "objectID": "120B-W26/Wk01/wk1.html#parameters",
+    "href": "120B-W26/Wk01/wk1.html#parameters",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Joint Distributions",
-    "text": "Joint Distributions\nCovariance\n\nThe covariance between two random variables X and Y is given by \\[\\begin{align*}\n  \\Cov(X, Y)  & := \\E\\left\\{ \\left( X - \\E[X] \\right) \\left( Y - \\E[Y] \\right)  \\right\\}  \\\\\n& = \\E[XY] - \\E[X] \\cdot \\E[Y]\n\\end{align*}\\]\n\n\nQuestions:\n\n\nWhat is another name for \\(\\Cov(X, X)\\)?\nAre covariances bounded or unbounded?\nWhat is the covariance between two independent random variables? Does zero covariance imply independence?"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#joint-distributions-5",
-    "href": "120B-W26/MTRev/MTRev.html#joint-distributions-5",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Joint Distributions",
-    "text": "Joint Distributions\nProperties of Covariance\n\n\n\n\n\n\nBilinearity Property\n\n\n\\[ \\Cov\\left( \\sum_{i=1}^{n} a_i X_i \\ , \\ \\sum_{j=1}^{n} b_j Y_j \\right) = \\sum_{i=1}^{n} \\sum_{j=1}^{n} a_i b_j \\Cov(X_i, X_j)\\]\n\n\n\n\n\n\n\n\n\n\nVariance of a Sum\n\n\n\\[ \\Var\\left( \\sum_{i=1}^{n} a_i X_i \\right) = \\sum_{i=1}^{n} a_i^2 \\Var(X_i) + 2 \\sum_{i \\neq j} a_i a_j \\Cov(X_i, X_j) \\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-1",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nConditional PMF\n\nRecall: given events E and F such that \\(\\Prob(F) \\neq 0\\), we define \\[ \\Prob(E \\mid F) = \\frac{\\Prob(E \\cap F)}{\\Prob(F)} \\]\nGiven discrete random variables X and Y with joint PMF pX,Y(x,y), we have, provided pY(y) ≠ 0, \\[ \\Prob(X = x \\mid Y = y) := \\frac{\\Prob(X = x, \\ Y = y)}{\\Prob(Y = y)} = \\frac{p_{X, Y}(x, y)}{p_Y(y)} \\]\n\nFor any fixed y, this will be a valid PMF in x which is why we notate this quantity pX|Y(x|y) and call it the conditional PMF of X given Y = y."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-2",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nExample\n\nRoll a fair six-sided die, and record the face showing\n\nThen toss as many fair coins as there are spots on the face showing\nLet X denote the number of heads\n\nQuestion: Does X follow a Binomial distribution?\n\nNo, as the number of trials is not fixed!\n\nLet N denote the result of the die roll\n\nThen N ~ DiscUnif{1, …, 6}\n\nWhat is pX|N(5|7)?\n\nUndefined; it is not possible to roll a 7 on a six-sided die"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-3",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-3",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nExample\n\nWhat is pX|N(5|3)?\n\nZero; it is impossible to toss three coins and observe 5 heads\n\nWhat is pX|N(3|5)?\n\n\\(p_{X \\mid N}(3 \\mid 5) = \\Prob(X = 3 \\mid N = 5) = \\binom{5}{3} (1/2)^5\\), using the Binomial PMF\n\nSo, provided that n \\(\\in\\) {1, …, 6}, we have \\[ p_{X \\mid N}(x \\mid n) = \\begin{cases}\n  \\binom{n}{x} \\left( \\frac{1}{2} \\right)^n  & \\text{if } x \\in \\{0, 1, \\cdots, n\\}  \\\\\n  0     & \\text{otherwise}\n\\end{cases} \\] and for any n \\(\\notin\\) {1, …, 6} we have that pX|N(x|n) is undefined.\n\nWe can succinctly write this as \\((X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2)\\)."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-4",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-4",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nConditional Distributions: Discrete Case\n\nGiven discrete random variables X and Y with joint PMF pX,Y(x, y):\n\n\\(\\Prob(X \\in A \\mid Y = y) = \\sum\\limits_{x \\in A} p_{X \\mid Y}(x \\mid y)\\)\n\\(\\E[g(X) \\mid Y = y] := \\sum\\limits_{x} x p_{X \\mid Y}(x \\mid y)\\)\n\nNote that \\(h(y) := \\E[X \\mid Y = y]\\) will be a function of y.\n\nWe define \\(\\E[X \\mid Y]\\), the conditional expectation of X given Y, to be \\(h(Y)\\). That is, we first compute \\(h(y) := \\E[X \\mid Y = y]\\) and then replace all instances of y with Y.\nThis means that \\(\\E[X \\mid Y]\\) will be a random variable\n\nExample: in our coin tossing example, \\(\\E[X \\mid N = n] = n/2\\) meaning \\(\\E[X \\mid N] = N/2\\)."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-5",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-5",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nConditional Distributions: Continuous Case\n\n\n\n\n\n\nDefinition: Conditional Density\n\n\nGiven continuous random variables \\(X\\) and \\(Y\\) with joint density \\(f_{X, Y}(x, y)\\), we define the conditional PDF of X given Y to be \\[ f_{X \\mid Y}(x \\mid y) := \\frac{f_{X, Y}(x, y)}{f_Y(y)} \\] only if y is such that \\(f_{Y}(y) \\neq 0\\). If y is such that \\(f_Y(y) = 0\\), then \\(f_{X \\mid Y}(x \\mid y)\\) is undefined.\n\n\n\n\n\\(\\Prob(X \\in A \\mid Y = y) = \\int_{A} f_{X \\mid Y}(x \\mid y) \\ \\mathrm{d}x\\)\n\\(\\E[g(Y) \\mid X = x] := \\int_{\\R} g(y) f_{Y \\mid X}(y \\mid x) \\ \\mathrm{d}y\\)\n\\(\\E[X \\mid Y] := h(Y)\\) where \\(h(y) := \\E[X \\mid Y = y]\\)"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-6",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-6",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nExample and Distinction\n\n\n\n\n\n\nExample 2\n\n\nLet X and Y be continuous random variables with joint density given by \\[f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\]\n\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X &gt; 0.5)\\)\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X = 0.5)\\)\n\n\n\n\n\nNotice how similar these questions appear\n\nThey require us to proceed in very different directions.\n\nRecall: \\(\\Prob(E \\mid F) := \\Prob(E \\cap F) / \\Prob(F)\\), provided that \\(\\Prob(F) \\neq 0\\).\n\nDoes \\(\\Prob(X &gt; 0.5) = 0\\)? Does \\(\\Prob(X = 0.5) = 0\\)?"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-7",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-7",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nExample and Distinction\n\n\n\n\n\n\nExample 2\n\n\nLet X and Y be continuous random variables with joint density given by \\[f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\]\n\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X &gt; 0.5)\\)\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X = 0.5)\\)\n\n\n\n\n\nPart (a): conditioning on an event with nonzero probability; can use the definition of conditional probability \\[ \\Prob(Y &lt; 0.5 \\mid X &gt; 0.5) = \\frac{\\Prob(X &gt; 0.5, \\ Y &lt; 0.5)}{\\Prob(X &gt; 0.5)} \\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-8",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-8",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nExample and Distinction\n\n\n\n\n\n\nExample 2\n\n\nLet X and Y be continuous random variables with joint density given by \\[f_{X, Y}(x, y) = \\begin{cases} \\frac{6}{5} (x + y^2) & \\text{if } 0 \\leq x \\leq 1, \\ 0 \\leq y \\leq 1 \\\\ 0 & \\text{otherwise} \\\\ \\end{cases}\\]\n\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X &gt; 0.5)\\)\nCalculate \\(\\Prob(Y &lt; 0.5 \\mid X = 0.5)\\)\n\n\n\n\n\nPart (b): conditioning on an event with zero probability; cannot use the definition of conditional probability, must instead integrate the conditional density \\[ \\Prob(Y &lt; 0.5 \\mid X = 0.5) = \\int_{-\\infty}^{0.5} f_{Y \\mid X}(y \\mid 0.5) \\ \\mathrm{d}y  \\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-9",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-9",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nExample and Distinction: Takeaway\n\nSo, here’s the key takeaway: always check whether the event we’re conditioning on has zero or nonzero probability.\n\nIf the event has nonzero probability, use the “120A definition” of conditional probability (and double-integrate the joint density to find the numerator and denominator)\nIf instead the event has zero probability, integrate the conditional density."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-10",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-10",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nConditional Expectations, Revisited\n\nRecall that \\(\\E[X \\mid Y]\\) will be a random variable.\n\nA natural question is: what is its expectation?\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[ \\E[X \\mid Y]] = \\E[X]\\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Variance\n\n\n\\[ \\Var(X) = \\Var(\\E[X \\mid Y]) + \\E[\\Var(X \\mid Y)] \\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#conditional-distributions-11",
-    "href": "120B-W26/MTRev/MTRev.html#conditional-distributions-11",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Conditional Distributions",
-    "text": "Conditional Distributions\nConditional Expectations, Example\n\n\n\n\n\n\nExample 3\n\n\nLet \\((X \\mid N = n) \\sim \\mathrm{Bin}(n, 1/2)\\) and \\(N \\sim \\mathrm{DiscUnif}\\{1, \\cdots, 6\\}\\). Find \\(\\E[X]\\) and \\(\\Var(X)\\). Some Facts: \\(\\E[N] = (7/2)\\) and \\(\\Var(N) = 35/12\\).\n\n\n\n\n\\(\\E[X \\mid N] = N/2 \\implies \\E[X] = \\E[\\E[X \\mid N]] = \\E[N / 2] = (7/2)(1/2) = \\boxed{7/4}\\)\n\\(\\Var(X \\mid N) = N(1/2)(1/2) = (N / 4)\\)\n\n\\[\\begin{align*}\n  \\class{fragment}{{} \\Var(X)}\n    & \\class{fragment}{{} = \\Var(\\E[X \\mid N]) + \\E[\\Var(X \\mid N)]}         \\\\[3px]\n    & \\class{fragment}{{} = \\Var(N/2) + \\E[(N / 4)]}         \\\\[3px]\n    & \\class{fragment}{{} = (1/4) \\Var(N) + (1/4) \\E[N]}         \\\\[3px]\n    & \\class{fragment}{{} = (1/4) \\Var(N) + (1/4) \\E[N] = \\frac{1}{4} \\cdot \\frac{35}{12} + \\frac{1}{4} \\cdot \\frac{7}{2} = \\boxed{ \\frac{77}{48} }}         \\\\[3px]\n\\end{align*}\\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics",
-    "href": "120B-W26/MTRev/MTRev.html#statistics",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-1",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-2",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-2",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-3",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-3",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nLinear Combinations\n\nA linear combination of an i.i.d. random sample \\(X_1, X_2, \\cdots, X_n\\) is defined to be \\[ U := \\sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \\cdots + a_n X_n \\] for constants \\(a_1, a_2, \\cdots, a_n\\).\n\nNote that a linear combination is also a statistic!\nIn particular, taking \\(a_1 = a_2 = \\cdots = a_n := 1/n\\) gives rise to the sample mean.\n\nThe expected value and variance of a linear combination follow trivially from PSTAT 120A principles."
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-4",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-4",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nLinear Combinations: an MGF Property\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\n\\[\\begin{align*}\n  \\class{fragment}{{} M_{\\sum_{i=1}^{n} a_i X_i}(t)}\n    & \\class{fragment}{{} : = \\E\\left[ e^{t\\sum_{i=1}^{n} a_i X_i} \\right] } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\E\\left[ \\prod_{i=1}^{n} e^{(a_i t) X_i} \\right]}  & \\class{fragment}{{}\\color{blue}[\\mathrm{Algebra/Arithmetic}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} \\E[e^{(a_i t) X_i}]} & \\class{fragment}{{}\\color{blue}[\\mathrm{Independence}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} M_{X_i}(a_i t)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n\\end{align*}\\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-5",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-5",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nLinear Combinations: an Example\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\n\n\n\n\n\n\nExample 4\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) is an i.i.d. sample, what is the MGF of \\(\\bar{X}_n := (X_1 + X_2 + \\cdots + X_n) / n\\), in terms of the MGF \\(M_{X_i}(t)\\) of \\(X_i\\)?"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-6",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-6",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nDiscrete Statistics\n\nFor our so-called discrete statistics (aka order statistics), our general approach is to find the CDF, and then differentiate.\nFor example: if \\(X_{(n)} := \\max\\{X_1, X_2, \\cdots, X_n\\}\\) for an i.i.d. sample \\(X_1, X_2, \\cdots, X_n\\), then\n\n\\[\\begin{align*}\n  \\class{fragment}{{} F_{X_{(n)}}(x)}\n    & \\class{fragment}{{} : = \\Prob(X_{(n)} \\leq x) } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ CDF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\Prob(\\max\\{X_1, X_2, \\cdots, X_n\\} \\leq x)}  & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition}]}         \\\\[3px]\n    & \\class{fragment}{{} = \\Prob(X_1 \\leq x, \\ X_2 \\leq x, \\ \\cdots \\ X_n \\leq x)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Logic}]}         \\\\[3px]\n    & \\class{fragment}{{} = \\prod_{i=1}^{n} \\Prob(X_i \\leq x)} \\class{fragment}{{}  = [\\Prob(X_i \\leq x)]^n} & \\class{fragment}{{}\\color{blue}[\\mathrm{I.I.D.}]}         \\\\[3px]\n    & \\class{fragment}{{} = [F_{X_i}(x)]^n} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\  CDF}]}         \\\\[3px]\n\\end{align*}\\]"
-  },
-  {
-    "objectID": "120B-W26/MTRev/MTRev.html#statistics-7",
-    "href": "120B-W26/MTRev/MTRev.html#statistics-7",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nDiscrete Statistics\n\nFor our so-called discrete statistics (aka order statistics), our general approach is to find the CDF, and then differentiate.\nFor example: if \\(X_{(n)} := \\max\\{X_1, X_2, \\cdots, X_n\\}\\) for an i.i.d. sample \\(X_1, X_2, \\cdots, X_n\\), then\n\n\\[\\begin{align*}\n  {{} F_{X_{(n)}}(x)}\n    & {{} =  [F_{X_i}(x)]^n} \\\\[3px]\n  \\class{fragment}{{} \\implies f_{X_{(n)}}(x)} & \\class{fragment}{{} = \\frac{\\mathrm{d}}{\\mathrm{d}x} f_{X_{(n)}}(x) } \\class{fragment}{{} = \\frac{\\mathrm{d}}{\\mathrm{d}x} [F_{X_i}(x)]^n } \\class{fragment}{{} = n [F_{X_i}(x)]^{n - 1} \\cdot f_{X_i}(x) }\n\\end{align*}\\]"
+    "section": " Parameters",
+    "text": "Parameters\nExample: Normal Distribution\nThink of parameters as dials that control the shape of a distribution.\n\nviewof µ = Inputs.range(\n  [-3, 3], \n  {value: 0, step: 0.1, label: \"µ:\"}\n)\n\nviewof σ = Inputs.range(\n  [0.2, 3.1], \n  {value: 1, step: 0.01, label: \"σ:\"}\n)\n\nsigsquared = σ**2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njstat = require(\"jstat\")\n\nplt_pdf = Plot.plot({\n    width: 850,\n    height: 375,\n    color: {\n      legend: true\n    },\n    x: {\n      label: \"x\",\n      axis: true\n    },\n    y: {\n      label: \"f(x)\",\n      //axis: false,\n      //domain: [0, d3.max(pdfvals.map(d =&gt; d.pdf))]  \n    },\n    marks: [\n      Plot.ruleY([0]),\n      Plot.ruleX([0]),\n      Plot.line(pdfvals, {x: \"x\", y: \"pdf\", stroke : \"blue\", strokeWidth: 4})\n    ]\n  })\n  \npdfvals = {\n  const x = d3.range(-12, 12, 0.01);\n  var pdf;\n  pdf = x.map(x =&gt; ({x: x, pdf: jstat.normal.pdf(x, µ, σ)}));\n  return pdf\n}"
   },
   {
     "objectID": "index.html",
