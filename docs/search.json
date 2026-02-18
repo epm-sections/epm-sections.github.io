@@ -1127,6 +1127,97 @@
     "text": "Transformations\n\nAlso note how transformations may be useful, especially when one or more of your variables has comparatively high spread.\n\n\n\n\nRaw:\n\n\n\n\n\n\n\n\n\n\n\n\nLog-Transformed:"
   },
   {
+    "objectID": "120B-W26/Wk07_old/wk07.html#statistical-inference",
+    "href": "120B-W26/Wk07_old/wk07.html#statistical-inference",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistical Inference",
+    "text": "Statistical Inference\nGeneral Framework\n\n\n\nWe have a population, governed by a set of population parameters that are unobserved (but that we’d like to make claims about).\nTo make claims about the population parameters, we take a sample.\nWe then use our sample to make inferences (i.e. claims) about the population parameters.\n\n\n\n\n\nIn estimation, we seek to construct estimators to estimate population parameters."
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\n\nA coin lands “heads” with probability \\(\\theta \\in (0, 1)\\).\nSuppose we toss the coin five times, and observe (H, T, H, H, T).\n\nLetting X denote the number of heads in 5 tosses, X ~ Bin(5, \\(\\theta\\))\n\nIf \\(\\theta = 0.3\\), how likely were we to have observed what we saw?\n\nIf \\(\\theta = 0.3\\), the probability of observing three heads is \\(\\Prob(X = 3) = \\binom{5}{3}(0.3)^3(0.7)^2 \\approx 0.1323\\)\n\nIf \\(\\theta = 0.4\\), how likely were we to have observed what we saw?\n\nIf \\(\\theta = 0.3\\), the probability of observing three heads is \\(\\Prob(X = 3) = \\binom{5}{3}(0.4)^3(0.6)^2 \\approx 0.2304\\)\n\nGiven that we observed (H, T, H, H, T), which was more likely: that \\(\\theta = 0.3\\) or that \\(\\theta = 0.4\\)?"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-1",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nMaximization\n\n\n\n\n\n\nIdea:\n\n\nTo estimate a parameter \\(\\theta\\) given data \\(X_1, X_2, \\cdots, X_n\\), find the value of \\(\\theta\\) that was most likely to have given rise to the data we observed.\n\n\n\n\nThis procedure is called maximum likelihood estimation and the resulting estimator is called the maximum likelihood estimator\nThe likelihood gives a way of answering the question: “given data \\(X_1, X_2, \\cdots, X_n\\), how likely was it that the true value of the parameter were \\(\\theta\\), for an arbitrary \\(\\theta\\)?”\nFor example, back to our coin-tossing example:"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-2",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nExample"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-3",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nExample: Different Datasets"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-4",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nDefinition\n\nThe likelihood given a sample is just the marginal mass/density function.\nIndeed, the reason we call this a “likelihood” function instead of a “probability” function is because, in the continuous case, the likelihood at a given point doesn’t really represent a true probability (but, it is giving the same sort of information as a probability).\n\n\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) := f_{X_1, X_2, \\cdots, X_n}(x_1, x_2, \\cdots, x_n; \\theta) \\]\n\n\nIf the sample is i.i.d.: \\(\\displaystyle \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\prod_{i=1}^{n} f(x_i; \\theta)\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-5",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nContinuous Example: Exponential\n\nExample Scenario: The wait time at The Arbor of a randomly-selected customer follows an Exponential distribution with unknown mean \\(\\theta\\).\nLikelihood (assuming i.i.d.): \\[\\begin{align*}\n  \\class{fragment}{{} \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n)}\n&\\class{fragment}{{} = \\prod_{i=1}^{n} f(x_i; \\theta)}            \\\\[3px]\n&\\class{fragment}{{} = \\prod_{i=1}^{n} \\left[ \\frac{1}{\\theta} e^{-Y_i/\\theta} \\cdot 1 \\! \\! 1_{\\{x_i \\geq 0\\}} \\right] }    \\\\[3px]\n&\\class{fragment}{{} = \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\cdot 1 \\! \\! 1_{\\{x_{(1)} \\geq 0\\}}}\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-6",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nContinuous Example: Exponential\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\cdot 1 \\! \\! 1_{\\{x_{(1)} \\geq 0\\}} \\]\n\nNote that we are viewing this as a function of \\(\\theta\\)!\n\nThe idea is: we assume that we already have our data \\((x_1, x_2, \\cdots, x_n)\\); what we’re trying to do is figure out the \\(\\theta\\) value that makes the data we observed most plausible.\n\nFurther note: this shows that likelihoods aren’t true density functions in \\(\\theta\\).\n\nIndeed, \\(\\displaystyle \\int_{0}^{\\infty} \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\ \\mathrm{d}\\theta = \\frac{(n - 2)!}{(\\sum_{i=1}^{n} x_i)^{n - 1}} \\neq 1\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-7",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nContinuous Example: Exponential\n\n\nCode\nexp_lik &lt;- function(theta, y) {\n  (1 / theta)^(length(y)) * exp(-(1 / theta) * sum(y))\n}"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nGeneral Procedure\n\n\n\n\n\n\nDefinition: Maximum Likelihood Estimator\n\n\n\\[ (\\widehat{\\theta}_{1, \\mathrm{MLE}}, \\ \\cdots, \\ \\widehat{\\theta}_{m, \\mathrm{MLE}})  := \\argmax_{(\\theta_1, \\cdots, \\theta_m)} \\Lik(\\theta_1, \\cdots, \\theta_m; X_1, X_2, \\cdots, X_n) \\]\n\n\n\n\nProcedurally, we often work with the log-likelihood instead. That is:\n\n\nFind the likelihood\nTake the logarithm to find the log-likelihood\nFind the minimizing value of the log-likelihood"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-1",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nExample\nLet \\(X_1, X_2, \\cdots, X_n \\iid f(x; \\theta) = \\frac{x}{\\theta} \\exp\\left\\{ - \\frac{x^2}{2 \\theta} \\right\\}\\)\n\\[\\begin{align*}\n  \\class{fragment}{{} \\mathcal{L}(\\theta; X_1, \\cdots, X_n)}\n    &\\class{fragment}{{} = \\prod_{i=1}^{n} f(X_i; \\theta)} \\class{fragment}{{} = \\prod_{i=1}^{n} \\left[ \\frac{X_i}{\\theta} \\cdot \\exp\\left\\{ - \\frac{X_i^2}{2\\theta} \\right\\} \\right]  }    \\\\[3px]\n    &\\class{fragment}{{} = \\left( \\frac{1}{\\theta} \\right)^n \\cdot \\left( \\prod_{i=1}^{n} X_i \\right) \\cdot \\exp\\left\\{ - \\frac{1}{2\\theta} \\sum_{i=1}^{n} X_i^2 \\right\\}  }  \\\\[3px]\n   \\class{fragment}{{} \\ell(\\theta; X_1, \\cdots, X_n)}  &\\class{fragment}{{} := \\ln \\mathcal{L}(\\theta; X_1, \\cdots, X_n) }  \\class{fragment}{{} = -n\\ln(\\theta) + \\sum_{i=1}^{n} \\ln(X_i) - \\frac{1}{2 \\theta} \\sum_{i=1}^{n} X_i^2 }  \\\\[3px]\n   \\class{fragment}{{} \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n)} &\\class{fragment}{{}  = - \\frac{n}{\\theta} + \\frac{1}{2 \\theta^2} \\sum_{i=1}^{n} X_i^2 }\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-2",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nExample\nLet \\(X_1, X_2, \\cdots, X_n \\iid f(x; \\theta) = \\frac{x}{\\theta} \\exp\\left\\{ - \\frac{x^2}{2 \\theta} \\right\\}\\)\n\n\n\\[ \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n) = - \\frac{n}{\\theta} + \\frac{1}{2 \\theta^2} \\sum_{i=1}^{n} X_i^2  \\]\n\n\n\n\nThus, \\(\\widehat{\\theta}_{\\mathrm{MLE}}\\) must satisfy\n\\[  - \\frac{n}{\\widehat{\\theta}_{\\mathrm{MLE}} } + \\frac{1}{2 \\widehat{\\theta}_{\\mathrm{MLE}}^2} \\sum_{i=1}^{n} X_i^2 \\stackrel{\\mathrm{set}}{=} 0  \\]\n\n\n\nWhen solved for \\(\\widehat{\\theta}_{\\mathrm{MLE}}\\), we find \\(\\boxed{\\widehat{\\theta}_{\\mathrm{MLE}} = \\frac{1}{2n} \\sum_{i=1}^{n} X_i^2 }\\)\nTechnically, we should also check that the second derivative at this point is negative, to ensure we found a maximum; I leave this as an exercise"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-3",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nInvariance Property\n\n\n\n\n\n\nInvariance Property of the MLE\n\n\nIf \\(\\widehat{\\theta}_1, \\cdots, \\widehat{\\theta}_m\\) are the maximum likelihood estimators for \\(\\theta_1, \\cdots, \\theta_m\\), then the maximum likelihood estimator for \\(h(\\theta_1, \\cdots, \\theta_m)\\) is \\[ h(\\widehat{\\theta}_1, \\cdots, \\widehat{\\theta}_m) \\]\n\n\n\n\nExample: If \\(X_1, \\cdots, X_n \\iid \\mathrm{Expo}(\\lambda)\\), then \\(\\widehat{\\lambda}_{\\mathrm{MLE}} = 1 / \\bar{X}\\) (as shown in lecture).\n\nSay we seek the maximum likelihood estimator for the population variance, \\(\\lambda^2\\).\nBy invariance, this is given by \\(1/(\\bar{X}^2)\\)."
+  },
+  {
     "objectID": "120B-W26/Wk04/wk04.html#announcements",
     "href": "120B-W26/Wk04/wk04.html#announcements",
     "title": "PSTAT 120B: Mathematical Statistics",

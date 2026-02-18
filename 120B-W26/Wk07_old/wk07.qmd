@@ -1,0 +1,385 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 7 Discussion Section"
+footer: "PSTAT 120B - Winter 2026 with Dr. Annie Qu; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: February 18, 2026
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\S}{\mathbb{S}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+\newcommand{\probto}{\stackrel{\mathrm{p}}{\longrightarrow}}
+\newcommand{\distto}{\stackrel{\mathrm{d}}{\longrightarrow}}
+\newcommand{\mseto}{\stackrel{\mathrm{m.s.}}{\longrightarrow}}
+\newcommand{\Lik}{\mathcal{L}}
+\DeclareMathOperator*{\argmax}{\text{arg }\max}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa magnifying-glass-chart >}} Statistical Inference
+### General Framework
+
+:::: {.columns}
+
+::: {.column width="60%"}
+::: {.nonincremental}
+-   We have a [**population**]{.alert}, governed by a set of [**population parameters**]{.alert} that are unobserved (but that we’d like to make claims about).
+
+-   To make claims about the population parameters, we take a [**sample**]{.alert}.
+
+-   We then use our sample to make [**inferences**]{.alert} (i.e. claims) about the population parameters.
+:::
+
+:::
+
+::: {.column width="40%"}
+![](images/inference.svg)
+:::
+
+::::
+
+-   In **estimation**, we seek to construct [**estimators**]{.alert} to estimate population parameters.
+
+
+
+## {{< fa dice >}} Likelihoods
+
+-   A coin lands "heads" with probability $\theta \in (0, 1)$. 
+
+-   Suppose we toss the coin five times, and observe (`H`, `T`, `H`, `H`, `T`).
+    -   Letting _X_ denote the number of heads in 5 tosses, _X_ ~ Bin(5, $\theta$)
+
+-   If $\theta = 0.3$, how likely were we to have observed what we saw?
+    -   If $\theta = 0.3$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.3)^3(0.7)^2 \approx 0.1323$
+    
+-   If $\theta = 0.4$, how likely were we to have observed what we saw?
+    -   If $\theta = 0.3$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.4)^3(0.6)^2 \approx 0.2304$
+    
+-   Given that we observed (`H`, `T`, `H`, `H`, `T`), which was more likely: that $\theta = 0.3$ or that $\theta = 0.4$?
+
+## {{< fa dice >}} Likelihoods
+### Maximization
+
+::: {.callout-tip}
+## **Idea:** 
+
+To estimate a parameter $\theta$ given data $X_1, X_2, \cdots, X_n$, find the value of $\theta$ that was _most likely_ to have given rise to the data we observed.
+:::
+
+-   This procedure is called [**maximum likelihood estimation**]{.alert} and the resulting estimator is called the [**maximum likelihood estimator**]{.alert}
+
+
+-   The [**likelihood**]{.alert} gives a way of answering the question: "given data $X_1, X_2, \cdots, X_n$, how likely was it that the true value of the parameter were $\theta$, for an arbitrary $\theta$?"
+
+-   For example, back to our coin-tossing example:
+
+
+## {{< fa dice >}} Likelihoods
+### Example
+
+```{r}
+#| echo: False
+#| code-fold: True
+
+lik_theta <- Vectorize(function(theta){
+  dbinom(3, 5, theta)
+})
+
+data.frame(x = 0:1) %>% ggplot(aes(x = x)) +
+  stat_function(fun = lik_theta, linewidth = 1) +
+  theme_minimal(base_size = 18) +
+  xlab(bquote(theta)) +
+  ylab(paste("likelihood that true prob. is", bquote(theta))) +
+  ggtitle("Example Likelihood",
+          subtitle = "Data = (H, T, H, H, T)") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  annotate(
+    "point",
+    x = 0.3, y = lik_theta(0.3),
+    size = 4
+  ) + annotate(
+    "point",
+    x = 0.4, y = lik_theta(0.4),
+    size = 4
+  ) +
+  geom_segment(
+    aes(x = 0.3, xend = 0.3,
+        y = 0, yend = lik_theta(0.3)),
+    linetype = "dotted"
+  ) + geom_segment(
+    aes(x = 0, xend = 0.3,
+        y = lik_theta(0.3), yend = lik_theta(0.3)),
+    linetype = "dotted"
+  ) +
+  geom_segment(
+    aes(x = 0.4, xend = 0.4,
+        y = 0, yend = lik_theta(0.4)),
+    linetype = "dotted"
+  ) + geom_segment(
+    aes(x = 0, xend = 0.4,
+        y = lik_theta(0.4), yend = lik_theta(0.4)),
+    linetype = "dotted"
+  )
+```
+
+
+## {{< fa dice >}} Likelihoods
+### Example: Different Datasets
+
+```{r}
+#| echo: False
+#| code-fold: True
+
+lik_theta <- function(theta, x){
+  dbinom(sum(x == "H"), length(x), theta)
+}
+
+data.frame(x = 0:1) %>% ggplot(aes(x = x)) +
+  stat_function(fun = lik_theta, linewidth = 1.5,
+                args = list(x = c("H", "T", "H", "H", "T")),
+                aes(colour = "c(H, T, H, H, T)")
+  ) + stat_function(fun = lik_theta, linewidth = 1.5,
+                args = list(x = c("T", "T", "T", "T", "H")),
+                aes(colour = "c(T, T, T, T, H)")
+  ) + stat_function(fun = lik_theta, linewidth = 1.5,
+                args = list(x = c("H", "H", "H", "H", "T")),
+                aes(colour = "c(H, H, H, H, T)")
+  ) +
+  theme_minimal(base_size = 18) +
+  labs(colour = "Data") +
+  ggtitle("Example Likelihood",
+          subtitle = "Different Datasets") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  xlab(bquote(theta)) +
+  ylab(paste("likelihood that true prob. is", bquote(theta))) +
+  scale_color_okabe_ito()
+```
+
+
+## {{< fa dice >}} Likelihoods
+### Definition
+
+-   The likelihood given a sample is just the marginal mass/density function.
+
+-   Indeed, the reason we call this a "likelihood" function instead of a "probability" function is because, in the continuous case, the likelihood at a given point doesn't really represent a true _probability_ (but, it is giving the same _sort_ of information as a probability).
+
+::: {.fragment}
+$$ \mathcal{L}(\theta; x_1, x_2, \cdots, x_n) := f_{X_1, X_2, \cdots, X_n}(x_1, x_2, \cdots, x_n; \theta) $$
+:::
+
+-   If the sample is i.i.d.: $\displaystyle \mathcal{L}(\theta; x_1, x_2, \cdots, x_n) = \prod_{i=1}^{n} f(x_i; \theta)$
+
+## {{< fa dice >}} Likelihoods
+### Continuous Example: Exponential
+
+-   **Example Scenario:** The wait time at _The Arbor_ of a randomly-selected customer follows an Exponential distribution with unknown mean $\theta$. 
+
+-   Likelihood (assuming i.i.d.):
+\begin{align*}
+  \class{fragment}{{} \mathcal{L}(\theta; x_1, x_2, \cdots, x_n)}
+    &\class{fragment}{{} = \prod_{i=1}^{n} f(x_i; \theta)}            \\[3px]
+    &\class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{1}{\theta} e^{-Y_i/\theta} \cdot 1 \! \! 1_{\{x_i \geq 0\}} \right] }    \\[3px]
+    &\class{fragment}{{} = \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} x_i} \cdot 1 \! \! 1_{\{x_{(1)} \geq 0\}}} 
+\end{align*}
+
+## {{< fa dice >}} Likelihoods
+### Continuous Example: Exponential
+
+$$ \mathcal{L}(\theta; x_1, x_2, \cdots, x_n) = \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} x_i} \cdot 1 \! \! 1_{\{x_{(1)} \geq 0\}} $$
+
+-   Note that we are viewing this as a function of $\theta$! 
+    -   The idea is: we assume that we already have our data $(x_1, x_2, \cdots, x_n)$; what we're trying to do is figure out the $\theta$ value that makes the data we observed _most plausible_.
+    
+-   Further note: this shows that likelihoods aren't true density functions in $\theta$.
+    -   Indeed, $\displaystyle \int_{0}^{\infty} \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} x_i} \ \mathrm{d}\theta = \frac{(n - 2)!}{(\sum_{i=1}^{n} x_i)^{n - 1}} \neq 1$
+
+## {{< fa dice >}} Likelihoods
+### Continuous Example: Exponential
+
+```{r}
+#| echo: True
+#| code-fold: True
+exp_lik <- function(theta, y) {
+  (1 / theta)^(length(y)) * exp(-(1 / theta) * sum(y))
+}
+```
+
+```{r}
+data.frame(x = 0:6) %>% ggplot(aes(x = x)) +
+  stat_function(fun = exp_lik,
+                args = list(y = c(1, 2, 3, 1, 2)),
+                aes(colour = "c(1, 2, 3, 1, 2)"),
+                linewidth = 1.5
+  ) + stat_function(fun = exp_lik,
+                args = list(y = c(2, 2, 2, 2, 2)),
+                aes(colour = "c(2, 2, 2, 2, 2)"),
+                linewidth = 1.5
+  ) + stat_function(fun = exp_lik,
+                args = list(y = c(1, 2, 3, 2, 2)),
+                aes(colour = "c(1, 2, 3, 2, 2)"),
+                linewidth = 1.5,
+                linetype = "dashed"
+  ) +
+  theme_minimal(base_size = 18) +
+  labs(colour = "Data") +
+  ggtitle("Exponential Likelihood",
+          subtitle = "Different Datasets") +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24)) +
+  xlab(bquote(theta)) +
+  ylab(paste("likelihood that true avg. is", bquote(theta))) +
+  scale_color_manual(values = c("#009E73","#0072B2","#E69F00")) 
+```
+
+## {{< fa dice >}} Maximum Likelihood Estimators
+### General Procedure
+
+::: {.callout-note}
+## **Definition: Maximum Likelihood Estimator**
+$$ (\widehat{\theta}_{1, \mathrm{MLE}}, \ \cdots, \ \widehat{\theta}_{m, \mathrm{MLE}})  := \argmax_{(\theta_1, \cdots, \theta_m)} \Lik(\theta_1, \cdots, \theta_m; X_1, X_2, \cdots, X_n) $$
+:::
+
+-   Procedurally, we often work with the [**log-likelihood**]{.alert} instead. That is:
+   1)   Find the likelihood
+   2)   Take the logarithm to find the log-likelihood
+   3)   Find the minimizing value of the log-likelihood
+
+
+## {{< fa dice >}} Maximum Likelihood Estimators
+### Example
+
+Let $X_1, X_2, \cdots, X_n \iid f(x; \theta) = \frac{x}{\theta} \exp\left\{ - \frac{x^2}{2 \theta} \right\}$
+
+\begin{align*}
+  \class{fragment}{{} \mathcal{L}(\theta; X_1, \cdots, X_n)}
+    &\class{fragment}{{} = \prod_{i=1}^{n} f(X_i; \theta)} \class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{X_i}{\theta} \cdot \exp\left\{ - \frac{X_i^2}{2\theta} \right\} \right]  }    \\[3px]
+    &\class{fragment}{{} = \left( \frac{1}{\theta} \right)^n \cdot \left( \prod_{i=1}^{n} X_i \right) \cdot \exp\left\{ - \frac{1}{2\theta} \sum_{i=1}^{n} X_i^2 \right\}  }  \\[3px]
+   \class{fragment}{{} \ell(\theta; X_1, \cdots, X_n)}  &\class{fragment}{{} := \ln \mathcal{L}(\theta; X_1, \cdots, X_n) }  \class{fragment}{{} = -n\ln(\theta) + \sum_{i=1}^{n} \ln(X_i) - \frac{1}{2 \theta} \sum_{i=1}^{n} X_i^2 }  \\[3px]
+   \class{fragment}{{} \frac{\partial}{\partial \theta} \ell(\theta; X_1, \cdots, X_n)} &\class{fragment}{{}  = - \frac{n}{\theta} + \frac{1}{2 \theta^2} \sum_{i=1}^{n} X_i^2 } 
+\end{align*}
+
+
+## {{< fa dice >}} Maximum Likelihood Estimators
+### Example
+
+Let $X_1, X_2, \cdots, X_n \iid f(x; \theta) = \frac{x}{\theta} \exp\left\{ - \frac{x^2}{2 \theta} \right\}$
+
+:::: {.columns}
+
+::: {.column width="45%"}
+$$ \frac{\partial}{\partial \theta} \ell(\theta; X_1, \cdots, X_n) = - \frac{n}{\theta} + \frac{1}{2 \theta^2} \sum_{i=1}^{n} X_i^2  $$
+:::
+
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="45%"}
+-   Thus, $\widehat{\theta}_{\mathrm{MLE}}$ must satisfy \
+$$  - \frac{n}{\widehat{\theta}_{\mathrm{MLE}} } + \frac{1}{2 \widehat{\theta}_{\mathrm{MLE}}^2} \sum_{i=1}^{n} X_i^2 \stackrel{\mathrm{set}}{=} 0  $$
+:::
+
+::::
+
+-   When solved for $\widehat{\theta}_{\mathrm{MLE}}$, we find $\boxed{\widehat{\theta}_{\mathrm{MLE}} = \frac{1}{2n} \sum_{i=1}^{n} X_i^2 }$
+
+-   Technically, we should also check that the second derivative at this point is negative, to ensure we found a _maximum_; I leave this as an exercise
+
+## {{< fa dice >}} Maximum Likelihood Estimators
+### Invariance Property
+
+::: {.callout-important}
+## **Invariance Property of the MLE**
+
+If $\widehat{\theta}_1, \cdots, \widehat{\theta}_m$ are the maximum likelihood estimators for $\theta_1, \cdots, \theta_m$, then the maximum likelihood estimator for $h(\theta_1, \cdots, \theta_m)$ is 
+$$ h(\widehat{\theta}_1, \cdots, \widehat{\theta}_m) $$
+:::
+
+-   **Example:** If $X_1, \cdots, X_n \iid \mathrm{Expo}(\lambda)$, then $\widehat{\lambda}_{\mathrm{MLE}} = 1 / \bar{X}$ (as shown in lecture).
+    -   Say we seek the maximum likelihood estimator for the population variance, $\lambda^2$.
+    -   By invariance, this is given by $1/(\bar{X}^2)$.
