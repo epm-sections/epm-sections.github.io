@@ -115,7 +115,7 @@ library(tidymodels)
 :::
 
 ::: {.column width="40%"}
-![](images/inference.svg)
+![](Images/inference.svg)
 :::
 
 ::::
