@@ -145,13 +145,13 @@ library(tidymodels)
 ::: {.callout-tip}
 ## **Idea:** 
 
-To estimate a parameter $\theta$ given data $X_1, X_2, \cdots, X_n$, find the value of $\theta$ that was _most likely_ to have given rise to the data we observed.
+To estimate a parameter $\theta$ given data $X_1, X_2, \cdots, X_n$, find the value of $\theta$ under which our observed data was _most likely_.
 :::
 
 -   This procedure is called [**maximum likelihood estimation**]{.alert} and the resulting estimator is called the [**maximum likelihood estimator**]{.alert}
 
 
--   The [**likelihood**]{.alert} gives a way of answering the question: "given data $X_1, X_2, \cdots, X_n$, how likely was it that the true value of the parameter were $\theta$, for an arbitrary $\theta$?"
+-   The [**likelihood**]{.alert} essentially answers: "given a candidate value for $\theta$, how likely were we to have observed our data $X_1, X_2, \cdots, X_n$?"
 
 -   For example, back to our coin-tossing example:
 

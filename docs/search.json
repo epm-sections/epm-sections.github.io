@@ -704,7 +704,7 @@
     "href": "120B-W26/Wk07/wk07.html#likelihoods-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Likelihoods",
-    "text": "Likelihoods\nMaximization\n\n\n\n\n\n\nIdea:\n\n\nTo estimate a parameter \\(\\theta\\) given data \\(X_1, X_2, \\cdots, X_n\\), find the value of \\(\\theta\\) that was most likely to have given rise to the data we observed.\n\n\n\n\nThis procedure is called maximum likelihood estimation and the resulting estimator is called the maximum likelihood estimator\nThe likelihood gives a way of answering the question: “given data \\(X_1, X_2, \\cdots, X_n\\), how likely was it that the true value of the parameter were \\(\\theta\\), for an arbitrary \\(\\theta\\)?”\nFor example, back to our coin-tossing example:"
+    "text": "Likelihoods\nMaximization\n\n\n\n\n\n\nIdea:\n\n\nTo estimate a parameter \\(\\theta\\) given data \\(X_1, X_2, \\cdots, X_n\\), find the value of \\(\\theta\\) under which our observed data was most likely.\n\n\n\n\nThis procedure is called maximum likelihood estimation and the resulting estimator is called the maximum likelihood estimator\nThe likelihood essentially answers: “given a candidate value for \\(\\theta\\), how likely were we to have observed our data \\(X_1, X_2, \\cdots, X_n\\)?”\nFor example, back to our coin-tossing example:"
   },
   {
     "objectID": "120B-W26/Wk07/wk07.html#likelihoods-2",
