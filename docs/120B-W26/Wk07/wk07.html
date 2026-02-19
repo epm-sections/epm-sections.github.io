@@ -301,7 +301,7 @@ MathJax = {
 </ul></li>
 <li class="fragment"><p>If <span class="math inline">\(\theta = 0.4\)</span>, how likely were we to have observed what we saw?</p>
 <ul>
-<li class="fragment">If <span class="math inline">\(\theta = 0.3\)</span>, the probability of observing three heads is <span class="math inline">\(\Prob(X = 3) = \binom{5}{3}(0.4)^3(0.6)^2 \approx 0.2304\)</span></li>
+<li class="fragment">If <span class="math inline">\(\theta = 0.4\)</span>, the probability of observing three heads is <span class="math inline">\(\Prob(X = 3) = \binom{5}{3}(0.4)^3(0.6)^2 \approx 0.2304\)</span></li>
 </ul></li>
 <li class="fragment"><p>Given that we observed (<code>H</code>, <code>T</code>, <code>H</code>, <code>H</code>, <code>T</code>), which was more likely: that <span class="math inline">\(\theta = 0.3\)</span> or that <span class="math inline">\(\theta = 0.4\)</span>?</p></li>
 </ul>
@@ -360,7 +360,7 @@ MathJax = {
 <li class="fragment"><p>Likelihood (assuming i.i.d.): <span class="math display">\[\begin{align*}
   \class{fragment}{{} \mathcal{L}(\theta; x_1, x_2, \cdots, x_n)}
 &amp;\class{fragment}{{} = \prod_{i=1}^{n} f(x_i; \theta)}            \\[3px]
-&amp;\class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{1}{\theta} e^{-Y_i/\theta} \cdot 1 \! \! 1_{\{x_i \geq 0\}} \right] }    \\[3px]
+&amp;\class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{1}{\theta} e^{-x_i/\theta} \cdot 1 \! \! 1_{\{x_i \geq 0\}} \right] }    \\[3px]
 &amp;\class{fragment}{{} = \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} x_i} \cdot 1 \! \! 1_{\{x_{(1)} \geq 0\}}}
 \end{align*}\]</span></p></li>
 </ul>
@@ -415,7 +415,7 @@ MathJax = {
 <ol type="1">
 <li class="fragment">Find the likelihood</li>
 <li class="fragment">Take the logarithm to find the log-likelihood</li>
-<li class="fragment">Find the minimizing value of the log-likelihood</li>
+<li class="fragment">Find the maximizing value of the log-likelihood (including checking the second derivative)</li>
 </ol>
 </section>
 <section id="maximum-likelihood-estimators-1" class="slide level2">

@@ -135,7 +135,7 @@ library(tidymodels)
     -   If $\theta = 0.3$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.3)^3(0.7)^2 \approx 0.1323$
     
 -   If $\theta = 0.4$, how likely were we to have observed what we saw?
-    -   If $\theta = 0.3$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.4)^3(0.6)^2 \approx 0.2304$
+    -   If $\theta = 0.4$, the probability of observing three heads is $\Prob(X = 3) = \binom{5}{3}(0.4)^3(0.6)^2 \approx 0.2304$
     
 -   Given that we observed (`H`, `T`, `H`, `H`, `T`), which was more likely: that $\theta = 0.3$ or that $\theta = 0.4$?
 
@@ -262,7 +262,7 @@ $$ \mathcal{L}(\theta; x_1, x_2, \cdots, x_n) := f_{X_1, X_2, \cdots, X_n}(x_1, 
 \begin{align*}
   \class{fragment}{{} \mathcal{L}(\theta; x_1, x_2, \cdots, x_n)}
     &\class{fragment}{{} = \prod_{i=1}^{n} f(x_i; \theta)}            \\[3px]
-    &\class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{1}{\theta} e^{-Y_i/\theta} \cdot 1 \! \! 1_{\{x_i \geq 0\}} \right] }    \\[3px]
+    &\class{fragment}{{} = \prod_{i=1}^{n} \left[ \frac{1}{\theta} e^{-x_i/\theta} \cdot 1 \! \! 1_{\{x_i \geq 0\}} \right] }    \\[3px]
     &\class{fragment}{{} = \left( \frac{1}{\theta} \right)^n \cdot e^{-\frac{1}{\theta} \sum_{i=1}^{n} x_i} \cdot 1 \! \! 1_{\{x_{(1)} \geq 0\}}} 
 \end{align*}
 
@@ -326,7 +326,7 @@ $$ (\widehat{\theta}_{1, \mathrm{MLE}}, \ \cdots, \ \widehat{\theta}_{m, \mathrm
 -   Procedurally, we often work with the [**log-likelihood**]{.alert} instead. That is:
    1)   Find the likelihood
    2)   Take the logarithm to find the log-likelihood
-   3)   Find the minimizing value of the log-likelihood
+   3)   Find the maximizing value of the log-likelihood (including checking the second derivative)
 
 
 ## {{< fa dice >}} Maximum Likelihood Estimators
