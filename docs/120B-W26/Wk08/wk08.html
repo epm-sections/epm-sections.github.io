@@ -199,57 +199,175 @@ MathJax = {
 </style>
 </div>
 </section>
-<section id="announcements" class="slide level2">
-<h2><i class="fa-solid fa-info" aria-label="info"></i> Announcements</h2>
+<section id="announcement" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Announcement</h2>
 <ul>
-<li><p>Midterm Exam is taking place on <strong>Monday February 9, 2026</strong> at <strong>11am</strong> (Usual Lecture Time) in <strong>ILP 1302</strong> (Usual Lecture Classroom)</p></li>
-<li><p>You are allowed to use a calculator, and two sheets of notes</p>
-<ul>
-<li>No worked-out examples; only theorems, definitions, etc.</li>
-<li>You will be asked to turn in your note sheet at the end of the exam, so you should <strong>make a copy beforehand</strong> if you are planning on reusing your sheet in the future</li>
-</ul></li>
-<li><p>I will be holding a Review Session from <strong>5 - 6:30pm</strong> on <strong>Thursday February 5, 2026</strong> in <strong>Broida 1610</strong> (Canvas Announcement coming soon)</p>
-<ul>
-<li>This will be comprised of some slides (material review) and some additional practice problems.</li>
-</ul></li>
-</ul>
-</section>
-<section id="linear-combinations-of-random-variables" class="slide level2">
-<h2><i class="fa-solid fa-calculator" aria-label="calculator"></i> Linear Combinations of Random Variables</h2>
-<ul>
-<li class="fragment"><p>Given a collection of random variables <em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, …, <em>X</em><sub><em>n</em></sub>, we define a <span class="alert"><strong>linear combination</strong></span> of these random variables to be <span class="math display">\[ U := \sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \cdots + a_n X_n \]</span></p></li>
-<li class="fragment"><p>Crucially, <em>U</em> will be a <em>random variable</em>!</p>
-<ul>
-<li class="fragment">E.g. Let <em>X</em><sub>1</sub> := revenue on a randomly-selected Monday; <em>X</em><sub>2</sub> := revenue on a randomly-selected Tuesday; <em>X</em><sub>1</sub> + <em>X</em><sub>2</sub> (total revenue) will be random!</li>
-</ul></li>
-<li class="fragment"><p>Two questions:</p>
-<ol type="1">
-<li class="fragment">What are <span class="math inline">\(\E[U]\)</span> and <span class="math inline">\(\Var(U)\)</span>?</li>
-<li class="fragment">What is the distribution of <span class="math inline">\(U\)</span>?</li>
-</ol></li>
-</ul>
-</section>
-<section id="linear-combinations-of-random-variables-1" class="slide level2">
-<h2><i class="fa-solid fa-calculator" aria-label="calculator"></i> Linear Combinations of Random Variables</h2>
-<h3 id="expectation-and-variance">Expectation and Variance</h3>
-<ul>
-<li><span class="math inline">\(\displaystyle \E\left[ \sum_{i=1}^{n} a_i X_i \right] =\)</span>
-<ul>
-<li>Any assumptions?</li>
-</ul></li>
+<li class="fragment"><p>When deriving an MLE, you should always perform a second-derivative check.</p></li>
+<li class="fragment"><p>I won’t deduct points on HW06 for failing to do so, but from HW07 onwards I will deduct a fraction of a point for failing to check the second derivative.</p></li>
 </ul>
 <p><br>
 </p>
 <ul>
-<li><span class="math inline">\(\displaystyle \Var\left( \sum_{i=1}^{n} a_i X_i \right) =\)</span>
+<li class="fragment">Also, our Section Google Drive has been updated (apologies for the delay in getting some of the solutions and slides uploaded!)</li>
+</ul>
+</section>
+<section id="mvue" class="slide level2">
+<h2><i class="fa-solid fa-minimize" aria-label="minimize"></i> MVUE</h2>
+<h3 id="leadup">Leadup</h3>
 <ul>
-<li>Any assumptions?</li>
+<li class="fragment"><p>Recall that <span class="math inline">\(\mathrm{MSE}(\widehat{\theta}) = \mathrm{Bias}^2(\widehat{\theta}) + \Var(\widehat{\theta})\)</span></p></li>
+<li class="fragment"><p>Further recall that we prefer estimators with <em>small</em> MSE</p></li>
+<li class="fragment"><p>If <span class="math inline">\(\widehat{\theta}_n\)</span> is an unbiased estimator for <span class="math inline">\(\theta\)</span>, what is its MSE?</p>
+<ul>
+<li class="fragment">Just its variance.</li>
+<li class="fragment">So, in a way, the “ideal” estimator seems to be one that is <em>unbiased</em> and has <em>as small variance as possible</em>.</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Definition: MVUE</strong></strong></p>
+</div>
+<div class="callout-content">
+<p>The <span class="alert"><strong>MVUE</strong></span> (minimum variance unbiased estimator) for a parameter <span class="math inline">\(\theta\)</span> is the unbiased estimator that has smallest possible variance. That is, if <span class="math inline">\(\widehat{\theta}_{\mathrm{MVUE}}\)</span> is the MVUE, then <span class="math inline">\(\Var(\widehat{\theta}) \geq \Var(\widehat{\theta}_{\mathrm{MVUE}})\)</span> for any other unbiased estimator <span class="math inline">\(\widehat{\theta}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="fisher-information" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="leadup-1">Leadup</h3>
+<ul>
+<li class="fragment"><p>Separately, we can actually provide a lower bound on the variance of <em>any</em> unbiased estimator.</p>
+<ul>
+<li class="fragment">This lower bound is called the <span class="alert"><strong>Cramér-Rao Lower Bound</strong></span> (CRLB).</li>
+</ul></li>
+<li class="fragment"><p>To understand the CRLB, we need to first explore the notion of <span class="alert"><strong>information</strong></span> (more specifically, the <span class="alert"><strong>Fisher Information</strong></span>).</p></li>
+<li class="fragment"><p>Let’s try and build some intuition. Say <em>X</em> is a draw from a distribution with PDF <span class="math inline">\(f(x; \theta)\)</span>, where <span class="math inline">\(\theta\)</span> is some parameter.</p>
+<ul>
+<li class="fragment">Our question at hand is: how much <em>information</em> does <em>X</em> provide about the parameter <span class="math inline">\(\theta\)</span>?</li>
+</ul></li>
+<li class="fragment"><p>Recall that the likelihood <span class="math inline">\(\mathcal{L}(\theta; X)\)</span> provides us information on how likely we were to have observed <em>X</em> under different candidate values for <span class="math inline">\(\theta\)</span>.</p></li>
+</ul>
+</section>
+<section id="fisher-information-1" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="leadup-2">Leadup</h3>
+<ul>
+<li class="fragment">Consider the following two “extreme” likelihoods:</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="wk08_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="wk08_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li class="fragment">In Likelihood 2, pretty much <em>any</em> value of <span class="math inline">\(\theta\)</span> was equally likely to have generated the data we observed
+<ul>
+<li class="fragment">So, the data contains <em>no information</em> about the most plausible value for <span class="math inline">\(\theta\)</span>.</li>
 </ul></li>
 </ul>
 </section>
-<section id="linear-combinations-of-random-variables-2" class="slide level2">
-<h2><i class="fa-solid fa-calculator" aria-label="calculator"></i> Linear Combinations of Random Variables</h2>
-<h3 id="mgf">MGF</h3>
+<section id="fisher-information-2" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="leadup-3">Leadup</h3>
+<ul>
+<li>Consider the following two “extreme” likelihoods:</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="wk08_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="wk08_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li class="fragment">This is in stark contrast to Likelihood 1, in which there is a <em>single clear choice</em> for the most <span class="math inline">\(\theta\)</span> value (given the data we observed).
+<ul>
+<li class="fragment">Here, the data contains <em>a lot of information</em> about the most plausible value for <span class="math inline">\(\theta\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="fisher-information-3" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="leadup-4">Leadup</h3>
+<ul>
+<li>Consider the following two “extreme” likelihoods:</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="wk08_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="wk08_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li class="fragment">Both likelihoods are maximized at the same value (i.e.&nbsp;their <span class="alert"><strong>score functions</strong></span> attain zeroes at the same value).
+<ul>
+<li class="fragment">The key manner in which they differ is in their <em>curvature</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="fisher-information-4" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="formula">Formula</h3>
+<div class="fragment">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -259,40 +377,77 @@ MathJax = {
 <p><strong><strong>Theorem</strong></strong></p>
 </div>
 <div class="callout-content">
-<p>If <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> are independent random variables, <span class="math inline">\(\displaystyle M_{\sum_{i=1}^{n} a_i X_i}(t) = \prod_{i=1}^{n} M_{X_i}(a_i t)\)</span></p>
+<p>Under certain mild “regularity conditions,” <span class="math display">\[ \mathcal{I}(\theta) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\theta^2} \ln f(X; \theta) \right] \]</span></p>
 </div>
 </div>
 </div>
-<p><strong>Proof:</strong> <span class="math display">\[\begin{align*}
-  \class{fragment}{{} M_{\sum_{i=1}^{n} a_i X_i}(t)}
-    &amp; \class{fragment}{{} : = \E\left[ e^{t\sum_{i=1}^{n} a_i X_i} \right] } &amp; \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
-    &amp; \class{fragment}{{} : = \prod_{i=1}^{n} \E[e^{(a_i t) X_i}]} &amp; \class{fragment}{{}\color{blue}[\mathrm{Independence}]}         \\[3px]
-    &amp; \class{fragment}{{} : = \prod_{i=1}^{n} M_{X_i}(a_i t)} &amp; \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
-\end{align*}\]</span></p>
-</section>
-<section id="statistics" class="slide level2">
-<h2><i class="fa-solid fa-chart-area" aria-label="chart-area"></i> Statistics</h2>
-<h3 id="general-concepts">General Concepts</h3>
+</div>
+<div class="fragment">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong><strong>Definition:</strong> Statistic</strong></p>
+<p><strong><strong>Definition: Fisher Information of Single Observation</strong></strong></p>
 </div>
 <div class="callout-content">
-<p>A <span class="alert"><strong>statistic</strong></span> is any quantity calculated from the sample data.</p>
+<p>The Fisher Information of a single observation <em>X</em>, notated <span class="math inline">\(\mathcal{I}(\theta)\)</span>, is defined to be the variance of the <span class="alert"><strong>score function</strong></span> (derivative of the log-likelihood): <span class="math display">\[ \mathcal{I}(\theta) := \Var\left[ \frac{\mathrm{d}}{\mathrm{d}\theta} \ln f(X; \theta) \right] \]</span></p>
 </div>
 </div>
 </div>
-<p><strong>Some Examples:</strong></p>
+</div>
+</section>
+<section id="fisher-information-5" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="example">Example</h3>
+<p><strong>Example:</strong> <span class="math inline">\(X \sim \mathrm{Expo}(\lambda)\)</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="fragment"><span class="math inline">\(\ell(\lambda; X) = \ln(\lambda) - \lambda X\)</span></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="fragment"><span class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; X) = \frac{1}{\lambda} - X\)</span></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Using the Definition:</strong></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\begin{align*}
+  \mathcal{I}(\lambda)  &amp; := \Var\left( \frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; X) \right)   \\
+    &amp; = \Var\left( \frac{1}{\lambda} - X \right) \\
+    &amp; = \Var(X) = \frac{1}{\lambda^2}
+\end{align*}\]</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Using the Second Formlation:</strong></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\begin{align*}
+  \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X)  &amp; = - \frac{1}{\lambda^2} \\
+  \mathcal{I}(\lambda)  &amp; = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X)  \right] \\
+    &amp; = - \E\left[ - \frac{1}{\lambda^2}  \right] = \frac{1}{\lambda^2}
+\end{align*}\]</span></p>
+</div>
+</div></div>
+</section>
+<section id="fisher-information-6" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="of-a-sample">Of A Sample</h3>
 <ul>
-<li class="fragment"><span class="alert"><strong>Sample Mean:</strong></span> <span class="math inline">\(\bar{X} := \frac{1}{n} \sum_{i=1}^{n} X_i\)</span></li>
-<li class="fragment"><span class="alert"><strong>Sample Variance:</strong></span> <span class="math inline">\(S_X^2 := \frac{1}{n - 1} \sum_{i=1}^{n} (X_i - \bar{X})^2\)</span></li>
-<li class="fragment"><span class="alert"><strong>Sample Maximum:</strong></span> <span class="math inline">\(X_{(n)} := \max\{X_1, \cdots, X_n\}\)</span></li>
-<li class="fragment"><span class="alert"><strong>Sample Minimum:</strong></span> <span class="math inline">\(X_{(1)} := \min\{X_1, \cdots, X_n\}\)</span></li>
+<li class="fragment">If we have more than one observation, we can naturally consider how much information the <em>entire sample</em> captures about <span class="math inline">\(\theta\)</span>.</li>
 </ul>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Definition: Fisher Information of a Sample</strong></strong></p>
+</div>
+<div class="callout-content">
+<p>The Fisher Information of sample <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span>, notated <span class="math inline">\(\mathcal{I}_n(\theta)\)</span>, is defined to be the variance of the <span class="alert"><strong>score function</strong></span> (derivative of the log-likelihood): <span class="math display">\[ \mathcal{I}(\theta) := \Var\left[ \frac{\mathrm{d}}{\mathrm{d}\theta} \ln f_{X_1, X_2, \cdots, X_n}(X_1, X_2, \cdots, X_n; \theta) \right] \]</span></p>
+</div>
+</div>
+</div>
+</div>
 <div class="fragment">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -300,40 +455,105 @@ MathJax = {
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong><strong>Key Takeaway</strong></strong></p>
+<p><strong><strong>Second Formulation</strong></strong></p>
 </div>
 <div class="callout-content">
-<p>Crucially, statistics are <em>random</em></p>
+<p>Under certain mild “regularity conditions,” <span class="math display">\[ \mathcal{I}_n(\theta) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\theta^2} \ln f_{X_1, X_2, \cdots, X_n} (X_1, X_2, \cdots, X_n; \theta) \right] \]</span></p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="statistics-1" class="slide level2">
-<h2><i class="fa-solid fa-chart-area" aria-label="chart-area"></i> Statistics</h2>
-<h3 id="example-cat-weights">Example: Cat Weights</h3>
-<div class="r-stack">
-<p><img data-src="Images/min0.svg" class="fragment" width="1200"></p>
-<p><img data-src="Images/min1.svg" class="fragment" width="1200"></p>
-<p><img data-src="Images/min2.svg" class="fragment" width="1200"></p>
-<p><img data-src="Images/min3.svg" class="fragment" width="1200"></p>
+<section id="fisher-information-7" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="of-a-sample-1">Of A Sample</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Theorem</strong></strong></p>
+</div>
+<div class="callout-content">
+<p>For an IID sample <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span>, <span class="math display">\[ \mathcal{I}_n(\theta) = n \mathcal{I}(\theta) \]</span> That is, the Fisher Information of the sample is just the sample size times the Fisher Information of a single observation.</p>
+</div>
+</div>
 </div>
 <ul>
-<li class="fragment">Different samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc.</li>
+<li class="fragment">Please see the Lecture Slides for the proof.
+<ul>
+<li class="fragment">I won’t go over the proof today, but instead demonstrate equivalence through an example.</li>
+</ul></li>
 </ul>
 </section>
-<section id="statistics-2" class="slide level2">
-<h2><i class="fa-solid fa-chart-area" aria-label="chart-area"></i> Statistics</h2>
-<h3 id="sampling-distributions">Sampling Distributions</h3>
+<section id="fisher-information-8" class="slide level2">
+<h2><i class="fa-solid fa-info" aria-label="info"></i> Fisher Information</h2>
+<h3 id="example-1">Example</h3>
+<p><strong>Example:</strong> <span class="math inline">\(X_1, X_2, \cdots, X_n \iid \mathrm{Expo}(\lambda)\)</span></p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1"><strong>Using the Entire Sample</strong></a></li><li><a href="#tabset-1-2"><strong>Using a Single Observation</strong></a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <ul>
-<li class="fragment">The distribution of a statistic <span class="math inline">\(T(X_1, \cdots, X_n)\)</span> is called its <span class="alert"><strong>sampling distribution</strong></span>
+<li class="fragment"><p>Likelihood of the sample: <span class="math inline">\(\mathcal{L}(\lambda; \vect{X}) = \prod_{i=1}^{n} \left( \lambda e^{-\lambda X_i} \right) = \lambda^n e^{-\lambda \sum_{i=1}^{n} X_i}\)</span></p></li>
+<li class="fragment"><p>Log-Likelihood of the sample: <span class="math inline">\(\ell(\lambda; \vect{X}) = n \ln(\lambda) - \lambda \sum_{i=1}^{n} X_i\)</span></p></li>
+<li class="fragment"><p>Score Function of the Sample: <span class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; \vect{X}) = \frac{n}{\lambda} - \sum_{i=1}^{n} X_i\)</span></p></li>
+<li class="fragment"><p>Curvature of Log-Likelihood of the Sample: <span class="math inline">\(\frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; \vect{X}) = - \frac{n}{\lambda^2}\)</span></p></li>
+<li class="fragment"><p>Fisher Information of the Sample: <span class="math inline">\(\mathcal{I}_n(\lambda) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; \vect{X}) \right] = - \E\left[ - \frac{n}{\lambda^2} \right] = \boxed{\frac{n}{\lambda^2}}\)</span></p></li>
+</ul>
+</div>
+<div id="tabset-1-2">
 <ul>
-<li class="fragment">For example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)</li>
+<li class="fragment"><p>Likelihood of an observation: <span class="math inline">\(\mathcal{L}(\lambda; X) =  \lambda e^{-\lambda X}\)</span></p></li>
+<li class="fragment"><p>Log-Likelihood of an observation: <span class="math inline">\(\ell(\lambda; X) = \ln(\lambda) - \lambda X\)</span></p></li>
+<li class="fragment"><p>Score Function of the Sample: <span class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; X) = \frac{1}{\lambda} - X\)</span></p></li>
+<li class="fragment"><p>Curvature of Log-Likelihood of the Sample: <span class="math inline">\(\frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X) = - \frac{1}{\lambda^2}\)</span></p></li>
+<li class="fragment"><p>Fisher Information of an Observation: <span class="math inline">\(\mathcal{I}(\lambda) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X) \right] = - \E\left[ - \frac{1}{\lambda^2} \right] = \frac{1}{\lambda^2}\)</span></p></li>
+<li class="fragment"><p>Fisher Information of the Sample: <span class="math inline">\(\mathcal{I}(\lambda) =  n \mathcal{I}(\lambda) = \boxed{ \frac{n}{\lambda^2} }\)</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="cramér-rao-lower-bound" class="slide level2">
+<h2><i class="fa-solid fa-rug" aria-label="rug"></i> Cramér-Rao Lower Bound</h2>
+<h3 id="definition">Definition</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Theorem</strong></strong></p>
+</div>
+<div class="callout-content">
+<p>Every unbiased estimator for <span class="math inline">\(\theta\)</span> has variance greater than or equal to <span class="math inline">\([\mathcal{I}_n(\theta)]^{-1}\)</span>. The quantity <span class="math inline">\([\mathcal{I}_n(\theta)]^{-1}\)</span> is often referred to as the <span class="alert"><strong>Cramér-Rao Lower Bound</strong></span> (CRLB)</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">This is a very powerful statement! Though, note that it only applies to unbiased estimators.
+<ul>
+<li class="fragment">Indeed, it is possible to find biased estimators whose variance fall <em>below</em> the CRLB.</li>
 </ul></li>
-<li class="fragment">In general, deriving sampling distributions can be involved. Two useful tools are:
+<li class="fragment">We can tie this back into our discussion on the MVUE: if an unbiased estimator attains the CRLB, it <em>must</em> be the MVUE.
 <ul>
-<li class="fragment">MGFs (assuming a linear combination of independent random variables)</li>
-<li class="fragment">CDFs (may lead to difficult integrals, but will get you to the answer eventually!)</li>
+<li class="fragment">An estimator whose variance attains the CRLB is said to be <span class="alert"><strong>efficient</strong></span>; so, “an unbiased efficient estimator is the MVUE”</li>
+</ul></li>
+</ul>
+</section>
+<section id="cramér-rao-lower-bound-1" class="slide level2">
+<h2><i class="fa-solid fa-rug" aria-label="rug"></i> Cramér-Rao Lower Bound</h2>
+<h3 id="relation-to-mvue">Relation to MVUE</h3>
+<ul>
+<li class="fragment">The “converse” is not necessarily true. That is, in some cases the MVUE will <em>not</em> be efficient (i.e.&nbsp;it will have variance greater than the CRLB).
+<ul>
+<li class="fragment">We won’t talk about attainment of the CRLB in this class, but just know that there do exist checks for whether or not the MVUE will be efficient in a given situation.</li>
+</ul></li>
+<li class="fragment">Fun fact: the MVUE will always be a function of a sufficient statistic!
+<ul>
+<li class="fragment">There is a theorem called the <span class="alert"><strong>Rao-Blackwell Theorem</strong></span> (sometimes covered in PSTAT 120B!) that can be used to prove this fact.</li>
 </ul></li>
 </ul>
 

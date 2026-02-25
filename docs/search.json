@@ -686,53 +686,95 @@
     "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\nwhere \\(\\mathrm{Bias}(\\widehat{\\theta}_n) := \\E[\\widehat{\\theta}_n] - \\theta\\)."
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#announcements",
-    "href": "120B-W26/Wk08/wk08.html#announcements",
+    "objectID": "120B-W26/Wk08/wk08.html#announcement",
+    "href": "120B-W26/Wk08/wk08.html#announcement",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Announcements",
-    "text": "Announcements\n\nMidterm Exam is taking place on Monday February 9, 2026 at 11am (Usual Lecture Time) in ILP 1302 (Usual Lecture Classroom)\nYou are allowed to use a calculator, and two sheets of notes\n\nNo worked-out examples; only theorems, definitions, etc.\nYou will be asked to turn in your note sheet at the end of the exam, so you should make a copy beforehand if you are planning on reusing your sheet in the future\n\nI will be holding a Review Session from 5 - 6:30pm on Thursday February 5, 2026 in Broida 1610 (Canvas Announcement coming soon)\n\nThis will be comprised of some slides (material review) and some additional practice problems."
+    "section": " Announcement",
+    "text": "Announcement\n\nWhen deriving an MLE, you should always perform a second-derivative check.\nI won’t deduct points on HW06 for failing to do so, but from HW07 onwards I will deduct a fraction of a point for failing to check the second derivative.\n\n\n\n\nAlso, our Section Google Drive has been updated (apologies for the delay in getting some of the solutions and slides uploaded!)"
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#linear-combinations-of-random-variables",
-    "href": "120B-W26/Wk08/wk08.html#linear-combinations-of-random-variables",
+    "objectID": "120B-W26/Wk08/wk08.html#mvue",
+    "href": "120B-W26/Wk08/wk08.html#mvue",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Linear Combinations of Random Variables",
-    "text": "Linear Combinations of Random Variables\n\nGiven a collection of random variables X1, X2, …, Xn, we define a linear combination of these random variables to be \\[ U := \\sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \\cdots + a_n X_n \\]\nCrucially, U will be a random variable!\n\nE.g. Let X1 := revenue on a randomly-selected Monday; X2 := revenue on a randomly-selected Tuesday; X1 + X2 (total revenue) will be random!\n\nTwo questions:\n\nWhat are \\(\\E[U]\\) and \\(\\Var(U)\\)?\nWhat is the distribution of \\(U\\)?"
+    "section": " MVUE",
+    "text": "MVUE\nLeadup\n\nRecall that \\(\\mathrm{MSE}(\\widehat{\\theta}) = \\mathrm{Bias}^2(\\widehat{\\theta}) + \\Var(\\widehat{\\theta})\\)\nFurther recall that we prefer estimators with small MSE\nIf \\(\\widehat{\\theta}_n\\) is an unbiased estimator for \\(\\theta\\), what is its MSE?\n\nJust its variance.\nSo, in a way, the “ideal” estimator seems to be one that is unbiased and has as small variance as possible.\n\n\n\n\n\n\n\n\n\nDefinition: MVUE\n\n\nThe MVUE (minimum variance unbiased estimator) for a parameter \\(\\theta\\) is the unbiased estimator that has smallest possible variance. That is, if \\(\\widehat{\\theta}_{\\mathrm{MVUE}}\\) is the MVUE, then \\(\\Var(\\widehat{\\theta}) \\geq \\Var(\\widehat{\\theta}_{\\mathrm{MVUE}})\\) for any other unbiased estimator \\(\\widehat{\\theta}\\)."
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#linear-combinations-of-random-variables-1",
-    "href": "120B-W26/Wk08/wk08.html#linear-combinations-of-random-variables-1",
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Linear Combinations of Random Variables",
-    "text": "Linear Combinations of Random Variables\nExpectation and Variance\n\n\\(\\displaystyle \\E\\left[ \\sum_{i=1}^{n} a_i X_i \\right] =\\)\n\nAny assumptions?\n\n\n\n\n\n\\(\\displaystyle \\Var\\left( \\sum_{i=1}^{n} a_i X_i \\right) =\\)\n\nAny assumptions?"
+    "section": " Fisher Information",
+    "text": "Fisher Information\nLeadup\n\nSeparately, we can actually provide a lower bound on the variance of any unbiased estimator.\n\nThis lower bound is called the Cramér-Rao Lower Bound (CRLB).\n\nTo understand the CRLB, we need to first explore the notion of information (more specifically, the Fisher Information).\nLet’s try and build some intuition. Say X is a draw from a distribution with PDF \\(f(x; \\theta)\\), where \\(\\theta\\) is some parameter.\n\nOur question at hand is: how much information does X provide about the parameter \\(\\theta\\)?\n\nRecall that the likelihood \\(\\mathcal{L}(\\theta; X)\\) provides us information on how likely we were to have observed X under different candidate values for \\(\\theta\\)."
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#linear-combinations-of-random-variables-2",
-    "href": "120B-W26/Wk08/wk08.html#linear-combinations-of-random-variables-2",
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-1",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Linear Combinations of Random Variables",
-    "text": "Linear Combinations of Random Variables\nMGF\n\n\n\n\n\n\nTheorem\n\n\nIf \\(X_1, X_2, \\cdots, X_n\\) are independent random variables, \\(\\displaystyle M_{\\sum_{i=1}^{n} a_i X_i}(t) = \\prod_{i=1}^{n} M_{X_i}(a_i t)\\)\n\n\n\nProof: \\[\\begin{align*}\n  \\class{fragment}{{} M_{\\sum_{i=1}^{n} a_i X_i}(t)}\n    & \\class{fragment}{{} : = \\E\\left[ e^{t\\sum_{i=1}^{n} a_i X_i} \\right] } & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} \\E[e^{(a_i t) X_i}]} & \\class{fragment}{{}\\color{blue}[\\mathrm{Independence}]}         \\\\[3px]\n    & \\class{fragment}{{} : = \\prod_{i=1}^{n} M_{X_i}(a_i t)} & \\class{fragment}{{}\\color{blue}[\\mathrm{Definition \\ of \\ MGF}]}         \\\\[3px]\n\\end{align*}\\]"
+    "section": " Fisher Information",
+    "text": "Fisher Information\nLeadup\n\nConsider the following two “extreme” likelihoods:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn Likelihood 2, pretty much any value of \\(\\theta\\) was equally likely to have generated the data we observed\n\nSo, the data contains no information about the most plausible value for \\(\\theta\\)."
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#statistics",
-    "href": "120B-W26/Wk08/wk08.html#statistics",
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-2",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-2",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
+    "section": " Fisher Information",
+    "text": "Fisher Information\nLeadup\n\nConsider the following two “extreme” likelihoods:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis is in stark contrast to Likelihood 1, in which there is a single clear choice for the most \\(\\theta\\) value (given the data we observed).\n\nHere, the data contains a lot of information about the most plausible value for \\(\\theta\\)."
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#statistics-1",
-    "href": "120B-W26/Wk08/wk08.html#statistics-1",
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-3",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-3",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
+    "section": " Fisher Information",
+    "text": "Fisher Information\nLeadup\n\nConsider the following two “extreme” likelihoods:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBoth likelihoods are maximized at the same value (i.e. their score functions attain zeroes at the same value).\n\nThe key manner in which they differ is in their curvature"
   },
   {
-    "objectID": "120B-W26/Wk08/wk08.html#statistics-2",
-    "href": "120B-W26/Wk08/wk08.html#statistics-2",
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-4",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-4",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Statistics",
-    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
+    "section": " Fisher Information",
+    "text": "Fisher Information\nFormula\n\n\n\n\n\n\n\nTheorem\n\n\nUnder certain mild “regularity conditions,” \\[ \\mathcal{I}(\\theta) = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\theta^2} \\ln f(X; \\theta) \\right] \\]\n\n\n\n\n\n\n\n\n\n\n\nDefinition: Fisher Information of Single Observation\n\n\nThe Fisher Information of a single observation X, notated \\(\\mathcal{I}(\\theta)\\), is defined to be the variance of the score function (derivative of the log-likelihood): \\[ \\mathcal{I}(\\theta) := \\Var\\left[ \\frac{\\mathrm{d}}{\\mathrm{d}\\theta} \\ln f(X; \\theta) \\right] \\]"
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-5",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Fisher Information",
+    "text": "Fisher Information\nExample\nExample: \\(X \\sim \\mathrm{Expo}(\\lambda)\\)         \\(\\ell(\\lambda; X) = \\ln(\\lambda) - \\lambda X\\)         \\(\\frac{\\mathrm{d}}{\\mathrm{d}\\lambda} \\ell(\\lambda; X) = \\frac{1}{\\lambda} - X\\)\n\n\n\nUsing the Definition:\n\n\n\\[\\begin{align*}\n  \\mathcal{I}(\\lambda)  & := \\Var\\left( \\frac{\\mathrm{d}}{\\mathrm{d}\\lambda} \\ell(\\lambda; X) \\right)   \\\\\n    & = \\Var\\left( \\frac{1}{\\lambda} - X \\right) \\\\\n    & = \\Var(X) = \\frac{1}{\\lambda^2}\n\\end{align*}\\]\n\n\n\nUsing the Second Formlation:\n\n\n\\[\\begin{align*}\n  \\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; X)  & = - \\frac{1}{\\lambda^2} \\\\\n  \\mathcal{I}(\\lambda)  & = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; X)  \\right] \\\\\n    & = - \\E\\left[ - \\frac{1}{\\lambda^2}  \\right] = \\frac{1}{\\lambda^2}\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-6",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Fisher Information",
+    "text": "Fisher Information\nOf A Sample\n\nIf we have more than one observation, we can naturally consider how much information the entire sample captures about \\(\\theta\\).\n\n\n\n\n\n\n\n\nDefinition: Fisher Information of a Sample\n\n\nThe Fisher Information of sample \\(X_1, X_2, \\cdots, X_n\\), notated \\(\\mathcal{I}_n(\\theta)\\), is defined to be the variance of the score function (derivative of the log-likelihood): \\[ \\mathcal{I}(\\theta) := \\Var\\left[ \\frac{\\mathrm{d}}{\\mathrm{d}\\theta} \\ln f_{X_1, X_2, \\cdots, X_n}(X_1, X_2, \\cdots, X_n; \\theta) \\right] \\]\n\n\n\n\n\n\n\n\n\n\n\nSecond Formulation\n\n\nUnder certain mild “regularity conditions,” \\[ \\mathcal{I}_n(\\theta) = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\theta^2} \\ln f_{X_1, X_2, \\cdots, X_n} (X_1, X_2, \\cdots, X_n; \\theta) \\right] \\]"
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-7",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Fisher Information",
+    "text": "Fisher Information\nOf A Sample\n\n\n\n\n\n\nTheorem\n\n\nFor an IID sample \\(X_1, X_2, \\cdots, X_n\\), \\[ \\mathcal{I}_n(\\theta) = n \\mathcal{I}(\\theta) \\] That is, the Fisher Information of the sample is just the sample size times the Fisher Information of a single observation.\n\n\n\n\nPlease see the Lecture Slides for the proof.\n\nI won’t go over the proof today, but instead demonstrate equivalence through an example."
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#fisher-information-8",
+    "href": "120B-W26/Wk08/wk08.html#fisher-information-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Fisher Information",
+    "text": "Fisher Information\nExample\nExample: \\(X_1, X_2, \\cdots, X_n \\iid \\mathrm{Expo}(\\lambda)\\)\n\nUsing the Entire SampleUsing a Single Observation\n\n\n\nLikelihood of the sample: \\(\\mathcal{L}(\\lambda; \\vect{X}) = \\prod_{i=1}^{n} \\left( \\lambda e^{-\\lambda X_i} \\right) = \\lambda^n e^{-\\lambda \\sum_{i=1}^{n} X_i}\\)\nLog-Likelihood of the sample: \\(\\ell(\\lambda; \\vect{X}) = n \\ln(\\lambda) - \\lambda \\sum_{i=1}^{n} X_i\\)\nScore Function of the Sample: \\(\\frac{\\mathrm{d}}{\\mathrm{d}\\lambda} \\ell(\\lambda; \\vect{X}) = \\frac{n}{\\lambda} - \\sum_{i=1}^{n} X_i\\)\nCurvature of Log-Likelihood of the Sample: \\(\\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; \\vect{X}) = - \\frac{n}{\\lambda^2}\\)\nFisher Information of the Sample: \\(\\mathcal{I}_n(\\lambda) = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; \\vect{X}) \\right] = - \\E\\left[ - \\frac{n}{\\lambda^2} \\right] = \\boxed{\\frac{n}{\\lambda^2}}\\)\n\n\n\n\nLikelihood of an observation: \\(\\mathcal{L}(\\lambda; X) =  \\lambda e^{-\\lambda X}\\)\nLog-Likelihood of an observation: \\(\\ell(\\lambda; X) = \\ln(\\lambda) - \\lambda X\\)\nScore Function of the Sample: \\(\\frac{\\mathrm{d}}{\\mathrm{d}\\lambda} \\ell(\\lambda; X) = \\frac{1}{\\lambda} - X\\)\nCurvature of Log-Likelihood of the Sample: \\(\\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; X) = - \\frac{1}{\\lambda^2}\\)\nFisher Information of an Observation: \\(\\mathcal{I}(\\lambda) = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; X) \\right] = - \\E\\left[ - \\frac{1}{\\lambda^2} \\right] = \\frac{1}{\\lambda^2}\\)\nFisher Information of the Sample: \\(\\mathcal{I}(\\lambda) =  n \\mathcal{I}(\\lambda) = \\boxed{ \\frac{n}{\\lambda^2} }\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#cramér-rao-lower-bound",
+    "href": "120B-W26/Wk08/wk08.html#cramér-rao-lower-bound",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Cramér-Rao Lower Bound",
+    "text": "Cramér-Rao Lower Bound\nDefinition\n\n\n\n\n\n\nTheorem\n\n\nEvery unbiased estimator for \\(\\theta\\) has variance greater than or equal to \\([\\mathcal{I}_n(\\theta)]^{-1}\\). The quantity \\([\\mathcal{I}_n(\\theta)]^{-1}\\) is often referred to as the Cramér-Rao Lower Bound (CRLB)\n\n\n\n\nThis is a very powerful statement! Though, note that it only applies to unbiased estimators.\n\nIndeed, it is possible to find biased estimators whose variance fall below the CRLB.\n\nWe can tie this back into our discussion on the MVUE: if an unbiased estimator attains the CRLB, it must be the MVUE.\n\nAn estimator whose variance attains the CRLB is said to be efficient; so, “an unbiased efficient estimator is the MVUE”"
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#cramér-rao-lower-bound-1",
+    "href": "120B-W26/Wk08/wk08.html#cramér-rao-lower-bound-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Cramér-Rao Lower Bound",
+    "text": "Cramér-Rao Lower Bound\nRelation to MVUE\n\nThe “converse” is not necessarily true. That is, in some cases the MVUE will not be efficient (i.e. it will have variance greater than the CRLB).\n\nWe won’t talk about attainment of the CRLB in this class, but just know that there do exist checks for whether or not the MVUE will be efficient in a given situation.\n\nFun fact: the MVUE will always be a function of a sufficient statistic!\n\nThere is a theorem called the Rao-Blackwell Theorem (sometimes covered in PSTAT 120B!) that can be used to prove this fact."
   },
   {
     "objectID": "120B-W26/MTRev/MTRev.html#welcome",

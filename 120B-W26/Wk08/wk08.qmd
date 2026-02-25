@@ -93,110 +93,354 @@ library(plotly)
 library(tidymodels)
 ```
 
-## {{< fa info >}} Announcements
+## {{< fa info >}} Announcement
 
-::: {.nonincremental}
--   Midterm Exam is taking place on **Monday February 9, 2026** at **11am** (Usual Lecture Time) in **ILP 1302** (Usual Lecture Classroom)
+-   When deriving an MLE, you should always perform a second-derivative check.
 
--   You are allowed to use a calculator, and two sheets of notes
-    -   No worked-out examples; only theorems, definitions, etc.
-    -   You will be asked to turn in your note sheet at the end of the exam, so you should **make a copy beforehand** if you are planning on reusing your sheet in the future
-    
--   I will be holding a Review Session from **5 - 6:30pm** on **Thursday February 5, 2026** in **Broida 1610** (Canvas Announcement coming soon)
-    -   This will be comprised of some slides (material review) and some additional practice problems.
-:::
+-   I won't deduct points on HW06 for failing to do so, but from HW07 onwards I will deduct a fraction of a point for failing to check the second derivative.
 
-## {{< fa calculator >}} Linear Combinations of Random Variables
-
--   Given a collection of random variables _X_~1~, _X_~2~, ..., _X_~_n_~, we define a [**linear combination**]{.alert} of these random variables to be
-$$ U := \sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \cdots + a_n X_n $$
-
--   Crucially, _U_ will be a _random variable_!
-    -   E.g. Let _X_~1~ := revenue on a randomly-selected Monday; _X_~2~ := revenue on a randomly-selected Tuesday; _X_~1~ + _X_~2~ (total revenue) will be random!
-    
--   Two questions:
-    1)   What are $\E[U]$ and $\Var(U)$?
-    2)   What is the distribution of $U$?
-
-
-## {{< fa calculator >}} Linear Combinations of Random Variables
-### Expectation and Variance
-
-::: {.nonincremental}
-- $\displaystyle \E\left[ \sum_{i=1}^{n} a_i X_i \right] =$
-    -   Any assumptions?
-    
 \
+
+-   Also, our Section Google Drive has been updated (apologies for the delay in getting some of the solutions and slides uploaded!)
+
+## {{< fa minimize >}} MVUE
+### Leadup
+
+-   Recall that $\mathrm{MSE}(\widehat{\theta}) = \mathrm{Bias}^2(\widehat{\theta}) + \Var(\widehat{\theta})$
+
+-   Further recall that we prefer estimators with _small_ MSE
+
+-   If $\widehat{\theta}_n$ is an unbiased estimator for $\theta$, what is its MSE?
+    -   Just its variance.
+    -   So, in a way, the "ideal" estimator seems to be one that is _unbiased_ and has _as small variance as possible_.
     
-- $\displaystyle \Var\left( \sum_{i=1}^{n} a_i X_i \right) =$
-    -   Any assumptions?
+::: {.fragment}
+::: {.callout-note}
+## **Definition: MVUE**
+
+The [**MVUE**]{.alert} (minimum variance unbiased estimator) for a parameter $\theta$ is the unbiased estimator that has smallest possible variance. That is, if $\widehat{\theta}_{\mathrm{MVUE}}$ is the MVUE, then $\Var(\widehat{\theta}) \geq \Var(\widehat{\theta}_{\mathrm{MVUE}})$ for any other unbiased estimator $\widehat{\theta}$.
+:::
 :::
 
 
-## {{< fa calculator >}} Linear Combinations of Random Variables
-### MGF
+## {{< fa info >}} Fisher Information
+### Leadup
 
-::: {.callout-important}
-## **Theorem**
-If $X_1, X_2, \cdots, X_n$ are independent random variables, $\displaystyle M_{\sum_{i=1}^{n} a_i X_i}(t) = \prod_{i=1}^{n} M_{X_i}(a_i t)$
+-   Separately, we can actually provide a lower bound on the variance of _any_ unbiased estimator.
+    -   This lower bound is called the [**Cramér-Rao Lower Bound**]{.alert} (CRLB).
+    
+-   To understand the CRLB, we need to first explore the notion of [**information**]{.alert} (more specifically, the [**Fisher Information**]{.alert}).
+
+-   Let's try and build some intuition. Say _X_ is a draw from a distribution with PDF $f(x; \theta)$, where $\theta$ is some parameter.
+    -   Our question at hand is: how much _information_ does _X_ provide about the parameter $\theta$?
+    
+-   Recall that the likelihood $\mathcal{L}(\theta; X)$ provides us information on how likely we were to have observed _X_ under different candidate values for $\theta$.
+    
+## {{< fa info >}} Fisher Information
+### Leadup
+
+-   Consider the following two "extreme" likelihoods:
+
+```{r}
+norm.lik <- \(x, mu, sig2) {return(1 / sqrt(2 * pi * sig2) * exp( - (x - mu)^2 / (2 * sig2)))}
+
+## sample
+set.seed(100)
+x1 <- rnorm(1, 2, 0.001)
+x2 <- rnorm(1, 2, 100)
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.fragment}
+```{r}
+data.frame(x = seq(-2, 4)) %>%
+  ggplot(aes(x = x)) +
+  stat_function(fun = norm.lik,
+                args = list(x = x1,
+                            sig2 = 0.001^2),
+                n = 1000,
+                linewidth = 1.75) +
+  theme_minimal(base_size = 32) +
+  xlab(bquote(theta)) + ylab("likelihood") +
+  ggtitle("Likelihood 1") +
+  theme(plot.title = element_text(face = "bold"))
+```
+:::
 :::
 
+::: {.column width="50%"}
+::: {.fragment}
+```{r}
+data.frame(x = seq(-2, 4)) %>%
+  ggplot(aes(x = x)) +
+  stat_function(fun = norm.lik,
+                args = list(x = x1,
+                            sig2 = 100^2),
+                n = 1000,
+                linewidth = 1.75) +
+  ylim(c(0, 0.0045)) +
+  theme_minimal(base_size = 32) +
+  xlab(bquote(theta)) + ylab("likelihood") +
+  ggtitle("Likelihood 2") +
+  theme(plot.title = element_text(face = "bold"))
+```
 
-**Proof:**
-\begin{align*}
-  \class{fragment}{{} M_{\sum_{i=1}^{n} a_i X_i}(t)}
-    & \class{fragment}{{} : = \E\left[ e^{t\sum_{i=1}^{n} a_i X_i} \right] } & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
-    & \class{fragment}{{} : = \prod_{i=1}^{n} \E[e^{(a_i t) X_i}]} & \class{fragment}{{}\color{blue}[\mathrm{Independence}]}         \\[3px]
-    & \class{fragment}{{} : = \prod_{i=1}^{n} M_{X_i}(a_i t)} & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
-\end{align*}
+:::
+:::
+::::
+    
+-   In Likelihood 2, pretty much _any_ value of $\theta$ was equally likely to have generated the data we observed
+    -   So, the data contains _no information_ about the most plausible value for $\theta$.
 
+## {{< fa info >}} Fisher Information
+### Leadup
 
-## {{< fa chart-area >}} Statistics
-### General Concepts
-
-:::{.callout-note}
-## **Definition:** Statistic
-
-A [**statistic**]{.alert} is any quantity calculated from the sample data.
+::: {.nonincremental}
+-   Consider the following two "extreme" likelihoods:
 :::
 
-**Some Examples:**
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+data.frame(x = seq(-2, 4)) %>%
+  ggplot(aes(x = x)) +
+  stat_function(fun = norm.lik,
+                args = list(x = x1,
+                            sig2 = 0.001^2),
+                n = 1000,
+                linewidth = 1.75) +
+  theme_minimal(base_size = 32) +
+  xlab(bquote(theta)) + ylab("likelihood") +
+  ggtitle("Likelihood 1") +
+  theme(plot.title = element_text(face = "bold"))
+```
+:::
 
--   [**Sample Mean:**]{.alert} $\bar{X} := \frac{1}{n} \sum_{i=1}^{n} X_i$
--   [**Sample Variance:**]{.alert} $S_X^2 := \frac{1}{n - 1} \sum_{i=1}^{n} (X_i - \bar{X})^2$
--   [**Sample Maximum:**]{.alert} $X_{(n)} := \max\{X_1, \cdots, X_n\}$
--   [**Sample Minimum:**]{.alert} $X_{(1)} := \min\{X_1, \cdots, X_n\}$
+::: {.column width="50%"}
+```{r}
+data.frame(x = seq(-2, 4)) %>%
+  ggplot(aes(x = x)) +
+  stat_function(fun = norm.lik,
+                args = list(x = x1,
+                            sig2 = 100^2),
+                n = 1000,
+                linewidth = 1.75) +
+  ylim(c(0, 0.0045)) +
+  theme_minimal(base_size = 32) +
+  xlab(bquote(theta)) + ylab("likelihood") +
+  ggtitle("Likelihood 2") +
+  theme(plot.title = element_text(face = "bold"))
+```
+:::
+::::
+    
+-   This is in stark contrast to Likelihood 1, in which there is a _single clear choice_ for the most $\theta$ value (given the data we observed).
+    -   Here, the data contains _a lot of information_ about the most plausible value for $\theta$.
+
+
+## {{< fa info >}} Fisher Information
+### Leadup
+
+::: {.nonincremental}
+-   Consider the following two "extreme" likelihoods:
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+data.frame(x = seq(-2, 4)) %>%
+  ggplot(aes(x = x)) +
+  stat_function(fun = norm.lik,
+                args = list(x = x1,
+                            sig2 = 0.001^2),
+                n = 1000,
+                linewidth = 1.75) +
+  theme_minimal(base_size = 32) +
+  xlab(bquote(theta)) + ylab("likelihood") +
+  ggtitle("Likelihood 1") +
+  theme(plot.title = element_text(face = "bold"))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+data.frame(x = seq(-2, 4)) %>%
+  ggplot(aes(x = x)) +
+  stat_function(fun = norm.lik,
+                args = list(x = x1,
+                            sig2 = 100^2),
+                n = 1000,
+                linewidth = 1.75) +
+  ylim(c(0, 0.0045)) +
+  theme_minimal(base_size = 32) +
+  xlab(bquote(theta)) + ylab("likelihood") +
+  ggtitle("Likelihood 2") +
+  theme(plot.title = element_text(face = "bold"))
+```
+:::
+::::
+    
+-   Both likelihoods are maximized at the same value (i.e. their [**score functions**]{.alert} attain zeroes at the same value). 
+    -   The key manner in which they differ is in their _curvature_
+
+
+## {{< fa info >}} Fisher Information
+### Formula
 
 ::: {.fragment}
 ::: {.callout-important}
-## **Key Takeaway**
-
-Crucially, statistics are _random_
+## **Theorem**
+Under certain mild "regularity conditions,"
+$$ \mathcal{I}(\theta) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\theta^2} \ln f(X; \theta) \right] $$
 :::
 :::
 
-## {{< fa chart-area >}} Statistics
-### Example: Cat Weights
-
-::: {.r-stack}
-![](Images/min0.svg){.fragment width="1200"}
-
-![](Images/min1.svg){.fragment width="1200"}
-
-![](Images/min2.svg){.fragment width="1200"}
-
-![](Images/min3.svg){.fragment width="1200"}
+::: {.fragment}
+::: {.callout-note}
+## **Definition: Fisher Information of Single Observation**
+The Fisher Information of a single observation _X_, notated $\mathcal{I}(\theta)$, is defined to be the variance of the [**score function**]{.alert} (derivative of the log-likelihood):
+$$ \mathcal{I}(\theta) := \Var\left[ \frac{\mathrm{d}}{\mathrm{d}\theta} \ln f(X; \theta) \right] $$
+:::
 :::
 
--   Different samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc.
 
 
-## {{< fa chart-area >}} Statistics
-### Sampling Distributions
+## {{< fa info >}} Fisher Information
+### Example
 
--   The distribution of a statistic $T(X_1, \cdots, X_n)$ is called its [**sampling distribution**]{.alert}
-    -   For example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)
+**Example:** $X \sim \mathrm{Expo}(\lambda)$ \ \ \ \ \ \ \  [$\ell(\lambda; X) = \ln(\lambda) - \lambda X$]{.fragment} \ \ \ \ \ \ \  [$\frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; X) = \frac{1}{\lambda} - X$]{.fragment}
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.fragment}
+**Using the Definition:**
+:::
+
+::: {.fragment}
+\begin{align*}
+  \mathcal{I}(\lambda)  & := \Var\left( \frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; X) \right)   \\
+    & = \Var\left( \frac{1}{\lambda} - X \right) \\
+    & = \Var(X) = \frac{1}{\lambda^2} 
+\end{align*}
+:::
+:::
+
+
+::: {.column width="50%"}
+::: {.fragment}
+**Using the Second Formlation:**
+:::
+
+::: {.fragment}
+\begin{align*}
+  \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X)  & = - \frac{1}{\lambda^2} \\
+  \mathcal{I}(\lambda)  & = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X)  \right] \\
+    & = - \E\left[ - \frac{1}{\lambda^2}  \right] = \frac{1}{\lambda^2}
+\end{align*}
+:::
+:::
+
+::::
+
+
+## {{< fa info >}} Fisher Information
+### Of A Sample
+
+-   If we have more than one observation, we can naturally consider how much information the _entire sample_ captures about $\theta$.
+
+::: {.fragment}
+::: {.callout-note}
+## **Definition: Fisher Information of a Sample**
+The Fisher Information of sample $X_1, X_2, \cdots, X_n$, notated $\mathcal{I}_n(\theta)$, is defined to be the variance of the [**score function**]{.alert} (derivative of the log-likelihood):
+$$ \mathcal{I}(\theta) := \Var\left[ \frac{\mathrm{d}}{\mathrm{d}\theta} \ln f_{X_1, X_2, \cdots, X_n}(X_1, X_2, \cdots, X_n; \theta) \right] $$
+:::
+:::
+
+
+::: {.fragment}
+::: {.callout-important}
+## **Second Formulation**
+Under certain mild "regularity conditions,"
+$$ \mathcal{I}_n(\theta) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\theta^2} \ln f_{X_1, X_2, \cdots, X_n} (X_1, X_2, \cdots, X_n; \theta) \right] $$
+:::
+:::
+
+
+## {{< fa info >}} Fisher Information
+### Of A Sample
+
+::: {.callout-important}
+## **Theorem**
+For an IID sample $X_1, X_2, \cdots, X_n$,
+$$ \mathcal{I}_n(\theta) = n \mathcal{I}(\theta) $$ 
+That is, the Fisher Information of the sample is just the sample size times the Fisher Information of a single observation.
+:::
+
+-   Please see the Lecture Slides for the proof.
+    -   I won't go over the proof today, but instead demonstrate equivalence through an example.
     
--   In general, deriving sampling distributions can be involved. Two useful tools are:
-    -   MGFs (assuming a linear combination of independent random variables)
-    -   CDFs (may lead to difficult integrals, but will get you to the answer eventually!)
+## {{< fa info >}} Fisher Information
+### Example
+
+**Example:** $X_1, X_2, \cdots, X_n \iid \mathrm{Expo}(\lambda)$
+
+::: {.panel-tabset}
+
+## **Using the Entire Sample**
+
+-   Likelihood of the sample: $\mathcal{L}(\lambda; \vect{X}) = \prod_{i=1}^{n} \left( \lambda e^{-\lambda X_i} \right) = \lambda^n e^{-\lambda \sum_{i=1}^{n} X_i}$
+
+-   Log-Likelihood of the sample: $\ell(\lambda; \vect{X}) = n \ln(\lambda) - \lambda \sum_{i=1}^{n} X_i$
+
+-   Score Function of the Sample: $\frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; \vect{X}) = \frac{n}{\lambda} - \sum_{i=1}^{n} X_i$
+
+-   Curvature of Log-Likelihood of the Sample: $\frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; \vect{X}) = - \frac{n}{\lambda^2}$
+
+-   Fisher Information of the Sample: $\mathcal{I}_n(\lambda) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; \vect{X}) \right] = - \E\left[ - \frac{n}{\lambda^2} \right] = \boxed{\frac{n}{\lambda^2}}$
+
+
+
+## **Using a Single Observation**
+
+-   Likelihood of an observation: $\mathcal{L}(\lambda; X) =  \lambda e^{-\lambda X}$
+
+-   Log-Likelihood of an observation: $\ell(\lambda; X) = \ln(\lambda) - \lambda X$
+
+-   Score Function of the Sample: $\frac{\mathrm{d}}{\mathrm{d}\lambda} \ell(\lambda; X) = \frac{1}{\lambda} - X$
+
+-   Curvature of Log-Likelihood of the Sample: $\frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X) = - \frac{1}{\lambda^2}$
+
+-   Fisher Information of an Observation: $\mathcal{I}(\lambda) = - \E\left[ \frac{\mathrm{d}^2}{\mathrm{d}\lambda^2} \ell(\lambda; X) \right] = - \E\left[ - \frac{1}{\lambda^2} \right] = \frac{1}{\lambda^2}$
+
+-   Fisher Information of the Sample: $\mathcal{I}(\lambda) =  n \mathcal{I}(\lambda) = \boxed{ \frac{n}{\lambda^2} }$
+
+:::
+
+
+
+
+## {{< fa rug >}} Cramér-Rao Lower Bound
+### Definition
+
+::: {.callout-important}
+## **Theorem**
+
+Every unbiased estimator for $\theta$ has variance greater than or equal to $[\mathcal{I}_n(\theta)]^{-1}$. The quantity $[\mathcal{I}_n(\theta)]^{-1}$ is often referred to as the [**Cramér-Rao Lower Bound**]{.alert} (CRLB)
+:::
+
+-   This is a very powerful statement! Though, note that it only applies to unbiased estimators.
+    -   Indeed, it is possible to find biased estimators whose variance fall _below_ the CRLB.
+
+-   We can tie this back into our discussion on the MVUE: if an unbiased estimator attains the CRLB, it _must_ be the MVUE.
+    -   An estimator whose variance attains the CRLB is said to be [**efficient**]{.alert}; so, "an unbiased efficient estimator is the MVUE"
+
+
+
+## {{< fa rug >}} Cramér-Rao Lower Bound
+### Relation to MVUE
+
+-   The "converse" is not necessarily true. That is, in some cases the MVUE will _not_ be efficient (i.e. it will have variance greater than the CRLB).
+    -   We won't talk about attainment of the CRLB in this class, but just know that there do exist checks for whether or not the MVUE will be efficient in a given situation.
+-   Fun fact: the MVUE will always be a function of a sufficient statistic!
+    -   There is a theorem called the [**Rao-Blackwell Theorem**]{.alert} (sometimes covered in PSTAT 120B!) that can be used to prove this fact.
