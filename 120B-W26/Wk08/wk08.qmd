@@ -1,0 +1,202 @@
+---
+title: "PSTAT 120B: Mathematical Statistics"
+subtitle: "Ethan's Week 8 Discussion Section"
+footer: "PSTAT 120B - Winter 2026 with Dr. Annie Qu; material © Ethan P. Marzban"
+logo: "Images/120b_logo.svg"
+format: 
+  clean-revealjs:
+    theme: ../slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    menu:
+      side: left
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Ethan P. Marzban
+    affiliations: Department of Statistics and Applied Probability; UCSB <br /> <br />
+institute: February 25, 2026
+title-slide-attributes:
+    data-background-image: "Images/120b_logo.svg"
+    data-background-size: "30%"
+    data-background-opacity: "0.5"
+    data-background-position: 80% 50%
+code-annotations: hover
+---
+
+<style>
+mjx-math {
+  font-size: 80% !important;
+}
+</style>
+
+<script>
+MathJax = {
+  options: {
+    menuOptions: {
+      settings: {
+        assistiveMml: false
+      }
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="path-to-MathJax/tex-chtml.js"></script>
+
+
+$$
+\newcommand\R{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\S}{\mathbb{S}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\1}{1\!\!1}
+\newcommand{\comp}[1]{#1^{\complement}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\vect}[1]{\vec{\boldsymbol{#1}}}
+\newcommand{\tvect}[1]{\vec{\boldsymbol{#1}}^{\mathsf{T}}}
+\newcommand{\hvect}[1]{\widehat{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tmat}[1]{\mathbf{#1}^{\mathsf{T}}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg} \ \min}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+$$
+
+```{css echo = F}
+.hscroll {
+  height: 100%;
+  max-height: 600px;
+  max-width: 2000px;
+  overflow: scroll;
+}
+```
+
+```{r setup, echo = F}
+library(tidyverse)
+library(countdown)
+library(fixest)
+library(modelsummary) # Make sure you have >=v2.0.0
+library(GGally)
+library(ggokabeito)
+library(reshape2)
+library(pander)
+library(gridExtra)
+library(cowplot)
+library(palmerpenguins)
+library(plotly)
+library(tidymodels)
+```
+
+## {{< fa info >}} Announcements
+
+::: {.nonincremental}
+-   Midterm Exam is taking place on **Monday February 9, 2026** at **11am** (Usual Lecture Time) in **ILP 1302** (Usual Lecture Classroom)
+
+-   You are allowed to use a calculator, and two sheets of notes
+    -   No worked-out examples; only theorems, definitions, etc.
+    -   You will be asked to turn in your note sheet at the end of the exam, so you should **make a copy beforehand** if you are planning on reusing your sheet in the future
+    
+-   I will be holding a Review Session from **5 - 6:30pm** on **Thursday February 5, 2026** in **Broida 1610** (Canvas Announcement coming soon)
+    -   This will be comprised of some slides (material review) and some additional practice problems.
+:::
+
+## {{< fa calculator >}} Linear Combinations of Random Variables
+
+-   Given a collection of random variables _X_~1~, _X_~2~, ..., _X_~_n_~, we define a [**linear combination**]{.alert} of these random variables to be
+$$ U := \sum_{i=1}^{n} a_i X_i = a_1 X_1 + a_2 X_2 + \cdots + a_n X_n $$
+
+-   Crucially, _U_ will be a _random variable_!
+    -   E.g. Let _X_~1~ := revenue on a randomly-selected Monday; _X_~2~ := revenue on a randomly-selected Tuesday; _X_~1~ + _X_~2~ (total revenue) will be random!
+    
+-   Two questions:
+    1)   What are $\E[U]$ and $\Var(U)$?
+    2)   What is the distribution of $U$?
+
+
+## {{< fa calculator >}} Linear Combinations of Random Variables
+### Expectation and Variance
+
+::: {.nonincremental}
+- $\displaystyle \E\left[ \sum_{i=1}^{n} a_i X_i \right] =$
+    -   Any assumptions?
+    
+\
+    
+- $\displaystyle \Var\left( \sum_{i=1}^{n} a_i X_i \right) =$
+    -   Any assumptions?
+:::
+
+
+## {{< fa calculator >}} Linear Combinations of Random Variables
+### MGF
+
+::: {.callout-important}
+## **Theorem**
+If $X_1, X_2, \cdots, X_n$ are independent random variables, $\displaystyle M_{\sum_{i=1}^{n} a_i X_i}(t) = \prod_{i=1}^{n} M_{X_i}(a_i t)$
+:::
+
+
+**Proof:**
+\begin{align*}
+  \class{fragment}{{} M_{\sum_{i=1}^{n} a_i X_i}(t)}
+    & \class{fragment}{{} : = \E\left[ e^{t\sum_{i=1}^{n} a_i X_i} \right] } & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
+    & \class{fragment}{{} : = \prod_{i=1}^{n} \E[e^{(a_i t) X_i}]} & \class{fragment}{{}\color{blue}[\mathrm{Independence}]}         \\[3px]
+    & \class{fragment}{{} : = \prod_{i=1}^{n} M_{X_i}(a_i t)} & \class{fragment}{{}\color{blue}[\mathrm{Definition \ of \ MGF}]}         \\[3px]
+\end{align*}
+
+
+## {{< fa chart-area >}} Statistics
+### General Concepts
+
+:::{.callout-note}
+## **Definition:** Statistic
+
+A [**statistic**]{.alert} is any quantity calculated from the sample data.
+:::
+
+**Some Examples:**
+
+-   [**Sample Mean:**]{.alert} $\bar{X} := \frac{1}{n} \sum_{i=1}^{n} X_i$
+-   [**Sample Variance:**]{.alert} $S_X^2 := \frac{1}{n - 1} \sum_{i=1}^{n} (X_i - \bar{X})^2$
+-   [**Sample Maximum:**]{.alert} $X_{(n)} := \max\{X_1, \cdots, X_n\}$
+-   [**Sample Minimum:**]{.alert} $X_{(1)} := \min\{X_1, \cdots, X_n\}$
+
+::: {.fragment}
+::: {.callout-important}
+## **Key Takeaway**
+
+Crucially, statistics are _random_
+:::
+:::
+
+## {{< fa chart-area >}} Statistics
+### Example: Cat Weights
+
+::: {.r-stack}
+![](Images/min0.svg){.fragment width="1200"}
+
+![](Images/min1.svg){.fragment width="1200"}
+
+![](Images/min2.svg){.fragment width="1200"}
+
+![](Images/min3.svg){.fragment width="1200"}
+:::
+
+-   Different samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc.
+
+
+## {{< fa chart-area >}} Statistics
+### Sampling Distributions
+
+-   The distribution of a statistic $T(X_1, \cdots, X_n)$ is called its [**sampling distribution**]{.alert}
+    -   For example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)
+    
+-   In general, deriving sampling distributions can be involved. Two useful tools are:
+    -   MGFs (assuming a linear combination of independent random variables)
+    -   CDFs (may lead to difficult integrals, but will get you to the answer eventually!)
