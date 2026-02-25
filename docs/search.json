@@ -777,6 +777,20 @@
     "text": "Cramér-Rao Lower Bound\nRelation to MVUE\n\nThe “converse” is not necessarily true. That is, in some cases the MVUE will not be efficient (i.e. it will have variance greater than the CRLB).\n\nWe won’t talk about attainment of the CRLB in this class, but just know that there do exist checks for whether or not the MVUE will be efficient in a given situation.\n\nFun fact: the MVUE will always be a function of a sufficient statistic!\n\nThere is a theorem called the Rao-Blackwell Theorem (sometimes covered in PSTAT 120B!) that can be used to prove this fact."
   },
   {
+    "objectID": "120B-W26/Wk08/wk08.html#confidence-intervals-1",
+    "href": "120B-W26/Wk08/wk08.html#confidence-intervals-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Confidence Intervals",
+    "text": "Confidence Intervals\nAn Analogy\n\n\n“Using only a point estimate is like fishing in a murky lake with a spear. We can throw a spear where we saw a fish, but we will probably miss. On the other hand, if we toss a net in that area, we have a good chance of catching the fish.” (OpenIntro Statistics, pg. 181)\n\n\n\nThe statistical analogy of “throwing a net” is “constructing a confidence interval”.\nEssentially, we acknowledge that using a single point estimator to estimate a parameter is risky.\n\nA slightly more conservative approach is to report a range of plausible values."
+  },
+  {
+    "objectID": "120B-W26/Wk08/wk08.html#confidence-intervals-2",
+    "href": "120B-W26/Wk08/wk08.html#confidence-intervals-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Confidence Intervals",
+    "text": "Confidence Intervals\nPivotal Quantities\n\n\n\n\n\n\nDefinition: Pivotal Quantity\n\n\nConsider a sample \\(X_1, X_2, \\cdots, X_n\\) from some probability distribution \\(F\\) prescribed by a single parameter \\(\\theta\\). A quantity \\(h(X_1, X_2, \\cdots, X_n; \\theta)\\) is said to be a pivotal quantity for \\(\\theta\\) if its distribution does not depend on \\(\\theta\\).\n\n\n\n\nIn other words, a pivotal quantity is a function of both the data and the parameter, whose distribution does not depend on the parameter.\nExample: If we have a single draw \\(X \\sim \\mathrm{Expo}(\\lambda)\\), then \\(h(X; \\lambda) := (\\lambda X)\\) is a pivotal quantity since \\(h(X; \\lambda) \\sim \\mathrm{Expo}(1)\\) [verify this using our techniques from the first few weeks of the course!]\n\nIndeed, to verify that a quantity is a pivotal quantity will require us to use our techniques from the Transformations chapter of this course."
+  },
+  {
     "objectID": "120B-W26/MTRev/MTRev.html#welcome",
     "href": "120B-W26/MTRev/MTRev.html#welcome",
     "title": "PSTAT 120B: Mathematical Statistics",
