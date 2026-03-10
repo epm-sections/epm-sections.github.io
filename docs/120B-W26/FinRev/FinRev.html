@@ -1265,6 +1265,18 @@ MathJax = {
 <li class="fragment">Use the fact that <span class="math inline">\(-2 \ln \Lambda \distto \chi^2_{\nu}\)</span>, with <span class="math inline">\(\nu =\)</span> number of parameters specified by the null hypothesis.</li>
 </ul></li>
 </ul>
+</section>
+<section id="power-5" class="slide level2">
+<h2><i class="fa-solid fa-power-off" aria-label="power-off"></i> Power</h2>
+<h3 id="likelihood-ratio-test-example">Likelihood Ratio Test: Example</h3>
+<ul>
+<li class="fragment">As an example of the first point, suppose <span class="math inline">\(X \sim \mathrm{Expo}(\lambda)\)</span>, <span class="math inline">\(H_0: \lambda = \lambda_0\)</span>, and <span class="math inline">\(H_A: \lambda = \lambda_a\)</span> for some <span class="math inline">\(\lambda_a &lt; \lambda_0\)</span>. <span class="fragment"><span class="math display">\[ \Lambda :=  \frac{\max\limits_{\lambda \in \{\lambda_0\}}\Lik(\lambda; X)}{\max\limits_{\lambda \in \{\lambda_A\}}\Lik(\lambda; X)} = \frac{f(X; \lambda_0)}{f(X; \lambda_A)} = \frac{\lambda_0 e^{-\lambda_0 X}}{\lambda_a e^{-\lambda_A X}} = \left( \frac{\lambda_0}{\lambda_a} \right) e^{-(\lambda_0 - \lambda_a)X} \]</span></span></li>
+<li class="fragment">Because <span class="math inline">\(\lambda_a &lt; \lambda_0\)</span>, <span class="math inline">\(\Lambda(X)\)</span> is a strictly decreasing function in <em>X</em>.
+<ul>
+<li class="fragment">As such, small values for <span class="math inline">\(\Lambda\)</span> are achieved by <em>large</em> values of <span class="math inline">\(X\)</span>, meaning our rejection region is of the form <span class="math inline">\(\{X &gt; k\}\)</span>.</li>
+<li class="fragment">This makes it much easier to identify the correct value of <em>k</em> (i.e.&nbsp;the value that ensures the test has a desired level of significance)</li>
+</ul></li>
+</ul>
 
 
 </section></section>

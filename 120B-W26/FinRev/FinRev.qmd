@@ -1081,3 +1081,14 @@ where $\Lik(\theta; X_1, \cdots, X_n)$ denotes the likelihood. The corresponding
 -   To select _k_ to ensure an appropriate significance level, we either:
     -   Rewrite the test statistic to be in a more recognizable form
     -   Use the fact that $-2 \ln \Lambda \distto \chi^2_{\nu}$, with $\nu =$ number of parameters specified by the null hypothesis.
+
+
+
+## {{< fa power-off >}} Power
+### Likelihood Ratio Test: Example
+
+-   As an example of the first point, suppose $X \sim \mathrm{Expo}(\lambda)$, $H_0: \lambda = \lambda_0$, and $H_A: \lambda = \lambda_a$ for some $\lambda_a < \lambda_0$.
+[$$ \Lambda :=  \frac{\max\limits_{\lambda \in \{\lambda_0\}}\Lik(\lambda; X)}{\max\limits_{\lambda \in \{\lambda_A\}}\Lik(\lambda; X)} = \frac{f(X; \lambda_0)}{f(X; \lambda_A)} = \frac{\lambda_0 e^{-\lambda_0 X}}{\lambda_a e^{-\lambda_A X}} = \left( \frac{\lambda_0}{\lambda_a} \right) e^{-(\lambda_0 - \lambda_a)X} $$]{.fragment}
+-   Because $\lambda_a < \lambda_0$, $\Lambda(X)$ is a strictly decreasing function in _X_.
+    -   As such, small values for $\Lambda$ are achieved by _large_ values of $X$, meaning our rejection region is of the form $\{X > k\}$.
+    -   This makes it much easier to identify the correct value of _k_ (i.e. the value that ensures the test has a desired level of significance)

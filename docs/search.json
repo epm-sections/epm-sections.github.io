@@ -1645,6 +1645,13 @@
     "text": "Power\nLikelihood Ratio Test\n\n\n\n\n\n\nLikelihood Ratio Test\n\n\nLet \\(X_1, \\cdots, X_n\\) denote a sample from a distribution F prescribed by a single parameter θ, and consider testing \\(H_0: \\theta = \\theta_0\\) vs \\(H_A: \\theta = \\theta_A\\). The likelihood ratio test is the test with rejection region\n\\[ \\left\\{ \\frac{\\max\\limits_{\\theta \\in \\Theta_0}\\Lik(\\theta; X_1, \\cdots, X_n)}{\\max\\limits_{\\theta \\in \\Theta_A}\\Lik(\\theta_A; X_1, \\cdots, X_n)} &lt; k  \\right\\} \\] where \\(\\Lik(\\theta; X_1, \\cdots, X_n)\\) denotes the likelihood. The corresponding test statistic is often referred to as the likelihood ratio \\(\\Lambda\\).\n\n\n\n\nTo select k to ensure an appropriate significance level, we either:\n\nRewrite the test statistic to be in a more recognizable form\nUse the fact that \\(-2 \\ln \\Lambda \\distto \\chi^2_{\\nu}\\), with \\(\\nu =\\) number of parameters specified by the null hypothesis."
   },
   {
+    "objectID": "120B-W26/FinRev/FinRev.html#power-5",
+    "href": "120B-W26/FinRev/FinRev.html#power-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Power",
+    "text": "Power\nLikelihood Ratio Test: Example\n\nAs an example of the first point, suppose \\(X \\sim \\mathrm{Expo}(\\lambda)\\), \\(H_0: \\lambda = \\lambda_0\\), and \\(H_A: \\lambda = \\lambda_a\\) for some \\(\\lambda_a &lt; \\lambda_0\\). \\[ \\Lambda :=  \\frac{\\max\\limits_{\\lambda \\in \\{\\lambda_0\\}}\\Lik(\\lambda; X)}{\\max\\limits_{\\lambda \\in \\{\\lambda_A\\}}\\Lik(\\lambda; X)} = \\frac{f(X; \\lambda_0)}{f(X; \\lambda_A)} = \\frac{\\lambda_0 e^{-\\lambda_0 X}}{\\lambda_a e^{-\\lambda_A X}} = \\left( \\frac{\\lambda_0}{\\lambda_a} \\right) e^{-(\\lambda_0 - \\lambda_a)X} \\]\nBecause \\(\\lambda_a &lt; \\lambda_0\\), \\(\\Lambda(X)\\) is a strictly decreasing function in X.\n\nAs such, small values for \\(\\Lambda\\) are achieved by large values of \\(X\\), meaning our rejection region is of the form \\(\\{X &gt; k\\}\\).\nThis makes it much easier to identify the correct value of k (i.e. the value that ensures the test has a desired level of significance)"
+  },
+  {
     "objectID": "120B-W26/Wk04/wk04.html#announcements",
     "href": "120B-W26/Wk04/wk04.html#announcements",
     "title": "PSTAT 120B: Mathematical Statistics",
