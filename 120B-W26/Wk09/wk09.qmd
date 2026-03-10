@@ -404,3 +404,24 @@ $$ \texttt{decision}(X_1, \cdots, X_n) = \begin{cases} \texttt{reject null} & \t
 $$ \left| \frac{\bar{X} - \mu_0}{1 / \sqrt{n}} \right| > z_{1 - \frac{\alpha}{2}} $$
 and fail to reject otherwise.
     -   For example, a 5\% level of significance adopts a critical value of around 1.96.
+    
+    
+    
+## {{< fa magnifying-glass-chart >}} Hypothesis Testing
+### Notational Note
+
+-   Professor Qu uses $z_{p}$ to denote the _p_^th^ percentile of the standard normal distribution.
+    -   It should be noted that some people use $z_{p}$ to denote a _right-tail_ quantile; that is, $\Phi(z_{p}) = 1 - p$. 
+    -   I recommend always drawing a picture, to get around this notational hurdle.
+
+
+
+    
+## {{< fa magnifying-glass-chart >}} Hypothesis Testing
+### Power Example
+
+$X_1, \cdots, X_n \iid \mathcal{N}(\mu, \sigma^2)$; testing $H_0: \mu = \mu_0$ against $H_A: \mu > \mu_0$.
+
+-   Test: $\mathcal{R} = \left\{ \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} > z_{1 - \alpha} \right\}$
+-   [**Power Curve:**]{.alert}: $\beta(\mu_a) := \mathbb{P}(\text{Reject $H_0$} \mid \mu = mu_a)$
+    -   The answer is in the lecture slides; let's quickly re-derive this.

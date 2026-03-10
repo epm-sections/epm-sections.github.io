@@ -952,6 +952,97 @@
     "text": "Conditional Expectations\n\nIn general, \\(\\E[Y \\mid X = x]\\) will be a function of x, but will be deterministic (i.e. nonrandom).\nBy contrast, \\(\\E[Y \\mid X]\\) will be a random variable.\n\nTo calculate \\(\\E[Y \\mid X]\\), we first calculate \\(h(x) := \\E[Y \\mid X = x]\\) and then replace all instances of x with X.\n\n\n\n\n\n\n\n\n\nLaw of Total Expectation\n\n\n\\[ \\E[Y] = \\E[\\E[Y \\mid X]] \\]\n\n\n\n\n\n\n\n\n\n\n\nLaw of Total Variance\n\n\n\\[ \\Var(Y) = \\Var(\\E[Y \\mid X]) + \\E[\\Var(Y \\mid X)] \\]"
   },
   {
+    "objectID": "120B-W26/Wk07_old/wk07.html#statistical-inference",
+    "href": "120B-W26/Wk07_old/wk07.html#statistical-inference",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistical Inference",
+    "text": "Statistical Inference\nGeneral Framework\n\n\n\nWe have a population, governed by a set of population parameters that are unobserved (but that we’d like to make claims about).\nTo make claims about the population parameters, we take a sample.\nWe then use our sample to make inferences (i.e. claims) about the population parameters.\n\n\n\n\n\nIn estimation, we seek to construct estimators to estimate population parameters."
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\n\nA coin lands “heads” with probability \\(\\theta \\in (0, 1)\\).\nSuppose we toss the coin five times, and observe (H, T, H, H, T).\n\nLetting X denote the number of heads in 5 tosses, X ~ Bin(5, \\(\\theta\\))\n\nIf \\(\\theta = 0.3\\), how likely were we to have observed what we saw?\n\nIf \\(\\theta = 0.3\\), the probability of observing three heads is \\(\\Prob(X = 3) = \\binom{5}{3}(0.3)^3(0.7)^2 \\approx 0.1323\\)\n\nIf \\(\\theta = 0.4\\), how likely were we to have observed what we saw?\n\nIf \\(\\theta = 0.3\\), the probability of observing three heads is \\(\\Prob(X = 3) = \\binom{5}{3}(0.4)^3(0.6)^2 \\approx 0.2304\\)\n\nGiven that we observed (H, T, H, H, T), which was more likely: that \\(\\theta = 0.3\\) or that \\(\\theta = 0.4\\)?"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-1",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nMaximization\n\n\n\n\n\n\nIdea:\n\n\nTo estimate a parameter \\(\\theta\\) given data \\(X_1, X_2, \\cdots, X_n\\), find the value of \\(\\theta\\) that was most likely to have given rise to the data we observed.\n\n\n\n\nThis procedure is called maximum likelihood estimation and the resulting estimator is called the maximum likelihood estimator\nThe likelihood gives a way of answering the question: “given data \\(X_1, X_2, \\cdots, X_n\\), how likely was it that the true value of the parameter were \\(\\theta\\), for an arbitrary \\(\\theta\\)?”\nFor example, back to our coin-tossing example:"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-2",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nExample"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-3",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nExample: Different Datasets"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-4",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nDefinition\n\nThe likelihood given a sample is just the marginal mass/density function.\nIndeed, the reason we call this a “likelihood” function instead of a “probability” function is because, in the continuous case, the likelihood at a given point doesn’t really represent a true probability (but, it is giving the same sort of information as a probability).\n\n\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) := f_{X_1, X_2, \\cdots, X_n}(x_1, x_2, \\cdots, x_n; \\theta) \\]\n\n\nIf the sample is i.i.d.: \\(\\displaystyle \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\prod_{i=1}^{n} f(x_i; \\theta)\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-5",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nContinuous Example: Exponential\n\nExample Scenario: The wait time at The Arbor of a randomly-selected customer follows an Exponential distribution with unknown mean \\(\\theta\\).\nLikelihood (assuming i.i.d.): \\[\\begin{align*}\n  \\class{fragment}{{} \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n)}\n&\\class{fragment}{{} = \\prod_{i=1}^{n} f(x_i; \\theta)}            \\\\[3px]\n&\\class{fragment}{{} = \\prod_{i=1}^{n} \\left[ \\frac{1}{\\theta} e^{-Y_i/\\theta} \\cdot 1 \\! \\! 1_{\\{x_i \\geq 0\\}} \\right] }    \\\\[3px]\n&\\class{fragment}{{} = \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\cdot 1 \\! \\! 1_{\\{x_{(1)} \\geq 0\\}}}\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-6",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nContinuous Example: Exponential\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\cdot 1 \\! \\! 1_{\\{x_{(1)} \\geq 0\\}} \\]\n\nNote that we are viewing this as a function of \\(\\theta\\)!\n\nThe idea is: we assume that we already have our data \\((x_1, x_2, \\cdots, x_n)\\); what we’re trying to do is figure out the \\(\\theta\\) value that makes the data we observed most plausible.\n\nFurther note: this shows that likelihoods aren’t true density functions in \\(\\theta\\).\n\nIndeed, \\(\\displaystyle \\int_{0}^{\\infty} \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\ \\mathrm{d}\\theta = \\frac{(n - 2)!}{(\\sum_{i=1}^{n} x_i)^{n - 1}} \\neq 1\\)"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-7",
+    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Likelihoods",
+    "text": "Likelihoods\nContinuous Example: Exponential\n\n\nCode\nexp_lik &lt;- function(theta, y) {\n  (1 / theta)^(length(y)) * exp(-(1 / theta) * sum(y))\n}"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nGeneral Procedure\n\n\n\n\n\n\nDefinition: Maximum Likelihood Estimator\n\n\n\\[ (\\widehat{\\theta}_{1, \\mathrm{MLE}}, \\ \\cdots, \\ \\widehat{\\theta}_{m, \\mathrm{MLE}})  := \\argmax_{(\\theta_1, \\cdots, \\theta_m)} \\Lik(\\theta_1, \\cdots, \\theta_m; X_1, X_2, \\cdots, X_n) \\]\n\n\n\n\nProcedurally, we often work with the log-likelihood instead. That is:\n\n\nFind the likelihood\nTake the logarithm to find the log-likelihood\nFind the minimizing value of the log-likelihood"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-1",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nExample\nLet \\(X_1, X_2, \\cdots, X_n \\iid f(x; \\theta) = \\frac{x}{\\theta} \\exp\\left\\{ - \\frac{x^2}{2 \\theta} \\right\\}\\)\n\\[\\begin{align*}\n  \\class{fragment}{{} \\mathcal{L}(\\theta; X_1, \\cdots, X_n)}\n    &\\class{fragment}{{} = \\prod_{i=1}^{n} f(X_i; \\theta)} \\class{fragment}{{} = \\prod_{i=1}^{n} \\left[ \\frac{X_i}{\\theta} \\cdot \\exp\\left\\{ - \\frac{X_i^2}{2\\theta} \\right\\} \\right]  }    \\\\[3px]\n    &\\class{fragment}{{} = \\left( \\frac{1}{\\theta} \\right)^n \\cdot \\left( \\prod_{i=1}^{n} X_i \\right) \\cdot \\exp\\left\\{ - \\frac{1}{2\\theta} \\sum_{i=1}^{n} X_i^2 \\right\\}  }  \\\\[3px]\n   \\class{fragment}{{} \\ell(\\theta; X_1, \\cdots, X_n)}  &\\class{fragment}{{} := \\ln \\mathcal{L}(\\theta; X_1, \\cdots, X_n) }  \\class{fragment}{{} = -n\\ln(\\theta) + \\sum_{i=1}^{n} \\ln(X_i) - \\frac{1}{2 \\theta} \\sum_{i=1}^{n} X_i^2 }  \\\\[3px]\n   \\class{fragment}{{} \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n)} &\\class{fragment}{{}  = - \\frac{n}{\\theta} + \\frac{1}{2 \\theta^2} \\sum_{i=1}^{n} X_i^2 }\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-2",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nExample\nLet \\(X_1, X_2, \\cdots, X_n \\iid f(x; \\theta) = \\frac{x}{\\theta} \\exp\\left\\{ - \\frac{x^2}{2 \\theta} \\right\\}\\)\n\n\n\\[ \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n) = - \\frac{n}{\\theta} + \\frac{1}{2 \\theta^2} \\sum_{i=1}^{n} X_i^2  \\]\n\n\n\n\nThus, \\(\\widehat{\\theta}_{\\mathrm{MLE}}\\) must satisfy\n\\[  - \\frac{n}{\\widehat{\\theta}_{\\mathrm{MLE}} } + \\frac{1}{2 \\widehat{\\theta}_{\\mathrm{MLE}}^2} \\sum_{i=1}^{n} X_i^2 \\stackrel{\\mathrm{set}}{=} 0  \\]\n\n\n\nWhen solved for \\(\\widehat{\\theta}_{\\mathrm{MLE}}\\), we find \\(\\boxed{\\widehat{\\theta}_{\\mathrm{MLE}} = \\frac{1}{2n} \\sum_{i=1}^{n} X_i^2 }\\)\nTechnically, we should also check that the second derivative at this point is negative, to ensure we found a maximum; I leave this as an exercise"
+  },
+  {
+    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-3",
+    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Maximum Likelihood Estimators",
+    "text": "Maximum Likelihood Estimators\nInvariance Property\n\n\n\n\n\n\nInvariance Property of the MLE\n\n\nIf \\(\\widehat{\\theta}_1, \\cdots, \\widehat{\\theta}_m\\) are the maximum likelihood estimators for \\(\\theta_1, \\cdots, \\theta_m\\), then the maximum likelihood estimator for \\(h(\\theta_1, \\cdots, \\theta_m)\\) is \\[ h(\\widehat{\\theta}_1, \\cdots, \\widehat{\\theta}_m) \\]\n\n\n\n\nExample: If \\(X_1, \\cdots, X_n \\iid \\mathrm{Expo}(\\lambda)\\), then \\(\\widehat{\\lambda}_{\\mathrm{MLE}} = 1 / \\bar{X}\\) (as shown in lecture).\n\nSay we seek the maximum likelihood estimator for the population variance, \\(\\lambda^2\\).\nBy invariance, this is given by \\(1/(\\bar{X}^2)\\)."
+  },
+  {
     "objectID": "DSCol-F25/DataVis/DataVis.html#some-questions",
     "href": "DSCol-F25/DataVis/DataVis.html#some-questions",
     "title": "Data Visualization",
@@ -1232,95 +1323,326 @@
     "text": "Transformations\n\nAlso note how transformations may be useful, especially when one or more of your variables has comparatively high spread.\n\n\n\n\nRaw:\n\n\n\n\n\n\n\n\n\n\n\n\nLog-Transformed:"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#statistical-inference",
-    "href": "120B-W26/Wk07_old/wk07.html#statistical-inference",
+    "objectID": "120B-W26/FinRev/FinRev.html#welcome",
+    "href": "120B-W26/FinRev/FinRev.html#welcome",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Welcome!",
+    "text": "Welcome!\nAnd A Disclaimer\n\nHello! I’m Ethan (he/him), and I’m one of the TAs this quarter (I’ve hosted the Wednesday 1pm and Wednesday 2pm Sections).\n\n\n\n\n\n\n\n\nDisclaimer\n\n\nI have not yet seen the exam! What I cover here today is not meant to be an indication of exactly what will be covered on the exam.\n\n\n\n\n\nJust because I cover something today doesn’t mean it will show up on the exam; similarly, just because I don’t cover something today doesn’t mean it won’t show up on the exam.\nWith that said, I have some prior experience with this class, so am basing my review on material I think could plausibly appear on the exam"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#roadmap-for-today",
+    "href": "120B-W26/FinRev/FinRev.html#roadmap-for-today",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Roadmap for Today",
+    "text": "Roadmap for Today\n\nReview some Material\n\nEstimation\nHypothesis Testing\n\n\nWork through some problems\n\nI’ll pass out a worksheet later with some problems for groupwork (that we’ll later solve together)\n\n\n\nI will upload most (but not all!) material from today to a Google Drive folder; I’ll send a Canvas announcement with more information."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#statistics",
+    "href": "120B-W26/FinRev/FinRev.html#statistics",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nGeneral Concepts\n\n\n\n\n\n\nDefinition: Statistic\n\n\nA statistic is any quantity calculated from the sample data.\n\n\n\nSome Examples:\n\nSample Mean: \\(\\bar{X} := \\frac{1}{n} \\sum_{i=1}^{n} X_i\\)\nSample Variance: \\(S_X^2 := \\frac{1}{n - 1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2\\)\nSample Maximum: \\(X_{(n)} := \\max\\{X_1, \\cdots, X_n\\}\\)\nSample Minimum: \\(X_{(1)} := \\min\\{X_1, \\cdots, X_n\\}\\)\n\n\n\n\n\n\n\n\nKey Takeaway\n\n\nCrucially, statistics are random"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#statistics-1",
+    "href": "120B-W26/FinRev/FinRev.html#statistics-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nExample: Cat Weights\n\n\n\n\n\n\n\nDifferent samples contain potentially different cat weights, and therefore potentially different minimum weights, average weights, etc."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#statistics-2",
+    "href": "120B-W26/FinRev/FinRev.html#statistics-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nSampling Distributions\n\nThe distribution of a statistic \\(T(X_1, \\cdots, X_n)\\) is called its sampling distribution\n\nFor example, we saw in lecture: assuming a normally-distributed sample, the sample mean has a normal sampling distribution (Reproductive Property of Normal RVs)\n\nIn general, deriving sampling distributions can be involved. Two useful tools are:\n\nMGFs (assuming a linear combination of independent random variables)\nCDFs (may lead to difficult integrals, but will get you to the answer eventually!)"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#statistics-3",
+    "href": "120B-W26/FinRev/FinRev.html#statistics-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Statistics",
+    "text": "Statistics\nWhy Do We Care?\n\nSo, why do we care about statistics?\nLet’s return to our cat weight example: suppose we consider the population of all cats in the world.\n\nSay I want to estimate \\(\\mu\\), the true average weight of all cats in the world.\n\nIdea 1: track down every cat in the world, weigh them, and calculate the average.\n\nIs this feasible? Not really…\n\nIdea 2: take a random sample of cats, weigh them, and use the sampled cat weights to say something about the population of all cat weights."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#statistical-inference",
+    "href": "120B-W26/FinRev/FinRev.html#statistical-inference",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Statistical Inference",
-    "text": "Statistical Inference\nGeneral Framework\n\n\n\nWe have a population, governed by a set of population parameters that are unobserved (but that we’d like to make claims about).\nTo make claims about the population parameters, we take a sample.\nWe then use our sample to make inferences (i.e. claims) about the population parameters.\n\n\n\n\n\nIn estimation, we seek to construct estimators to estimate population parameters."
+    "text": "Statistical Inference\nGeneral Framework\n\n\n\nWe have a population, governed by a set of population parameters that are unobserved (but that we’d like to make claims about).\nTo make claims about the population parameters, we take a sample.\nWe then use our sample to make inferences (i.e. claims) about the population parameters.\n\n\n\n\n\nInference could mean estimation or hypothesis testing."
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods",
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-1",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nGeneral Framework\n\n\n\n\n\n\nGoal\n\n\nUse random samples \\(X_1, X_2, \\cdots, X_n\\) drawn from some population distribution \\(F\\) prescribed by a parameter \\(\\theta\\) to estimate \\(\\theta\\).\n\n\n\n\nEstimator: a statistic being used to estimate the parameter.\n\nIs an estimator random or deterministic?\n\nEstimate: a particular realization of an estimator.\n\nEquivalently: the numerical value obtained by applying an estimator to a particular realized sample.\n\nTwo questions arise: (1) How can we construct estimators? (2) How can we quantify the performance of an estimator?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-2",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nPerformance of an Estimator\n\n\n\n\n\n\nDefinition: Bias\n\n\nThe bias of an estimator \\(\\widehat{\\theta}_n\\) being used to estimate a parameter \\(\\theta\\) is defined to be \\[ \\mathrm{Bias}(\\widehat{\\theta}_n) := \\E[\\widehat{\\theta}_n] - \\theta \\] If \\(\\mathrm{Bias}(\\widehat{\\theta}_n) = 0\\), we say that \\(\\widehat{\\theta}_n\\) is an unbiased estimator for \\(\\theta\\).\n\n\n\n\nAn unbiased estimator is one that “on average, gets it right.”\n\nEquivalently: the sampling distribution of an unbiased estimator is centered at the true value of the parameter.\n\n\n\n\n\n\n\n\n\nExercise 1\n\n\nShow that the sample mean is an unbiased estimator for the population mean."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-3",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nAn Analogy\n\nUnbiasedness, however, is often not enough. To motivate why, let’s take a look at an analogy.\nAn analogy is often drawn between estimation and hitting a bullseye.\n\nThe bullseye is akin to our estimand, and estimates are represented by shots fired at the target.\nThe estimator is, therefore, akin to the marskperson.\n\nAn unbiased estimator is analogous to a marksperson for whom the average location of shots is the bullseye."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-4",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nWhich of the following markspersons is “better”?\n\n\n\n\n\nMarksperson 1\n\n\n\n\nMarksperson 2"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-5",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nTwo Markspersons\n\nSo, unbiasedness is not enough; we’d also like small variance.\nTo that end, we introduce the mean squared-error (MSE) of an estimator: \\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\E\\left[(\\widehat{\\theta}_n - \\theta)^2 \\right] \\]\n\n\n\n\n\n\n\n\nBias-Variance Decomposition\n\n\n\\[ \\mathrm{MSE}(\\widehat{\\theta}_n) := \\mathrm{Bias}^2(\\widehat{\\theta}_n) + \\Var(\\widehat{\\theta}_n) \\]\n\n\n\n\n\nDo we want estimators with high or low MSE?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-6",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nMVUE\n\nSo, we prefer estimators with low MSE.\nIf an estimator is unbiased, its MSE is just equal to its variance.\nTherefore, among all unbiased estimators, it seems that the “best” one is the one that has smallest variance.\n\nThat is, an “optimal” estimator is one that is unbiased and has minimum variance…\nSuch an estimator is called the MVUE (Minimum Variance Unbiased Estimator)."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-7",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nMVUE\n\nConstructing an MVUE can be a task and a half.\n\nIt is often much easier to verify whether a given estimator is an MVUE or not.\n\n\n\n\n\n\n\n\n\nCramér-Rao Lower Bound\n\n\nThe smallest variance attainable by an unbiased estimator for a parameter \\(\\theta\\) is \\([\\mathcal{I}_n(\\theta)]^{-1}\\), where \\(\\mathcal{I}_n(\\theta)\\) denotes the Fisher Information of the Sample \\(X_1, X_2, \\cdots, X_n\\): \\[ \\mathcal{I}_n(\\theta) := \\Var\\left( \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n) \\right)  = - \\E\\left[ \\frac{\\partial^2}{\\partial \\theta^2} \\ell(\\theta; X_1, \\cdots, X_n)  \\right]  \\]\n\n\n\n\n\nAn estimator whose variance is equal to the CRLB (Cramér-Rao Lower Bound) is said to be efficient"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-8",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nMVUE\n\n\n\n\n\n\nFact\n\n\nAn unbiased, efficient estimator will be the MVUE.\n\n\n\n\nRemember: \\(\\widehat{\\theta}_n\\) being efficient means its variance is \\([\\mathcal{I}_n(\\theta)]^{-1}\\).\n\nBut we also know that no estimator has variance smaller than \\([\\mathcal{I}_n(\\theta)]^{-1}\\).\nTherefore, no unbiased estimator has variance smaller than that of \\(\\widehat{\\theta}_n\\); i.e. among all unbiased estimators, \\(\\widehat{\\theta}_n\\) has the smallest variance.\n\nThe “converse” is not necessarily true: just because an unbiased estimator is not efficient doesn’t mean it’s not the MVUE."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-9",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-9",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nFisher Information\n\nBefore we do an example, I’d like to return to the notion of Fisher Information.\nThere are actually two types of Fisher Information we’ve been talking about!\n\nOne is the Fisher Information of a single observation X, denote \\(\\Info(\\theta)\\)\nThe other is the Fisher Information of a sample X1, …, Xn, denoted \\(\\Info_n(\\theta)\\).\n\nIf our sample is IID, then \\(\\Info_n(\\theta) = n \\Info(\\theta)\\).\n\nAs a general rule-of-thumb: if you’re dealing with the entire sample, don’t multiply by n again."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#fisher-information-1",
+    "href": "120B-W26/FinRev/FinRev.html#fisher-information-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Fisher Information",
+    "text": "Fisher Information\nExample\nExample: \\(X_1, X_2, \\cdots, X_n \\iid \\mathrm{Expo}(\\lambda)\\)\n\nUsing the Entire SampleUsing a Single Observation\n\n\n\nLikelihood of the sample: \\(\\mathcal{L}(\\lambda; \\vect{X}) = \\prod_{i=1}^{n} \\left( \\lambda e^{-\\lambda X_i} \\right) = \\lambda^n e^{-\\lambda \\sum_{i=1}^{n} X_i}\\)\nLog-Likelihood of the sample: \\(\\ell(\\lambda; \\vect{X}) = n \\ln(\\lambda) - \\lambda \\sum_{i=1}^{n} X_i\\)\nScore Function of the Sample: \\(\\frac{\\mathrm{d}}{\\mathrm{d}\\lambda} \\ell(\\lambda; \\vect{X}) = \\frac{n}{\\lambda} - \\sum_{i=1}^{n} X_i\\)\nCurvature of Log-Likelihood of the Sample: \\(\\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; \\vect{X}) = - \\frac{n}{\\lambda^2}\\)\nFisher Information of the Sample: \\(\\mathcal{I}_n(\\lambda) = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; \\vect{X}) \\right] = - \\E\\left[ - \\frac{n}{\\lambda^2} \\right] = \\boxed{\\frac{n}{\\lambda^2}}\\)\n\n\n\n\nLikelihood of an observation: \\(\\mathcal{L}(\\lambda; X) =  \\lambda e^{-\\lambda X}\\)\nLog-Likelihood of an observation: \\(\\ell(\\lambda; X) = \\ln(\\lambda) - \\lambda X\\)\nScore Function of an Observation: \\(\\frac{\\mathrm{d}}{\\mathrm{d}\\lambda} \\ell(\\lambda; X) = \\frac{1}{\\lambda} - X\\)\nCurvature of Log-Likelihood of an Observation: \\(\\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; X) = - \\frac{1}{\\lambda^2}\\)\nFisher Information of an Obs.: \\(\\mathcal{I}(\\lambda) = - \\E\\left[ \\frac{\\mathrm{d}^2}{\\mathrm{d}\\lambda^2} \\ell(\\lambda; X) \\right] = - \\E\\left[ - \\frac{1}{\\lambda^2} \\right] = \\frac{1}{\\lambda^2}\\)\nFisher Information of the Sample: \\(\\mathcal{I}(\\lambda) =  n \\mathcal{I}(\\lambda) = \\boxed{ \\frac{n}{\\lambda^2} }\\)"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#mvue-3",
+    "href": "120B-W26/FinRev/FinRev.html#mvue-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " MVUE",
+    "text": "MVUE\nExample\n\n\n\n\n\n\nExample 2\n\n\nLet \\(X_1, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\). It can be shown that the Fisher Information of the Sample is given by \\(\\Info_n(\\mu) = 1 / n\\). Is \\(\\bar{X}\\) the MVUE for \\(\\mu\\)? Justify your answer carefully."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#estimation-10",
+    "href": "120B-W26/FinRev/FinRev.html#estimation-10",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Estimation",
+    "text": "Estimation\nConstruction\n\nConcepts like unbiasedness, MVUE, etc. all pertain to quantifying how well an estimator is doing at estimating a parameter.\nWe would also like to be able to construct estimators!\nThe two main methods we discussed in this class for constructing estimators are:\n\nMethod of Moments\nMethod of Maximum Likelihood Estimation\n\nThe method of moments is based on following idea: our sample moments should match the population moments closely.\n\nAs such, we find the parameter estimators that set our sample moments equal to the population moments."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#likelihoods",
+    "href": "120B-W26/FinRev/FinRev.html#likelihoods",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Likelihoods",
-    "text": "Likelihoods\n\nA coin lands “heads” with probability \\(\\theta \\in (0, 1)\\).\nSuppose we toss the coin five times, and observe (H, T, H, H, T).\n\nLetting X denote the number of heads in 5 tosses, X ~ Bin(5, \\(\\theta\\))\n\nIf \\(\\theta = 0.3\\), how likely were we to have observed what we saw?\n\nIf \\(\\theta = 0.3\\), the probability of observing three heads is \\(\\Prob(X = 3) = \\binom{5}{3}(0.3)^3(0.7)^2 \\approx 0.1323\\)\n\nIf \\(\\theta = 0.4\\), how likely were we to have observed what we saw?\n\nIf \\(\\theta = 0.3\\), the probability of observing three heads is \\(\\Prob(X = 3) = \\binom{5}{3}(0.4)^3(0.6)^2 \\approx 0.2304\\)\n\nGiven that we observed (H, T, H, H, T), which was more likely: that \\(\\theta = 0.3\\) or that \\(\\theta = 0.4\\)?"
+    "text": "Likelihoods\nMotivating Example\n\nSuppose I have a coin that lands heads with some unknown probability θ.\nI toss this coin five times, and observe 3 heads.\n\nNote that X := number of heads in 5 tosses of a \\(\\theta-\\)coin follows a Binom(5, θ) distribution.\n\nIf \\(\\theta = 0.3\\), what is the probability that I observed the data that I saw (e.g. X = 3)?\n\n\\(\\Prob(X = 3 \\mid \\theta = 0.3) = \\binom{5}{3} (0.3)^{3} (0.7)^{2} \\approx 0.1323\\)\n\nIf \\(\\theta = 0.4\\), what is the probability that I observed the data that I saw (e.g. X = 3)?\n\n\\(\\Prob(X = 3 \\mid \\theta = 0.4) = \\binom{5}{3} (0.4)^{3} (0.6)^{2} \\approx 0.2304\\)"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-1",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-1",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Likelihoods",
-    "text": "Likelihoods\nMaximization\n\n\n\n\n\n\nIdea:\n\n\nTo estimate a parameter \\(\\theta\\) given data \\(X_1, X_2, \\cdots, X_n\\), find the value of \\(\\theta\\) that was most likely to have given rise to the data we observed.\n\n\n\n\nThis procedure is called maximum likelihood estimation and the resulting estimator is called the maximum likelihood estimator\nThe likelihood gives a way of answering the question: “given data \\(X_1, X_2, \\cdots, X_n\\), how likely was it that the true value of the parameter were \\(\\theta\\), for an arbitrary \\(\\theta\\)?”\nFor example, back to our coin-tossing example:"
-  },
-  {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-2",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-2",
+    "objectID": "120B-W26/FinRev/FinRev.html#likelihoods-1",
+    "href": "120B-W26/FinRev/FinRev.html#likelihoods-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Likelihoods",
     "text": "Likelihoods\nExample"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-3",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-3",
+    "objectID": "120B-W26/FinRev/FinRev.html#likelihoods-2",
+    "href": "120B-W26/FinRev/FinRev.html#likelihoods-2",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Likelihoods",
     "text": "Likelihoods\nExample: Different Datasets"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-4",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-4",
+    "objectID": "120B-W26/FinRev/FinRev.html#likelihoods-3",
+    "href": "120B-W26/FinRev/FinRev.html#likelihoods-3",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Likelihoods",
-    "text": "Likelihoods\nDefinition\n\nThe likelihood given a sample is just the marginal mass/density function.\nIndeed, the reason we call this a “likelihood” function instead of a “probability” function is because, in the continuous case, the likelihood at a given point doesn’t really represent a true probability (but, it is giving the same sort of information as a probability).\n\n\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) := f_{X_1, X_2, \\cdots, X_n}(x_1, x_2, \\cdots, x_n; \\theta) \\]\n\n\nIf the sample is i.i.d.: \\(\\displaystyle \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\prod_{i=1}^{n} f(x_i; \\theta)\\)"
+    "text": "Likelihoods\nDefinition\n\nConceptually, the likelihood \\(\\Lik(\\theta; x_1, x_2, \\cdots, x_n)\\) answers the question: if the true value of the parameter were \\(\\theta\\), how likely was I to have observed \\(x_1, x_2, \\cdots, x_n\\)?\nMathematically, the likelihood is just the marginal mass/density function\n\n\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) := f_{X_1, X_2, \\cdots, X_n}(x_1, x_2, \\cdots, x_n; \\theta) \\]\n\n\nIf the sample is i.i.d.: \\(\\displaystyle \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\prod_{i=1}^{n} f(x_i; \\theta)\\)\nThe maximum likelihood estimate is the value of \\(\\theta\\) under which our data was most likely to have been observed."
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-5",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-5",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Likelihoods",
-    "text": "Likelihoods\nContinuous Example: Exponential\n\nExample Scenario: The wait time at The Arbor of a randomly-selected customer follows an Exponential distribution with unknown mean \\(\\theta\\).\nLikelihood (assuming i.i.d.): \\[\\begin{align*}\n  \\class{fragment}{{} \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n)}\n&\\class{fragment}{{} = \\prod_{i=1}^{n} f(x_i; \\theta)}            \\\\[3px]\n&\\class{fragment}{{} = \\prod_{i=1}^{n} \\left[ \\frac{1}{\\theta} e^{-Y_i/\\theta} \\cdot 1 \\! \\! 1_{\\{x_i \\geq 0\\}} \\right] }    \\\\[3px]\n&\\class{fragment}{{} = \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\cdot 1 \\! \\! 1_{\\{x_{(1)} \\geq 0\\}}}\n\\end{align*}\\]"
-  },
-  {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-6",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-6",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Likelihoods",
-    "text": "Likelihoods\nContinuous Example: Exponential\n\\[ \\mathcal{L}(\\theta; x_1, x_2, \\cdots, x_n) = \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\cdot 1 \\! \\! 1_{\\{x_{(1)} \\geq 0\\}} \\]\n\nNote that we are viewing this as a function of \\(\\theta\\)!\n\nThe idea is: we assume that we already have our data \\((x_1, x_2, \\cdots, x_n)\\); what we’re trying to do is figure out the \\(\\theta\\) value that makes the data we observed most plausible.\n\nFurther note: this shows that likelihoods aren’t true density functions in \\(\\theta\\).\n\nIndeed, \\(\\displaystyle \\int_{0}^{\\infty} \\left( \\frac{1}{\\theta} \\right)^n \\cdot e^{-\\frac{1}{\\theta} \\sum_{i=1}^{n} x_i} \\ \\mathrm{d}\\theta = \\frac{(n - 2)!}{(\\sum_{i=1}^{n} x_i)^{n - 1}} \\neq 1\\)"
-  },
-  {
-    "objectID": "120B-W26/Wk07_old/wk07.html#likelihoods-7",
-    "href": "120B-W26/Wk07_old/wk07.html#likelihoods-7",
-    "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Likelihoods",
-    "text": "Likelihoods\nContinuous Example: Exponential\n\n\nCode\nexp_lik &lt;- function(theta, y) {\n  (1 / theta)^(length(y)) * exp(-(1 / theta) * sum(y))\n}"
-  },
-  {
-    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators",
-    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators",
+    "objectID": "120B-W26/FinRev/FinRev.html#maximum-likelihood-estimators",
+    "href": "120B-W26/FinRev/FinRev.html#maximum-likelihood-estimators",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Maximum Likelihood Estimators",
-    "text": "Maximum Likelihood Estimators\nGeneral Procedure\n\n\n\n\n\n\nDefinition: Maximum Likelihood Estimator\n\n\n\\[ (\\widehat{\\theta}_{1, \\mathrm{MLE}}, \\ \\cdots, \\ \\widehat{\\theta}_{m, \\mathrm{MLE}})  := \\argmax_{(\\theta_1, \\cdots, \\theta_m)} \\Lik(\\theta_1, \\cdots, \\theta_m; X_1, X_2, \\cdots, X_n) \\]\n\n\n\n\nProcedurally, we often work with the log-likelihood instead. That is:\n\n\nFind the likelihood\nTake the logarithm to find the log-likelihood\nFind the minimizing value of the log-likelihood"
+    "text": "Maximum Likelihood Estimators\nGeneral Procedure\n\n\n\n\n\n\nDefinition: Maximum Likelihood Estimator\n\n\n\\[ (\\widehat{\\theta}_{1, \\mathrm{MLE}}, \\ \\cdots, \\ \\widehat{\\theta}_{m, \\mathrm{MLE}})  := \\argmax_{(\\theta_1, \\cdots, \\theta_m)} \\ \\Lik(\\theta_1, \\cdots, \\theta_m; X_1, X_2, \\cdots, X_n) \\]\n\n\n\n\nProcedurally, we often work with the log-likelihood instead. That is:\n\n\nFind the likelihood\nTake the logarithm to find the log-likelihood\nSet the derivative of the log-likelihood (aka the score function) equal to zero and solve\nCheck that the second derivative is negative at our candidate value"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-1",
-    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-1",
+    "objectID": "120B-W26/FinRev/FinRev.html#maximum-likelihood-estimators-1",
+    "href": "120B-W26/FinRev/FinRev.html#maximum-likelihood-estimators-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Maximum Likelihood Estimators",
-    "text": "Maximum Likelihood Estimators\nExample\nLet \\(X_1, X_2, \\cdots, X_n \\iid f(x; \\theta) = \\frac{x}{\\theta} \\exp\\left\\{ - \\frac{x^2}{2 \\theta} \\right\\}\\)\n\\[\\begin{align*}\n  \\class{fragment}{{} \\mathcal{L}(\\theta; X_1, \\cdots, X_n)}\n    &\\class{fragment}{{} = \\prod_{i=1}^{n} f(X_i; \\theta)} \\class{fragment}{{} = \\prod_{i=1}^{n} \\left[ \\frac{X_i}{\\theta} \\cdot \\exp\\left\\{ - \\frac{X_i^2}{2\\theta} \\right\\} \\right]  }    \\\\[3px]\n    &\\class{fragment}{{} = \\left( \\frac{1}{\\theta} \\right)^n \\cdot \\left( \\prod_{i=1}^{n} X_i \\right) \\cdot \\exp\\left\\{ - \\frac{1}{2\\theta} \\sum_{i=1}^{n} X_i^2 \\right\\}  }  \\\\[3px]\n   \\class{fragment}{{} \\ell(\\theta; X_1, \\cdots, X_n)}  &\\class{fragment}{{} := \\ln \\mathcal{L}(\\theta; X_1, \\cdots, X_n) }  \\class{fragment}{{} = -n\\ln(\\theta) + \\sum_{i=1}^{n} \\ln(X_i) - \\frac{1}{2 \\theta} \\sum_{i=1}^{n} X_i^2 }  \\\\[3px]\n   \\class{fragment}{{} \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n)} &\\class{fragment}{{}  = - \\frac{n}{\\theta} + \\frac{1}{2 \\theta^2} \\sum_{i=1}^{n} X_i^2 }\n\\end{align*}\\]"
+    "text": "Maximum Likelihood Estimators\nLarge-Sample Properties\n\n\n\n\n\n\nLarge-Sample Properties of the MLE\n\n\nUnder appropriate “regularity conditions,” \\[ \\widehat{\\theta}_{\\mathrm{MLE}} \\distto \\mathcal{N}\\left(\\theta, \\ \\frac{1}{\\Info_n(\\theta)} \\right)\\]\n\n\n\n\nThe MLE is asymptotically normal\nThe MLE is asymptotically unbiased\nThe MLE is asymptotically the efficient\n\nTherefore, the MLE is asymptotically the MVUE"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-2",
-    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-2",
+    "objectID": "120B-W26/FinRev/FinRev.html#i-want-to-ride-my-bicycle",
+    "href": "120B-W26/FinRev/FinRev.html#i-want-to-ride-my-bicycle",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Maximum Likelihood Estimators",
-    "text": "Maximum Likelihood Estimators\nExample\nLet \\(X_1, X_2, \\cdots, X_n \\iid f(x; \\theta) = \\frac{x}{\\theta} \\exp\\left\\{ - \\frac{x^2}{2 \\theta} \\right\\}\\)\n\n\n\\[ \\frac{\\partial}{\\partial \\theta} \\ell(\\theta; X_1, \\cdots, X_n) = - \\frac{n}{\\theta} + \\frac{1}{2 \\theta^2} \\sum_{i=1}^{n} X_i^2  \\]\n\n\n\n\nThus, \\(\\widehat{\\theta}_{\\mathrm{MLE}}\\) must satisfy\n\\[  - \\frac{n}{\\widehat{\\theta}_{\\mathrm{MLE}} } + \\frac{1}{2 \\widehat{\\theta}_{\\mathrm{MLE}}^2} \\sum_{i=1}^{n} X_i^2 \\stackrel{\\mathrm{set}}{=} 0  \\]\n\n\n\nWhen solved for \\(\\widehat{\\theta}_{\\mathrm{MLE}}\\), we find \\(\\boxed{\\widehat{\\theta}_{\\mathrm{MLE}} = \\frac{1}{2n} \\sum_{i=1}^{n} X_i^2 }\\)\nTechnically, we should also check that the second derivative at this point is negative, to ensure we found a maximum; I leave this as an exercise"
+    "section": " I Want To Ride my Bicycle",
+    "text": "I Want To Ride my Bicycle\nAn Example\n\nThe Daily Nexus claimed that 35% of UCSB students ride their bike to campus.\n\n\n\n\n\n\n\n\nLetting p denote the true proportion of all UCSB students that primarily bike to campus, the Daily Nexus has claimed that p = 0.35\nThis claim, however, came from a sample of students; that is, the Daily Nexus did not survey every single UCSB student to obtain this claim.\n\n\n\nDo we believe the Daily Nexus’ Claim?"
   },
   {
-    "objectID": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-3",
-    "href": "120B-W26/Wk07_old/wk07.html#maximum-likelihood-estimators-3",
+    "objectID": "120B-W26/FinRev/FinRev.html#i-want-to-ride-my-bicycle-1",
+    "href": "120B-W26/FinRev/FinRev.html#i-want-to-ride-my-bicycle-1",
     "title": "PSTAT 120B: Mathematical Statistics",
-    "section": " Maximum Likelihood Estimators",
-    "text": "Maximum Likelihood Estimators\nInvariance Property\n\n\n\n\n\n\nInvariance Property of the MLE\n\n\nIf \\(\\widehat{\\theta}_1, \\cdots, \\widehat{\\theta}_m\\) are the maximum likelihood estimators for \\(\\theta_1, \\cdots, \\theta_m\\), then the maximum likelihood estimator for \\(h(\\theta_1, \\cdots, \\theta_m)\\) is \\[ h(\\widehat{\\theta}_1, \\cdots, \\widehat{\\theta}_m) \\]\n\n\n\n\nExample: If \\(X_1, \\cdots, X_n \\iid \\mathrm{Expo}(\\lambda)\\), then \\(\\widehat{\\lambda}_{\\mathrm{MLE}} = 1 / \\bar{X}\\) (as shown in lecture).\n\nSay we seek the maximum likelihood estimator for the population variance, \\(\\lambda^2\\).\nBy invariance, this is given by \\(1/(\\bar{X}^2)\\)."
+    "section": " I Want To Ride my Bicycle",
+    "text": "I Want To Ride my Bicycle\nAn Example\n\nSay we take a sample of 100 UCSB students, and find that 33 of them primarily bike to campus.\n\n33% is not equal to 35%! So we can automatically claim that the Daily Nexus’ claim is false. Right?\nWell, not really. We know there is some inherent randomness in sampling, so just because our observed data doesn’t exactly agree with the Daily Nexus’ claim doesn’t mean that the original claim was false.\n\nHowever, suppose our sample of 100 UCSB students contained 87 people who primarily bike to campus.\n\nNow what do we think - is it starting to seem like the Daily Nexus’ claim might be false?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#i-want-to-ride-my-bicycle-2",
+    "href": "120B-W26/FinRev/FinRev.html#i-want-to-ride-my-bicycle-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " I Want To Ride my Bicycle",
+    "text": "I Want To Ride my Bicycle\nAn Example\n\nOf course, even if we observed \\(\\hat{p}\\) = 87%, it is still possible that the true proportion is p = 0.35 and we just happened to get extraordinarily lucky.\n\nHowever, the probability of that occurring is so small that we believe it is more likely that the original claim was false.\n\nSo, somewhere between \\(\\hat{p}\\) = 0.33 and \\(\\hat{p}\\) = 0.87 exists a “cutoff”, past which we believe our data leads credence away from the Daily Nexus’ claim. Where is that cutoff?\nNotice how this is a different question than the one estimation seeks to answer.\n\nWe are not asking “what is the true proportion of UCSB students that primarily bike to campus?” Instead, we are asking “is the true proportion of UCSB students that primarily bike to campus equal to 35% or not?”"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-1",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nGeneral Framework\n\nThis is the general framework of hypothesis testing.\nWe start off with two competing claims, the null hypothesis (denoted H0, and read “H-naught”) and the alternative hypothesis (denoted HA)\nWe then assume the null is true, and try and see if that leads us to any strange conclusions/contradictions (in which case we “reject the null in favor of the alternative”).\nTypically, the null is the “status quo”, and is often of the form H0: θ = θ0 for some parameter θ and some null value θ0\n\nE.g. in our bicycle example, H0: p = 0.35 where p denotes the true proportion of UCSB students that primarily bike to campus."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-2",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nAlternative Hypothesis\n\nGiven a null H0: θ = θ0, three main alternative hypotheses become available:\n\nLower-Tailed: HA: θ &lt; θ0\nUpper-Tailed: HA: θ &gt; θ0\nTwo-Tailed (aka Two-Sided): HA: θ ≠ θ0\n\nIn a given real-world setting, it is up to us to pick one of these.\nNote: it is very important that the null and alternative hypotheses don’t have any overlap.\n\nFor example, the following is an INCORRECT phrasing of a lower-tailed alternative: HA: θ ≤ θ0. Can anyone tell me (conceptually) why this is?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-3",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nThe Test\n\nA hypothesis test is essentially a rule that takes in data, and returns one of two outcomes: “reject the null in favor of the alternative” or “fail to reject the null in favor of the alternative”\n\n\n\\[ \\texttt{decision}(\\texttt{data}) = \\begin{cases} \\texttt{reject null in favor of alternative} & \\text{if ...} \\\\ \\texttt{f.t.r. null in favor of alternative} & \\text{if ...} \\\\ \\end{cases} \\]\n\n\nOf course, there is the question of when our test rejects/fails to reject the null!\nTypically, the set of all data values for which we reject the null is called the rejection region\nTo construct the rejection region, we need to take a step back."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-4",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nStates of the World\n\nOur test either rejects or fails to reject the null.\nSeparately, the null is either true or not.\nThis leads to four states of the world:\n\n\n\n\n\n\n\n\nResult of Test\n\n\n\n\n\n\n\nReject\n\n\nFail to Reject\n\n\n\n\nH0\n\n\nTrue\n\n\n\n\n\n\n\n\nFalse\n\n\n\n\n\n\n\n\n\n\n\nSome of these states are good, others are bad. Which are which?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-5",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-5",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nStates of the World\n\n\n\n\n\n\nResult of Test\n\n\n\n\n\n\n\nReject\n\n\nFail to Reject\n\n\n\n\nH0\n\n\nTrue\n\n\nBAD\n\n\nGOOD\n\n\n\n\nFalse\n\n\nGOOD\n\n\nBAD\n\n\n\n\n\n\nWe give names to the two “bad” situations: Type I and Type II errors.\n\n\n\n\n\n\n\n\nResult of Test\n\n\n\n\n\n\n\nReject\n\n\nFail to Reject\n\n\n\n\nH0\n\n\nTrue\n\n\nType I Error\n\n\nGOOD\n\n\n\n\nFalse\n\n\nGOOD\n\n\nType II Error"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#states-of-the-world-2",
+    "href": "120B-W26/FinRev/FinRev.html#states-of-the-world-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " States of the World",
+    "text": "States of the World\nType I and Type II Errors\n\n\n\n\n\n\n\nDefinition: Type I and Type II errors\n\n\n\n\nA Type I Error occurs when we reject \\(H_0\\), when \\(H_0\\) was actually true.\nA Type II Error occurs when we fail to reject \\(H_0\\), when \\(H_0\\) was actually false.\n\n\n\n\n\n\n\nA common way of interpreting Type I and Type II errors are in the context of the judicial system.\nThe US judicial system is built upon a motto of “innocent until proven guilty.” As such, the null hypothesis is that a given person is innocent.\nA Type I error represents convicting an innocent person.\nA Type II error represents letting a guilty person go free."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#states-of-the-world-3",
+    "href": "120B-W26/FinRev/FinRev.html#states-of-the-world-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " States of the World",
+    "text": "States of the World\nType I and Type II Errors\n\nViewing the two errors in the context of the judicial system also highlights a tradeoff.\nIf we want to reduce the number of times we wrongfully convict an innocent person, we may want to make the conditions for convicting someone even stronger.\nBut, this would have the consequence of having fewer people overall convicted, thereby (and inadvertently) increasing the chance we let a guilty person go free.\nAs such, controlling for one type of error increases the likelihood of committing the other type."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-6",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-6",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample\nExample: \\(X_1, X_2, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\) for some unknown \\(\\mu \\in \\R\\), and consider testing \\(H_0: \\mu = \\mu_0\\) vs \\(H_A: \\mu &gt; \\mu_0\\) at a 5% level of significance.\n\nTest 1: \\(\\mathcal{R}_1 = \\left\\{ X_1 - \\mu_0 &gt; 1.645 \\right\\}\\)\nTest 2: \\(\\mathcal{R}_2 = \\left\\{ \\frac{\\bar{X} - \\mu_0}{1 / \\sqrt{n}} &gt; 1.645 \\right\\}\\)\n\nQuestion 1: Do both of these tests have a 5% level of significance? \\[\\begin{align*}\n  \\class{fragment}{{} \\mathrm{level}_1}\n    &\\class{fragment}{{} := \\Prob(\\text{Reject $H_0$} \\mid \\text{$H_0$ true}) }\n    \\class{fragment}{{} := \\Prob(X_1 - \\mu_0 &gt; 1.645 \\mid \\mu = \\mu_0) } \\\\[3px]\n    & \\class{fragment}{{} := \\Prob(Z &gt; 1.645) = 1 - \\Prob(Z \\leq 1.645)}\n\\\\[3px]\n    & \\class{fragment}{{} := 1 - \\Phi(1.645)  = 0.05 \\ \\checkmark}\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-7",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-7",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample\nExample: \\(X_1, X_2, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\) for some unknown \\(\\mu \\in \\R\\), and consider testing \\(H_0: \\mu = \\mu_0\\) vs \\(H_A: \\mu &gt; \\mu_0\\) at a 5% level of significance.\n\nTest 1: \\(\\mathcal{R}_1 = \\left\\{ X_1 - \\mu_0 &gt; 1.645 \\right\\}\\)\nTest 2: \\(\\mathcal{R}_2 = \\left\\{ \\frac{\\bar{X} - \\mu_0}{1 / \\sqrt{n}} &gt; 1.645 \\right\\}\\)\n\nQuestion 2: If the true value of \\(\\mu\\) is \\(\\mu_A\\) for some \\(\\mu_A  &gt; \\mu_0\\), what is the power of each test?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-8",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-8",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample\nExample: \\(X_1, X_2, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\) for some unknown \\(\\mu \\in \\R\\), and consider testing \\(H_0: \\mu = \\mu_0\\) vs \\(H_A: \\mu &gt; \\mu_0\\) at a 5% level of significance. Test 1: \\(\\mathcal{R}_1 = \\left\\{ X_1 - \\mu_0 &gt; 1.645 \\right\\}\\)\n\\[\\begin{align*}\n  \\class{fragment}{{} \\mathrm{Power}(\\mu_A)}\n    &\\class{fragment}{{} := \\Prob(\\text{Reject $H_0$} \\mid \\mu = \\mu_A) }\n    \\class{fragment}{{} := \\Prob(X_1 - \\mu_0 &gt; 1.645 \\mid \\mu = \\mu_A) } \\\\[3px]\n    & \\class{fragment}{{} := \\Prob(X_1 &gt; 1.645 + \\mu_0 \\mid \\mu = \\mu_A)}\n\\\\[3px]\n    & \\class{fragment}{{} := \\Prob\\left( X_1 - \\mu_A &gt; 1.645 + \\mu_0 - \\mu_A \\mid \\mu = \\mu_A \\right)} \\\\[3px]\n    & \\class{fragment}{{} := \\Prob\\left(Z &gt; 1.645 + \\mu_0 - \\mu_A \\right) = \\boxed{ 1 - \\Phi\\left( 1.645 + \\mu_0 - \\mu_A \\right)} } \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-9",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-9",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample\nExample: \\(X_1, X_2, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\) for some unknown \\(\\mu \\in \\R\\), and consider testing \\(H_0: \\mu = \\mu_0\\) vs \\(H_A: \\mu &gt; \\mu_0\\) at a 5% level of significance. Test 2: \\(\\mathcal{R}_2 = \\left\\{ \\frac{\\bar{X} - \\mu_0}{1/\\sqrt{n}} &gt; 1.645 \\right\\}\\)\n\n\\[\\begin{align*}\n  \\class{fragment}{{} \\mathrm{Power}(\\mu_A)}\n    &\\class{fragment}{{} := \\Prob(\\text{Reject $H_0$} \\mid \\mu = \\mu_A) }\n    \\class{fragment}{{} := \\Prob\\left(\\frac{\\bar{X} - \\mu_0}{1/\\sqrt{n}} &gt; 1.645 \\ \\middle| \\  \\mu = \\mu_A\\right) } \\\\[3px]\n    & \\class{fragment}{{} := \\Prob\\left(\\frac{\\bar{X}}{1/\\sqrt{n}} &gt; 1.645 + \\frac{\\mu_0}{1/\\sqrt{n}} \\  \\middle| \\  \\mu = \\mu_A\\right)}\n\\\\[3px]\n    & \\class{fragment}{{} := \\Prob\\left( \\frac{\\bar{X} - \\mu_A}{1/\\sqrt{n}} &gt; 1.645 + \\frac{\\mu_0 - \\mu_A}{1/\\sqrt{n}} \\  \\middle| \\  \\mu = \\mu_A \\right)} \\\\[3px]\n    & \\class{fragment}{{} = \\boxed{ 1 - \\Phi\\left(1.645 + \\frac{\\mu_0 - \\mu_A}{1/\\sqrt{n}} \\right) }  } \\\\[3px]\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-10",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-10",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nExample\n\n\nCode\npwr.fnt1 &lt;- function(x, mu0) {\n  return(1 - pnorm(1.645 + (mu0 - x) ))\n}\n\npwr.fnt2 &lt;- function(x, mu0, n) {\n  return(1 - pnorm(1.645 + (mu0 - x) / (1 / sqrt(n))))\n}"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#power",
+    "href": "120B-W26/FinRev/FinRev.html#power",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Power",
+    "text": "Power\nHypotheses\n\nSo, regardless of the true alternative value for \\(\\mu\\), Test 2 has a higher power than Test 1.\n\nIntuitively, this makes sense: Test 1 ignores \\((n - 1)\\) datapoints, whereas Test 2 incorporates the full sample.\n\nIn this way, we see that power can be used as a way to compare the performance of tests.\n\nThink of this as analogous to how MSE can be used to compare the performance of estimators.\n\nFun Fact: for any test, the power of the test at \\(\\theta = \\theta_0\\) (where \\(\\theta_0\\) is the null value) is … ?"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#hypothesis-testing-11",
+    "href": "120B-W26/FinRev/FinRev.html#hypothesis-testing-11",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nParameter Spaces\n\nLet’s take a quick step back.\nA simple hypothesis is one that uniquely specifies the distribution of the population from which the sample is taken.\nAny hypothesis that is not simple is called composite; e.g. \\(H: \\ \\theta &gt; \\theta'\\).\nConsider a uniparameter case; let \\(\\Theta_0\\) denote the values of the parameter taken under the null (sometimes called the null space) and let \\(\\Theta_A\\) denote the values of the parameter taken under the alternative; that is, \\[ H_0: \\ \\theta \\in \\Theta_0 \\qquad \\text{vs} \\qquad H_A: \\ \\theta \\in \\Theta_A \\]\n\nA simple hypothesis corresponds to \\(\\Theta = \\{\\theta'\\}\\); i.e. a singleton set for the corresponding restricted parameter space."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#power-1",
+    "href": "120B-W26/FinRev/FinRev.html#power-1",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Power",
+    "text": "Power\nComparing Power Curves\n\\(X_1, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\), \\(\\Theta_0 = \\{\\mu_0\\}\\), \\(\\Theta_A = (\\mu_0, \\infty)\\)\n\n\n\\[\\begin{align*}\n  \\mathcal{R}_1 & := \\{X_1 - \\mu_0 &gt; 1.645 \\} \\\\\n  \\mathcal{R}_2 & := \\left\\{ \\frac{\\bar{X} - \\mu_0}{1/\\sqrt{n}} &gt; 1.645 \\right\\}\n\\end{align*}\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[ \\beta_2(\\mu_A) &gt; \\beta_1(\\mu_A) \\qquad \\forall \\mu_A \\in \\Theta_A \\]"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#power-2",
+    "href": "120B-W26/FinRev/FinRev.html#power-2",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Power",
+    "text": "Power\nUMP Tests\n\nSuppose in a test of \\(H_0: \\theta \\in \\Theta_0\\) vs \\(H_A: \\theta \\in \\Theta_A\\), there exists a test with power function \\(\\beta(\\cdot)\\) such that \\[ \\beta(\\theta_A) &gt; \\beta^{\\ast}(\\theta_A) \\qquad \\forall \\beta^{\\ast}, \\ \\forall \\theta_A \\in \\Theta_A \\]\nThat is, among all other tests (with corresponding power functions \\(\\beta^{\\ast}\\)), our original test has higher power for any value in the alternative space.\nSuch a test is called a Uniformly Most Powerful (UMP) test.\nIn general, UMP tests are very challenging to find, and don’t always exist!\nHowever, if we restrict ourselves to a simple-vs-simple testing paradigm, things become a lot easier…"
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#power-3",
+    "href": "120B-W26/FinRev/FinRev.html#power-3",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Power",
+    "text": "Power\nNeyman-Pearson Lemma\n\n\n\n\n\n\nNeyman-Pearson Lemma\n\n\nLet \\(X_1, \\cdots, X_n\\) denote a sample from a distribution F prescribed by a single parameter θ, and consider testing \\(H_0: \\theta = \\theta_0\\) vs \\(H_A: \\theta = \\theta_A\\). Let \\(\\Lik(\\theta; X_1, \\cdots, X_n)\\) denote the likelihood, and consider the test with rejection region \\[ \\left\\{ \\frac{\\Lik(\\theta_0; X_1, \\cdots, X_n)}{\\Lik(\\theta_A; X_1, \\cdots, X_n)} &lt; k  \\right\\} \\] for some critical value k selected to ensure the test has level \\(\\alpha\\). Then, the resulting test is the most powerful \\(\\alpha-\\)level test of \\(H_0\\) vs \\(H_A\\)\n\n\n\n\nBy the way, in the simple-vs-simple case we don’t say uniformly most powerful and instead say most powerful.\nImportant: The NPL only applies to a uniparameter, simple-vs-simple testing setting."
+  },
+  {
+    "objectID": "120B-W26/FinRev/FinRev.html#power-4",
+    "href": "120B-W26/FinRev/FinRev.html#power-4",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Power",
+    "text": "Power\nLikelihood Ratio Test\n\n\n\n\n\n\nLikelihood Ratio Test\n\n\nLet \\(X_1, \\cdots, X_n\\) denote a sample from a distribution F prescribed by a single parameter θ, and consider testing \\(H_0: \\theta = \\theta_0\\) vs \\(H_A: \\theta = \\theta_A\\). The likelihood ratio test is the test with rejection region\n\\[ \\left\\{ \\frac{\\max\\limits_{\\theta \\in \\Theta_0}\\Lik(\\theta; X_1, \\cdots, X_n)}{\\max\\limits_{\\theta \\in \\Theta_A}\\Lik(\\theta_A; X_1, \\cdots, X_n)} &lt; k  \\right\\} \\] where \\(\\Lik(\\theta; X_1, \\cdots, X_n)\\) denotes the likelihood. The corresponding test statistic is often referred to as the likelihood ratio \\(\\Lambda\\).\n\n\n\n\nTo select k to ensure an appropriate significance level, we either:\n\nRewrite the test statistic to be in a more recognizable form\nUse the fact that \\(-2 \\ln \\Lambda \\distto \\chi^2_{\\nu}\\), with \\(\\nu =\\) number of parameters specified by the null hypothesis."
   },
   {
     "objectID": "120B-W26/Wk04/wk04.html#announcements",
@@ -1706,6 +2028,20 @@
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Hypothesis Testing",
     "text": "Hypothesis Testing\nConcrete Example\n\nSo, given \\(X_1, X_2, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\) and testing H0: µ = µ0 vs HA: µ ≠ µ0, we reject the null in favor of the alternative whenever \\[ \\left| \\frac{\\bar{X} - \\mu_0}{1 / \\sqrt{n}} \\right| &gt; z_{1 - \\frac{\\alpha}{2}} \\] and fail to reject otherwise.\n\nFor example, a 5% level of significance adopts a critical value of around 1.96."
+  },
+  {
+    "objectID": "120B-W26/Wk09/wk09.html#hypothesis-testing-13",
+    "href": "120B-W26/Wk09/wk09.html#hypothesis-testing-13",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nNotational Note\n\nProfessor Qu uses \\(z_{p}\\) to denote the pth percentile of the standard normal distribution.\n\nIt should be noted that some people use \\(z_{p}\\) to denote a right-tail quantile; that is, \\(\\Phi(z_{p}) = 1 - p\\).\nI recommend always drawing a picture, to get around this notational hurdle."
+  },
+  {
+    "objectID": "120B-W26/Wk09/wk09.html#hypothesis-testing-14",
+    "href": "120B-W26/Wk09/wk09.html#hypothesis-testing-14",
+    "title": "PSTAT 120B: Mathematical Statistics",
+    "section": " Hypothesis Testing",
+    "text": "Hypothesis Testing\nPower Example\n\\(X_1, \\cdots, X_n \\iid \\mathcal{N}(\\mu, \\sigma^2)\\); testing \\(H_0: \\mu = \\mu_0\\) against \\(H_A: \\mu &gt; \\mu_0\\).\n\nTest: \\(\\mathcal{R} = \\left\\{ \\frac{\\bar{X} - \\mu_0}{\\sigma / \\sqrt{n}} &gt; z_{1 - \\alpha} \\right\\}\\)\nPower Curve:: \\(\\beta(\\mu_a) := \\mathbb{P}(\\text{Reject $H_0$} \\mid \\mu = mu_a)\\)\n\nThe answer is in the lecture slides; let’s quickly re-derive this."
   },
   {
     "objectID": "120B-W26/Wk01/wk1.html#hello",

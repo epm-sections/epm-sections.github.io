@@ -577,6 +577,29 @@ MathJax = {
 <li class="fragment">For example, a 5% level of significance adopts a critical value of around 1.96.</li>
 </ul></li>
 </ul>
+</section>
+<section id="hypothesis-testing-13" class="slide level2">
+<h2><i class="fa-solid fa-magnifying-glass-chart" aria-label="magnifying-glass-chart"></i> Hypothesis Testing</h2>
+<h3 id="notational-note">Notational Note</h3>
+<ul>
+<li class="fragment">Professor Qu uses <span class="math inline">\(z_{p}\)</span> to denote the <em>p</em><sup>th</sup> percentile of the standard normal distribution.
+<ul>
+<li class="fragment">It should be noted that some people use <span class="math inline">\(z_{p}\)</span> to denote a <em>right-tail</em> quantile; that is, <span class="math inline">\(\Phi(z_{p}) = 1 - p\)</span>.</li>
+<li class="fragment">I recommend always drawing a picture, to get around this notational hurdle.</li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-14" class="slide level2">
+<h2><i class="fa-solid fa-magnifying-glass-chart" aria-label="magnifying-glass-chart"></i> Hypothesis Testing</h2>
+<h3 id="power-example">Power Example</h3>
+<p><span class="math inline">\(X_1, \cdots, X_n \iid \mathcal{N}(\mu, \sigma^2)\)</span>; testing <span class="math inline">\(H_0: \mu = \mu_0\)</span> against <span class="math inline">\(H_A: \mu &gt; \mu_0\)</span>.</p>
+<ul>
+<li class="fragment">Test: <span class="math inline">\(\mathcal{R} = \left\{ \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} &gt; z_{1 - \alpha} \right\}\)</span></li>
+<li class="fragment"><span class="alert"><strong>Power Curve:</strong></span>: <span class="math inline">\(\beta(\mu_a) := \mathbb{P}(\text{Reject $H_0$} \mid \mu = mu_a)\)</span>
+<ul>
+<li class="fragment">The answer is in the lecture slides; let’s quickly re-derive this.</li>
+</ul></li>
+</ul>
 
 
 </section>
