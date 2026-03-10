@@ -412,7 +412,7 @@ MathJax = {
 <li class="fragment"><p>We then use our sample to make <span class="alert"><strong>inferences</strong></span> (i.e.&nbsp;claims) about the population parameters.</p></li>
 </ul>
 </div><div class="column" style="width:40%;">
-<p><img data-src="images/inference.svg"></p>
+<p><img data-src="Images/Inference_X.svg"></p>
 </div></div>
 <ul>
 <li class="fragment">Inference could mean <span class="alert"><strong>estimation</strong></span> or <span class="alert"><strong>hypothesis testing</strong></span>.</li>
@@ -1207,14 +1207,14 @@ MathJax = {
 </div>
 </div>
 </div></div>
-<p><span class="fragment"><span class="math display">\[ \beta_2(\mu_A) &gt; \beta_1(\mu_A) \qquad \forall \mu_A \in \Theta_A \]</span></span></p>
+<p><span class="fragment"><span class="math display">\[ Q_2(\mu_A) &gt; Q_1(\mu_A) \qquad \forall \mu_A \in \Theta_A \]</span></span></p>
 </section>
 <section id="power-2" class="slide level2">
 <h2><i class="fa-solid fa-power-off" aria-label="power-off"></i> Power</h2>
 <h3 id="ump-tests">UMP Tests</h3>
 <ul>
-<li class="fragment"><p>Suppose in a test of <span class="math inline">\(H_0: \theta \in \Theta_0\)</span> vs <span class="math inline">\(H_A: \theta \in \Theta_A\)</span>, there exists a test with power function <span class="math inline">\(\beta(\cdot)\)</span> such that <span class="math display">\[ \beta(\theta_A) &gt; \beta^{\ast}(\theta_A) \qquad \forall \beta^{\ast}, \ \forall \theta_A \in \Theta_A \]</span></p></li>
-<li class="fragment"><p>That is, among <em>all</em> other tests (with corresponding power functions <span class="math inline">\(\beta^{\ast}\)</span>), our original test has higher power <em>for any value in the alternative space</em>.</p></li>
+<li class="fragment"><p>Suppose in a test of <span class="math inline">\(H_0: \theta \in \Theta_0\)</span> vs <span class="math inline">\(H_A: \theta \in \Theta_A\)</span>, there exists a test with power function <span class="math inline">\(Q(\cdot)\)</span> such that <span class="math display">\[ Q(\theta_A) &gt; Q^{\ast}(\theta_A) \qquad \forall Q^{\ast}, \ \forall \theta_A \in \Theta_A \]</span></p></li>
+<li class="fragment"><p>That is, among <em>all</em> other tests (with corresponding power functions <span class="math inline">\(Q^{\ast}\)</span>), our original test has higher power <em>for any value in the alternative space</em>.</p></li>
 <li class="fragment"><p>Such a test is called a <span class="alert"><strong>Uniformly Most Powerful</strong></span> (UMP) test.</p></li>
 <li class="fragment"><p>In general, UMP tests are <em>very</em> challenging to find, and <em>don’t always exist</em>!</p></li>
 <li class="fragment"><p>However, if we restrict ourselves to a <span class="alert"><strong>simple-vs-simple</strong></span> testing paradigm, things become a lot easier…</p></li>
@@ -1254,7 +1254,7 @@ MathJax = {
 </div>
 <div class="callout-content">
 <p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> denote a sample from a distribution <em>F</em> prescribed by a single parameter <em>θ</em>, and consider testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs <span class="math inline">\(H_A: \theta = \theta_A\)</span>. The <span class="alert"><strong>likelihood ratio test</strong></span> is the test with rejection region</p>
-<p><span class="math display">\[ \left\{ \frac{\max\limits_{\theta \in \Theta_0}\Lik(\theta; X_1, \cdots, X_n)}{\max\limits_{\theta \in \Theta_A}\Lik(\theta_A; X_1, \cdots, X_n)} &lt; k  \right\} \]</span> where <span class="math inline">\(\Lik(\theta; X_1, \cdots, X_n)\)</span> denotes the likelihood. The corresponding test statistic is often referred to as the <span class="alert"><strong>likelihood ratio</strong></span> <span class="math inline">\(\Lambda\)</span>.</p>
+<p><span class="math display">\[ \left\{ \frac{\max\limits_{\theta \in \Theta_0}\Lik(\theta; X_1, \cdots, X_n)}{\max\limits_{\theta \in \Theta}\Lik(\theta_A; X_1, \cdots, X_n)} &lt; k  \right\} \]</span> where <span class="math inline">\(\Lik(\theta; X_1, \cdots, X_n)\)</span> denotes the likelihood. The corresponding test statistic is often referred to as the <span class="alert"><strong>likelihood ratio</strong></span> <span class="math inline">\(\Lambda\)</span>.</p>
 </div>
 </div>
 </div>

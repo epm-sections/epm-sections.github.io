@@ -1621,14 +1621,14 @@
     "href": "120B-W26/FinRev/FinRev.html#power-1",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Power",
-    "text": "Power\nComparing Power Curves\n\\(X_1, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\), \\(\\Theta_0 = \\{\\mu_0\\}\\), \\(\\Theta_A = (\\mu_0, \\infty)\\)\n\n\n\\[\\begin{align*}\n  \\mathcal{R}_1 & := \\{X_1 - \\mu_0 &gt; 1.645 \\} \\\\\n  \\mathcal{R}_2 & := \\left\\{ \\frac{\\bar{X} - \\mu_0}{1/\\sqrt{n}} &gt; 1.645 \\right\\}\n\\end{align*}\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[ \\beta_2(\\mu_A) &gt; \\beta_1(\\mu_A) \\qquad \\forall \\mu_A \\in \\Theta_A \\]"
+    "text": "Power\nComparing Power Curves\n\\(X_1, \\cdots, X_n \\iid \\mathcal{N}(\\mu, 1)\\), \\(\\Theta_0 = \\{\\mu_0\\}\\), \\(\\Theta_A = (\\mu_0, \\infty)\\)\n\n\n\\[\\begin{align*}\n  \\mathcal{R}_1 & := \\{X_1 - \\mu_0 &gt; 1.645 \\} \\\\\n  \\mathcal{R}_2 & := \\left\\{ \\frac{\\bar{X} - \\mu_0}{1/\\sqrt{n}} &gt; 1.645 \\right\\}\n\\end{align*}\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[ Q_2(\\mu_A) &gt; Q_1(\\mu_A) \\qquad \\forall \\mu_A \\in \\Theta_A \\]"
   },
   {
     "objectID": "120B-W26/FinRev/FinRev.html#power-2",
     "href": "120B-W26/FinRev/FinRev.html#power-2",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Power",
-    "text": "Power\nUMP Tests\n\nSuppose in a test of \\(H_0: \\theta \\in \\Theta_0\\) vs \\(H_A: \\theta \\in \\Theta_A\\), there exists a test with power function \\(\\beta(\\cdot)\\) such that \\[ \\beta(\\theta_A) &gt; \\beta^{\\ast}(\\theta_A) \\qquad \\forall \\beta^{\\ast}, \\ \\forall \\theta_A \\in \\Theta_A \\]\nThat is, among all other tests (with corresponding power functions \\(\\beta^{\\ast}\\)), our original test has higher power for any value in the alternative space.\nSuch a test is called a Uniformly Most Powerful (UMP) test.\nIn general, UMP tests are very challenging to find, and don’t always exist!\nHowever, if we restrict ourselves to a simple-vs-simple testing paradigm, things become a lot easier…"
+    "text": "Power\nUMP Tests\n\nSuppose in a test of \\(H_0: \\theta \\in \\Theta_0\\) vs \\(H_A: \\theta \\in \\Theta_A\\), there exists a test with power function \\(Q(\\cdot)\\) such that \\[ Q(\\theta_A) &gt; Q^{\\ast}(\\theta_A) \\qquad \\forall Q^{\\ast}, \\ \\forall \\theta_A \\in \\Theta_A \\]\nThat is, among all other tests (with corresponding power functions \\(Q^{\\ast}\\)), our original test has higher power for any value in the alternative space.\nSuch a test is called a Uniformly Most Powerful (UMP) test.\nIn general, UMP tests are very challenging to find, and don’t always exist!\nHowever, if we restrict ourselves to a simple-vs-simple testing paradigm, things become a lot easier…"
   },
   {
     "objectID": "120B-W26/FinRev/FinRev.html#power-3",
@@ -1642,7 +1642,7 @@
     "href": "120B-W26/FinRev/FinRev.html#power-4",
     "title": "PSTAT 120B: Mathematical Statistics",
     "section": " Power",
-    "text": "Power\nLikelihood Ratio Test\n\n\n\n\n\n\nLikelihood Ratio Test\n\n\nLet \\(X_1, \\cdots, X_n\\) denote a sample from a distribution F prescribed by a single parameter θ, and consider testing \\(H_0: \\theta = \\theta_0\\) vs \\(H_A: \\theta = \\theta_A\\). The likelihood ratio test is the test with rejection region\n\\[ \\left\\{ \\frac{\\max\\limits_{\\theta \\in \\Theta_0}\\Lik(\\theta; X_1, \\cdots, X_n)}{\\max\\limits_{\\theta \\in \\Theta_A}\\Lik(\\theta_A; X_1, \\cdots, X_n)} &lt; k  \\right\\} \\] where \\(\\Lik(\\theta; X_1, \\cdots, X_n)\\) denotes the likelihood. The corresponding test statistic is often referred to as the likelihood ratio \\(\\Lambda\\).\n\n\n\n\nTo select k to ensure an appropriate significance level, we either:\n\nRewrite the test statistic to be in a more recognizable form\nUse the fact that \\(-2 \\ln \\Lambda \\distto \\chi^2_{\\nu}\\), with \\(\\nu =\\) number of parameters specified by the null hypothesis."
+    "text": "Power\nLikelihood Ratio Test\n\n\n\n\n\n\nLikelihood Ratio Test\n\n\nLet \\(X_1, \\cdots, X_n\\) denote a sample from a distribution F prescribed by a single parameter θ, and consider testing \\(H_0: \\theta = \\theta_0\\) vs \\(H_A: \\theta = \\theta_A\\). The likelihood ratio test is the test with rejection region\n\\[ \\left\\{ \\frac{\\max\\limits_{\\theta \\in \\Theta_0}\\Lik(\\theta; X_1, \\cdots, X_n)}{\\max\\limits_{\\theta \\in \\Theta}\\Lik(\\theta_A; X_1, \\cdots, X_n)} &lt; k  \\right\\} \\] where \\(\\Lik(\\theta; X_1, \\cdots, X_n)\\) denotes the likelihood. The corresponding test statistic is often referred to as the likelihood ratio \\(\\Lambda\\).\n\n\n\n\nTo select k to ensure an appropriate significance level, we either:\n\nRewrite the test statistic to be in a more recognizable form\nUse the fact that \\(-2 \\ln \\Lambda \\distto \\chi^2_{\\nu}\\), with \\(\\nu =\\) number of parameters specified by the null hypothesis."
   },
   {
     "objectID": "120B-W26/FinRev/FinRev.html#power-5",

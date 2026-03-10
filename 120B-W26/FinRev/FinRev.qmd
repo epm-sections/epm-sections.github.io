@@ -211,7 +211,7 @@ Crucially, statistics are _random_
 :::
 
 ::: {.column width="40%"}
-![](images/inference.svg)
+![](Images/Inference_X.svg)
 :::
 
 ::::
@@ -1027,17 +1027,17 @@ data.frame(x = -1:4) %>%
 
 ::::
 
-[$$ \beta_2(\mu_A) > \beta_1(\mu_A) \qquad \forall \mu_A \in \Theta_A $$]{.fragment}
+[$$ Q_2(\mu_A) > Q_1(\mu_A) \qquad \forall \mu_A \in \Theta_A $$]{.fragment}
 
 
 
 ## {{< fa power-off >}} Power
 ### UMP Tests
 
--   Suppose in a test of $H_0: \theta \in \Theta_0$ vs $H_A: \theta \in \Theta_A$, there exists a test with power function $\beta(\cdot)$ such that
-$$ \beta(\theta_A) > \beta^{\ast}(\theta_A) \qquad \forall \beta^{\ast}, \ \forall \theta_A \in \Theta_A $$
+-   Suppose in a test of $H_0: \theta \in \Theta_0$ vs $H_A: \theta \in \Theta_A$, there exists a test with power function $Q(\cdot)$ such that
+$$ Q(\theta_A) > Q^{\ast}(\theta_A) \qquad \forall Q^{\ast}, \ \forall \theta_A \in \Theta_A $$
 
--   That is, among _all_ other tests (with corresponding power functions $\beta^{\ast}$), our original test has higher power _for any value in the alternative space_.
+-   That is, among _all_ other tests (with corresponding power functions $Q^{\ast}$), our original test has higher power _for any value in the alternative space_.
 
 -   Such a test is called a [**Uniformly Most Powerful**]{.alert} (UMP) test.
 
@@ -1074,7 +1074,7 @@ for some critical value _k_ selected to ensure the test has level $\alpha$. Then
 
 Let $X_1, \cdots, X_n$ denote a sample from a distribution _F_ prescribed by a single parameter _θ_, and consider testing $H_0: \theta = \theta_0$ vs $H_A: \theta = \theta_A$. The [**likelihood ratio test**]{.alert} is the test with rejection region
 
-$$ \left\{ \frac{\max\limits_{\theta \in \Theta_0}\Lik(\theta; X_1, \cdots, X_n)}{\max\limits_{\theta \in \Theta_A}\Lik(\theta_A; X_1, \cdots, X_n)} < k  \right\} $$
+$$ \left\{ \frac{\max\limits_{\theta \in \Theta_0}\Lik(\theta; X_1, \cdots, X_n)}{\max\limits_{\theta \in \Theta}\Lik(\theta_A; X_1, \cdots, X_n)} < k  \right\} $$
 where $\Lik(\theta; X_1, \cdots, X_n)$ denotes the likelihood. The corresponding test statistic is often referred to as the [**likelihood ratio**]{.alert} $\Lambda$.
 :::
 
